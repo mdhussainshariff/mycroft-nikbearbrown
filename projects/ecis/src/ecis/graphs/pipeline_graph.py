@@ -68,6 +68,19 @@ def ingestion_node(state: PipelineState) -> dict:
 
     cleaned = clean_file(path)
     normalised = normalise_transcript(cleaned)
+
+    from ecis.extraction.duplicate_transcripts import check_and_register
+
+    _, original = check_and_register(
+        state.get("ticker", "UNKNOWN"),
+        normalised,
+        str(path),
+    )
+    if original:
+        return {
+            "transcript_text": "",
+            "errors": [f"duplicate_transcript:{original}"],
+        }
     return {"transcript_text": normalised}
 
 
@@ -117,13 +130,24 @@ def fast_pass_node(state: PipelineState) -> dict:
     if not chunks:
         return {"fast_pass_results": []}
 
-    kw_results = keyword_read_batch(chunks)
-    fb_results = finbert_read_batch(chunks)
+    from ecis.extraction.keyword_density import keyword_density
+    from ecis.extraction.latency import timed
+    from ecis.extraction.negation import has_negation
+
+    ticker = state.get("ticker")
+    with timed("keyword", ticker=ticker):
+        kw_results = keyword_read_batch(chunks)
+    with timed("finbert", ticker=ticker):
+        fb_results = finbert_read_batch(chunks)
 
     fast_pass_results: list[FastPassResult] = []
     for i, chunk in enumerate(chunks):
         kw = kw_results[i] if i < len(kw_results) else {}
         fb = fb_results[i] if i < len(fb_results) else {}
+        negation = has_negation(chunk.get("text", ""))
+        density = keyword_density(chunk.get("text", ""), int(kw.get("match_count") or 0))
+        chunk["negation_flag"] = negation
+        chunk["keyword_density"] = density
 
         fp = FastPassResult(
             chunk_index=chunk["chunk_index"],
@@ -138,6 +162,8 @@ def fast_pass_node(state: PipelineState) -> dict:
             finbert_dominant=fb.get("dominant"),
             finbert_confidence=fb.get("confidence", 0.0),
             finbert_direction=fb.get("direction"),
+            negation_flag=negation,
+            keyword_density=density,
         )
         fast_pass_results.append(fp)
 
@@ -181,7 +207,10 @@ def llm_extraction_node(state: PipelineState) -> dict:
 
     ticker = state.get("ticker", "UNKNOWN")
     model = state.get("llm_model") or settings.llm_model
-    results = llm_read_chunks(target_chunks, ticker, model=model)
+    from ecis.extraction.latency import timed
+
+    with timed("llm", ticker=ticker):
+        results = llm_read_chunks(target_chunks, ticker, model=model)
     chunk_models = dict(state.get("chunk_models") or {})
     for chunk in target_chunks:
         chunk_models[chunk["chunk_index"]] = model
@@ -240,7 +269,10 @@ def ner_node(state: PipelineState) -> dict:
     if not target_chunks:
         return {"ner_results": []}
 
-    results = ner_read_batch(target_chunks)
+    from ecis.extraction.latency import timed
+
+    with timed("ner", ticker=state.get("ticker")):
+        results = ner_read_batch(target_chunks)
     return {"ner_results": results}
 
 
@@ -398,7 +430,18 @@ def run_pipeline(
     *,
     checkpointer=None,
     llm_model: str | None = None,
+    force: bool = False,
 ) -> list[SignalRecord]:
+    from ecis.db.crash_recovery import (
+        STATUS_COMPLETE,
+        STATUS_FAILED,
+        STATUS_IN_PROGRESS,
+        STATUS_SKIPPED,
+        is_complete,
+        log_resume_skip,
+        mark_run,
+    )
+
     compile_kwargs = {}
     saver = checkpointer if checkpointer is not None else _default_checkpointer()
     if saver:
@@ -406,6 +449,10 @@ def run_pipeline(
 
     app = compile_pipeline(**compile_kwargs)
     model = llm_model or settings.llm_model
+
+    if not force and is_complete(ticker, transcript_path, model):
+        log_resume_skip(ticker, transcript_path, model)
+        return []
 
     initial_state: PipelineState = {
         "ticker": ticker,
@@ -431,6 +478,52 @@ def run_pipeline(
         "rejected_chunks": [],
     }
 
-    config = {"configurable": {"thread_id": f"{ticker}_{transcript_path}"}}
-    final_state = app.invoke(initial_state, config=config)
-    return final_state.get("final_signals", [])
+    config = {"configurable": {"thread_id": f"{ticker}_{transcript_path}_{model}"}}
+    mark_run(ticker, transcript_path, model, STATUS_IN_PROGRESS, node_id="start")
+
+    try:
+        final_state = _invoke_with_stream(app, initial_state, config, ticker, transcript_path, model)
+    except Exception as exc:
+        mark_run(ticker, transcript_path, model, STATUS_FAILED, error=str(exc))
+        raise
+
+    errors = final_state.get("errors") or []
+    if any(str(e).startswith("duplicate_transcript:") for e in errors):
+        mark_run(
+            ticker, transcript_path, model, STATUS_SKIPPED,
+            node_id="ingestion", error="; ".join(str(e) for e in errors), signal_count=0,
+        )
+        return []
+
+    signals = final_state.get("final_signals", [])
+    mark_run(
+        ticker, transcript_path, model, STATUS_COMPLETE,
+        node_id="logging", signal_count=len(signals),
+    )
+    return signals
+
+
+def _invoke_with_stream(app, initial_state, config, ticker: str, transcript_path: str, model: str) -> dict:
+    """Stream node updates for observability; fall back to invoke if streaming is unavailable."""
+    from ecis.db.crash_recovery import record_node
+
+    try:
+        stream_iter = app.stream(initial_state, config=config, stream_mode="updates")
+    except Exception as exc:
+        logger.debug("Streaming unavailable, falling back to invoke: %s", exc)
+        return app.invoke(initial_state, config=config)
+
+    final_state = dict(initial_state)
+    streamed = False
+    for snapshot in stream_iter:
+        streamed = True
+        if not isinstance(snapshot, dict):
+            continue
+        for node_id, update in snapshot.items():
+            logger.info("pipeline node %s (%s %s)", node_id, ticker, model)
+            patch = update if isinstance(update, dict) else {}
+            record_node(ticker, transcript_path, model, str(node_id), patch)
+            final_state.update(patch)
+    if streamed:
+        return final_state
+    return app.invoke(initial_state, config=config)

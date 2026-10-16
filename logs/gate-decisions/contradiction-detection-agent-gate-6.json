@@ -1,0 +1,42 @@
+{
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "approve",
+  "decision_words": "D5 approve",
+  "evidence_files": [
+    {
+      "path": "reports/generated/contradiction-detection-agent-2026-09-30-clean.md",
+      "sha256": "b829027b8c9ed8ca747229001d303f31b52151e439b977e7a6a5b8ce3bab24c0"
+    },
+    {
+      "path": "reports/generated/contradiction-detection-agent-2026-09-30-defective.md",
+      "sha256": "b6f853c4eb1ef5a9872655bdf13e28ac40a81a0b26a2a50d6fc5e5664ceb558b"
+    },
+    {
+      "path": "logs/contradiction-detection-agent-2026-09-30-clean.json",
+      "sha256": "6e9e9f671786555cf67b6cf69d42b016fe03be0b757ef3c509540d82680615cf"
+    },
+    {
+      "path": "logs/contradiction-detection-agent-2026-09-30-defective.json",
+      "sha256": "951717d67893244ec32b7c4a7305400b98b172f70e806a2cc321d0b5f9d63789"
+    }
+  ],
+  "evidence_observed": "Both human reports carry all 15 contract sections, Reader and Decision enabled; both agent logs carry all 16 contract fields. Report and log agree on rejects (clean 0, defective 13); checks a stopped run never reached say 'not checked'; the recommendation is built from the gate records. Reviewed after the report step was fixed during this gate's review; self-test section G checks all three; gate test passes.",
+  "gate": 6,
+  "gate_name": "Report gate",
+  "handoff_condition": "Agent log and human report are written with the required fields and sections.",
+  "human_capacity": "[TO]",
+  "mode": "sample",
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged",
+  "residual_risk": "Covers the report and log for the two sample runs only; it says nothing about live runs or about whether the flags are right about any real company.",
+  "run": "sample-001-clean and sample-001-defective",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "workflow": "Contradiction_detection_agent"
+}

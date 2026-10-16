@@ -1,0 +1,133 @@
+{
+  "_provenance": {
+    "fixture_set": "defective",
+    "quality_checked_by": "scripts/gigo/market-sentiment-analysis-part-1-transform-quality-check.py",
+    "run_id": "sample-001",
+    "source_envelope": {
+      "fetched_at": "2026-08-27T14:30:00+00:00",
+      "sample_mode": true,
+      "source_name": "Reddit r/wallstreetbets search",
+      "source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/reddit-wallstreetbets.json",
+      "source_sha256": "291b99b9b2d3b6a21d0d1b3d4a2a3fbf078a098d3545eef3cb244aa82b5bf477",
+      "source_type": "http_json"
+    },
+    "step3_input": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/reddit-wallstreetbets.json"
+  },
+  "classification": "gigo",
+  "duplicate_counting_rule": "A duplicate is every occurrence of an identity key beyond the first. Three rows sharing one key count as 2 duplicates, not 3 and not 1.",
+  "duplicates": [
+    {
+      "action": "removed from verified_records; first occurrence kept",
+      "basis": "identity_key",
+      "first_seen_locator": "records[0].data.children[0].data",
+      "key_fields": [
+        "id"
+      ],
+      "key_value": [
+        "sy0001"
+      ],
+      "locator": "records[0].data.children[1].data"
+    }
+  ],
+  "flags": [
+    {
+      "action": "flagged and kept; stale data must not be silently dropped",
+      "age_days": 894,
+      "field": "created_utc",
+      "flag": "stale_timestamp",
+      "locator": "records[0].data.children[4].data",
+      "measured_from": "2026-08-27T14:30:00+00:00",
+      "observed_at": "2024-03-15T17:20:00+00:00",
+      "value": 1710523200,
+      "window_days": 1
+    },
+    {
+      "action": "flagged and left as found; must not be coerced downstream",
+      "expected": "int_like",
+      "field": "score",
+      "flag": "type_violation",
+      "locator": "records[0].data.children[5].data",
+      "value": "many"
+    }
+  ],
+  "freshness_measured_from": "2026-08-27T14:30:00+00:00",
+  "freshness_window_days": 1,
+  "identity_keys": [
+    "id"
+  ],
+  "node": "Transform and quality check",
+  "quality_notes": [],
+  "record_count": 3,
+  "record_count_basis": "rows surviving dedup; flagged rows are kept, not dropped",
+  "rejects": [
+    {
+      "action": "row withheld from the verified layer; never defaulted",
+      "detail": "key_absent",
+      "field": "title",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/reddit-wallstreetbets.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "locator": "records[0].data.children[2].data",
+      "reason": "missing_required_field",
+      "stream": "reddit"
+    },
+    {
+      "action": "row withheld from the verified layer",
+      "detail": "expected an object, got str",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/reddit-wallstreetbets.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "locator": "records[0].data.children[3].data",
+      "reason": "malformed_row",
+      "stream": "reddit"
+    }
+  ],
+  "rows_in": 4,
+  "rows_removed_as_duplicates": 1,
+  "schema_source": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+  "schema_version": "1.0.0",
+  "stream": "reddit",
+  "type_contract": {
+    "created_utc": "epoch_int",
+    "score": "int_like"
+  },
+  "verified_locators": [
+    "records[0].data.children[0].data",
+    "records[0].data.children[4].data",
+    "records[0].data.children[5].data"
+  ],
+  "verified_records": [
+    {
+      "author": "synthetic_user_01",
+      "created_utc": 1787828400,
+      "id": "sy0001",
+      "num_comments": 87,
+      "permalink": "/r/wallstreetbets/comments/sy0001/",
+      "score": 412,
+      "selftext": "Held through the print and the calls are up big. Still bullish here.",
+      "subreddit": "wallstreetbets",
+      "title": "FAKE calls printing after the earnings beat"
+    },
+    {
+      "author": "synthetic_user_06",
+      "created_utc": 1710523200,
+      "id": "sy0014",
+      "num_comments": 4,
+      "permalink": "/r/wallstreetbets/comments/sy0014/",
+      "score": 31,
+      "selftext": "Submission is far outside the t=day collection window.",
+      "subreddit": "wallstreetbets",
+      "title": "Old FAKE puts thread from last year"
+    },
+    {
+      "author": "synthetic_user_07",
+      "created_utc": 1787782200,
+      "id": "sy0015",
+      "num_comments": 17,
+      "permalink": "/r/wallstreetbets/comments/sy0015/",
+      "score": "many",
+      "selftext": "Bullish, but the score arrived as a word instead of an integer.",
+      "subreddit": "wallstreetbets",
+      "title": "FAKE rocket thread, score field is text"
+    }
+  ],
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

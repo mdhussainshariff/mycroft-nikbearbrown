@@ -1,0 +1,79 @@
+{
+  "approval_state": {
+    "approved_for_live_action": false,
+    "exists": true,
+    "record": "logs/gate-decisions/contradiction-detection-agent-gate-5.json"
+  },
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "classification": "tools",
+  "detail": {
+    "expected_flags": {
+      "exists": true,
+      "parsed_ok": true,
+      "path": "data/raw/contradiction-detection-agent/sample/expected-flags.json",
+      "sha256": "222617d58d28191ee37bcc96f82449bf5c88a7e57d0c223bba403eace22258bf"
+    },
+    "fixture_manifest": {
+      "exists": true,
+      "parsed_ok": true,
+      "path": "data/raw/contradiction-detection-agent/sample/fixture-manifest.json",
+      "sha256": "ff397cce2e206cb7d6b76d53ed32ebf4fd8a5b80771547da6cfcf707a71a5b27"
+    },
+    "original_workflow": {
+      "declared_in_recipe": 26,
+      "exists": true,
+      "node_count": 26,
+      "parsed_ok": true,
+      "path": "data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Contradiction_Detection_Agent/Contradiction_detection_agent.json",
+      "sha256": "7f77a6e26f29f943ca4aff33ab24cb78c34f6456ec98f1b1884aee7c3469954c",
+      "title_matches_pipeline": true
+    },
+    "recipe": {
+      "exists": true,
+      "parsed_ok": true,
+      "path": "recipes/contradiction-detection-agent.md"
+    },
+    "run_envelope": {
+      "exists": true,
+      "parsed_ok": true,
+      "path": "data/raw/contradiction-detection-agent/run-envelope.json",
+      "sha256": "6dadd1fd9cb0756ee979dbb64f03d44df0810911aec430fbd0c8f82ac18c7011"
+    }
+  },
+  "exists": {
+    "expected_flags": true,
+    "fixture_manifest": true,
+    "original_workflow": true,
+    "recipe": true,
+    "run_envelope": true
+  },
+  "findings_digest": "4f53cda18c2baa0c",
+  "human_gate": {
+    "capacity": "[TO]",
+    "cleared_by": null,
+    "gate": 1,
+    "note": "Gate 1: a human confirms the sources are the intended ones before ingest."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_step": "ingest-inputs",
+  "node": "Verify provenance",
+  "node_type": "recipe-step",
+  "parsed_ok": {
+    "expected_flags": true,
+    "fixture_manifest": true,
+    "original_workflow": true,
+    "recipe": true,
+    "run_envelope": true
+  },
+  "source_paths": {
+    "expected_flags": "data/raw/contradiction-detection-agent/sample/expected-flags.json",
+    "fixture_manifest": "data/raw/contradiction-detection-agent/sample/fixture-manifest.json",
+    "original_workflow": "data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Contradiction_Detection_Agent/Contradiction_detection_agent.json",
+    "recipe": "recipes/contradiction-detection-agent.md",
+    "run_envelope": "data/raw/contradiction-detection-agent/run-envelope.json"
+  },
+  "status": "ok",
+  "stop_conditions": [],
+  "workflow": "Contradiction_detection_agent"
+}

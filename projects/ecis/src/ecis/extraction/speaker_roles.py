@@ -30,7 +30,7 @@ _ROLE_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 
-def classify_speaker(speaker: str) -> str:
+def classify_speaker(speaker: str, ticker: str | None = None) -> str:
     """Return a canonical role for a speaker attribution string."""
     text = (speaker or "").strip()
     if not text:
@@ -42,12 +42,23 @@ def classify_speaker(speaker: str) -> str:
 
     for role, pattern in _ROLE_PATTERNS:
         if pattern.search(text):
+            if ticker and role not in {"analyst", "operator"}:
+                from ecis.extraction.officer_lookup import ingest_from_speaker
+
+                ingest_from_speaker(ticker, text, role)
             return role
+
+    if ticker:
+        from ecis.extraction.officer_lookup import lookup_role
+
+        stored = lookup_role(ticker, text)
+        if stored:
+            return stored
     return "unknown"
 
 
-def speaker_weight(speaker: str, role: str | None = None) -> float:
+def speaker_weight(speaker: str, role: str | None = None, ticker: str | None = None) -> float:
     """Weight multiplier for a speaker. CFO is 1.0; analysts and operators are downweighted."""
-    resolved = role or classify_speaker(speaker)
+    resolved = role or classify_speaker(speaker, ticker=ticker)
     table = settings.speaker_role_weights
     return float(table.get(resolved, table.get("unknown", 0.8)))

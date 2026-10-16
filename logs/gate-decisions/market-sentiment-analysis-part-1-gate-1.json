@@ -1,0 +1,31 @@
+{
+  "decided_at": "2026-09-25",
+  "decided_by": {
+    "name": "Uday Sonawane",
+    "role": "recipe owner"
+  },
+  "decision": "approve",
+  "evidence_files": [
+    {
+      "path": "scripts/tools/market-sentiment-analysis-part-1-verify-provenance.py",
+      "sha256": "3afb272debc044ae94c795a83bd3f333d466b1551e0860287dcac2257a03524c"
+    },
+    {
+      "path": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+      "sha256": "7ee88528523d57800bbebd58ceb393718f8afce728e8a517b204bb6546f52095"
+    }
+  ],
+  "evidence_observed": "Step 1 checked 14 declared source paths: 12 required, all present, hashed and parse-checked. The two absent paths are optional (the gate-5 approval record, which is correctly absent, and a path step 1 does not create).",
+  "gate": 1,
+  "gate_name": "Source gate",
+  "handoff_condition": "All required source paths are present or explicitly marked with a typed TODO.",
+  "human_capacity": "[TO]",
+  "mode": "sample",
+  "recipe": "recipes/market-sentiment-analysis-part-1.md",
+  "recipe_version": "0.2.0",
+  "residual_risk": "The check is existence, parseability and hash. It does not assert the sources are the RIGHT sources for the question being asked -- that judgment is not automatable and is not claimed here.",
+  "run_log": "logs/RUN_LOG.md#2026-09-25",
+  "scope": "This decision covers the sample run over the frozen fixture corpus only.",
+  "voids_if": "Any edit to the recipe or its six step scripts, any change to the fixture corpus, or a switch out of sample mode voids this decision.",
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

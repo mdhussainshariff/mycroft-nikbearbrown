@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "Golf Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXG-20260930-001",
+    "ticker": "FXG"
+  },
+  "rows": {
+    "guidance-signals": [],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXG-1",
+        "headline": "Analysts raise Golf Fixture Co target",
+        "id": "N-FXG-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXG",
+        "topic_tags": [
+          "analyst",
+          "target"
+        ]
+      }
+    ],
+    "qa-pressure-map": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-2",
+        "pressure_score": 8,
+        "question_text": "Can you say more about pricing?",
+        "question_topic": "pricing",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 1
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": true,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-1",
+        "pressure_score": 5,
+        "question_text": "Can you say more about capex?",
+        "question_topic": "capex",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 3
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-3",
+        "pressure_score": 2,
+        "question_text": "Can you say more about hiring?",
+        "question_topic": "hiring",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 1
+      }
+    ],
+    "risk-admissions": [],
+    "tech-stack-signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXG-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXG-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXG",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 0
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 1
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 3
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 0
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 1
+    }
+  }
+}

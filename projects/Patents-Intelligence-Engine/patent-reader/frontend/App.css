@@ -1,0 +1,176 @@
+.app {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #2F2A26;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.patent-input {
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: opacity 0.2s;
+}
+
+.patent-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.classify-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.classify-toggle input:disabled {
+  cursor: not-allowed;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #1F4E5F;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+  min-width: 130px;
+  transition: background 0.2s;
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.loading-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-hint {
+  font-size: 0.88rem;
+  color: #666;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.error {
+  background: #fdf0ed;
+  border-left: 3px solid #E4572E;
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1rem;
+}
+
+.error strong {
+  color: #E4572E;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.error p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.result {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.result section {
+  margin-bottom: 1.5rem;
+}
+
+.result section:last-child {
+  margin-bottom: 0;
+}
+
+.result h3 {
+  margin-bottom: 0.5rem;
+  color: #1F4E5F;
+}
+
+.flag {
+  color: #E4572E;
+  font-weight: bold;
+}
+
+.scope-readings {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.scope-reading {
+  background: #f9f7f3;
+  border-left: 3px solid #F3A712;
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
+}
+
+.caveat {
+  font-style: italic;
+  color: #555;
+  margin: 0.4rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+details {
+  margin-top: 0.5rem;
+}
+
+details summary {
+  cursor: pointer;
+  color: #1F4E5F;
+  font-size: 0.9rem;
+}
+
+details ul {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}

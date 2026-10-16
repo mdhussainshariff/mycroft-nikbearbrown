@@ -1,0 +1,273 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Charlie Fixture Co",
+  "contradiction_flags": [
+    {
+      "claim_a_direction": "strengthened",
+      "claim_a_id": "GS-FXC-001",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "Demand is accelerating; we are raising guidance.",
+      "claim_b_direction": "negative",
+      "claim_b_id": "NEWS-FXC-1",
+      "claim_b_source": "news_agent",
+      "claim_b_text": "Charlie Fixture Co under pressure (1)",
+      "conflict_description": "Guidance STRENGTHENED on call but news sentiment is NEGATIVE",
+      "evidence_for_a": "Earnings: 1 strengthened signals",
+      "evidence_for_b": "News: 4 negative articles, avg score -0.23",
+      "flag_id": "CONTRA-FXC-20260930-001-P1-F001",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 1,
+      "pattern_name": "Sentiment vs Guidance Direction",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXC-20260930-001",
+      "schema_valid": true,
+      "severity": "HIGH",
+      "ticker": "FXC"
+    },
+    {
+      "claim_a_direction": "strengthened",
+      "claim_a_id": "GS-FXC-001",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "Demand is accelerating; we are raising guidance.",
+      "claim_b_direction": "negative",
+      "claim_b_id": "NEWS-FXC-1",
+      "claim_b_source": "news_agent",
+      "claim_b_text": "Charlie Fixture Co under pressure (1)",
+      "conflict_description": "Management projects high-confidence strengthened guidance against sustained negative news momentum",
+      "evidence_for_a": "Earnings: 1 strengthened signals, confidence=0.85",
+      "evidence_for_b": "News: 4 negative vs 2 positive, avg=-0.23",
+      "flag_id": "CONTRA-FXC-20260930-001-P6-F002",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 6,
+      "pattern_name": "Guidance Optimism vs Negative News Momentum",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXC-20260930-001",
+      "schema_valid": true,
+      "severity": "HIGH",
+      "ticker": "FXC"
+    }
+  ],
+  "detection_summary": {
+    "has_contradictions": true,
+    "high_severity": 2,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "CRITICALLY_COMPROMISED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": true,
+    "total_flags": 2
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 1
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 1
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXC-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 6,
+    "qa_items": 0,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXC-001",
+        "claim_summary": "Demand is accelerating; we are raising guidance.",
+        "claim_text": "Demand is accelerating; we are raising guidance.",
+        "company_name": "Charlie Fixture Co",
+        "direction": "strengthened",
+        "direction_confidence": 0.85,
+        "earnings_call_id": "CALL-FXC-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "data center demand",
+        "id": "G-FXC-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXC",
+        "transcript_citation": "CALL-FXC-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXC-1",
+        "headline": "Charlie Fixture Co under pressure (1)",
+        "id": "N-FXC-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXC-2",
+        "headline": "Charlie Fixture Co under pressure (2)",
+        "id": "N-FXC-2",
+        "published_at": "2026-09-20T10:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXC-3",
+        "headline": "Charlie Fixture Co under pressure (3)",
+        "id": "N-FXC-3",
+        "published_at": "2026-09-20T09:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXC-4",
+        "headline": "Charlie Fixture Co under pressure (4)",
+        "id": "N-FXC-4",
+        "published_at": "2026-09-20T08:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXC-5",
+        "headline": "Charlie Fixture Co product praised (5)",
+        "id": "N-FXC-5",
+        "published_at": "2026-09-20T07:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.3,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "products"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXC-6",
+        "headline": "Charlie Fixture Co product praised (6)",
+        "id": "N-FXC-6",
+        "published_at": "2026-09-20T06:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.3,
+        "source_name": "Fixture Wire",
+        "ticker": "FXC",
+        "topic_tags": [
+          "products"
+        ]
+      }
+    ],
+    "qa_pressure": [],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXC-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXC-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXC",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": -0.2333333333333333,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXC-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXC-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXC",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 4,
+    "news_sentiment_direction": "NEGATIVE",
+    "pos_news": 2,
+    "strengthened_guidance_count": 1,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXC"
+}

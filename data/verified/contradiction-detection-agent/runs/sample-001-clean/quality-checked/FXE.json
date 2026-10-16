@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "Echo Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXE-20260930-001",
+    "ticker": "FXE"
+  },
+  "rows": {
+    "guidance-signals": [],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXE-1",
+        "headline": "Echo Fixture Co seen as regulation winner",
+        "id": "N-FXE-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.4,
+        "source_name": "Fixture Wire",
+        "ticker": "FXE",
+        "topic_tags": [
+          "regulation"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXE-2",
+        "headline": "Echo Fixture Co quarterly update",
+        "id": "N-FXE-2",
+        "published_at": "2026-09-20T10:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.0,
+        "source_name": "Fixture Wire",
+        "ticker": "FXE",
+        "topic_tags": [
+          "earnings"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXE-3",
+        "headline": "Echo Fixture Co hires",
+        "id": "N-FXE-3",
+        "published_at": "2026-09-20T09:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.0,
+        "source_name": "Fixture Wire",
+        "ticker": "FXE",
+        "topic_tags": [
+          "hiring"
+        ]
+      }
+    ],
+    "qa-pressure-map": [],
+    "risk-admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXE-001",
+        "earnings_call_id": "CALL-FXE-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXE-1",
+        "prior_disclosure_call": null,
+        "risk_category": "regulation",
+        "risk_description": "New regulation may restrict our core product.",
+        "risk_summary": "New regulation may restrict our core product.",
+        "schema_valid": true,
+        "severity": "high",
+        "ticker": "FXE",
+        "transcript_citation": "CALL-FXE-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech-stack-signals": []
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 0
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 3
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 0
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 1
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 0
+    }
+  }
+}

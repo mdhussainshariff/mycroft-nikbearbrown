@@ -1,0 +1,41 @@
+{
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "approve",
+  "decision_words": "D1 clear, D2 deny, D3 keep, D4 log",
+  "evidence_files": [
+    {
+      "path": "logs/contradiction-detection-agent/runs/sample-001-clean/step-3-validate-data-shape.json",
+      "sha256": "6eed8713e0376f20cf0d1a97949c2bd79a7182ae1adc4f0b82fc80c0ae61eb5d"
+    },
+    {
+      "path": "data/verified/contradiction-detection-agent/runs/sample-001-clean/sample-001-clean-audit.md",
+      "sha256": "816bfaea1ab519054dea512c84ac4c031fb434ca4e3cfc163ebc96c411fa71d7"
+    },
+    {
+      "path": "data/verified/contradiction-detection-agent/runs/sample-001-defective/sample-001-defective-audit.md",
+      "sha256": "6182350207324dc9f57784aa1fedfb97f7bada04e2c472708c004139d36521d3"
+    }
+  ],
+  "evidence_observed": "Clean run: 0 shape findings. Defective run: all 13 shape defects reported at their rows, the run halted; self-test 17/17 catalogued defects.",
+  "gate": 3,
+  "gate_name": "Data-shape gate",
+  "handoff_condition": "Every raw and verified output of the run parses, and step 3 reports ok.",
+  "human_capacity": "[PA]",
+  "mode": "sample",
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": [
+    "2026-10-04 by Tanmay Kulkarni (\"D1 clear\"), after the report step was fixed during the gate-6 review (report and agent log now agree on rejects; unchecked items say 'not checked'; recommendation built from the gate records); evidence re-hashed",
+    "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged"
+  ],
+  "residual_risk": "Shape and listed quality checks only; it says nothing about whether the signals are true.",
+  "run": "sample-001-clean (and sample-001-defective, read for gate 3)",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "workflow": "Contradiction_detection_agent"
+}

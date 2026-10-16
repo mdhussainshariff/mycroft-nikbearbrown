@@ -33,6 +33,19 @@ class TestDatabaseInit:
             conn.close()
             assert len(tables) > 0, f"{name}.db has no tables"
 
+    def test_checkpoints_extraction_runs(self, tmp_path, monkeypatch):
+        from ecis.config.settings import settings
+
+        monkeypatch.setattr(settings, "db_dir", tmp_path)
+        from ecis.db.init_db import init_database
+
+        init_database("checkpoints")
+        conn = sqlite3.connect(str(tmp_path / "checkpoints.db"))
+        tables = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        conn.close()
+        assert "extraction_runs" in tables
+        assert "checkpoints" in tables
+
     def test_signals_schema(self, tmp_path, monkeypatch):
         from ecis.config.settings import settings
 
@@ -51,7 +64,8 @@ class TestDatabaseInit:
             "transcript_date", "chunk_index", "char_start", "char_end",
             "created_at", "llm_model", "content_hash", "retry_count",
             "low_confidence", "speaker_role", "speaker_weight",
-            "chunk_quality", "trend",
+            "chunk_quality", "trend", "decay_profile", "keyword_density",
+            "negation_flag",
         }
         assert expected.issubset(columns)
 

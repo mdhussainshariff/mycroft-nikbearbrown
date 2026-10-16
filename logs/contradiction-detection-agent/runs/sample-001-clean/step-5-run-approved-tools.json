@@ -1,0 +1,179 @@
+{
+  "action_taken": "detected over 16 companies; LLM review prepared as handoff, not sent",
+  "approval_id": null,
+  "classification": "tools",
+  "companies": [
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXA",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": false,
+      "medium": 0,
+      "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "skipped_patterns": [],
+      "ticker": "FXB",
+      "total_flags": 0
+    },
+    {
+      "high": 2,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CRITICALLY_COMPROMISED",
+      "skipped_patterns": [],
+      "ticker": "FXC",
+      "total_flags": 2
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXD",
+      "total_flags": 1
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [
+        4,
+        5
+      ],
+      "ticker": "FXE",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": true,
+      "medium": 1,
+      "overall_confidence_level": "LOW_CONCERN",
+      "skipped_patterns": [],
+      "ticker": "FXF",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": true,
+      "medium": 1,
+      "overall_confidence_level": "LOW_CONCERN",
+      "skipped_patterns": [],
+      "ticker": "FXG",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": false,
+      "medium": 0,
+      "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "skipped_patterns": [],
+      "ticker": "FXH",
+      "total_flags": 0
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXJ",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": false,
+      "medium": 0,
+      "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "skipped_patterns": [],
+      "ticker": "FXK",
+      "total_flags": 0
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXL",
+      "total_flags": 1
+    },
+    {
+      "high": 0,
+      "llm_needed": false,
+      "medium": 0,
+      "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "skipped_patterns": [],
+      "ticker": "FXM",
+      "total_flags": 0
+    },
+    {
+      "high": 0,
+      "llm_needed": false,
+      "medium": 0,
+      "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "skipped_patterns": [
+        4,
+        5
+      ],
+      "ticker": "FXN",
+      "total_flags": 0
+    },
+    {
+      "high": 0,
+      "llm_needed": true,
+      "medium": 2,
+      "overall_confidence_level": "REVIEW_WARRANTED",
+      "skipped_patterns": [],
+      "ticker": "FXP",
+      "total_flags": 2
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXQ",
+      "total_flags": 1
+    },
+    {
+      "high": 1,
+      "llm_needed": true,
+      "medium": 0,
+      "overall_confidence_level": "CONFIDENCE_REDUCED",
+      "skipped_patterns": [],
+      "ticker": "FXR",
+      "total_flags": 1
+    }
+  ],
+  "flags_total": 13,
+  "generated_at": "2026-09-30T00:00:00+00:00",
+  "human_gate": {
+    "capacity": "[EI]",
+    "cleared_by": null,
+    "gate": 5,
+    "note": "Sending flags to a model is a live action; it needs a gate-5 approval record."
+  },
+  "input_path": "data/verified/contradiction-detection-agent/runs/sample-001-clean/quality-checked",
+  "live_call_performed": false,
+  "mode": "sample",
+  "network_access": "none",
+  "next_step": "produce-human-report",
+  "no_write_mode": false,
+  "node": "Run approved tools",
+  "node_type": "recipe-step",
+  "output_path": "logs/contradiction-detection-agent/runs/sample-001-clean",
+  "run": "sample-001-clean",
+  "status": "ok",
+  "stop_conditions": [],
+  "tool_name": "six-pattern contradiction detector (ported)",
+  "workflow": "Contradiction_detection_agent"
+}

@@ -1,0 +1,85 @@
+{
+  "rows": [
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXA-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXA-1",
+      "pressure_score": 3,
+      "question_text": "Can you say more about headcount?",
+      "question_topic": "headcount",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXA",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": true,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-1",
+      "pressure_score": 5,
+      "question_text": "Can you say more about capex?",
+      "question_topic": "capex",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 3
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-2",
+      "pressure_score": 8,
+      "question_text": "Can you say more about pricing?",
+      "question_topic": "pricing",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-3",
+      "pressure_score": 2,
+      "question_text": "Can you say more about hiring?",
+      "question_topic": "hiring",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXH-2026Q2-1",
+      "evasion_flag": true,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXH-1",
+      "pressure_score": 9,
+      "question_text

@@ -1,0 +1,341 @@
+{
+  "flags": [
+    {
+      "action": "[TODO: DEFINE] - the weights, thresholds and keyword lists need a named human.",
+      "flag": "scoring_params_unattributed",
+      "scoring_params_version": "1.0.0",
+      "why": "the weights, thresholds and keyword lists have no recorded author"
+    },
+    {
+      "flag": "multi_quote_first_wins",
+      "row_used": "records[0].\"Global Quote\"",
+      "rows_available": 3,
+      "rows_ignored": [
+        "records[2].\"Global Quote\"",
+        "records[3].\"Global Quote\""
+      ],
+      "stream": "price",
+      "why": "original reads a single Global Quote; additional verified quotes are ignored"
+    },
+    {
+      "flag": "scored_row_carries_quality_flag",
+      "locator": "records[6]",
+      "quality_flags": [
+        {
+          "field": "datetime",
+          "flag": "stale_timestamp",
+          "value": 1710507600
+        }
+      ],
+      "stream": "news",
+      "why": "a row step 4 flagged as stale or wrongly typed still fed this score"
+    },
+    {
+      "flag": "scored_row_carries_quality_flag",
+      "locator": "records[7]",
+      "quality_flags": [
+        {
+          "field": "datetime",
+          "flag": "type_violation",
+          "value": "yesterday"
+        }
+      ],
+      "stream": "news",
+      "why": "a row step 4 flagged as stale or wrongly typed still fed this score"
+    },
+    {
+      "flag": "scored_row_carries_quality_flag",
+      "locator": "records[0].data.children[4].data",
+      "quality_flags": [
+        {
+          "field": "created_utc",
+          "flag": "stale_timestamp",
+          "value": 1710523200
+        }
+      ],
+      "stream": "reddit",
+      "why": "a row step 4 flagged as stale or wrongly typed still fed this score"
+    },
+    {
+      "flag": "scored_row_carries_quality_flag",
+      "locator": "records[0].data.children[5].data",
+      "quality_flags": [
+        {
+          "field": "score",
+          "flag": "type_violation",
+          "value": "many"
+        }
+      ],
+      "stream": "reddit",
+      "why": "a row step 4 flagged as stale or wrongly typed still fed this score"
+    },
+    {
+      "branch": "redditMentions > 20 (high social activity findings)",
+      "flag": "untested_threshold_path",
+      "rows_available": 3,
+      "stream": "reddit",
+      "why": "a branch in the original that this corpus cannot exercise"
+    },
+    {
+      "flag": "ticker_not_derived_from_question",
+      "note": "The source workflow derives the ticker from a parsed question and defaults to 'SPY' when none is found, which silently turns a ticker-less question into an SPY analysis. This recipe has no question-parsing step, so that default cannot fire here -- and no question is scored either.",
+      "ticker_source": "price row field '01. symbol'",
+      "ticker_used": "FAKE",
+      "why": "no question-parsing step exists in this recipe, so the ticker comes from the price rows"
+    }
+  ],
+  "interpretation_warning": "This score is arithmetic over a keyword count, not a market observation. It is not a recommendation, and every flag above changes what it means.",
+  "price_data": {
+    "change_percent": 2.0,
+    "current_price": 102.0,
+    "previous_close": 100.0,
+    "volume": 12000000
+  },
+  "scoring_params": {
+    "attribution": null,
+    "attribution_note": "No derivation, backtest, or author is recorded in the source workflow for any constant in this block. [TODO: DEFINE] - needs a named human.",
+    "label_thresholds": {
+      "BEARISH": 35,
+      "BULLISH": 65,
+      "SLIGHTLY BEARISH": 45,
+      "SLIGHTLY BULLISH": 55
+    },
+    "news_negative_words": [
+      "drop",
+      "fall",
+      "bear",
+      "downgrade",
+      "miss",
+      "weak",
+      "loss",
+      "decline",
+      "crash"
+    ],
+    "news_positive_words": [
+      "surge",
+      "gain",
+      "bull",
+      "upgrade",
+      "beat",
+      "strong",
+      "growth",
+      "profit",
+      "rise"
+    ],
+    "news_scan_limit": 20,
+    "no_data_score": 50,
+    "ported_from": "data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Market_Monitoring_Agent/market_sentiment.json",
+    "ported_from_node": "Aggregate & Calculate Sentiment",
+    "price_score_map": {
+      "change_gt_0": 60,
+      "change_gt_3": 75,
+      "change_lt_-3": 25,
+      "otherwise": 40
+    },
+    "reddit_bearish_terms": [
+      "puts",
+      "crash",
+      "bearish",
+      "sell",
+      "short",
+      "dump"
+    ],
+    "reddit_bullish_terms": [
+      "calls",
+      "moon",
+      "rocket",
+      "bullish",
+      "buy",
+      "long",
+      "\ud83d\ude80",
+      "to the moon"
+    ],
+    "version": "1.0.0",
+    "weights": {
+      "news": 0.3,
+      "price": 0.4,
+      "social": 0.3
+    }
+  },
+  "sentiment_analysis": {
+    "news_sentiment": {
+      "negative": 0,
+      "neutral": 2,
+      "positive": 1,
+      "score": 67,
+      "score_is_default": false,
+      "total_articles": 3
+    },
+    "overall_formula": "price*0.4 + news*0.3 + social*0.3, rounded",
+    "overall_score": 64,
+    "overall_score_unrounded": 64.0,
+    "price_sentiment": {
+      "score": 60
+    },
+    "sentiment_label": "SLIGHTLY BULLISH",
+    "social_sentiment": {
+      "negative": 1,
+      "neutral": 0,
+      "positive": 2,
+      "score": 67,
+      "score_is_default": false,
+      "total_mentions": 3
+    }
+  },
+  "ticker": "FAKE",
+  "trace_chain": {
+    "news": {
+      "contributions": [
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[0]",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/news-finnhub.json",
+          "raw_source_sha256": "c7dd6641a29e8dee26efd45fed186c473c01977ef769f4192eb402ba4cb052e9",
+          "record_index": 0,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/news-finnhub.json"
+        },
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[6]",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/news-finnhub.json",
+          "raw_source_sha256": "c7dd6641a29e8dee26efd45fed186c473c01977ef769f4192eb402ba4cb052e9",
+          "record_index": 1,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/news-finnhub.json"
+        },
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[7]",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/news-finnhub.json",
+          "raw_source_sha256": "c7dd6641a29e8dee26efd45fed186c473c01977ef769f4192eb402ba4cb052e9",
+          "record_index": 2,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/news-finnhub.json"
+        }
+      ],
+      "per_row": [
+        {
+          "locator": "records[0]",
+          "negative_hits": 0,
+          "positive_hits": 4,
+          "verdict": "positive"
+        },
+        {
+          "locator": "records[6]",
+          "negative_hits": 0,
+          "positive_hits": 0,
+          "verdict": "neutral"
+        },
+        {
+          "locator": "records[7]",
+          "negative_hits": 0,
+          "positive_hits": 0,
+          "verdict": "neutral"
+        }
+      ],
+      "rows_carrying_quality_flags": [
+        {
+          "locator": "records[6]",
+          "quality_flags": [
+            {
+              "field": "datetime",
+              "flag": "stale_timestamp",
+              "value": 1710507600
+            }
+          ]
+        },
+        {
+          "locator": "records[7]",
+          "quality_flags": [
+            {
+              "field": "datetime",
+              "flag": "type_violation",
+              "value": "yesterday"
+            }
+          ]
+        }
+      ]
+    },
+    "price": {
+      "contributions": [
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[0].\"Global Quote\"",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/price-alpha-vantage.json",
+          "raw_source_sha256": "1480e3436870fb758f01b46039eaeefc89af5b5e53cce02f721ea518fe2f418c",
+          "record_index": 0,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/price-alpha-vantage.json"
+        }
+      ],
+      "rows_carrying_quality_flags": []
+    },
+    "reddit": {
+      "contributions": [
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[0].data.children[0].data",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/reddit-wallstreetbets.json",
+          "raw_source_sha256": "291b99b9b2d3b6a21d0d1b3d4a2a3fbf078a098d3545eef3cb244aa82b5bf477",
+          "record_index": 0,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/reddit-wallstreetbets.json"
+        },
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[0].data.children[4].data",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/reddit-wallstreetbets.json",
+          "raw_source_sha256": "291b99b9b2d3b6a21d0d1b3d4a2a3fbf078a098d3545eef3cb244aa82b5bf477",
+          "record_index": 1,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/reddit-wallstreetbets.json"
+        },
+        {
+          "fetched_at": "2026-08-27T14:30:00+00:00",
+          "raw_locator": "records[0].data.children[5].data",
+          "raw_source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/reddit-wallstreetbets.json",
+          "raw_source_sha256": "291b99b9b2d3b6a21d0d1b3d4a2a3fbf078a098d3545eef3cb244aa82b5bf477",
+          "record_index": 2,
+          "verified_file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/quality-checked/reddit-wallstreetbets.json"
+        }
+      ],
+      "per_row": [
+        {
+          "locator": "records[0].data.children[0].data",
+          "negative_hits": 0,
+          "positive_hits": 2,
+          "verdict": "positive"
+        },
+        {
+          "locator": "records[0].data.children[4].data",
+          "negative_hits": 1,
+          "positive_hits": 0,
+          "verdict": "negative"
+        },
+        {
+          "locator": "records[0].data.children[5].data",
+          "negative_hits": 0,
+          "positive_hits": 2,
+          "verdict": "positive"
+        }
+      ],
+      "rows_carrying_quality_flags": [
+        {
+          "locator": "records[0].data.children[4].data",
+          "quality_flags": [
+            {
+              "field": "created_utc",
+              "flag": "stale_timestamp",
+              "value": 1710523200
+            }
+          ]
+        },
+        {
+          "locator": "records[0].data.children[5].data",
+          "quality_flags": [
+            {
+              "field": "score",
+              "flag": "type_violation",
+              "value": "many"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

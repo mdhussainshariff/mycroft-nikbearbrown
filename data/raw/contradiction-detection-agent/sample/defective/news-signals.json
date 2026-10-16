@@ -1,0 +1,451 @@
+{
+  "rows": [
+    {
+      "claim_id": "NEWS-FXA-1",
+      "headline": "Alpha Fixture Co shares climb",
+      "id": "N-FXA-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXA",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXA-2",
+      "headline": "Alpha Fixture Co wins contract",
+      "id": "N-FXA-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": "0.4",
+      "source_name": "Fixture Wire",
+      "ticker": "FXA",
+      "topic_tags": [
+        "contracts"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXA-3",
+      "headline": "Alpha Fixture Co steady",
+      "id": "N-FXA-3",
+      "published_at": "2026-09-20T09:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.3,
+      "source_name": "Fixture Wire",
+      "ticker": "FXA",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXB-1",
+      "headline": "Bravo Fixture Co upbeat",
+      "id": "N-FXB-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": false,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXB",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-1",
+      "headline": "Charlie Fixture Co under pressure (1)",
+      "id": "N-FXC-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-2",
+      "headline": "Charlie Fixture Co under pressure (2)",
+      "id": "N-FXC-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-3",
+      "headline": "Charlie Fixture Co under pressure (3)",
+      "id": "N-FXC-3",
+      "published_at": "yesterday",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-4",
+      "headline": "Charlie Fixture Co under pressure (4)",
+      "id": "N-FXC-4",
+      "published_at": "2026-09-20T08:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-5",
+      "headline": "Charlie Fixture Co product praised (5)",
+      "id": "N-FXC-5",
+      "published_at": "2026-09-20T07:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.3,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "products"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXC-6",
+      "headline": "Charlie Fixture Co product praised (6)",
+      "id": "N-FXC-6",
+      "published_at": "2026-09-20T06:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.3,
+      "source_name": "Fixture Wire",
+      "ticker": "FXC",
+      "topic_tags": [
+        "products"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXD-1",
+      "headline": "Delta Fixture Co under pressure (1)",
+      "id": "N-FXD-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXD",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXD-2",
+      "headline": "Delta Fixture Co under pressure (2)",
+      "id": "N-FXD-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXD",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXD-3",
+      "headline": "Delta Fixture Co under pressure (3)",
+      "id": "N-FXD-3",
+      "published_at": "2026-09-20T09:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXD",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXD-4",
+      "headline": "Delta Fixture Co product praised",
+      "id": "N-FXD-4",
+      "published_at": "2026-09-20T08:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.3,
+      "source_name": "Fixture Wire",
+      "ticker": "FXD",
+      "topic_tags": [
+        "products"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXE-1",
+      "headline": "Echo Fixture Co seen as regulation winner",
+      "id": "N-FXE-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.4,
+      "source_name": "Fixture Wire",
+      "ticker": "FXE",
+      "topic_tags": [
+        "regulation"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXE-2",
+      "headline": "Echo Fixture Co quarterly update",
+      "id": "N-FXE-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXE",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXE-3",
+      "headline": "Echo Fixture Co hires",
+      "id": "N-FXE-3",
+      "published_at": "2026-09-20T09:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXE",
+      "topic_tags": [
+        "hiring"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXF-1",
+      "headline": "Foxtrot Fixture Co supply chain recovers",
+      "id": "N-FXF-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.4,
+      "source_name": "Fixture Wire",
+      "ticker": "FXF",
+      "topic_tags": [
+        "supply_chain"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXF-2",
+      "headline": "Foxtrot Fixture Co faces lawsuit",
+      "id": "N-FXF-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "negative",
+      "sentiment_score": -0.4,
+      "source_name": "Fixture Wire",
+      "ticker": "FXF",
+      "topic_tags": [
+        "litigation"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXG-1",
+      "headline": "Analysts raise Golf Fixture Co target",
+      "id": "N-FXG-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXG",
+      "topic_tags": "analyst"
+    },
+    {
+      "claim_id": "NEWS-FXH-1",
+      "headline": "Analysts upgrade Hotel Fixture Co",
+      "id": "N-FXH-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6,
+      "source_name": "Fixture Wire",
+      "ticker": "FXH",
+      "topic_tags": [
+        "analyst"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXJ-1",
+      "headline": "Juliett Fixture Co holds event",
+      "id": "N-FXJ-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXJ",
+      "topic_tags": [
+        "events"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXJ-2",
+      "headline": "Juliett Fixture Co profile",
+      "id": "N-FXJ-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXJ",
+      "topic_tags": [
+        "profiles"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXK-1",
+      "headline": "Kilo Fixture Co holds event",
+      "id": "N-FXK-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXK",
+      "topic_tags": [
+        "events"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXL-1",
+      "headline": "Lima Fixture Co update",
+      "id": "N-FXL-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXL",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXM-1",
+      "headline": "Mike Fixture Co update",
+      "id": "N-FXM-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.0,
+      "source_name": "Fixture Wire",
+      "ticker": "FXM",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXN-1",
+      "headline": "November Fixture Co reaffirms",
+      "id": "N-FXN-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.05,
+      "source_name": "Fixture Wire",
+      "ticker": "FXN",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXP-1",
+      "headline": "Analysts upgrade Papa Fixture Co",
+      "id": "N-FXP-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6,
+      "source_name": "Fixture Wire",
+      "ticker": "FXP",
+      "topic_tags": [
+        "analyst"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXQ-1",
+      "headline": "Quebec Fixture Co rallies",
+      "id": "N-FXQ-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXQ",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXQ-2",
+      "headline": "Quebec Fixture Co beats estimates",
+      "id": "N-FXQ-2",
+      "published_at": "2026-09-20T10:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.75,
+      "source_name": "Fixture Wire",
+      "ticker": "FXQ",
+      "topic_tags": [
+        "earnings"
+      ]
+    },
+    {
+      "claim_id": "NEWS-FXR-1",
+      "headline": "Romeo Fixture Co upbeat",
+      "id": "N-FXR-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.5,
+      "source_name": "Fixture Wire",
+      "ticker": "FXR",
+      "topic_tags": [
+        "markets"
+      ]
+    },
+    {
+      "claim_id": "NEWS-ZZZZ-1",
+      "headline": "Echo Fixture Co seen as regulation winner",
+      "id": "N-ZZZZ-1",
+      "published_at": "2026-09-20T11:00:00+00:00",
+      "schema_valid": true,
+      "sentiment_label": "positive",
+      "sentiment_score": 0.4,
+      "source_name": "Fixture Wire",
+      "ticker": "ZZZZ",
+      "topic_tags": [
+        "regulation"
+      ]
+    }
+  ],
+  "source": "news-signals"
+}

@@ -1,0 +1,4 @@
+# No external dependencies. Every module in this repository uses only the
+# Python standard library. Tests are runnable directly via `python3` and
+# require no test framework, though they are also pytest-compatible if you
+# prefer to run them as a suite: `pip install pytest && pytest tests/`

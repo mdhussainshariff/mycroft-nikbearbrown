@@ -1,0 +1,171 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Hotel Fixture Co",
+  "contradiction_flags": [],
+  "detection_summary": {
+    "has_contradictions": false,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": false,
+    "total_flags": 0
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXH-20260930-001",
+  "signal_counts": {
+    "guidance": 0,
+    "news": 1,
+    "qa_items": 2,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXH-1",
+        "headline": "Analysts upgrade Hotel Fixture Co",
+        "id": "N-FXH-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.6,
+        "source_name": "Fixture Wire",
+        "ticker": "FXH",
+        "topic_tags": [
+          "analyst"
+        ]
+      }
+    ],
+    "qa_pressure": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXH-2026Q2-1",
+        "evasion_flag": true,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXH-1",
+        "pressure_score": 9,
+        "question_text": "Can you say more about capex?",
+        "question_topic": "capex",
+        "response_summary": "Management responded (deflected).",
+        "response_type": "deflected",
+        "schema_valid": true,
+        "ticker": "FXH",
+        "times_asked": 2
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXH-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXH-2",
+        "pressure_score": 6,
+        "question_text": "Can you say more about pricing?",
+        "question_topic": "pricing",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXH",
+        "times_asked": 1
+      }
+    ],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXH-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXH-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXH",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.6,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXH-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXH-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXH",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "POSITIVE",
+    "pos_news": 1,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXH"
+}

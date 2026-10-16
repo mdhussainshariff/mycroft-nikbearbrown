@@ -1,0 +1,33 @@
+{
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "approve",
+  "decision_words": "D1 clear, D2 deny, D3 keep, D4 log",
+  "evidence_files": [
+    {
+      "path": "data/raw/contradiction-detection-agent/run-envelope.json",
+      "sha256": "6dadd1fd9cb0756ee979dbb64f03d44df0810911aec430fbd0c8f82ac18c7011"
+    }
+  ],
+  "evidence_observed": "Envelope declares mode sample, fixture set, frozen clock and 16 declared fictional companies; gate test passes.",
+  "gate": 2,
+  "gate_name": "Scope gate",
+  "handoff_condition": "The run declares sample mode, or an approved live mode, before ingest.",
+  "human_capacity": "[PF]",
+  "mode": "sample",
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": [
+    "2026-10-04 by Tanmay Kulkarni, same words, after wording-only edits to the recipe, scripts and corpus descriptions (detector behaviour, flags and fixture rows unchanged); evidence re-hashed",
+    "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged"
+  ],
+  "residual_risk": "None in sample mode; live mode is denied (gate 5).",
+  "run": "sample-001-clean (and sample-001-defective, read for gate 3)",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "workflow": "Contradiction_detection_agent"
+}

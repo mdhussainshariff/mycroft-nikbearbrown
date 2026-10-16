@@ -1,0 +1,50 @@
+{
+  "actions_declined": [
+    "reading the five Postgres tables",
+    "calling Alpha Vantage NEWS_SENTIMENT",
+    "sending flags to Groq (llama-3.3-70b-versatile)",
+    "writing contradiction_reports / contradiction_flags rows"
+  ],
+  "approved_for_live_action": false,
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "deny",
+  "decision_words": "D1 clear, D2 deny, D3 keep, D4 log",
+  "evidence_files": [
+    {
+      "path": "scripts/tools/contradiction-detection-agent-run-approved-tools.py",
+      "sha256": "544bd6ed5ca39581e0e881d6027267ff4e1cd6b05715a19467281f83e40fa0b0"
+    },
+    {
+      "path": "scripts/ingest/contradiction-detection-agent-ingest-inputs.py",
+      "sha256": "e460001c19ee5aca82866c48931b4cc89898ac6c404133d40787c4cf2676b182"
+    }
+  ],
+  "gate": 5,
+  "gate_name": "Approval gate",
+  "gate_test_status": "passes: a named human's deny is recorded and no artifact records a live call",
+  "handoff_condition": "Live network calls, database reads or writes, credentials, or model calls need an approval record naming a human.",
+  "human_capacity": "[EI]",
+  "mode": "sample",
+  "preconditions_to_reopen": [
+    "every SQL query passes its values as parameters",
+    "credentials read from the environment only",
+    "the model request confirmed to carry the built prompt",
+    "fixtures and tests for live failure modes, then a new decision by a named human"
+  ],
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": [
+    "2026-10-04 by Tanmay Kulkarni, same words, after wording-only edits to the recipe, scripts and corpus descriptions (detector behaviour, flags and fixture rows unchanged); evidence re-hashed",
+    "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged"
+  ],
+  "run": "sample-001-clean (and sample-001-defective, read for gate 3)",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "why_denied": "Live mode is unimplemented by design and has never been exercised here. Before any live run, queries should pass their values as parameters, keys should come from the environment, and the model request should be confirmed to carry its prompt. Live failure modes (timeouts, 401/403/429, empty pages) have no fixtures yet. Approving now would authorise actions that have never been exercised.",
+  "workflow": "Contradiction_detection_agent"
+}

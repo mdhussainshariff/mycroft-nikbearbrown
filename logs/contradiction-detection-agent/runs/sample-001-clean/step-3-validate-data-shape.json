@@ -1,0 +1,81 @@
+{
+  "classification": "gigo",
+  "human_gate": {
+    "capacity": "[PA]",
+    "cleared_by": null,
+    "gate": 3,
+    "note": "Gate 3: every raw and verified JSON output parses and every shape finding has been read."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_step": "transform-quality-check",
+  "node": "Validate data shape",
+  "node_type": "recipe-step",
+  "run": "sample-001-clean",
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 11,
+      "record_count": 11,
+      "required_fields_present": true,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "guidance-signals",
+      "type_errors": 0,
+      "withheld": 0
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 6,
+      "record_count": 6,
+      "required_fields_present": true,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "risk-admissions",
+      "type_errors": 0,
+      "withheld": 0
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 9,
+      "record_count": 9,
+      "required_fields_present": true,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "qa-pressure-map",
+      "type_errors": 0,
+      "withheld": 0
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 31,
+      "record_count": 31,
+      "required_fields_present": true,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "news-signals",
+      "type_errors": 0,
+      "withheld": 0
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 14,
+      "record_count": 14,
+      "required_fields_present": true,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "tech-stack-signals",
+      "type_errors": 0,
+      "withheld": 0
+    }
+  ],
+  "status": "ok",
+  "stop_conditions": [],
+  "workflow": "Contradiction_detection_agent"
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "signal_id": "s1",
+    "company_id": "harbor-ai",
+    "signal_type": "funding_round",
+    "signal_title": "Series B round",
+    "signal_value": "$45M",
+    "occurred_date": "2024-03-12",
+    "source_url": "https://example.com/harbor-series-b",
+    "score": 90,
+    "validated_by": "amruta",
+    "validation_note": "confirmed via two outlets",
+    "validation_date": "2024-03-15"
+  },
+  {
+    "signal_id": "s2",
+    "company_id": "harbor-ai",
+    "signal_type": "layoff",
+    "signal_title": "15% staff reduction",
+    "signal_value": "negative",
+    "occurred_date": "2025-06-01",
+    "source_url": "https://example.com/harbor-layoff",
+    "score": 70,
+    "validated_by": "amruta"
+  },
+  {
+    "signal_id": "s3",
+    "company_id": "lumen-labs",
+    "signal_type": "funding_round",
+    "signal_title": "Series A round",
+    "signal_value": "$12M",
+    "occurred_date": "2022-01-10",
+    "source_url": "https://example.com/lumen-series-a",
+    "score": 85,
+    "validated_by": null
+  },
+  {
+    "signal_id": "bad1",
+    "company_id": "broken-co",
+    "signal_type": "funding_rnd",
+    "signal_title": "typo in type",
+    "signal_value": "$5M",
+    "occurred_date": "2023-01-01",
+    "source_url": "https://example.com/x",
+    "score": 50
+  },
+  {
+    "signal_id": "bad2",
+    "company_id": "broken-co",
+    "signal_type": "funding_round",
+    "signal_title": "no source url",
+    "signal_value": "$8M",
+    "occurred_date": "2023-05-01",
+    "source_url": "not-a-url",
+    "score": 50
+  },
+  {
+    "signal_id": "bad3",
+    "company_id": "broken-co",
+    "signal_type": "funding_round",
+    "signal_title": "future dated",
+    "signal_value": "$9M",
+    "occurred_date": "2099-01-01",
+    "source_url": "https://example.com/y",
+    "score": 50
+  },
+  {
+    "signal_id": "bad4",
+    "company_id": "broken-co",
+    "signal_type": "funding_round",
+    "signal_title": "score out of range",
+    "signal_value": "$3M",
+    "occurred_date": "2023-02-02",
+    "source_url": "https://example.com/z",
+    "score": 250
+  }
+]

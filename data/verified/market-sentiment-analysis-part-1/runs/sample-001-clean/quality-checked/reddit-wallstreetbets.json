@@ -1,0 +1,92 @@
+{
+  "_provenance": {
+    "fixture_set": "clean",
+    "quality_checked_by": "scripts/gigo/market-sentiment-analysis-part-1-transform-quality-check.py",
+    "run_id": "sample-001",
+    "source_envelope": {
+      "fetched_at": "2026-08-27T14:30:00+00:00",
+      "sample_mode": true,
+      "source_name": "Reddit r/wallstreetbets search",
+      "source_path": "data/raw/market-sentiment-analysis-part-1/sample/clean/reddit-wallstreetbets.json",
+      "source_sha256": "6df0b3e31e6f08afe4394c89b2bea38c06947480558ebf693580b6d3806e17a4",
+      "source_type": "http_json"
+    },
+    "step3_input": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-clean/reddit-wallstreetbets.json"
+  },
+  "classification": "gigo",
+  "duplicate_counting_rule": "A duplicate is every occurrence of an identity key beyond the first. Three rows sharing one key count as 2 duplicates, not 3 and not 1.",
+  "duplicates": [],
+  "flags": [],
+  "freshness_measured_from": "2026-08-27T14:30:00+00:00",
+  "freshness_window_days": 1,
+  "identity_keys": [
+    "id"
+  ],
+  "node": "Transform and quality check",
+  "quality_notes": [],
+  "record_count": 4,
+  "record_count_basis": "rows surviving dedup; flagged rows are kept, not dropped",
+  "rejects": [],
+  "rows_in": 4,
+  "rows_removed_as_duplicates": 0,
+  "schema_source": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+  "schema_version": "1.0.0",
+  "stream": "reddit",
+  "type_contract": {
+    "created_utc": "epoch_int",
+    "score": "int_like"
+  },
+  "verified_locators": [
+    "records[0].data.children[0].data",
+    "records[0].data.children[1].data",
+    "records[0].data.children[2].data",
+    "records[0].data.children[3].data"
+  ],
+  "verified_records": [
+    {
+      "author": "synthetic_user_01",
+      "created_utc": 1787828400,
+      "id": "sy0001",
+      "num_comments": 87,
+      "permalink": "/r/wallstreetbets/comments/sy0001/",
+      "score": 412,
+      "selftext": "Held through the print and the calls are up big. Still bullish here.",
+      "subreddit": "wallstreetbets",
+      "title": "FAKE calls printing after the earnings beat"
+    },
+    {
+      "author": "synthetic_user_02",
+      "created_utc": 1787797800,
+      "id": "sy0002",
+      "num_comments": 64,
+      "permalink": "/r/wallstreetbets/comments/sy0002/",
+      "score": 288,
+      "selftext": "Rocket fuel. Adding more on any dip, long dated.",
+      "subreddit": "wallstreetbets",
+      "title": "Loading up on FAKE, this thing is going to the moon \ud83d\ude80"
+    },
+    {
+      "author": "synthetic_user_03",
+      "created_utc": 1787782200,
+      "id": "sy0003",
+      "num_comments": 51,
+      "permalink": "/r/wallstreetbets/comments/sy0003/",
+      "score": 143,
+      "selftext": "Margins are going to dump. Bearish and staying short.",
+      "subreddit": "wallstreetbets",
+      "title": "Bought FAKE puts before the margin news"
+    },
+    {
+      "author": "synthetic_user_04",
+      "created_utc": 1787762700,
+      "id": "sy0004",
+      "num_comments": 22,
+      "permalink": "/r/wallstreetbets/comments/sy0004/",
+      "score": 76,
+      "selftext": "No position change, just watching what they guide.",
+      "subreddit": "wallstreetbets",
+      "title": "Anyone else holding FAKE through the investor day?"
+    }
+  ],
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

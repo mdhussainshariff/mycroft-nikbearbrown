@@ -290,3 +290,24 @@ def reject(approval_id: int, body: ApprovalDecision | None = None):
         return resolve_approval(approval_id, approved=False, note=(body.note if body else ""))
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
+
+
+@app.get("/predictions")
+def get_predictions(ticker: str | None = Query(None)):
+    from ecis.prediction.log import list_predictions
+
+    return list_predictions(ticker)
+
+
+@app.get("/predictions/scorecard")
+def get_prediction_scorecard(ticker: str | None = Query(None)):
+    from ecis.prediction.scorecard import score_predictions
+
+    return score_predictions(ticker)
+
+
+@app.get("/correlations")
+def get_correlations(lag: int = Query(0, ge=0, le=1)):
+    from ecis.extraction.correlation import list_correlations
+
+    return list_correlations(lag)

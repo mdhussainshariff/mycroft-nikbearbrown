@@ -1,0 +1,165 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "November Fixture Co",
+  "contradiction_flags": [],
+  "detection_summary": {
+    "has_contradictions": false,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+    "patterns_active": 4,
+    "patterns_skipped": 2,
+    "requires_human_review": false,
+    "total_flags": 0
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": false,
+      "data_available": false,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": false,
+      "data_available": false,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXN-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 1,
+    "qa_items": 1,
+    "risks": 1,
+    "tech_stack": 0
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXN-001",
+        "claim_summary": "We reaffirm revenue guidance.",
+        "claim_text": "We reaffirm revenue guidance.",
+        "company_name": "November Fixture Co",
+        "direction": "unchanged",
+        "direction_confidence": 0.7,
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "revenue",
+        "id": "G-FXN-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXN",
+        "transcript_citation": "CALL-FXN-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXN-1",
+        "headline": "November Fixture Co reaffirms",
+        "id": "N-FXN-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.05,
+        "source_name": "Fixture Wire",
+        "ticker": "FXN",
+        "topic_tags": [
+          "earnings"
+        ]
+      }
+    ],
+    "qa_pressure": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXN-1",
+        "pressure_score": 4,
+        "question_text": "Can you say more about revenue?",
+        "question_topic": "revenue",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXN",
+        "times_asked": 1
+      }
+    ],
+    "risk_admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXN-001",
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXN-1",
+        "prior_disclosure_call": null,
+        "risk_category": "currency",
+        "risk_description": "Currency moves may affect results.",
+        "risk_summary": "Currency moves may affect results.",
+        "schema_valid": true,
+        "severity": "low",
+        "ticker": "FXN",
+        "transcript_citation": "CALL-FXN-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech_stack_signals": []
+  },
+  "skipped_patterns": [
+    {
+      "pattern_id": 4,
+      "reason": "tech_stack_data_unavailable"
+    },
+    {
+      "pattern_id": 5,
+      "reason": "tech_stack_data_unavailable"
+    }
+  ],
+  "summaries": {
+    "avg_news_score": 0.05,
+    "has_tech_stack": false,
+    "latest_tech": null,
+    "neg_news": 0,
+    "news_sentiment_direction": "NEUTRAL",
+    "pos_news": 0,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 1,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXN"
+}

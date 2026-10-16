@@ -1,0 +1,85 @@
+{
+  "classification": "tools",
+  "findings": {
+    "duplicates": 0,
+    "expected_vs_actual_mismatches": 0,
+    "flags": 13,
+    "parse_errors": 0,
+    "rejects": 0,
+    "shape_findings": 0,
+    "stale_kept": 0
+  },
+  "gate_results": [
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 1,
+      "name": "Source gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 2,
+      "name": "Scope gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 3,
+      "name": "Data-shape gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 4,
+      "name": "Script-readiness gate"
+    },
+    {
+      "approved_for_live_action": false,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "deny",
+      "gate": 5,
+      "name": "Approval gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 6,
+      "name": "Report gate"
+    }
+  ],
+  "human_gate": {
+    "capacity": "[TO]",
+    "cleared_by": null,
+    "gate": 6,
+    "note": "Gate 6: the report and log exist with the contract's fields and sections."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_decision": "All six gates are decided for this sample run; nothing further is pending in sample mode. Live mode is denied (gate 5); reopening it is a separate decision.",
+  "node": "Produce human report",
+  "node_type": "recipe-step",
+  "outputs": {
+    "agent_log": "logs/contradiction-detection-agent-2026-09-30-clean.json",
+    "audit": "data/verified/contradiction-detection-agent/runs/sample-001-clean/sample-001-clean-audit.md",
+    "report": "reports/generated/contradiction-detection-agent-2026-09-30-clean.md"
+  },
+  "run": "sample-001-clean",
+  "sources_checked": 5,
+  "status": "ok",
+  "stop_conditions": [],
+  "summary": "16 companies, 13 flags, 5/5 steps completed",
+  "typed_todos": [],
+  "workflow": "Contradiction_detection_agent"
+}

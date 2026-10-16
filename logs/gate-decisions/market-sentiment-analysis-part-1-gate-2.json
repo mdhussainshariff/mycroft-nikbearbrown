@@ -1,0 +1,27 @@
+{
+  "decided_at": "2026-09-25",
+  "decided_by": {
+    "name": "Uday Sonawane",
+    "role": "recipe owner"
+  },
+  "decision": "approve",
+  "evidence_files": [
+    {
+      "path": "data/raw/market-sentiment-analysis-part-1/run-envelope.json",
+      "sha256": "33828ed47a8c38fce5d6a3b48260939a9ff744661355eca5ec2d4ba06f56aa93"
+    }
+  ],
+  "evidence_observed": "run-envelope.json declares mode=\"sample\", fixture_set, and frozen_clock 2026-08-27T14:30:00Z. No live, external, or model call was made by any step. Live mode is unimplemented and stops.",
+  "gate": 2,
+  "gate_name": "Scope gate",
+  "handoff_condition": "The run declares sample mode or an approved live mode before ingest begins.",
+  "human_capacity": "[PF]",
+  "mode": "sample",
+  "recipe": "recipes/market-sentiment-analysis-part-1.md",
+  "recipe_version": "0.2.0",
+  "residual_risk": "Clears sample mode only. It says nothing about live mode, which remains blocked by gate 5.",
+  "run_log": "logs/RUN_LOG.md#2026-09-25",
+  "scope": "This decision covers the sample run over the frozen fixture corpus only.",
+  "voids_if": "Any edit to the recipe or its six step scripts, any change to the fixture corpus, or a switch out of sample mode voids this decision.",
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

@@ -1,0 +1,109 @@
+{
+  "_note": "Hand-authored run control file for recipes/contradiction-detection-agent.md. Gate 2 (scope gate) reads it before ingest. Edit by hand only; scripts never write it.",
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "approval_record": null,
+  "approved_for_live_action": false,
+  "companies": [
+    {
+      "company_name": "Alpha Fixture Co",
+      "ticker": "FXA"
+    },
+    {
+      "company_name": "Bravo Fixture Co",
+      "ticker": "FXB"
+    },
+    {
+      "company_name": "Charlie Fixture Co",
+      "ticker": "FXC"
+    },
+    {
+      "company_name": "Delta Fixture Co",
+      "ticker": "FXD"
+    },
+    {
+      "company_name": "Echo Fixture Co",
+      "ticker": "FXE"
+    },
+    {
+      "company_name": "Foxtrot Fixture Co",
+      "ticker": "FXF"
+    },
+    {
+      "company_name": "Golf Fixture Co",
+      "ticker": "FXG"
+    },
+    {
+      "company_name": "Hotel Fixture Co",
+      "ticker": "FXH"
+    },
+    {
+      "company_name": "Juliett Fixture Co",
+      "ticker": "FXJ"
+    },
+    {
+      "company_name": "Kilo Fixture Co",
+      "ticker": "FXK"
+    },
+    {
+      "company_name": "Lima Fixture Co",
+      "ticker": "FXL"
+    },
+    {
+      "company_name": "Mike Fixture Co",
+      "ticker": "FXM"
+    },
+    {
+      "company_name": "November Fixture Co",
+      "ticker": "FXN"
+    },
+    {
+      "company_name": "Papa Fixture Co",
+      "ticker": "FXP"
+    },
+    {
+      "company_name": "Quebec Fixture Co",
+      "ticker": "FXQ"
+    },
+    {
+      "company_name": "Romeo Fixture Co",
+      "ticker": "FXR"
+    }
+  ],
+  "companies_basis": "Fictional companies, declared by hand. The original takes ticker and company_name as a manual input (its 'Set Company Input' node); scope is declared here, never inferred from the data.",
+  "fixture_root": "data/raw/contradiction-detection-agent/sample",
+  "fixture_set": "clean",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "frozen_clock_basis": "The only clock any step may use in sample mode; fetched_at, flagged_at and report dates derive from it, never from now().",
+  "live_mode_requirements": {
+    "approval_record_path": "logs/gate-decisions/contradiction-detection-agent-gate-5.json",
+    "credential_policy": "Environment variables only; never in this file, a script or a log.",
+    "credentials": [
+      "DATABASE_URL",
+      "ALPHA_VANTAGE_API_KEY",
+      "GROQ_API_KEY"
+    ],
+    "gate": "Gate 5 - Approval gate"
+  },
+  "lookback_days": 365,
+  "mode": "sample",
+  "overrides": {
+    "fixture_set": "Pass --fixture-set clean|defective to a step script to override for one run, without editing this file."
+  },
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "run_id": "sample-001",
+  "schema_version": "1.0.0",
+  "sources": [
+    "guidance-signals",
+    "risk-admissions",
+    "qa-pressure-map",
+    "news-signals",
+    "tech-stack-signals"
+  ]
+}

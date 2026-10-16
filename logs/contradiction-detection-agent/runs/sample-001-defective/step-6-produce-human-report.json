@@ -1,0 +1,85 @@
+{
+  "classification": "tools",
+  "findings": {
+    "duplicates": 0,
+    "expected_vs_actual_mismatches": 0,
+    "flags": 0,
+    "parse_errors": 1,
+    "rejects": 0,
+    "shape_findings": 12,
+    "stale_kept": 0
+  },
+  "gate_results": [
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 1,
+      "name": "Source gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 2,
+      "name": "Scope gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 3,
+      "name": "Data-shape gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 4,
+      "name": "Script-readiness gate"
+    },
+    {
+      "approved_for_live_action": false,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "deny",
+      "gate": 5,
+      "name": "Approval gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 6,
+      "name": "Report gate"
+    }
+  ],
+  "human_gate": {
+    "capacity": "[TO]",
+    "cleared_by": null,
+    "gate": 6,
+    "note": "Gate 6: the report and log exist with the contract's fields and sections."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_decision": "Read the shape findings and fix the sources; detection did not run on this set. Live mode is denied (gate 5); reopening it is a separate decision.",
+  "node": "Produce human report",
+  "node_type": "recipe-step",
+  "outputs": {
+    "agent_log": "logs/contradiction-detection-agent-2026-09-30-defective.json",
+    "audit": "data/verified/contradiction-detection-agent/runs/sample-001-defective/sample-001-defective-audit.md",
+    "report": "reports/generated/contradiction-detection-agent-2026-09-30-defective.md"
+  },
+  "run": "sample-001-defective",
+  "sources_checked": 5,
+  "status": "ok",
+  "stop_conditions": [],
+  "summary": "0 companies, 0 flags, 2/5 steps completed",
+  "typed_todos": [],
+  "workflow": "Contradiction_detection_agent"
+}

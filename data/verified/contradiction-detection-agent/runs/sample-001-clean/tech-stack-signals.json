@@ -1,0 +1,265 @@
+{
+  "record_count": 14,
+  "records": [
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXA-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXA-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXA",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXB-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXB-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXB",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXC-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXC-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXC",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXD-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXD-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXD",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXF-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXF-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXF",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXG-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXG-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXG",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXH-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXH-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXH",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXJ-001",
+      "declining_languages": [
+        "perl",
+        "cobol"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXJ-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 3,
+      "ticker": "FXJ",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXK-001",
+      "declining_languages": [
+        "perl"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXK-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 4,
+      "ticker": "FXK",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": true,
+      "burst_ratio": 3.2,
+      "claim_id": "TS-FXL-001",
+      "declining_languages": [],
+      "emerging_languages": [
+        "rust",
+        "zig"
+      ],
+      "id": "T-FXL-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 0,
+      "ticker": "FXL",
+      "velocity_anomaly": true,
+      "velocity_z_score": 2.4
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": true,
+      "burst_ratio": 3.2,
+      "claim_id": "TS-FXM-001",
+      "declining_languages": [],
+      "emerging_languages": [
+        "rust",
+        "zig"
+      ],
+      "id": "T-FXM-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 0,
+      "ticker": "FXM",
+      "velocity_anomaly": true,
+      "velocity_z_score": 2.4
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXP-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXP-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXP",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXQ-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXQ-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXQ",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXR-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXR-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXR",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    }
+  ],
+  "run": "sample-001-clean",
+  "schema_version": "1.0.0",
+  "source_name": "tech-stack-signals",
+  "validated_at": "2026-09-30T00:00:00+00:00",
+  "withheld_count": 0
+}

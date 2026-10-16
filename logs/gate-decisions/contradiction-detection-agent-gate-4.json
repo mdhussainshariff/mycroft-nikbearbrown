@@ -1,0 +1,61 @@
+{
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "approve",
+  "decision_words": "D1 clear, D2 deny, D3 keep, D4 log",
+  "evidence_files": [
+    {
+      "path": "scripts/gigo/contradiction-detection-agent-transform-quality-check.py",
+      "sha256": "ad61e9cb719b745d149bfb85320f341225ecb163a2b315531379e36d0de2b0bc"
+    },
+    {
+      "path": "scripts/gigo/contradiction-detection-agent-validate-data-shape.py",
+      "sha256": "631ff916453b2431a4b2fbb1e0596b46e5d05edcef8078ffda6963ba909e2967"
+    },
+    {
+      "path": "scripts/ingest/contradiction-detection-agent-ingest-inputs.py",
+      "sha256": "e460001c19ee5aca82866c48931b4cc89898ac6c404133d40787c4cf2676b182"
+    },
+    {
+      "path": "scripts/tools/contradiction-detection-agent-gate-check.py",
+      "sha256": "01c465d3b30d3fe78f534e9710f171e0141b8e349eb844eaa35368a18dd14514"
+    },
+    {
+      "path": "scripts/tools/contradiction-detection-agent-parity-check.py",
+      "sha256": "b1abe7da93e99bd932b723e42851fdb5ee477c16c030ba235fdb6dc6ae2b4458"
+    },
+    {
+      "path": "scripts/tools/contradiction-detection-agent-produce-human-report.py",
+      "sha256": "3923f149a5b0062b6b9fac253c240794559c434b566ab7db84aabdd1cb6191fa"
+    },
+    {
+      "path": "scripts/tools/contradiction-detection-agent-run-approved-tools.py",
+      "sha256": "544bd6ed5ca39581e0e881d6027267ff4e1cd6b05715a19467281f83e40fa0b0"
+    },
+    {
+      "path": "scripts/tools/contradiction-detection-agent-verify-provenance.py",
+      "sha256": "e373ff4c02d9dbf0d4bad58916a14912fe1f2e1fbd2356979e54bee4ef06f6bb"
+    }
+  ],
+  "evidence_observed": "Six scripts compile; parity 16/16 with the original JS; three deliberately broken ports caught (self-test section B).",
+  "gate": 4,
+  "gate_name": "Script-readiness gate",
+  "handoff_condition": "All six step scripts exist and compile, and the detector matches the original JavaScript.",
+  "human_capacity": "[IJ]",
+  "mode": "sample",
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": [
+    "2026-10-04 by Tanmay Kulkarni (\"D1 clear\"), after the report step was fixed during the gate-6 review (report and agent log now agree on rejects; unchecked items say 'not checked'; recommendation built from the gate records); evidence re-hashed",
+    "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged"
+  ],
+  "residual_risk": "Existence, compilation and matching the original only; it says nothing about whether the six patterns are good signals (see the recipe's Notes from porting).",
+  "run": "sample-001-clean (and sample-001-defective, read for gate 3)",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "workflow": "Contradiction_detection_agent"
+}

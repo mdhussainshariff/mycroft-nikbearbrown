@@ -13,7 +13,7 @@ load_dotenv(_PROJECT_ROOT / ".env")
 
 
 class _Settings:
-    edgar_user_agent: str = os.getenv("EDGAR_USER_AGENT", "ECIS Research admin@example.com")
+    edgar_user_agent: str = os.getenv("EDGAR_USER_AGENT")
     fmp_api_key: str = os.getenv("FMP_API_KEY", "")
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
 
@@ -21,6 +21,7 @@ class _Settings:
     llm_llama_model: str = os.getenv("LLM_LLAMA_MODEL", "llama3.1:8b-instruct-q8_0")
     llm_mistral_model: str = os.getenv("LLM_MISTRAL_MODEL", "mistral:7b-instruct")
     llm_qwen_model: str = os.getenv("LLM_QWEN_MODEL", "qwen2.5:14b-instruct-q4_K_M")
+    llm_finetuned_model: str = os.getenv("LLM_FINETUNED_MODEL", "llama3.1-ecis-ft:latest")
     llm_model: str = os.getenv("LLM_MODEL", os.getenv("LLM_LLAMA_MODEL", "llama3.1:8b-instruct-q8_0"))
 
     project_root: Path = _PROJECT_ROOT
@@ -34,6 +35,8 @@ class _Settings:
     chunks_dir: Path = data_dir / "processed" / "chunks"
 
     chroma_persist_dir: str = os.getenv("CHROMA_PERSIST_DIR", "")
+    database_url: str = os.getenv("DATABASE_URL", "")
+    db_backend: str = os.getenv("DB_BACKEND", "sqlite")
 
     chunk_size_tokens: int = 400
     chunk_overlap_tokens: int = 50
@@ -48,7 +51,11 @@ class _Settings:
     weight_llm_llama: float = float(os.getenv("WEIGHT_LLM_LLAMA", "0.50"))
     weight_llm_mistral: float = float(os.getenv("WEIGHT_LLM_MISTRAL", "0.50"))
     weight_llm_qwen: float = float(os.getenv("WEIGHT_LLM_QWEN", "0.52"))
+    weight_llm_finetuned: float = float(os.getenv("WEIGHT_LLM_FINETUNED", "0.55"))
     weight_agreement: float = 0.15
+    section_weight_prepared: float = float(os.getenv("SECTION_WEIGHT_PREPARED", "1.0"))
+    section_weight_qa: float = float(os.getenv("SECTION_WEIGHT_QA", "0.8"))
+    keyword_density_floor: float = float(os.getenv("KEYWORD_DENSITY_FLOOR", "0.70"))
 
     min_chunk_tokens: int = int(os.getenv("MIN_CHUNK_TOKENS", "20"))
     max_boilerplate_ratio: float = float(os.getenv("MAX_BOILERPLATE_RATIO", "0.8"))
@@ -79,6 +86,13 @@ class _Settings:
 
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     embedding_dim: int = 384
+    hnsw_m: int = int(os.getenv("HNSW_M", "16"))
+    hnsw_ef_construction: int = int(os.getenv("HNSW_EF_CONSTRUCTION", "200"))
+    hnsw_ef_search: int = int(os.getenv("HNSW_EF_SEARCH", "64"))
+    pg_pool_min: int = int(os.getenv("PG_POOL_MIN", "1"))
+    pg_pool_max: int = int(os.getenv("PG_POOL_MAX", "8"))
+    pg_pool_idle_seconds: int = int(os.getenv("PG_POOL_IDLE_SECONDS", "300"))
+    slow_query_ms: float = float(os.getenv("SLOW_QUERY_MS", "100"))
 
     def resolve_llm_models(self, spec: str | None = None) -> list[str]:
         raw = (spec or "llama").strip()
@@ -89,6 +103,8 @@ class _Settings:
             return [self.llm_mistral_model]
         if key in ("qwen", "qwen2.5", "qwen2.5-14b"):
             return [self.llm_qwen_model]
+        if key in ("finetuned", "ft", "qlora", "llama-ft"):
+            return [self.llm_finetuned_model]
         if key == "both":
             return [self.llm_llama_model, self.llm_mistral_model]
         if key == "all":
@@ -97,6 +113,8 @@ class _Settings:
 
     def model_alias(self, model_name: str) -> str:
         name = (model_name or "").lower()
+        if "finetuned" in name or "ecis-ft" in name or name.endswith("-ft"):
+            return "finetuned"
         if "qwen" in name:
             return "qwen"
         if "mistral" in name:
@@ -115,6 +133,7 @@ class _Settings:
             "llama": self.weight_llm_llama,
             "mistral": self.weight_llm_mistral,
             "qwen": self.weight_llm_qwen,
+            "finetuned": self.weight_llm_finetuned,
         }
         return table.get("llm", defaults.get(alias, self.weight_llm))
 

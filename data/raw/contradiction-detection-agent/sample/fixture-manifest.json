@@ -1,0 +1,342 @@
+{
+  "defects": [
+    {
+      "class": "missing_required",
+      "description": "the direction the detector reads is absent",
+      "expected_detection": {
+        "expectation": "missing_required",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "direction",
+      "id": "D01",
+      "locator": {
+        "row_id": "G-FXA-1"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "type_error",
+      "description": "confidence sent as text, which JavaScript would quietly coerce to a number",
+      "expected_detection": {
+        "expectation": "type_error",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "direction_confidence",
+      "id": "D02",
+      "locator": {
+        "row_id": "G-FXC-1"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "enum",
+      "description": "'up' is not one of strengthened / weakened / unchanged",
+      "expected_detection": {
+        "expectation": "not_in_allowed_set",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "direction",
+      "id": "D03",
+      "locator": {
+        "row_id": "G-FXD-1"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "bounds",
+      "description": "a confidence above 1",
+      "expected_detection": {
+        "expectation": "out_of_bounds",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "direction_confidence",
+      "id": "D04",
+      "locator": {
+        "row_id": "G-FXJ-1"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "stale",
+      "description": "a call 2.7 years old, outside the declared 365-day lookback (the original queries select without a date filter)",
+      "expected_detection": {
+        "expectation": "reported and KEPT, as the original keeps it",
+        "output_field": "stale_rows[]",
+        "step": 4
+      },
+      "field": "call_date",
+      "id": "D05",
+      "locator": {
+        "row_id": "G-FXN-1"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "row_not_object",
+      "description": "a bare string where a row object belongs",
+      "expected_detection": {
+        "expectation": "row_not_object",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": null,
+      "id": "D06",
+      "locator": {
+        "row_id": "(appended string)"
+      },
+      "source": "guidance-signals"
+    },
+    {
+      "class": "enum",
+      "description": "'severe' is not one of low / medium / high / critical",
+      "expected_detection": {
+        "expectation": "not_in_allowed_set",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "severity",
+      "id": "D07",
+      "locator": {
+        "row_id": "R-FXE-1"
+      },
+      "source": "risk-admissions"
+    },
+    {
+      "class": "missing_required",
+      "description": "the validity marker the queries filter on is absent",
+      "expected_detection": {
+        "expectation": "missing_required",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "schema_valid",
+      "id": "D08",
+      "locator": {
+        "row_id": "R-FXP-1"
+      },
+      "source": "risk-admissions"
+    },
+    {
+      "class": "duplicate",
+      "description": "the same row delivered twice",
+      "expected_detection": {
+        "expectation": "later copy withheld, listed",
+        "output_field": "duplicates[]",
+        "step": 4
+      },
+      "field": null,
+      "id": "D09",
+      "locator": {
+        "row_id": "R-FXF-1"
+      },
+      "source": "risk-admissions"
+    },
+    {
+      "class": "type_error",
+      "description": "score as text, which JavaScript would add into the average as a string",
+      "expected_detection": {
+        "expectation": "type_error",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "sentiment_score",
+      "id": "D10",
+      "locator": {
+        "row_id": "N-FXA-2"
+      },
+      "source": "news-signals"
+    },
+    {
+      "class": "type_error",
+      "description": "tags as one string instead of a list",
+      "expected_detection": {
+        "expectation": "type_error",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "topic_tags",
+      "id": "D11",
+      "locator": {
+        "row_id": "N-FXG-1"
+      },
+      "source": "news-signals"
+    },
+    {
+      "class": "type_error",
+      "description": "not a timestamp",
+      "expected_detection": {
+        "expectation": "type_error",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "published_at",
+      "id": "D12",
+      "locator": {
+        "row_id": "N-FXC-3"
+      },
+      "source": "news-signals"
+    },
+    {
+      "class": "invalid_marked",
+      "description": "a row marked invalid that a query would never return",
+      "expected_detection": {
+        "expectation": "withheld: schema_valid is not true",
+        "output_field": "rejects[]",
+        "step": 4
+      },
+      "field": "schema_valid",
+      "id": "D13",
+      "locator": {
+        "row_id": "N-FXB-1"
+      },
+      "source": "news-signals"
+    },
+    {
+      "class": "out_of_scope",
+      "description": "a company no run declared",
+      "expected_detection": {
+        "expectation": "withheld: outside the declared companies",
+        "output_field": "rejects[]",
+        "step": 4
+      },
+      "field": "ticker",
+      "id": "D14",
+      "locator": {
+        "row_id": "N-ZZZZ-1"
+      },
+      "source": "news-signals"
+    },
+    {
+      "class": "missing_required",
+      "description": "null list, which the JavaScript treats as an empty list",
+      "expected_detection": {
+        "expectation": "missing_required",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "declining_languages",
+      "id": "D15",
+      "locator": {
+        "row_id": "T-FXL-1"
+      },
+      "source": "tech-stack-signals"
+    },
+    {
+      "class": "type_error",
+      "description": "boolean as text; the JavaScript accepts 'true', while the data contract asks for a boolean",
+      "expected_detection": {
+        "expectation": "type_error",
+        "output_field": "row_findings[].problem",
+        "step": 3
+      },
+      "field": "burst_detected",
+      "id": "D16",
+      "locator": {
+        "row_id": "T-FXJ-1"
+      },
+      "source": "tech-stack-signals"
+    },
+    {
+      "class": "unparseable_file",
+      "description": "the whole Q&A source is truncated mid-object",
+      "expected_detection": {
+        "expectation": "reported; the source contributes no rows",
+        "output_field": "sources[].parse_errors",
+        "step": 3
+      },
+      "field": null,
+      "id": "D17",
+      "locator": {
+        "file": "qa-pressure-map.json.broken"
+      },
+      "source": "qa-pressure-map"
+    }
+  ],
+  "expected_totals": {
+    "defects_total": 17,
+    "step3_detects": 13,
+    "step4_detects": 4
+  },
+  "files": [
+    {
+      "bytes": 7996,
+      "path": "data/raw/contradiction-detection-agent/sample/clean/guidance-signals.json",
+      "sha256": "ee71fc801941e7a003c471cb80b5b37446d4f7d6011a995d4d1a6e8879d3f119"
+    },
+    {
+      "bytes": 11723,
+      "path": "data/raw/contradiction-detection-agent/sample/clean/news-signals.json",
+      "sha256": "0d3f9583699b005b38a2e9c945bbd68eed99b6b0d0b0abeff77f5a676a285117"
+    },
+    {
+      "bytes": 4807,
+      "path": "data/raw/contradiction-detection-agent/sample/clean/qa-pressure-map.json",
+      "sha256": "53e5bf112dfb61657a74f2ec02f4837f11df067a3f5ae925a05f3f1e2338fd14"
+    },
+    {
+      "bytes": 3379,
+      "path": "data/raw/contradiction-detection-agent/sample/clean/risk-admissions.json",
+      "sha256": "61522431f1d593502090c54aa9b4d92346e02347c44784f75c7b54f9e4f2b599"
+    },
+    {
+      "bytes": 6538,
+      "path": "data/raw/contradiction-detection-agent/sample/clean/tech-stack-signals.json",
+      "sha256": "edea8ced21c8fd143709bbc8a688fd5ee184e51c797efdcb09240cbe242459e8"
+    },
+    {
+      "bytes": 7973,
+      "path": "data/raw/contradiction-detection-agent/sample/defective/guidance-signals.json",
+      "sha256": "64409db401cc95361223c0a2a3edfcb8ef6395091c7174f16376fce40ab1ec49"
+    },
+    {
+      "bytes": 12065,
+      "path": "data/raw/contradiction-detection-agent/sample/defective/news-signals.json",
+      "sha256": "00567a1444cbde21a1f56ad3b00b782f69c3fb653549abc5b45f506dbddf1f40"
+    },
+    {
+      "bytes": 2404,
+      "path": "data/raw/contradiction-detection-agent/sample/defective/qa-pressure-map.json.broken",
+      "sha256": "c10f69408753645b04c638e8536c8522438d4bb624c043ce891f88c2a97f0387"
+    },
+    {
+      "bytes": 3923,
+      "path": "data/raw/contradiction-detection-agent/sample/defective/risk-admissions.json",
+      "sha256": "912938e65b15a9717e51f46ae0c5004d6e6a03e1ccfd580f5629c949a0e7a974"
+    },
+    {
+      "bytes": 6541,
+      "path": "data/raw/contradiction-detection-agent/sample/defective/tech-stack-signals.json",
+      "sha256": "f18cc06278ee30eeaab51dd2131ee9b2bf404fcb4ae854691c1a62615d4eea78"
+    },
+    {
+      "bytes": 8217,
+      "path": "data/raw/contradiction-detection-agent/sample/expected-flags.json",
+      "sha256": "222617d58d28191ee37bcc96f82449bf5c88a7e57d0c223bba403eace22258bf"
+    }
+  ],
+  "frozen_at": "2026-09-30T00:00:00+00:00",
+  "manifest_version": "1.0.0",
+  "not_covered": [
+    "live database or API behaviour (timeouts, 401/403/429, empty pages)",
+    "the LLM's responses (never called)",
+    "concurrency or reruns against a real upsert"
+  ],
+  "provenance": {
+    "authored_by": "tools/build_fixtures.py (Week 25 work folder, outside this repo); reproducible byte for byte",
+    "companies_are_fictional": true,
+    "credentials": "none used or needed",
+    "no_live_call_performed": true,
+    "row_shapes_from": "the SELECT lists of the five fetch nodes in data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Contradiction_Detection_Agent/Contradiction_detection_agent.json",
+    "values_are_invented": true
+  },
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "sets": {
+    "clean": "16 fictional companies; every pattern has a must-fire case and a must-not near-miss",
+    "defective": "the clean rows plus 17 catalogued defects"
+  },
+  "synthetic": true
+}
