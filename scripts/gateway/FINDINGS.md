@@ -434,3 +434,75 @@ everything measurable and all-cheap becomes the honest recommendation.
   escalating cheap to mid and stopping there.
 - 24 synthetic fixtures, three repeats, one provider, one day. The numbers are
   about these task types, not about Mycroft's traffic.
+
+  @'
+
+## 12. The decision
+
+Sprint 8. Six routing policies replayed against the Sprint 7 baseline, fitted
+on repeats 1-2 and evaluated on the held-out repeat 3. No new calls: the
+baseline recorded cost, latency, check result and correctness for every fixture
+on every tier, so a policy's behaviour is a lookup. Every policy is therefore
+judged on the same answers, and a difference between two of them cannot be
+run-to-run noise.
+
+The thresholds were fixed in August, before any of this was measured: at least
+20% cheaper at equal quality, and at most 20% slower.
+
+| policy | mean cost | p50 | correct | vs current |
+|---|---|---|---|---|
+| current policy | $0.000098 | 633 ms | 19/20 | incumbent |
+| **always cheap** | **$0.000067** | **438 ms** | 19/20 | **31% cheaper, 31% faster** |
+| always mid | $0.000109 | 633 ms | 19/20 | 12% dearer |
+| always strong | $0.000195 | 257 ms | 18/20 | 100% dearer, 59% faster |
+| task-type table | $0.000084 | 522 ms | 19/20 | 14% cheaper, 18% faster |
+| break-even | $0.000084 | 522 ms | 19/20 | 14% cheaper, 18% faster |
+
+**One candidate clears the thresholds, and it is the simplest one available:
+send every request to the cheap tier.** No router, no table, no per-request
+arithmetic. 31% cheaper and 31% faster than what the gateway does today, at the
+same measured correctness.
+
+**The two clever policies lost, and lost for the same reason.** Both route
+contradiction detection and structured extraction to mid, because the fit split
+measured mid as more accurate on those task types (100% and 92% against cheap's
+83% and 75%). On the held-out repeat that advantage did not reproduce: the only
+errors were `extract-004`, wrong on all three tiers, and `contra-003`, wrong on
+strong alone. So both policies paid mid's premium and got nothing for it, and
+both landed at 14% cheaper -- short of the 20% bar.
+
+This is what the holdout was for. Fitted, mid looked worth paying for.
+Evaluated, it wasn't.
+
+**The break-even rule and the task-type table made identical choices.** The rule
+that has been reserved since Sprint 3 as the "clever version" reduces, on this
+data, to the same table a human would write by eye. It is not wrong; it is
+redundant.
+
+### What this result does not establish
+
+- **The holdout can barely separate quality.** Every policy but always-strong
+  scores 19/20. "Quality held" is satisfied arithmetically, but at n=20 with a
+  single error it is a weak claim, and that error is `extract-004`, whose
+  answer key is itself disputed. If the ruling goes the models' way, every
+  policy scores 20/20 and the decision rests on cost and latency alone.
+- **No escalation fired.** There were no check failures at all in the held-out
+  repeat, so Sprint 4's retry rule contributed nothing here and is untested by
+  this comparison.
+- **Summarization is routed on cost alone** -- four of the 24 requests -- because
+  the judge that was supposed to grade it scored kappa 0.00 (section 10).
+- 24 synthetic fixtures, one provider, one held-out repeat.
+
+### Consequences
+
+- Sprint 9 packages "always cheap" as the recommendation, with the escalation
+  machinery retained but no longer load-bearing: it costs nothing when checks
+  pass and it is the only thing standing between a malformed answer and the
+  caller.
+- The strong tier should be dropped from the default ladder. It is dearer than
+  mid, less accurate than mid on the two task types that fail, and its single
+  advantage -- latency -- is not something any current caller has asked for.
+- The honest headline is that the project set out to build adaptive routing and
+  the measurement says not to. A rule that chooses per request has to beat a
+  constant, and here it did not.
+'@ | Add-Content -Encoding utf8 scripts/gateway/FINDINGS.md

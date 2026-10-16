@@ -667,3 +667,36 @@ workflow changes.
   - Coverage is 8 open-ended fixtures against a target of 30 per task type.
   - `main` is behind `origin/main`.
   - GROQ_API_KEY still needs rotating; it has now been exposed four times.
+@'
+
+## 2026-10-15 -- Gateway Sprint 8: the decision
+
+- **Recipe:** Adaptive Model Routing & Inference Gateway (Sprint 8 of 9).
+- **Gate:** Ship / do-not-ship, against thresholds fixed in August and not
+  revisited since.
+- **Cleared by:** Simba · 2026-10-15
+- **Inputs:** `bench/results/2026-10-08T161625-baseline.jsonl` (216 rows);
+  policy 0.2.0; tiers 0.4.0. No live calls.
+- **Commands:** `python scripts/gateway/bench/decide.py`.
+- **Outputs:** `bench/decide.py`; `bench/results/2026-10-15-decision.json`.
+- **Result:** Six policies replayed against the baseline, fitted on repeats 1-2
+  and evaluated on the held-out repeat 3. Only **always cheap** clears the
+  thresholds: $0.000067 against the incumbent's $0.000098 (31% cheaper), p50
+  438 ms against 633 ms (31% faster), correctness unchanged at 19/20. The
+  task-type table and the break-even rule both reached 14% cheaper -- short of
+  the 20% bar -- because both pay for mid on contradiction detection and
+  extraction, where mid's fitted advantage did not reproduce on the holdout.
+  The break-even rule reserved since Sprint 3 made choices identical to the
+  hand-written table.
+- **Findings:** `scripts/gateway/FINDINGS.md` section 12.
+- **Not verified:** the holdout separates quality poorly -- every policy but
+  always-strong scores 19/20, and the single error is `extract-004`, whose
+  answer key is disputed. No escalation fired in the held-out repeat, so the
+  retry rule is untested by this comparison.
+- **Open issues:**
+  - `contra-003` and `extract-004` still need a second reader's ruling.
+  - The strong tier should be dropped from the default ladder: dearer than mid
+    and less accurate on the two task types that fail.
+  - Sprint 5 and Sprint 7 RUN_LOG entries are still to be backfilled.
+  - GROQ_API_KEY still needs rotating.
+'@ | Add-Content -Encoding utf8 logs/RUN_LOG.md
