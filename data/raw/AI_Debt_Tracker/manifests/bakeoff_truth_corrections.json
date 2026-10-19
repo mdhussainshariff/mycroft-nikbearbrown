@@ -1,0 +1,25 @@
+{
+ "about": "Corrections to the bake-off truth values, applied by scripts/bakeoff.py report. The truth comes from the NEXT 10-Q/10-K; where the announcement itself states something different, the document is what a reader can be scored on. Each correction was found by reading the passage.",
+ "reviewer": "Claude (model judgment, P8) - review of all 29 rows on 2026-10-18; accepted or rejected by a named human at the gate",
+ "corrections": [
+  {"item_id": "0001193125-25-017365/d901407dfwp.htm", "match": {"maturity_year": 2028, "coupon_pct": 0.76},
+   "set": {"coupon_pct": null}, "reason": "Floating Rate Notes due 2028: 'Compounded SOFR, plus 0.760%' is a spread over a benchmark, not a fixed coupon; the prompt asks for null when the rate is floating."},
+  {"item_id": "0001628280-24-037702/ex992pricingpressrelease.htm", "match": {"maturity_year": 2029},
+   "set": {"principal": 400000000}, "reason": "The pricing release says $400 million; the $460 million in the next report includes the $60 million option the initial purchasers exercised afterwards."},
+  {"item_id": "0001193125-24-215943/d896673d8k.htm", "match": {"maturity_year": 2033},
+   "set": {"currency": "EUR", "principal": 850000000}, "reason": "The notes are euro notes ('EUR 850,000,000 ... 3.875% Guaranteed Notes due 2033'); the next report states them in US dollars (941,375,000)."},
+  {"item_id": "0001193125-24-215943/d896673dex991.htm", "match": {"maturity_year": 2033},
+   "set": {"currency": "EUR", "principal": 850000000}, "reason": "Same euro notes as the 8-K body: EUR 850.0 million."},
+  {"item_id": "0001640147-24-000234/exhibit992-pressrelease925.htm", "match": {"maturity_year": 2027},
+   "set": {"principal": 1000000000}, "reason": "The pricing release says $1.0 billion; $1.15 billion in the next report includes the purchasers' option exercised later."},
+  {"item_id": "0001640147-24-000234/exhibit992-pressrelease925.htm", "match": {"maturity_year": 2029},
+   "set": {"principal": 1000000000}, "reason": "As above, for the 2029 notes."},
+  {"item_id": "0001193125-24-252541/d867264d8k.htm", "match": {"maturity_year": 2029},
+   "set": {"principal": null}, "reason": "This 8-K body names the 1.875% Exchangeable Senior Notes due 2029 but states no amount, so principal cannot be scored from it."}
+ ],
+ "incomplete_not_wrong": [
+  "0001193125-24-226101/d832142dfwp.htm and 0001193125-24-227049/d861128d424b2.htm also announce Oracle's 5.375% notes due 2054, which is not in the truth list (unscored, so it does not change any score).",
+  "0001104659-24-119011/tm2428009-2_424b2.htm also announces Equinix's EUR 500 million 3.625% notes due 2034 (unscored).",
+  "Several rows have no truth principal although the document states one (e.g. Broadcom's $875 million tranches): the next report did not tag a face amount, so those principals are unscored."
+ ]
+}

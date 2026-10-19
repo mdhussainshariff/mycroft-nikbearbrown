@@ -1,0 +1,77 @@
+# status: FROZEN -- cleared by Om Mali on 2026-10-18 (manifests/week1_gate.json); generalisation set for the test split; selection rule in scripts/select_generalisation.py
+rank,cik,name,sic,division,test_reports,test_reports_l1,bonds_keyed_latest,total_debt_usd,total_basis
+1,318154,AMGEN INC,2836,Manufacturing,4,4,43,57304000000.0,LongTermDebt
+2,97745,THERMO FISHER SCIENTIFIC INC.,3829,Manufacturing,4,4,66,42284000000.0,LongTermDebt
+3,101829,RTX CORP,3724,Manufacturing,4,4,40,37154000000.0,debt incl. finance leases
+4,1702780,"OPTIMUM COMMUNICATIONS, INC.",4841,"Transportation, communications, utilities",4,4,13,26550765000.0,LongTermDebt
+5,798354,FISERV INC,7389,Services,4,4,27,26430000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+6,815097,CARNIVAL CORP LTD.,4400,"Transportation, communications, utilities",4,4,12,25570000000.0,LongTermDebt
+7,6201,AMERICAN AIRLINES GROUP INC.,4512,"Transportation, communications, utilities",4,3,2,25254000000.0,LongTermDebt
+8,1418135,KEURIG DR PEPPER INC.,2080,Manufacturing,4,4,35,24817000000.0,LongTermDebtNoncurrent + current
+9,1013871,"NRG ENERGY, INC.",4911,"Transportation, communications, utilities",4,4,21,23392000000.0,LongTermDebt
+10,1090727,UNITED PARCEL SERVICE INC,4210,"Transportation, communications, utilities",4,4,28,23294000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+11,1657853,"HERTZ GLOBAL HOLDINGS, INC",7510,Services,4,3,3,19080000000.0,LongTermDebt
+12,1701605,BAKER HUGHES CO,3533,Manufacturing,4,4,16,16253000000.0,DebtLongtermAndShorttermCombinedAmount
+13,1469367,SUNRUN INC.,3690,Manufacturing,4,4,0,15157898000.0,LongTermDebt
+14,1585689,HILTON WORLDWIDE HOLDINGS INC.,7011,Services,4,4,11,13444000000.0,DebtInstrumentCarryingAmount (undimensioned)
+15,1552275,SUNOCO LP,2911,Manufacturing,4,4,24,13310000000.0,debt incl. finance leases
+16,797468,OCCIDENTAL PETROLEUM CORP /DE/,1311,Mining,4,4,28,12800000000.0,LongTermDebt
+17,70318,TENET HEALTHCARE CORP,8062,Services,4,4,10,12662000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+18,1140859,"CENCORA, INC.",5122,Wholesale,4,4,16,11723241000.0,LongTermDebt
+19,1335258,"LIVE NATION ENTERTAINMENT, INC.",7900,Services,4,4,6,9201465000.0,DebtLongtermAndShorttermCombinedAmount
+20,1646972,"ALBERTSONS COMPANIES, INC.",5411,Retail,4,4,0,9162800000.0,debt incl. finance leases
+21,764065,CLEVELAND-CLIFFS INC.,1000,Mining,4,3,9,7703000000.0,LongTermDebt
+22,9389,BALL CORP,3411,Manufacturing,4,4,6,7177000000.0,debt incl. finance leases
+23,898173,O REILLY AUTOMOTIVE INC,5531,Retail,4,3,0,7014543000.0,LongTermDebtNoncurrent + current
+24,42582,GOODYEAR TIRE & RUBBER CO /OH/,3011,Manufacturing,4,4,10,6575000000.0,LongTermDebt
+25,1304280,NOVELIS INC.,3350,Manufacturing,4,4,15,6570000000.0,LongTermDebt
+26,1355096,"QVC GROUP, INC.",5961,Retail,4,4,11,6531000000.0,DebtLongtermAndShorttermCombinedAmount
+27,1584509,ARAMARK,5812,Retail,4,4,2,6129826000.0,debt incl. finance leases
+28,1050915,"QUANTA SERVICES, INC.",1731,Construction,4,4,8,6096174000.0,debt incl. finance leases
+29,1236275,"QXO, INC.",5030,Wholesale,4,4,3,6029000000.0,LongTermDebt
+30,916076,MARTIN MARIETTA MATERIALS INC,1400,Mining,4,4,9,6000000000.0,LongTermDebt
+31,1408075,GRAPHIC PACKAGING HOLDING CO,2650,Manufacturing,4,4,9,5539000000.0,LongTermDebt
+32,1370946,OWENS CORNING,3290,Manufacturing,4,4,3,5125000000.0,LongTermDebt
+33,1580670,"LGI HOMES, INC.",1531,Construction,4,4,3,4698957000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+34,1316835,"BUILDERS FIRSTSOURCE, INC.",5211,Retail,4,4,5,4591314000.0,debt incl. finance leases
+35,29534,DOLLAR GENERAL CORP,5331,Retail,4,4,7,4456883000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+36,1443646,BOOZ ALLEN HAMILTON HOLDING CORP,8742,Services,4,4,4,3936000000.0,LongTermDebt
+37,1411579,"AMC ENTERTAINMENT HOLDINGS, INC.",7830,Services,4,4,2,3851600000.0,LongTermDebtNoncurrent + current
+38,46080,"HASBRO, INC.",3944,Manufacturing,4,4,8,3538200000.0,LongTermDebtNoncurrent + current
+39,1166003,"XPO, INC.",4700,"Transportation, communications, utilities",4,4,4,3047000000.0,LongTermDebtNoncurrent + current
+40,67215,DYCOM INDUSTRIES INC,1623,Construction,4,3,0,2819733000.0,LongTermDebtNoncurrent + current
+41,1915657,HF SINCLAIR CORP,4610,"Transportation, communications, utilities",4,4,7,2772000000.0,LongTermDebt
+42,1116132,"TAPESTRY, INC.",3100,Manufacturing,4,4,4,2379000000.0,LongTermDebt
+43,1528849,RH,5712,Retail,4,4,0,2369893000.0,DebtLongtermAndShorttermCombinedAmount
+44,1755672,"CORTEVA, INC.",100,Agriculture,4,4,0,1600000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+45,1345126,COMPASS DIVERSIFIED HOLDINGS,2510,Manufacturing,4,4,2,1581930000.0,LongTermDebt
+46,39911,GAP INC,5651,Retail,4,4,2,1493000000.0,LongTermDebtNoncurrent + current
+47,723254,CINTAS CORP,2320,Manufacturing,4,4,3,1429086000.0,LongTermDebt
+48,1674335,"JELD-WEN HOLDING, INC.",2430,Manufacturing,4,4,0,1250184000.0,debt incl. finance leases
+49,1579684,"USA TODAY CO., INC.",2711,Manufacturing,4,4,2,950100000.0,LongTermDebt
+50,104889,GRAHAM HOLDINGS CO,8200,Services,4,3,1,900373000.0,DebtLongtermAndShorttermCombinedAmount
+51,1086600,ALLIANCE RESOURCE PARTNERS LP,1221,Mining,4,4,1,579588000.0,LongTermDebtNoncurrent + current
+52,105319,"WW INTERNATIONAL, INC.",7200,Services,4,4,0,423995000.0,LongTermDebtNoncurrent + current
+53,318833,TEAM INC,7600,Services,4,4,0,317610000.0,LongTermDebt
+54,1290677,"TURNING POINT BRANDS, INC.",2100,Manufacturing,4,4,2,294145000.0,LongTermDebtNoncurrent + current
+55,882095,"GILEAD SCIENCES, INC.",2836,Manufacturing,4,4,22,26246000000.0,LongTermDebt
+56,313616,DANAHER CORP /DE/,3823,Manufacturing,4,4,32,26558000000.0,LongTermDebt
+57,1260221,TRANSDIGM GROUP INC,3728,Manufacturing,4,4,12,32760000000.0,LongTermDebt
+58,732712,VERIZON COMMUNICATIONS INC,4813,"Transportation, communications, utilities",4,3,2,20418000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+59,1141391,MASTERCARD INC,7389,Services,4,4,26,24600000000.0,DebtLongtermAndShorttermCombinedAmount
+60,56047,KIRBY CORP,4400,"Transportation, communications, utilities",4,4,3,1037348000.0,LongTermDebt
+61,92380,SOUTHWEST AIRLINES CO,4512,"Transportation, communications, utilities",4,4,5,7401000000.0,sum of tagged instruments (no total tagged; coverage not independently measured)
+62,24545,MOLSON COORS BEVERAGE CO,2082,Manufacturing,4,4,8,7681800000.0,LongTermDebt
+63,1383650,"CHENIERE ENERGY PARTNERS, L.P.",4924,"Transportation, communications, utilities",4,4,10,14335000000.0,LongTermDebt
+64,1308208,"UNIVERSAL LOGISTICS HOLDINGS, INC.",4213,"Transportation, communications, utilities",4,4,0,692582000.0,LongTermDebt
+65,723612,"AVIS BUDGET GROUP, INC.",7510,Services,4,4,8,6022000000.0,LongTermDebtNoncurrent + current
+66,1783180,CARRIER GLOBAL CORP,3585,Manufacturing,4,4,10,11230000000.0,LongTermDebtNoncurrent + current
+67,68505,"MOTOROLA SOLUTIONS, INC.",3663,Manufacturing,4,4,14,8417000000.0,LongTermDebtNoncurrent + current
+68,1174922,WYNN RESORTS LTD,7011,Services,4,4,9,10724660000.0,LongTermDebt
+69,1694426,"DELEK US HOLDINGS, INC.",2911,Manufacturing,4,4,3,3189700000.0,LongTermDebt
+70,1090012,DEVON ENERGY CORP/DE,1311,Mining,4,4,16,11388000000.0,LongTermDebt
+71,1520697,"ACADIA HEALTHCARE COMPANY, INC.",8093,Services,4,4,3,2414569000.0,LongTermDebt
+72,927653,MCKESSON CORP,5122,Wholesale,4,4,12,9729000000.0,LongTermDebt
+73,1999001,SIX FLAGS ENTERTAINMENT CORPORATION/NEW,7900,Services,4,4,5,4971934000.0,LongTermDebt
+74,1801368,MP MATERIALS CORP. / DE,1000,Mining,4,4,1,934583000.0,LongTermDebt
+75,1219601,"CROWN HOLDINGS, INC.",3411,Manufacturing,4,4,4,6018000000.0,LongTermDebt

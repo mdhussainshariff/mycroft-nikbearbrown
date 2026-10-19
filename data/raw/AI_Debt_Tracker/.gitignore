@@ -1,0 +1,32 @@
+# Secrets — never commit
+.env
+*.pem
+
+# Bulk data lives in a local directory outside the repo (see README "Where things live").
+# `data` may be a link to that directory, so it must never be followed or committed. Small,
+# hand-checked evidence (manifests, probe results) is committed under manifests/ and docs/ instead.
+data
+data/
+*.zip
+*.tsv
+*.parquet
+*.pdf
+
+# Run outputs (rebuildable)
+runs/
+output/
+checkpoints/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

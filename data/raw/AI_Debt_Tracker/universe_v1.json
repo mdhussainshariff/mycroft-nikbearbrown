@@ -1,0 +1,3583 @@
+{
+ "version": "v1",
+ "status": "FROZEN -- cleared by Om Mali on 2026-10-18 (manifests/week1_gate.json)",
+ "built": "2026-10-18 by scripts/review_universe.py from the SEC notes data (2024q3..2026_09) and EDGAR",
+ "grading_levels": {
+  "L1": "per instrument: >= 2 itemised instruments (bonds with a maturity, facilities, loans) covering >= 80% of total debt (offering members tagged alongside do not count against it)",
+  "L2": "per offering / member: >= 2 itemised-or-offering members covering >= 80% of total debt, but not L1",
+  "L3": "totals only"
+ },
+ "level_rule": "company level = most common report level in the dev+test windows (ties -> coarser); each episode is graded at its own target report's level (P19)",
+ "windows": {
+  "dev_quarter_ends": [
+   "2024-09-30",
+   "2025-06-30"
+  ],
+  "test_quarter_ends": [
+   "2025-09-30",
+   "2026-06-30"
+  ]
+ },
+ "companies": [
+  {
+   "name": "Microsoft",
+   "edgar_name": "MICROSOFT CORP",
+   "cik": 789019,
+   "group": "hyperscaler",
+   "grading_level": "L2",
+   "grading_level_measured": "L2",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-K",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.14,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.138,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.137,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.142,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.14,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.139,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.148,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.146,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.145,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 13
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L2": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 0
+  },
+  {
+   "name": "Alphabet",
+   "edgar_name": "Alphabet Inc.",
+   "cik": 1652044,
+   "group": "hyperscaler",
+   "grading_level": "L2",
+   "grading_level_measured": "L2",
+   "grading_level_draft": "L2",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "debt incl. finance leases",
+     "counts": {
+      "bond": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "debt incl. finance leases",
+     "counts": {
+      "bond": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.01,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "offering": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.012,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "offering": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.012,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "offering": 4
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.01,
+     "coverage_offerings": 1.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "offering": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.021,
+     "coverage_offerings": 1.005,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 2,
+      "facility": 1,
+      "offering": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.018,
+     "coverage_offerings": 1.31,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 2,
+      "facility": 1,
+      "offering": 11
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 1,
+    "L2": 7
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 41
+  },
+  {
+   "name": "Amazon",
+   "edgar_name": "AMAZON COM INC",
+   "cik": 1018724,
+   "group": "hyperscaler",
+   "grading_level": "L2",
+   "grading_level_measured": "L2",
+   "grading_level_draft": "L2",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.006,
+     "coverage_offerings": 0.997,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "facility": 2,
+      "offering": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 6
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.315,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 4,
+      "offering": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.987,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "offering": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.985,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "offering": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.985,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "offering": 6
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.443,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 5,
+      "offering": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L2",
+     "coverage_itemised": 0.023,
+     "coverage_offerings": 0.993,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "offering": 9
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.166,
+     "coverage_offerings": 0.994,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "facility": 1,
+      "offering": 11
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L2": 6,
+    "L3": 2
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 19
+  },
+  {
+   "name": "Meta",
+   "edgar_name": "Meta Platforms, Inc.",
+   "cik": 1326801,
+   "group": "hyperscaler",
+   "grading_level": "L2",
+   "grading_level_measured": "L3",
+   "override_reason": "A 4-4 tie resolved to the coarser level by default; Meta's 10-Ks and half its 10-Qs tag every offering (5 offerings = 100% of debt in June 2026), so per-offering describes it better.",
+   "grading_level_draft": "L2",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.006,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 3
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.006,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.004,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L2",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 1.004,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "offering": 5
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L2": 4,
+    "L3": 4
+   },
+   "tagging_drops_p19": [
+    "10-K 20251231 (4) -> 10-Q 20260331 (0)"
+   ],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 9
+  },
+  {
+   "name": "Oracle",
+   "edgar_name": "ORACLE CORP",
+   "cik": 1341439,
+   "group": "hyperscaler",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L3",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240831",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241130",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.071,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "bond": 4,
+      "bond_keyed": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250228",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.145,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "bond": 10,
+      "bond_keyed": 10,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250531",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.171,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 49,
+      "bond_keyed": 49,
+      "facility": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250831",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251130",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.167,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260228",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.348,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "bond": 14,
+      "bond_keyed": 13,
+      "facility": 1,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260531",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.033,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 59,
+      "bond_keyed": 59,
+      "facility": 2,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260831",
+     "quarter_end": "2026-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermNotesAndLoans + NotesPayableCurrent",
+     "counts": {
+      "other": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 6,
+    "L1": 2
+   },
+   "tagging_drops_p19": [
+    "10-K 20250531 (56) -> 10-Q 20250831 (1)",
+    "10-K 20260531 (62) -> 10-Q 20260831 (1)"
+   ],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 19
+  },
+  {
+   "name": "Nvidia",
+   "edgar_name": "NVIDIA CORP",
+   "cik": 1045810,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.005,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7,
+      "bond_keyed": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 7
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.886,
+     "coverage_offerings": 0.118,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "offering": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 0.885,
+     "coverage_offerings": 0.118,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "offering": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.974,
+     "coverage_offerings": 0.03,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 13,
+      "bond_keyed": 13,
+      "offering": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 4
+  },
+  {
+   "name": "AMD",
+   "edgar_name": "ADVANCED MICRO DEVICES INC",
+   "cik": 2488,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.018,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.017,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.726,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 2,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.477,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.476,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.475,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.854,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.473,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.472,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "other": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 7,
+    "L3": 1
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 10
+  },
+  {
+   "name": "Broadcom",
+   "edgar_name": "Broadcom Inc.",
+   "cik": 1730168,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.14,
+     "coverage_offerings": 0.618,
+     "total_basis": "DebtInstrumentCarryingAmount (undimensioned)",
+     "counts": {
+      "bond": 25,
+      "bond_keyed": 25,
+      "facility": 3,
+      "offering": 10
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.091,
+     "coverage_offerings": 0.693,
+     "total_basis": "DebtInstrumentCarryingAmount (undimensioned)",
+     "counts": {
+      "bond": 29,
+      "bond_keyed": 29,
+      "facility": 3,
+      "offering": 10
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.969,
+     "coverage_offerings": 0.73,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 30,
+      "bond_keyed": 30,
+      "facility": 3,
+      "offering": 11
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 0.969,
+     "coverage_offerings": 0.723,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 30,
+      "bond_keyed": 30,
+      "facility": 4,
+      "offering": 11
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.889,
+     "coverage_offerings": 0.848,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 33,
+      "bond_keyed": 33,
+      "facility": 3,
+      "offering": 12
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 0.901,
+     "coverage_offerings": 0.868,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 35,
+      "bond_keyed": 35,
+      "facility": 2,
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.93,
+     "coverage_offerings": 0.881,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 36,
+      "bond_keyed": 36,
+      "facility": 2,
+      "offering": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 0.947,
+     "coverage_offerings": 0.906,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 36,
+      "bond_keyed": 36,
+      "facility": 2,
+      "offering": 12
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.939,
+     "coverage_offerings": 0.894,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 34,
+      "bond_keyed": 31,
+      "facility": 2,
+      "offering": 12
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 18
+  },
+  {
+   "name": "Micron",
+   "edgar_name": "MICRON TECHNOLOGY INC",
+   "cik": 723125,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-K",
+     "period": "20240831",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 12,
+      "bond_keyed": 12,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241130",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 12,
+      "bond_keyed": 12,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250228",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 12,
+      "bond_keyed": 12,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250531",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 13,
+      "bond_keyed": 13,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250831",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 13,
+      "bond_keyed": 13,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251130",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 11,
+      "bond_keyed": 11
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260228",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 9,
+      "bond_keyed": 9
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260531",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 9,
+      "bond_keyed": 9
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 8,
+    "in_notes_data": 8,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 10
+  },
+  {
+   "name": "Intel",
+   "edgar_name": "INTEL CORP",
+   "cik": 50863,
+   "group": "chips_hardware",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.009,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.832,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 44,
+      "bond_keyed": 34
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.861,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 42,
+      "bond_keyed": 33
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.129,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 5
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 6,
+    "L1": 2
+   },
+   "tagging_drops_p19": [
+    "10-K 20241231 (44) -> 10-Q 20250331 (0)",
+    "10-K 20251231 (42) -> 10-Q 20260331 (0)"
+   ],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 7
+  },
+  {
+   "name": "Super Micro",
+   "edgar_name": "Super Micro Computer, Inc.",
+   "cik": 1375365,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-K",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 4.751,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1,
+      "facility": 16
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 4.312,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1,
+      "facility": 8
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 9.058,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1,
+      "facility": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 24.072,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2,
+      "facility": 8
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 46.149,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 4,
+      "bond_keyed": 2,
+      "facility": 13
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 38.043,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "facility": 7
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 21.472,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "facility": 9
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 2.125,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "facility": 12
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 2.165,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "facility": 17
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 13
+  },
+  {
+   "name": "Dell",
+   "edgar_name": "Dell Technologies Inc.",
+   "cik": 1571996,
+   "group": "chips_hardware",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [
+    {
+     "cik": 790070,
+     "name": "EMC CORP",
+     "evidence": {
+      "filer on 424B2": 8,
+      "filer on 424B5": 1
+     }
+    },
+    {
+     "cik": 826083,
+     "name": "DELL INC",
+     "evidence": {
+      "filer on 424B2": 8,
+      "filer on 424B5": 1
+     }
+    },
+    {
+     "cik": 1476297,
+     "name": "Dell International L.L.C.",
+     "evidence": {
+      "filer on 424B2": 8,
+      "filer on 424B5": 1
+     }
+    },
+    {
+     "cik": 1658093,
+     "name": "Denali Intermediate Inc.",
+     "evidence": {
+      "filer on 424B2": 8,
+      "filer on 424B5": 1
+     }
+    }
+   ],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 20
+  },
+  {
+   "name": "Marvell",
+   "edgar_name": "Marvell Technology, Inc.",
+   "cik": 1835632,
+   "group": "chips_hardware",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.53,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 6,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.525,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 6,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.521,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 6,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.185,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "facility": 3,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.007,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 8,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.007,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 8,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.901,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 11,
+      "bond_keyed": 8,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 8
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.007,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 8,
+      "bond_keyed": 8
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 6
+  },
+  {
+   "name": "Equinix",
+   "edgar_name": "EQUINIX INC",
+   "cik": 1101239,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.968,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 25,
+      "bond_keyed": 24,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 0.967,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 27,
+      "bond_keyed": 26,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 0.975,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 28,
+      "bond_keyed": 27,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 0.974,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 29,
+      "bond_keyed": 28,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.977,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 31,
+      "bond_keyed": 30,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 0.978,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 30,
+      "bond_keyed": 29,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.019,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtInstrumentCarryingAmount (undimensioned)",
+     "counts": {
+      "bond": 33,
+      "bond_keyed": 31,
+      "facility": 1,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.015,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 33,
+      "bond_keyed": 33,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.016,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 34,
+      "bond_keyed": 34,
+      "facility": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [
+    {
+     "cik": 2015000,
+     "name": "Equinix Europe 2 Financing Corp LLC",
+     "evidence": {
+      "filer on 424B2": 8,
+      "filer on 424B5": 8
+     }
+    },
+    {
+     "cik": 2096003,
+     "name": "Equinix Canada Financing Ltd.",
+     "evidence": {
+      "filer on 424B2": 5,
+      "filer on 424B5": 5
+     }
+    },
+    {
+     "cik": 2110955,
+     "name": "Equinix Asia Financing Corp Pte. Ltd.",
+     "evidence": {
+      "filer on 424B2": 4,
+      "filer on 424B5": 4
+     }
+    }
+   ],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 28
+  },
+  {
+   "name": "Digital Realty",
+   "edgar_name": "DIGITAL REALTY TRUST, INC.",
+   "cik": 1297996,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 21,
+      "bond_keyed": 20,
+      "facility": 3,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 22,
+      "bond_keyed": 21,
+      "facility": 3,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 24,
+      "bond_keyed": 22,
+      "facility": 5,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 22,
+      "bond_keyed": 21,
+      "facility": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 23,
+      "bond_keyed": 22,
+      "facility": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 23,
+      "bond_keyed": 22,
+      "facility": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 26,
+      "bond_keyed": 24,
+      "category": 1,
+      "facility": 4,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 22,
+      "bond_keyed": 21,
+      "facility": 4,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 22,
+      "bond_keyed": 21,
+      "facility": 4,
+      "other": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [
+    {
+     "cik": 1494877,
+     "name": "DIGITAL REALTY TRUST, L.P.",
+     "evidence": {
+      "co-registrant on 10-Q/10-K": 9,
+      "filer on 8-K": 6
+     }
+    }
+   ],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 9
+  },
+  {
+   "name": "CoreWeave",
+   "edgar_name": "CoreWeave, Inc.",
+   "cik": 1769628,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.011,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "facility": 4,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.011,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1,
+      "facility": 3,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.012,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 1,
+      "facility": 5,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.145,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 3,
+      "facility": 5,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.006,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 4,
+      "facility": 6,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 0.911,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtInstrumentCarryingAmount (undimensioned)",
+     "counts": {
+      "bond": 7,
+      "bond_keyed": 5,
+      "facility": 6,
+      "other": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 6
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 6,
+    "in_notes_data": 6,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 12
+  },
+  {
+   "name": "Applied Digital",
+   "edgar_name": "Applied Digital Corp.",
+   "cik": 1144879,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-K",
+     "period": "20240531",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "other": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240831",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241130",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 4,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250228",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.085,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "other": 4
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250531",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.079,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "other": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250831",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.073,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "other": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251130",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260228",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 1,
+      "facility": 1,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260531",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 2,
+      "facility": 1,
+      "other": 4
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 5,
+    "L3": 3
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 11
+  },
+  {
+   "name": "Cipher Mining",
+   "edgar_name": "Cipher Digital Inc.",
+   "cik": 1819989,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.242,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "bond_keyed": 1,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.439,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.182,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.189,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 4,
+      "bond_keyed": 4
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.11,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 5,
+      "facility": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 3,
+    "L1": 5
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 15
+  },
+  {
+   "name": "TeraWulf",
+   "edgar_name": "TERAWULF INC.",
+   "cik": 1083301,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L3",
+   "override_reason": "A 4-4 tie resolved to the coarser level by default; every report since it began issuing bonds (Sep 2025) itemises 100% of its debt; the earlier L3 reports held a single term loan.",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.049,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "facility": 1,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.702,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.704,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3,
+      "facility": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 4,
+    "L1": 4
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 12
+  },
+  {
+   "name": "Core Scientific",
+   "edgar_name": "Core Scientific, Inc./tx",
+   "cik": 1839341,
+   "group": "datacentre_neocloud",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 1,
+      "facility": 1,
+      "other": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 1,
+      "other": 5
+     }
+    },
+    {
+     "form": "10-K/A",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 2,
+      "facility": 1,
+      "other": 3
+     }
+    },
+    {
+     "form": "10-Q/A",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 2,
+      "other": 4
+     }
+    },
+    {
+     "form": "10-Q/A",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 2,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-Q/A",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 2,
+      "other": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.528,
+     "coverage_offerings": 0.0,
+     "total_basis": "DebtLongtermAndShorttermCombinedAmount",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.02,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "bond_keyed": 3
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 7,
+    "L3": 1
+   },
+   "tagging_drops_p19": [
+    "10-Q/A 20250331 (10) -> 10-Q/A 20250630 (4)"
+   ],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 6
+  },
+  {
+   "name": "Vistra",
+   "edgar_name": "Vistra Corp.",
+   "cik": 1692819,
+   "group": "power",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.028,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.031,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 1
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.104,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.028,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "facility": 2,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.027,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 3,
+      "facility": 2,
+      "other": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [
+    {
+     "cik": 1746576,
+     "name": "Vistra Operations Co LLC",
+     "evidence": {
+      "filer on 424B2": 1,
+      "filer on FWP": 1,
+      "filer on 424B5": 1
+     }
+    }
+   ],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 16
+  },
+  {
+   "name": "Constellation Energy",
+   "edgar_name": "Constellation Energy Corp",
+   "cik": 1868275,
+   "group": "power",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.33,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 1,
+      "facility": 2,
+      "other": 5
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.647,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 4,
+      "bond_keyed": 3,
+      "facility": 3,
+      "other": 5
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.591,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 3,
+      "facility": 5,
+      "other": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.466,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 5,
+      "bond_keyed": 3,
+      "facility": 5,
+      "other": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 8
+   },
+   "tagging_drops_p19": [
+    "10-K 20241231 (8) -> 10-Q 20250331 (0)"
+   ],
+   "issuing_subsidiaries": [
+    {
+     "cik": 1168165,
+     "name": "CONSTELLATION ENERGY GENERATION LLC",
+     "evidence": {
+      "co-registrant on 10-Q/10-K": 9,
+      "filer on 8-K": 3
+     }
+    }
+   ],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 4
+  },
+  {
+   "name": "Salesforce",
+   "edgar_name": "Salesforce, Inc.",
+   "cik": 1108524,
+   "group": "ai_software",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.008,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.007,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.004,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 6,
+      "bond_keyed": 6,
+      "facility": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.006,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 14,
+      "bond_keyed": 14,
+      "facility": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.005,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebt",
+     "counts": {
+      "bond": 14,
+      "bond_keyed": 14,
+      "facility": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 8
+  },
+  {
+   "name": "Snowflake",
+   "edgar_name": "Snowflake Inc.",
+   "cik": 1640147,
+   "group": "ai_software",
+   "grading_level": "L1",
+   "grading_level_measured": "L1",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240731",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {}
+    },
+    {
+     "form": "10-Q",
+     "period": "20241031",
+     "quarter_end": "2024-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20250131",
+     "quarter_end": "2024-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250430",
+     "quarter_end": "2025-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250731",
+     "quarter_end": "2025-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20251031",
+     "quarter_end": "2025-09-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20260131",
+     "quarter_end": "2025-12-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260430",
+     "quarter_end": "2026-03-31",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260731",
+     "quarter_end": "2026-06-30",
+     "level": "L1",
+     "coverage_itemised": 1.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "sum of tagged instruments (no total tagged; coverage not independently measured)",
+     "counts": {
+      "bond": 2,
+      "bond_keyed": 2
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L1": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 1
+  },
+  {
+   "name": "IBM",
+   "edgar_name": "INTERNATIONAL BUSINESS MACHINES CO",
+   "cik": 51143,
+   "group": "ai_software",
+   "grading_level": "L3",
+   "grading_level_measured": "L3",
+   "grading_level_draft": "L1",
+   "level_by_report": [
+    {
+     "form": "10-Q",
+     "period": "20240630",
+     "quarter_end": "2024-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 28
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20240930",
+     "quarter_end": "2024-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 28
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20241231",
+     "quarter_end": "2024-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.02,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 2,
+      "bucket": 25
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250331",
+     "quarter_end": "2025-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 29
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250630",
+     "quarter_end": "2025-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 29
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20250930",
+     "quarter_end": "2025-09-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 29
+     }
+    },
+    {
+     "form": "10-K",
+     "period": "20251231",
+     "quarter_end": "2025-12-31",
+     "level": "L3",
+     "coverage_itemised": 0.016,
+     "coverage_offerings": 0.0,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bond": 2,
+      "bucket": 26
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260331",
+     "quarter_end": "2026-03-31",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.085,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 30,
+      "offering": 1
+     }
+    },
+    {
+     "form": "10-Q",
+     "period": "20260630",
+     "quarter_end": "2026-06-30",
+     "level": "L3",
+     "coverage_itemised": 0.0,
+     "coverage_offerings": 0.087,
+     "total_basis": "LongTermDebtNoncurrent + current",
+     "counts": {
+      "bucket": 29,
+      "offering": 1
+     }
+    }
+   ],
+   "level_tally_dev_test": {
+    "L3": 8
+   },
+   "tagging_drops_p19": [],
+   "issuing_subsidiaries": [],
+   "coverage": {
+    "edgar_10q_10k_in_window": 9,
+    "in_notes_data": 9,
+    "missing_from_notes_data": []
+   },
+   "debt_filings_in_window": 12
+  }
+ ]
+}

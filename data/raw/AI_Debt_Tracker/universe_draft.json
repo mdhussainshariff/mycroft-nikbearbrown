@@ -1,0 +1,37 @@
+{
+  "status": "DRAFT — to be reviewed and frozen as universe_v1.json in week 1",
+  "checked": "2026-10-16 by scripts/probe_debt_filings.py: every CIK resolved to the EDGAR name shown; debt_members = distinct members on DebtInstrumentAxis / LongtermDebtTypeAxis in the latest 10-Q/10-K",
+  "grading_levels": {
+    "L1": "each instrument tagged separately (member counts include loan facilities and revolvers, so they are not bond counts)",
+    "L2": "each offering tagged (bonds grouped by issue date)",
+    "L3": "totals only"
+  },
+  "note": "grading_level comes from the probe and must be hand-checked against the debt note in week 1",
+  "companies": [
+    {"name": "Microsoft", "edgar_name": "MICROSOFT CORP", "cik": 789019, "group": "hyperscaler", "latest": "10-K 2026-07-29", "debt_members": {"DebtInstrumentAxis": 13, "LongtermDebtTypeAxis": 1}, "grading_level": "L1"},
+    {"name": "Alphabet", "edgar_name": "Alphabet Inc.", "cik": 1652044, "group": "hyperscaler", "latest": "10-Q 2026-07-23", "debt_members": {"DebtInstrumentAxis": 13, "LongtermDebtTypeAxis": 0}, "grading_level": "L2", "grading_note": "members are mostly offerings, e.g. A2026USDollarNotes (spike 2026-10-16, P18)"},
+    {"name": "Amazon", "edgar_name": "AMAZON COM INC", "cik": 1018724, "group": "hyperscaler", "latest": "10-Q 2026-07-31", "debt_members": {"DebtInstrumentAxis": 21, "LongtermDebtTypeAxis": 4}, "grading_level": "L2", "grading_note": "mix of offerings (March2026SeniorUnsecuredNotes) and single bonds (spike 2026-10-16, P18)"},
+    {"name": "Meta", "edgar_name": "Meta Platforms, Inc.", "cik": 1326801, "group": "hyperscaler", "latest": "10-Q 2026-07-30", "debt_members": {"DebtInstrumentAxis": 0, "LongtermDebtTypeAxis": 6}, "grading_level": "L2"},
+    {"name": "Oracle", "edgar_name": "ORACLE CORP", "cik": 1341439, "group": "hyperscaler", "latest": "10-Q 2026-09-11", "debt_members": {"DebtInstrumentAxis": 0, "LongtermDebtTypeAxis": 2}, "grading_level": "L3"},
+    {"name": "Nvidia", "edgar_name": "NVIDIA CORP", "cik": 1045810, "group": "chips_hardware", "latest": "10-Q 2026-08-26", "debt_members": {"DebtInstrumentAxis": 15, "LongtermDebtTypeAxis": 2}, "grading_level": "L1"},
+    {"name": "AMD", "edgar_name": "ADVANCED MICRO DEVICES INC", "cik": 2488, "group": "chips_hardware", "latest": "10-Q 2026-08-05", "debt_members": {"DebtInstrumentAxis": 8, "LongtermDebtTypeAxis": 1}, "grading_level": "L1"},
+    {"name": "Broadcom", "edgar_name": "Broadcom Inc.", "cik": 1730168, "group": "chips_hardware", "latest": "10-Q 2026-09-10", "debt_members": {"DebtInstrumentAxis": 64, "LongtermDebtTypeAxis": 1}, "grading_level": "L1"},
+    {"name": "Micron", "edgar_name": "MICRON TECHNOLOGY INC", "cik": 723125, "group": "chips_hardware", "latest": "10-K 2026-10-09", "debt_members": {"DebtInstrumentAxis": 15, "LongtermDebtTypeAxis": 3}, "grading_level": "L1"},
+    {"name": "Intel", "edgar_name": "INTEL CORP", "cik": 50863, "group": "chips_hardware", "latest": "10-Q 2026-07-24", "debt_members": {"DebtInstrumentAxis": 8, "LongtermDebtTypeAxis": 2}, "grading_level": "L1"},
+    {"name": "Super Micro", "edgar_name": "Super Micro Computer, Inc.", "cik": 1375365, "group": "chips_hardware", "latest": "10-K 2026-08-31", "debt_members": {"DebtInstrumentAxis": 53, "LongtermDebtTypeAxis": 5}, "grading_level": "L1"},
+    {"name": "Dell", "edgar_name": "Dell Technologies Inc.", "cik": 1571996, "group": "chips_hardware", "latest": "10-Q 2026-09-08", "debt_members": {"DebtInstrumentAxis": 13, "LongtermDebtTypeAxis": 3}, "grading_level": "L1"},
+    {"name": "Marvell", "edgar_name": "Marvell Technology, Inc.", "cik": 1835632, "group": "chips_hardware", "latest": "10-Q 2026-08-28", "debt_members": {"DebtInstrumentAxis": 12, "LongtermDebtTypeAxis": 2}, "grading_level": "L1"},
+    {"name": "Equinix", "edgar_name": "EQUINIX INC", "cik": 1101239, "group": "datacentre_neocloud", "latest": "10-Q 2026-07-29", "debt_members": {"DebtInstrumentAxis": 41, "LongtermDebtTypeAxis": 4}, "grading_level": "L1"},
+    {"name": "Digital Realty", "edgar_name": "DIGITAL REALTY TRUST, INC.", "cik": 1297996, "group": "datacentre_neocloud", "latest": "10-Q 2026-07-31", "debt_members": {"DebtInstrumentAxis": 23, "LongtermDebtTypeAxis": 8}, "grading_level": "L1"},
+    {"name": "CoreWeave", "edgar_name": "CoreWeave, Inc.", "cik": 1769628, "group": "datacentre_neocloud", "latest": "10-Q 2026-08-12", "debt_members": {"DebtInstrumentAxis": 19, "LongtermDebtTypeAxis": 3}, "grading_level": "L1"},
+    {"name": "Applied Digital", "edgar_name": "Applied Digital Corp.", "cik": 1144879, "group": "datacentre_neocloud", "latest": "10-Q 2026-10-07", "debt_members": {"DebtInstrumentAxis": 12, "LongtermDebtTypeAxis": 7}, "grading_level": "L1"},
+    {"name": "Cipher Mining", "edgar_name": "Cipher Digital Inc.", "cik": 1819989, "group": "datacentre_neocloud", "latest": "10-Q 2026-08-04", "debt_members": {"DebtInstrumentAxis": 7, "LongtermDebtTypeAxis": 3}, "grading_level": "L1"},
+    {"name": "TeraWulf", "edgar_name": "TERAWULF INC.", "cik": 1083301, "group": "datacentre_neocloud", "latest": "10-Q 2026-08-05", "debt_members": {"DebtInstrumentAxis": 11, "LongtermDebtTypeAxis": 7}, "grading_level": "L1"},
+    {"name": "Core Scientific", "edgar_name": "Core Scientific, Inc./tx", "cik": 1839341, "group": "datacentre_neocloud", "latest": "10-Q 2026-07-28", "debt_members": {"DebtInstrumentAxis": 4, "LongtermDebtTypeAxis": 2}, "grading_level": "L1"},
+    {"name": "Vistra", "edgar_name": "Vistra Corp.", "cik": 1692819, "group": "power", "latest": "10-Q 2026-08-10", "debt_members": {"DebtInstrumentAxis": 51, "LongtermDebtTypeAxis": 21}, "grading_level": "L1"},
+    {"name": "Constellation Energy", "edgar_name": "Constellation Energy Corp", "cik": 1868275, "group": "power", "latest": "10-Q 2026-08-06", "debt_members": {"DebtInstrumentAxis": 39, "LongtermDebtTypeAxis": 7}, "grading_level": "L1"},
+    {"name": "Salesforce", "edgar_name": "Salesforce, Inc.", "cik": 1108524, "group": "ai_software", "latest": "10-Q 2026-08-27", "debt_members": {"DebtInstrumentAxis": 18, "LongtermDebtTypeAxis": 2}, "grading_level": "L1"},
+    {"name": "Snowflake", "edgar_name": "Snowflake Inc.", "cik": 1640147, "group": "ai_software", "latest": "10-Q 2026-09-04", "debt_members": {"DebtInstrumentAxis": 3, "LongtermDebtTypeAxis": 1}, "grading_level": "L1"},
+    {"name": "IBM", "edgar_name": "INTERNATIONAL BUSINESS MACHINES CO", "cik": 51143, "group": "ai_software", "latest": "10-Q 2026-07-23", "debt_members": {"DebtInstrumentAxis": 37, "LongtermDebtTypeAxis": 0}, "grading_level": "L1"}
+  ]
+}

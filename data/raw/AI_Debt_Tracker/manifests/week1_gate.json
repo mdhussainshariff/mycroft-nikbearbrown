@@ -1,0 +1,14 @@
+{
+ "gate": "Week 1 freeze: universe v1, generalisation set, dev/test splits, bake-off set and model choice (DESIGN.md §11, P4)",
+ "status": "FROZEN",
+ "cleared_by": "Om Mali",
+ "date": "2026-10-18",
+ "basis": "Om Mali accepted Claude's review (docs/week1_review.md) without checking the filings personally, and said so. The review itself is a model judgment (P8); the decision to accept it is Om's.",
+ "model_choice": "qwen3:4b",
+ "company_level_overrides": [
+  {"cik": 1326801, "name": "Meta", "measured": "L3", "level": "L2",
+   "reason": "A 4-4 tie resolved to the coarser level by default; Meta's 10-Ks and half its 10-Qs tag every offering (5 offerings = 100% of debt in June 2026), so per-offering describes it better."},
+  {"cik": 1083301, "name": "TeraWulf", "measured": "L3", "level": "L1",
+   "reason": "A 4-4 tie resolved to the coarser level by default; every report since it began issuing bonds (Sep 2025) itemises 100% of its debt; the earlier L3 reports held a single term loan."}
+ ]
+}

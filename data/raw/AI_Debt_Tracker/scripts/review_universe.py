@@ -1,0 +1,234 @@
+"""Week 1: the evidence for freezing the AI universe as universe_v1.json (DESIGN.md §3.2, §11).
+
+For each of the 25 companies in universe_draft.json this measures, instead of assuming:
+
+1. **Grading level per report** (P2, P18, P19). Every 10-Q/10-K filed Jul 2024 – Sep 2026 is read
+   from the notes data with the answer-key rules and given the finest level its tagging supports,
+   by *coverage* — how much of the company's total debt the itemised instruments account for
+   (`eval/answer_key.grading_level`; L1 ≥ 80% itemised, L2 ≥ 80% itemised-or-offering, else L3).
+   The proposed company level is the most common report level inside the dev + test windows
+   (ties go to the coarser level). Each episode is still graded at its own target report's level.
+2. **Tagging drops** (P19): consecutive reports where the outstanding-member count falls by more
+   than half (from at least 4).
+3. **Coverage**: every 10-Q/10-K on EDGAR in the window, and which are missing from the notes data
+   (those episodes cannot be graded from D4).
+4. **Issuing subsidiaries** (P12): co-registrants on the company's 10-Q/10-Ks (`aciks`) and the
+   filers listed in the headers of its debt filings (424B2/424B5, FWP, 8-K item 2.03).
+
+Writes universe_v1.json (status PROPOSED — the freeze is a gate a named human clears, P4) and
+docs/universe_v1_review.md. Network: the EDGAR submissions index and filing headers (cached).
+
+Usage:  python scripts/review_universe.py
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from collections import Counter, defaultdict
+from datetime import date
+from pathlib import Path
+
+from ai_debt_tracker import config
+from ai_debt_tracker.edgar import filers_in_header, load_filings
+from ai_debt_tracker.eval.answer_key import L1_COVERAGE, AnswerKey, grading_level, level_counts
+from ai_debt_tracker.sec import SecClient
+
+ROOT = Path(__file__).resolve().parents[1]
+WINDOW = ("2024-07-01", "2026-09-30")
+DEV, TEST = ("2024-09-30", "2025-06-30"), ("2025-09-30", "2026-06-30")
+DEBT_FORMS = {"424B2", "424B5", "FWP"}
+LEVEL_ORDER = {"L3": 0, "L2": 1, "L1": 2}
+# The human gate (P4): once manifests/week1_gate.json records who cleared it, outputs say FROZEN and
+# its company-level overrides apply (each with a reason). Without it everything stays PROPOSED.
+GATE_FILE = ROOT / "manifests" / "week1_gate.json"
+GATE = json.loads(GATE_FILE.read_text(encoding="utf-8")) if GATE_FILE.exists() else {}
+
+
+def gate_status() -> str:
+    if GATE.get("status") == "FROZEN":
+        return f"FROZEN -- cleared by {GATE['cleared_by']} on {GATE['date']} (manifests/week1_gate.json)"
+    return "PROPOSED -- freezing is a gate: it takes a named human's sign-off, logged in logs/RUN_LOG.md (P4)"
+
+
+def extracted_periods() -> list[str]:
+    root = config.data_dir() / "fsn_debt"
+    return sorted(p.name for p in root.iterdir() if (p / "_complete").exists())
+
+
+def nearest_quarter_end(period: str) -> str:
+    """'20241027' (Nvidia's fiscal quarter) -> '2024-09-30': the calendar quarter end closest to it."""
+    d = date(int(period[:4]), int(period[4:6]), int(period[6:8]))
+    cands = [date(y, m, dd) for y in (d.year - 1, d.year, d.year + 1) for m, dd in ((3, 31), (6, 30), (9, 30), (12, 31))]
+    return min(cands, key=lambda c: (abs((c - d).days), c)).isoformat()
+
+
+def main() -> int:
+    draft = json.loads((ROOT / "universe_draft.json").read_text(encoding="utf-8"))
+    companies = draft["companies"]
+    client = SecClient()
+    periods = extracted_periods()
+    ak = AnswerKey(periods, {c["cik"] for c in companies})
+    out, rows = [], []
+    for co in companies:
+        cik = co["cik"]
+        reports = ak.reports(cik)
+        per_report, prev_n = [], None
+        drops = []
+        for r in reports:
+            rec = ak.filing_record(r["adsh"])
+            g = grading_level(rec)
+            c = level_counts(rec)
+            n_out = sum(v for k, v in c.items() if k != "bond_keyed")
+            q = nearest_quarter_end(r["period"])
+            per_report.append({"adsh": r["adsh"], "form": r["form"], "period": r["period"], "quarter_end": q,
+                               "accepted": r["accepted"], "counts": c, "level": g["level"],
+                               "coverage_itemised": g["coverage_itemised"], "coverage_offerings": g["coverage_offerings"],
+                               "total_debt_usd": g["total_debt"], "total_basis": g["total_basis"]})
+            if prev_n is not None and prev_n >= 4 and n_out < prev_n / 2:
+                drops.append(f"{per_report[-2]['form']} {per_report[-2]['period']} ({prev_n}) -> {r['form']} {r['period']} ({n_out})")
+            prev_n = n_out
+        in_windows = [x["level"] for x in per_report if DEV[0] <= x["quarter_end"] <= TEST[1]]
+        tally = Counter(in_windows)
+        proposed = (max(tally.items(), key=lambda kv: (kv[1], -LEVEL_ORDER[kv[0]]))[0] if tally else "L3")
+
+        # coverage against EDGAR, and subsidiaries from debt-filing headers
+        filings = load_filings(client, cik)
+        periodic = [f for f in filings.values() if f.form in ("10-Q", "10-K", "10-Q/A", "10-K/A")
+                    and WINDOW[0] <= f.filing_date <= WINDOW[1]]
+        missing = sorted(f"{f.form} {f.report_date} ({f.accession})" for f in periodic
+                         if f.accession not in ak.subs and not f.form.endswith("/A"))
+        subs = defaultdict(lambda: {"name": "", "evidence": Counter()})
+        for r in reports:
+            for a in filter(None, (r.get("aciks") or "").replace(",", " ").split()):
+                if a.isdigit() and int(a) != cik:
+                    subs[int(a)]["evidence"]["co-registrant on 10-Q/10-K"] += 1
+        debt_filings = [f for f in filings.values() if WINDOW[0] <= f.filing_date <= WINDOW[1]
+                        and (f.form in DEBT_FORMS or (f.form.startswith("8-K") and "2.03" in f.items))]
+        for f in debt_filings:
+            try:
+                for fc, name in filers_in_header(client, cik, f.accession):
+                    if fc != cik:
+                        subs[fc]["name"] = name
+                        subs[fc]["evidence"][f"filer on {f.form}"] += 1
+            except Exception as ex:  # noqa: BLE001 — a missing header is reported, not fatal
+                print(f"  header {f.accession}: {type(ex).__name__}", file=sys.stderr)
+        for sc, s in subs.items():
+            if not s["name"]:
+                try:
+                    s["name"] = json.loads(client.get(f"https://data.sec.gov/submissions/CIK{sc:010d}.json", cache=False))["name"]
+                except Exception:  # noqa: BLE001
+                    s["name"] = "?"
+        sub_list = [{"cik": sc, "name": s["name"], "evidence": dict(s["evidence"])} for sc, s in sorted(subs.items())]
+
+        override = next((o for o in GATE.get("company_level_overrides", []) if o["cik"] == cik), None)
+        rec = {k: co[k] for k in ("name", "edgar_name", "cik", "group")}
+        rec.update({
+            "grading_level": override["level"] if override else proposed,
+            "grading_level_measured": proposed,
+            **({"override_reason": override["reason"]} if override else {}),
+            "grading_level_draft": co["grading_level"],
+            "level_by_report": [{k: x[k] for k in ("form", "period", "quarter_end", "level", "coverage_itemised",
+                                                   "coverage_offerings", "total_basis", "counts")} for x in per_report],
+            "level_tally_dev_test": dict(tally),
+            "tagging_drops_p19": drops,
+            "issuing_subsidiaries": sub_list,
+            "coverage": {"edgar_10q_10k_in_window": len([f for f in periodic if not f.form.endswith('/A')]),
+                         "in_notes_data": len(reports), "missing_from_notes_data": missing},
+            "debt_filings_in_window": len(debt_filings),
+        })
+        out.append(rec)
+        rows.append(rec)
+        print(f"{co['name']:20s} draft {co['grading_level']} -> {proposed}  {dict(tally)}  drops {len(drops)}  "
+              f"subs {len(sub_list)}  missing {len(missing)}", flush=True)
+
+    universe = {
+        "version": "v1",
+        "status": gate_status(),
+        "built": f"{date.today().isoformat()} by scripts/review_universe.py from the SEC notes data ({periods[0]}..{periods[-1]}) and EDGAR",
+        "grading_levels": {
+            "L1": f"per instrument: >= 2 itemised instruments (bonds with a maturity, facilities, loans) covering >= {L1_COVERAGE:.0%} of total debt (offering members tagged alongside do not count against it)",
+            "L2": f"per offering / member: >= 2 itemised-or-offering members covering >= {L1_COVERAGE:.0%} of total debt, but not L1",
+            "L3": "totals only",
+        },
+        "level_rule": "company level = most common report level in the dev+test windows (ties -> coarser); each episode is graded at its own target report's level (P19)",
+        "windows": {"dev_quarter_ends": list(DEV), "test_quarter_ends": list(TEST)},
+        "companies": out,
+    }
+    (ROOT / "universe_v1.json").write_text(json.dumps(universe, indent=1) + "\n", encoding="utf-8")
+    write_review(universe)
+    return 0
+
+
+def write_review(u: dict) -> None:
+    L = []
+    w = L.append
+    w("# Universe v1 — measured levels and sign-off\n")
+    w(f"> Generated by `scripts/review_universe.py` ({u['built'].split(' by ')[0]}). Machine-readable twin: "
+      f"[`universe_v1.json`](../universe_v1.json). Status: **{u['status'].split(' --')[0].lower()}** — "
+      + ("see the sign-off below (P4).\n" if u["status"].startswith("FROZEN") else
+         "the freeze is a gate for a named human (P4).\n"))
+    w("## What was measured\n")
+    w("Every 10-Q/10-K each company filed from July 2024 to September 2026 was read from the SEC notes data with the "
+      "answer-key rules, and each report was given the finest grading level its tagging supports. "
+      f"L1: {u['grading_levels']['L1']}. L2: {u['grading_levels']['L2']}. L3: {u['grading_levels']['L3']}. "
+      f"{u['level_rule'][0].upper() + u['level_rule'][1:]}.\n")
+    changed = [c for c in u["companies"] if c["grading_level"] != c["grading_level_draft"]]
+    w("## Summary\n")
+    tally = Counter(c["grading_level"] for c in u["companies"])
+    measured = Counter(c["grading_level_measured"] for c in u["companies"])
+    overridden = [c for c in u["companies"] if c.get("override_reason")]
+    w(f"- Levels: **L1 {tally.get('L1', 0)}**, **L2 {tally.get('L2', 0)}**, **L3 {tally.get('L3', 0)}** "
+      f"(measured: L1 {measured.get('L1', 0)}, L2 {measured.get('L2', 0)}, L3 {measured.get('L3', 0)}; "
+      f"draft: L1 21, L2 3, L3 1)." + (f" Overridden at the gate: {', '.join(c['name'] for c in overridden)}." if overridden else ""))
+    w(f"- Level changed from the draft for **{len(changed)}** companies: "
+      + (", ".join(f"{c['name']} {c['grading_level_draft']}→{c['grading_level']}" for c in changed) or "none") + ".")
+    n_drop = sum(len(c["tagging_drops_p19"]) for c in u["companies"])
+    w(f"- Tagging drops between consecutive reports (P19): **{n_drop}** across "
+      f"{sum(1 for c in u['companies'] if c['tagging_drops_p19'])} companies.")
+    n_sub = sum(1 for c in u["companies"] if c["issuing_subsidiaries"])
+    w(f"- Companies with a co-registrant or co-filer on debt filings (P12): **{n_sub}**.")
+    n_miss = sum(len(c["coverage"]["missing_from_notes_data"]) for c in u["companies"])
+    w(f"- 10-Q/10-Ks on EDGAR but missing from the notes data: **{n_miss}**.\n")
+    w("## Per company\n")
+    w("| Company | Group | Draft | Measured | **Level** | Report levels (dev+test) | P19 drops | Subsidiaries / co-filers | Missing |")
+    w("|---|---|---|---|---|---|---|---|---|")
+    for c in u["companies"]:
+        lv = ", ".join(f"{k} {v}" for k, v in sorted(c["level_tally_dev_test"].items()))
+        subs = "; ".join(s["name"] for s in c["issuing_subsidiaries"][:3]) + (" …" if len(c["issuing_subsidiaries"]) > 3 else "")
+        w(f"| {c['name']} | {c['group']} | {c['grading_level_draft']} | {c['grading_level_measured']} | "
+          f"**{c['grading_level']}**{' (override)' if c.get('override_reason') else ''} | {lv} | "
+          f"{len(c['tagging_drops_p19'])} | {subs or '—'} | {len(c['coverage']['missing_from_notes_data'])} |")
+    w("\n## Details worth a human look\n")
+    for c in u["companies"]:
+        notes = []
+        if c["grading_level"] != c["grading_level_draft"]:
+            last = c["level_by_report"][-1]
+            notes.append(f"level {c['grading_level_draft']} → {c['grading_level']} (latest {last['form']} {last['period']}: "
+                         f"itemised instruments cover {last['coverage_itemised']:.0%} of total debt, offerings "
+                         f"{last['coverage_offerings']:.0%}; total from {last['total_basis']}; outstanding members {last['counts']})")
+        if c["tagging_drops_p19"]:
+            notes.append("drops: " + "; ".join(c["tagging_drops_p19"]))
+        if c["coverage"]["missing_from_notes_data"]:
+            notes.append("missing from notes data: " + "; ".join(c["coverage"]["missing_from_notes_data"]))
+        if c["issuing_subsidiaries"]:
+            notes.append("co-filers: " + "; ".join(f"{s['name']} (CIK {s['cik']}: "
+                                                   + ", ".join(f"{k} ×{v}" for k, v in s["evidence"].items()) + ")"
+                                                   for s in c["issuing_subsidiaries"]))
+        if notes:
+            w(f"- **{c['name']}** — " + " · ".join(notes))
+    w("\n## Sign-off (P4)\n")
+    if u["status"].startswith("FROZEN"):
+        w(f"**Frozen** by {GATE['cleared_by']} on {GATE['date']}. Basis: {GATE['basis']} "
+          "Review: [`week1_review.md`](week1_review.md). Gate record: `manifests/week1_gate.json`.\n")
+        for c in overridden:
+            w(f"- Override — **{c['name']}** {c['grading_level_measured']} → {c['grading_level']}: {c['override_reason']}")
+        w("")
+    else:
+        w("The universe is frozen when a named human has read this page and records, in `logs/RUN_LOG.md`: who, the "
+          "date, and any level they override with one sentence of reasoning. Until then `universe_v1.json` says PROPOSED.\n")
+    (ROOT / "docs" / "universe_v1_review.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    sys.exit(main())
