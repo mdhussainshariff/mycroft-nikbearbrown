@@ -1,0 +1,62 @@
+{
+ "episode": "2488-2025-03-31",
+ "company": "AMD",
+ "report": "10-Q 20250331",
+ "level": "L1",
+ "status": "reviewed",
+ "holdout": true,
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 1-7",
+ "review": "Rows 1-5 (principal at Mar 29 2025, Dec 28 2024). The two 2025 notes ($875 m 4.212% 2026, $625 m 4.319% 2028) are new this quarter. Total long-term debt (net) $3,217 m.",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.212,
+   "maturity_year": 2026,
+   "principal": 875000000.0,
+   "amount_usd": 875000000.0,
+   "row": "4.212 % Senior Notes Due 2026 ( 4.212 % Notes) | 875 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.319,
+   "maturity_year": 2028,
+   "principal": 625000000.0,
+   "amount_usd": 625000000.0,
+   "row": "4.319 % Senior Notes Due 2028 ( 4.319 % Notes) | 625 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.375,
+   "maturity_year": 2030,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "2.375 % Senior Notes Due 2030 ( 2.375 % Notes) | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.924,
+   "maturity_year": 2032,
+   "principal": 500000000.0,
+   "amount_usd": 500000000.0,
+   "row": "3.924 % Senior Notes Due 2032 ( 3.924 % Notes) | 500 | 500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.393,
+   "maturity_year": 2052,
+   "principal": 500000000.0,
+   "amount_usd": 500000000.0,
+   "row": "4.393 % Senior Notes Due 2052 ( 4.393 % Notes) | 500 | 500"
+  }
+ ],
+ "totals": {
+  "total_debt": 3217000000.0
+ }
+}

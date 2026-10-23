@@ -30,13 +30,16 @@ import re
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 
-from ..ledger.parsers import parse_member, rates_match, split_camel
+from ..ledger.parsers import issue_period, parse_member, rates_match, split_camel
 from .fsn import NO_DIMS, month_dir, read_tsv
 
 IDENTITY_AXES = ("DebtInstrument", "LongtermDebtType", "ShortTermDebtType", "CreditFacility", "LineOfCreditFacility")
 DESCRIPTIVE_AXES = {"RecourseStatus", "VariableRate", "LegalEntity", "Currency", "ConsolidatedEntities",
                     "LongtermDebtType", "ShortTermDebtType", "CreditFacility", "LineOfCreditFacility", "DebtInstrument",
-                    "DebtInstrumentSecurityStatus", "DebtInstrumentPriorityStatus"}
+                    "DebtInstrumentSecurityStatus", "DebtInstrumentPriorityStatus",
+                    # debt assumed in an acquisition: Broadcom tags VMware's notes
+                    # BusinessAcquisition=VMwareAcquisition (Week 2 hand-check; 56 facts were being dropped)
+                    "BusinessAcquisition"}
 BALANCE_TAGS = {
     "LongTermDebt", "DebtInstrumentCarryingAmount", "LongTermDebtNoncurrent", "LongTermDebtCurrent", "SeniorNotes",
     "ConvertibleNotesPayable", "LongTermLineOfCredit", "LineOfCredit", "SecuredDebt", "UnsecuredDebt", "NotesPayable",
@@ -98,9 +101,13 @@ class Instrument:
     carrying: float | None = None
     capacity: float | None = None
     currency: str | None = None    # the bond's own currency (P8)
+    currency_from: str | None = None  # "label" | "face" (reliable) | "carrying" (may be a USD translation)
     amount_uom: str | None = None  # the unit the face/carrying amounts are stated in
     floating: bool = False
     amount_usd: float | None = None   # carrying (else face) in USD, for coverage against total debt
+    face_uom: str | None = None       # currency the face amount is stated in
+    carrying_uom: str | None = None   # currency the carrying amount is stated in
+    issued: str | None = None         # offerings only: issue period 'YYYY-MM' or 'YYYY' (L2 grading)
     tags: list[str] = field(default_factory=list)
     parse_notes: list[str] = field(default_factory=list)
 
@@ -197,7 +204,7 @@ class AnswerKey:
         for (axis, member), by_tag in facts.items():
             label = self.labels.get((member + "Member", adsh)) or self.std_labels.get(member + "Member")
             custom = (member + "Member", adsh) in self.labels
-            parsed = parse_member(member, label, as_of_year=year)
+            parsed = parse_member(member, label, as_of_year=year, as_of_month=int(period[:6]))
 
             def pick(tag, at_period=True):
                 rows = by_tag.get(tag, [])
@@ -218,14 +225,24 @@ class AnswerKey:
                 if carrying is not None:
                     break
             capacity, _ = pick("LineOfCreditFacilityMaximumBorrowingCapacity", at_period=False)
-            at_end = lambda x: x[2]["ddate"] == period and x[2]["qtrs"] == "0" and float(x[2]["value"] or 0) > 0  # noqa: E731
-            if any(at_end(x) for t in BALANCE_TAGS for x in by_tag.get(t, [])):
+            dated = lambda x: x[2]["ddate"] == period and x[2]["qtrs"] == "0"  # noqa: E731
+            balances = [float(x[2]["value"] or 0) for t in BALANCE_TAGS for x in by_tag.get(t, []) if dated(x)]
+            if any(v > 0 for v in balances):
                 outstanding, outstanding_from = True, "balance at period end"
-            elif any(at_end(x) for x in by_tag.get("DebtInstrumentFaceAmount", [])):
-                outstanding, outstanding_from = True, "face at period end"
+            elif balances:
+                # an explicit zero balance means repaid: Oracle tags its repaid July/November 2024 notes
+                # with carrying 0 *and* their original $2 bn face at the period end (Week 2 hand-check)
+                outstanding, outstanding_from = False, "zero balance at period end"
+            elif any(dated(x) and float(x[2]["value"] or 0) > 0 for x in by_tag.get("DebtInstrumentFaceAmount", [])):
+                outstanding, outstanding_from = True, "face at period end (no balance tagged)"
             else:
                 outstanding, outstanding_from = False, None
-            amount_usd = carrying if crow is not None and crow["uom"] == "USD" and carrying else                 face if face_row is not None and face_row["uom"] == "USD" and face else None
+            if crow is not None and crow["uom"] == "USD" and carrying:
+                amount_usd = carrying
+            elif face_row is not None and face_row["uom"] == "USD" and face:
+                amount_usd = face
+            else:
+                amount_usd = None
             if rate is not None and rate < 1:
                 rate = rate * 100  # stored as a fraction (0.0613) by most filers
             rate_from = "tagged" if rate is not None else ("parsed" if parsed.rate is not None else None)
@@ -238,6 +255,10 @@ class AnswerKey:
             # the bond's currency: named in the label/name (Equinix reports its euro notes in USD),
             # else the unit its face amount is stated in
             currency = parsed.currency or (face_row["uom"] if face_row else None) or amount_uom
+            # Known only from the label or the face amount's unit. A carrying amount is often a
+            # translation into dollars: Equinix's 2.875% 2028 notes are Swiss franc notes whose label
+            # never says so and whose only amount is a USD carrying value (Week 2 hand-check).
+            currency_from = "label" if parsed.currency else "face" if face_row else "carrying" if amount_uom else None
             mat = maturities.get((axis, member))
 
             plain = re.sub(r"\[member\]|\bmember\b", "", label or "", flags=re.I).strip(" ,")
@@ -264,7 +285,10 @@ class AnswerKey:
                 maturity_year=mat or parsed.maturity_year,
                 maturity_from="tagged" if mat else ("parsed" if parsed.maturity_year else None),
                 face=face, carrying=carrying, capacity=capacity,
-                currency=currency, amount_uom=amount_uom, floating=parsed.floating, amount_usd=amount_usd,
+                currency=currency, currency_from=currency_from, amount_uom=amount_uom, floating=parsed.floating,
+                amount_usd=amount_usd,
+                face_uom=face_row["uom"] if face_row else None, carrying_uom=crow["uom"] if crow else None,
+                issued=issue_period(member, label) if klass == "offering" else None,
                 tags=sorted(by_tag), parse_notes=parsed.notes,
             )
             out.append(inst)
@@ -311,7 +335,7 @@ def level_counts(record: dict) -> dict:
         if not i["outstanding"]:
             continue
         out[i["klass"]] += 1
-        if i["key"]:
+        if i.get("key"):
             out["bond_keyed"] += 1
     return dict(out)
 

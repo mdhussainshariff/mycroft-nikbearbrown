@@ -1,0 +1,12 @@
+{
+ "gate": "Week 2 check: the grader agrees with the hand-checked printed debt tables (DESIGN.md §11, P4)",
+ "status": "CLEARED",
+ "cleared_by": "Om Mali",
+ "date": "2026-10-23",
+ "accepted": "docs/handcheck.md -- calibration set 10 of 10; held-out set 2 of 3, with P35-P37 recorded as open for week 3",
+ "basis": "The transcriptions of the printed debt tables and their review are Claude's model judgment (P8), labelled in each manifests/handcheck/*.json file; the decision to accept them is Om's.",
+ "carried_forward": [
+  "P35-P37 (Digital Realty's own tagging) and a fresh held-out check come first in week 3",
+  "5 of 495 frozen episode levels differ under today's answer-key rules (docs/answer_key.md); they stay frozen until a gate decides otherwise"
+ ]
+}

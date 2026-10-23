@@ -1,6 +1,6 @@
 """Reproduce the debt-filing counts in DESIGN.md §3.2 and the answer-key levels in §3.3.
 
-For every company in universe_draft.json, counts filings between START and END:
+For every company in docs/archive/universe_draft.json, counts filings between START and END:
   8-K item 2.03 (creation of a direct financial obligation), 8-K item 1.01 (material definitive
   agreement), 424B2/424B5 prospectus supplements, FWP final term sheets, and 10-Q/10-K reports.
 Then, for each company's latest 10-Q/10-K, counts the distinct members used on the debt
@@ -47,7 +47,7 @@ def debt_members(cik, rec):
     return f"{rec['form'][i]} {rec['filingDate'][i]}", found
 
 
-universe = json.loads((ROOT / "universe_draft.json").read_text())["companies"]
+universe = json.loads((ROOT / "docs" / "archive" / "universe_draft.json").read_text())["companies"]
 print(f"window {START} .. {END}\n")
 print(f"{'company':20s} {'8-K 2.03':>8s} {'8-K 1.01':>8s} {'424B2/5':>7s} {'FWP':>4s} {'10-Q/K':>6s}   latest report       DebtInstrument  LongtermDebtType")
 totals = Counter()

@@ -79,8 +79,28 @@ def test_cutoff_is_exclusive_even_without_exclude(tmp_path):
     p = PointInTimeEdgar("2026-08-12T16:05:23", client=FakeSec(), log_path=tmp_path / "a.jsonl")
     with pytest.raises(Refused, match="cut-off"):
         p.fetch(CIK, TARGET, "q.htm")       # accepted exactly at the cut-off: not visible
-    p2 = PointInTimeEdgar("2026-08-12T16:05:24", client=FakeSec(), log_path=tmp_path / "b.jsonl")
+    p2 = PointInTimeEdgar("2026-08-12T16:05:24", client=FakeSec(), log_path=tmp_path / "b.jsonl", margin_hours=0)
     assert TARGET in [r["accession"] for r in p2.timeline(CIK, "2026-01-01", "2026-12-31")]
+
+
+def test_same_day_margin_hides_filings_close_to_the_cutoff(tmp_path):
+    """P29: EDGAR moved some acceptance times by 4-5 h. A filing on the cut-off day must be at least
+    `margin_hours` earlier to count as before; earlier days are unaffected."""
+    p = PointInTimeEdgar("2026-08-12T19:00:00", client=FakeSec(), log_path=tmp_path / "a.jsonl")
+    accs = [r["accession"] for r in p.timeline(CIK, "2026-01-01", "2026-12-31")]
+    assert TARGET not in accs and BEFORE in accs          # same day, 3 h before: hidden; May: visible
+    with pytest.raises(Refused, match="too close"):
+        p.fetch(CIK, TARGET, "q.htm")
+    p6 = PointInTimeEdgar("2026-08-12T22:00:00", client=FakeSec(), log_path=tmp_path / "b.jsonl")
+    assert TARGET in [r["accession"] for r in p6.timeline(CIK, "2026-01-01", "2026-12-31")]
+
+
+def test_for_episode_pins_the_cutoff_to_the_target_report(tmp_path):
+    p = PointInTimeEdgar.for_episode(CIK, TARGET, client=FakeSec(), log_path=tmp_path / "a.jsonl")
+    assert p.as_of == "2026-08-12T16:05:23" and p.cutoff_date == "2026-08-12" and TARGET in p.exclude
+    assert [r["accession"] for r in p.timeline(CIK, "2020-01-01", "2026-12-31")] == [OLD, BEFORE]
+    with pytest.raises(Refused, match="not in this company"):
+        PointInTimeEdgar.for_episode(CIK, "0000000001-26-999999", client=FakeSec(), log_path=tmp_path / "b.jsonl")
 
 
 def test_fetch_and_exhibits_work_before_the_cutoff(pit):

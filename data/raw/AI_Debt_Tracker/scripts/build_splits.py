@@ -36,7 +36,7 @@ from pathlib import Path
 from ai_debt_tracker.edgar import load_filings
 from ai_debt_tracker.eval.answer_key import AnswerKey, grading_level
 from ai_debt_tracker.sec import SecClient
-from review_universe import DEV, TEST, extracted_periods, gate_status, nearest_quarter_end
+from review_universe import DEV, TEST, extracted_periods, gate_status, guard_frozen, nearest_quarter_end
 
 ROOT = Path(__file__).resolve().parents[1]
 COLS = ["episode_id", "split", "universe", "company", "cik", "group", "quarter_end",
@@ -50,6 +50,7 @@ def members(g: dict) -> int:
 
 
 def main() -> int:
+    guard_frozen("manifests/dev.csv and test.csv")
     universe = json.loads((ROOT / "universe_v1.json").read_text(encoding="utf-8"))
     with open(ROOT / "manifests" / "generalisation.csv", encoding="utf-8") as f:
         gen = list(csv.DictReader(line for line in f if not line.startswith("#")))

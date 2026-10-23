@@ -1,0 +1,79 @@
+{
+ "episode": "1045810-2024-12-31",
+ "company": "Nvidia",
+ "report": "10-K 20250131",
+ "level": "L1",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 11-18; total 'Net carrying amount'",
+ "review": "Rows 11-18 of the long-term debt table (remaining term, effective rate, Jan 26 2025, Jan 28 2024); the 0.584% 2024 notes show '\u2014' (repaid). Net carrying amount $8,463 m.",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.2,
+   "maturity_year": 2026,
+   "principal": 1000000000.0,
+   "amount_usd": 1000000000.0,
+   "row": "3.20 % Notes Due 2026 | 1.6 | 3.31 % | 1,000 | 1,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 1.55,
+   "maturity_year": 2028,
+   "principal": 1250000000.0,
+   "amount_usd": 1250000000.0,
+   "row": "1.55 % Notes Due 2028 | 3.4 | 1.64 % | 1,250 | 1,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.85,
+   "maturity_year": 2030,
+   "principal": 1500000000.0,
+   "amount_usd": 1500000000.0,
+   "row": "2.85 % Notes Due 2030 | 5.2 | 2.93 % | 1,500 | 1,500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.0,
+   "maturity_year": 2031,
+   "principal": 1250000000.0,
+   "amount_usd": 1250000000.0,
+   "row": "2.00 % Notes Due 2031 | 6.4 | 2.09 % | 1,250 | 1,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.5,
+   "maturity_year": 2040,
+   "principal": 1000000000.0,
+   "amount_usd": 1000000000.0,
+   "row": "3.50 % Notes Due 2040 | 15.2 | 3.54 % | 1,000 | 1,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.5,
+   "maturity_year": 2050,
+   "principal": 2000000000.0,
+   "amount_usd": 2000000000.0,
+   "row": "3.50 % Notes Due 2050 | 25.2 | 3.54 % | 2,000 | 2,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.7,
+   "maturity_year": 2060,
+   "principal": 500000000.0,
+   "amount_usd": 500000000.0,
+   "row": "3.70 % Notes Due 2060 | 35.2 | 3.73 % | 500 | 500"
+  }
+ ],
+ "totals": {
+  "total_debt": 8463000000.0
+ }
+}

@@ -96,3 +96,37 @@ def test_typo_at_the_edge_of_a_number_run():
 def test_year_glued_to_coupon(name, rate, year):
     p = parse_member(name, as_of_year=2026)
     assert (p.rate, p.maturity_year) == (rate, year)
+
+
+@pytest.mark.parametrize("name,label,period", [
+    ("November2025Debt", "November 2025 Debt", "2025-11"),
+    ("January2021SeniorNotesTranche", None, "2021-01"),
+    ("A2026USDollarNotes", None, "2026"),
+    ("IssuanceOfLongTermDebtEight", None, None),
+    ("AugustTwoThousandTwentyFiveNotesMember", None, "2025-08"),
+])
+def test_issue_period(name, label, period):
+    from ai_debt_tracker.ledger.parsers import issue_period
+    assert issue_period(name, label) == period
+
+
+@pytest.mark.parametrize("name,label", [
+    ("A4.319SeniorNoteDue2028And4.212SeniorNoteDue2026Member", None),
+    ("SeniorNotesDue2027And2028", "Senior Notes due 2027 and 2028"),
+])
+def test_combined_members_are_deals_not_bonds(name, label):
+    p = parse_member(name, label, as_of_year=2026)
+    assert p.offering and p.rate is None and p.maturity_year is None and p.key() is None
+
+
+def test_month_year_on_or_after_the_report_is_a_maturity():
+    """Broadcom's assumed VMware notes are named by due date; Meta's offerings by issue date."""
+    p = parse_member("November2025SeniorNotes", None, as_of_year=2025, as_of_month=202505)
+    assert p.maturity_year == 2025 and not p.offering
+    assert parse_member("May2025SeniorNotes", None, as_of_year=2025, as_of_month=202505).maturity_year == 2025
+    assert parse_member("November2024Debt", None, as_of_year=2025, as_of_month=202505).offering
+
+
+def test_misspelt_notes_member_is_still_a_bond():
+    p = parse_member("May2027SeniorNots", None, as_of_year=2025, as_of_month=202505)
+    assert p.kind == "notes" and p.maturity_year == 2027

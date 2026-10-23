@@ -1,0 +1,62 @@
+{
+ "episode": "1769628-2025-06-30",
+ "company": "CoreWeave",
+ "report": "10-Q 20250630",
+ "level": "L1",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "debt table read from the HTML",
+ "review": "The debt table (in thousands): one bond \u2014 the 9.250% senior notes due June 2030 (the % column printed beside it is the effective rate), $2.0 bn issued May 2025 \u2014 plus three facilities and OEM financing. Total debt, net $11,051.5 m; non-current $7,423.8 m, so current $3,627.7 m.",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 9.25,
+   "maturity_year": 2030,
+   "principal": 2000000000.0,
+   "amount_usd": 2000000000.0,
+   "row": "2030 Senior Notes | June 2030 | 10 % | 2,000,000 | \u2014"
+  },
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": null,
+   "maturity_year": 2028,
+   "principal": 1782500000.0,
+   "amount_usd": 1782500000.0,
+   "row": "DDTL 1.0 Facility | March 2028 | 15 % | 1,782,500"
+  },
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": null,
+   "maturity_year": 2029,
+   "principal": 4953967000.0,
+   "amount_usd": 4953967000.0,
+   "row": "DDTL 2.0 Facility | May 2029 | 11 % | 4,953,967"
+  },
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": null,
+   "maturity_year": 2027,
+   "principal": 450000000.0,
+   "amount_usd": 450000000.0,
+   "row": "Revolving Credit Facility | June 2027 | 7 % | 450,000"
+  },
+  {
+   "kind": "other",
+   "currency": "USD",
+   "coupon_pct": null,
+   "maturity_year": 2028,
+   "principal": 1728388000.0,
+   "amount_usd": 1728388000.0,
+   "row": "OEM Financing Arrangements | March 2026 - May 2028 | 1,728,388"
+  }
+ ],
+ "totals": {
+  "total_debt": 11051501000.0,
+  "current": 3627664000.0
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "episode": "723125-2025-06-30",
+ "company": "Micron",
+ "report": "10-Q 20250531",
+ "level": "L1",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 16-29",
+ "review": "Rows 16-29 (stated rate, effective rate, current, long-term, total; then the prior period). Amounts are net carrying amounts, within 1% of face. The 2029 Term Loan A is a loan, not a bond. Two notes share 5.875% / 2033 (A due February, B due September) and differ in amount.",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.375,
+   "maturity_year": 2028,
+   "principal": 598000000.0,
+   "amount_usd": 598000000.0,
+   "row": "2028 Notes | 5.375 | 5.52 | \u2014 | 598 | 598 | \u2014 | 597 | 597"
+  },
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": 5.455,
+   "maturity_year": 2029,
+   "principal": 1681000000.0,
+   "amount_usd": 1681000000.0,
+   "row": "2029 Term Loan A | 5.455 | 5.49 | \u2014 | 1,681 | 1,681 | \u2014 | \u2014 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.327,
+   "maturity_year": 2029,
+   "principal": 698000000.0,
+   "amount_usd": 698000000.0,
+   "row": "2029 A Notes | 5.327 | 5.40 | \u2014 | 698 | 698 | \u2014 | 698 | 698"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 6.75,
+   "maturity_year": 2029,
+   "principal": 1260000000.0,
+   "amount_usd": 1260000000.0,
+   "row": "2029 B Notes | 6.750 | 6.54 | \u2014 | 1,260 | 1,260 | \u2014 | 1,261 | 1,261"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.663,
+   "maturity_year": 2030,
+   "principal": 847000000.0,
+   "amount_usd": 847000000.0,
+   "row": "2030 Notes | 4.663 | 4.73 | \u2014 | 847 | 847 | \u2014 | 847 | 847"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.3,
+   "maturity_year": 2031,
+   "principal": 994000000.0,
+   "amount_usd": 994000000.0,
+   "row": "2031 Notes | 5.300 | 5.41 | \u2014 | 994 | 994 | \u2014 | 994 | 994"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.703,
+   "maturity_year": 2032,
+   "principal": 996000000.0,
+   "amount_usd": 996000000.0,
+   "row": "2032 Green Bonds | 2.703 | 2.77 | \u2014 | 996 | 996 | \u2014 | 996 | 996"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.65,
+   "maturity_year": 2032,
+   "principal": 496000000.0,
+   "amount_usd": 496000000.0,
+   "row": "2032 Notes | 5.650 | 5.79 | \u2014 | 496 | 496 | \u2014 | \u2014 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.875,
+   "maturity_year": 2033,
+   "principal": 746000000.0,
+   "amount_usd": 746000000.0,
+   "row": "2033 A Notes | 5.875 | 5.96 | \u2014 | 746 | 746 | \u2014 | 745 | 745"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.875,
+   "maturity_year": 2033,
+   "principal": 892000000.0,
+   "amount_usd": 892000000.0,
+   "row": "2033 B Notes | 5.875 | 6.01 | \u2014 | 892 | 892 | \u2014 | 891 | 891"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.8,
+   "maturity_year": 2035,
+   "principal": 992000000.0,
+   "amount_usd": 992000000.0,
+   "row": "2035 A Notes | 5.800 | 5.90 | \u2014 | 992 | 992 | \u2014 | \u2014 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 6.05,
+   "maturity_year": 2035,
+   "principal": 1241000000.0,
+   "amount_usd": 1241000000.0,
+   "row": "2035 B Notes | 6.050 | 6.14 | \u2014 | 1,241 | 1,241 | \u2014 | \u2014 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.366,
+   "maturity_year": 2041,
+   "principal": 497000000.0,
+   "amount_usd": 497000000.0,
+   "row": "2041 Notes | 3.366 | 3.41 | \u2014 | 497 | 497 | \u2014 | 497 | 497"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.477,
+   "maturity_year": 2051,
+   "principal": 496000000.0,
+   "amount_usd": 496000000.0,
+   "row": "2051 Notes | 3.477 | 3.52 | \u2014 | 496 | 496 | \u2014 | 496 | 496"
+  }
+ ],
+ "totals": {}
+}

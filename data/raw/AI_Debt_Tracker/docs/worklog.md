@@ -4,6 +4,58 @@ Newest first.
 
 ---
 
+## 2026-10-23 — Week 2: the answer key, the grader and the do-nothing baseline
+
+**Housekeeping first.** Weeks 0–1 were committed; their three RUN_LOG entries had not reached
+`logs/RUN_LOG.md`, so they were appended and `run_log_pending.md` and `universe_draft.json` moved to
+`docs/archive/` (the scripts now read the draft from there).
+
+**The answer key, for everyone.** `scripts/build_answer_key.py` builds a record for every 10-Q/10-K of
+all 100 companies: **1,093 reports**, Jan 2024 – Sep 2026 (the 2024 Q1–Q2 notes files were added so
+annual-only itemisers have a prior 10-K), every episode finding both its records. Anomalies are counted
+in `docs/answer_key.md`, not hidden.
+
+**The grader** (`eval/grader.py`): L1 per bond (currency, coupon ±0.01 pp, maturity year; principal
+within 1% of face or 2% of carrying; one-to-one optimal assignment), L2 per offering (amounts within
+1%, issue periods compatible, ledger bonds summed by issue period), L3 totals (within 2%), change
+detection, and 95% bootstrap intervals. The suite grew from 65 to 95 tests.
+
+**B0 on dev** (`docs/baseline_b0.md`): bond recall **90.7%**, precision 90.3%, principal 99.2% — and
+**0 of 36 new bonds** caught, 3 of 16 removals, 18 of 47 L1 episodes exact. Two things had made it look
+worse than it is: the notes data started after Intel's and Oracle's previous 10-Ks, and B0 refused
+Intel's FY2023 10-K for itemising 79% (bar 80%). Fixed by adding the earlier data and letting B0 walk
+back to the best-itemised recent report. L2 recall is 76.2% — the first figure, 91.7%, compared static
+original deal sizes and was flattering.
+
+**The hand-check found real bugs.** Ten dev reports' *printed* debt tables were transcribed (a model
+judgment, every row reviewed) and graded against the key. First pass: **8 of 10**. Each disagreement
+was a defect on our side: Oracle's repaid notes resurrected by their face tags (P30), AMD's two-bond
+member read as a duplicate bond (P31), Broadcom's assumed VMware notes dropped with their
+`BusinessAcquisition` axis (P32) and named by due date or misspelt `SeniorNots` (P33), an Equinix Swiss
+franc note the XBRL calls dollars (P34), and Microsoft's offerings measured on original deal size.
+After the fixes: **10 of 10**. Because those ten found the fixes, three more were held out, chosen
+before reading and graded once: **2 of 3** — Digital Realty's own tagging (a face-only repaid note, a
+euro-tagged dollar note, translated face amounts) is P35–P37, left open on purpose for Week 3.
+
+**Frozen means frozen.** A rerun of the selection scripts with the fixed parser swapped Molson Coors
+for Post Holdings in the frozen generalisation set. The frozen files were restored from the commit,
+the three scripts now refuse to overwrite a frozen artifact without `--refreeze`, and
+`docs/answer_key.md` lists the 5 of 495 episode levels today's rules would grade differently.
+
+**EDGAR's clock moved.** The same rerun showed 43 of 495 episode cut-offs shifted by 4–5 hours in
+EDGAR's own index since 18 October (9 filers, Eastern → UTC). `edgar_pit` now pins the cut-off to the
+target report (`for_episode`, `EDGAR_PIT_TARGET`) and keeps a 5-hour margin on the cut-off day (P29).
+
+**Changes explained, properly** (`docs/changes_dev.md`): with the grader's change list, `edgar_pit`'s
+view at each cut-off, and exits counted only when named next to the bond, **30 of 32** searchable new
+bonds and **5 of 6** early removals were announced. The first run under-counted four because it searched
+for rounded coupons (3.62% for 3.625%); fixed.
+
+**Gate (P4):** Om Mali accepted the hand-check as the Week 2 check the same day
+(`manifests/week2_gate.json`). Week 3 starts with P35–P37 and a fresh held-out check. Git is Om's.
+
+---
+
 ## 2026-10-18 (later) — Week 1 gate cleared on the basis of Claude's review
 
 Om asked Claude to do the review on Om's behalf, since it needs financial reading Om does not

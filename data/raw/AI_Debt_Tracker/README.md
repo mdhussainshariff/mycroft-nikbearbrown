@@ -11,9 +11,15 @@ runs on local models only (Ollama on an 8 GB laptop GPU) — no paid APIs.
 
 ## Status
 
-**Week 1 complete — gate cleared 2026-10-18.** The universe, the generalisation set, the dev/test
-episodes and the model choice (`qwen3:4b`) are frozen. Om Mali accepted Claude's review
-([`docs/week1_review.md`](docs/week1_review.md)), and the gate record is `manifests/week1_gate.json`.
+**Week 2 complete — gate cleared 2026-10-23.** The answer key covers all 100 companies, the grader
+scores at three levels, and the do-nothing baseline is measured: it finds 90.7% of bonds but none of
+the 36 new ones. The grader agrees with 10 of 10 hand-checked printed debt tables (2 of 3 held out),
+accepted by Om Mali (`manifests/week2_gate.json`). Week 1 is frozen (`manifests/week1_gate.json`).
+
+- [`docs/answer_key.md`](docs/answer_key.md) — the answer key for every report, with its anomalies.
+- [`docs/baseline_b0.md`](docs/baseline_b0.md) — baseline B0 (carry forward) scored on dev.
+- [`docs/handcheck.md`](docs/handcheck.md) — the grader against printed debt tables; the Week 2 check.
+- [`docs/changes_dev.md`](docs/changes_dev.md) — which bond changes were announced in a filing.
 
 - [`DESIGN.md`](DESIGN.md) — data sources, problems and fixes (P1–P29), agents, MCP servers,
   models, evaluation, ten-week plan.
@@ -64,8 +70,8 @@ $env:OLLAMA_MODELS = "<your models directory>"; ollama serve
 
 ```powershell
 $env:UV_PROJECT_ENVIRONMENT = "<your venv directory>"; $env:UV_CACHE_DIR = "<your uv cache>"
-uv sync                      # Python 3.11+, installs mcp (<2) and pytest
-uv run pytest                # 65 offline tests: parser, matcher, answer key, edgar_pit's cut-off rule
+uv sync                      # Python 3.11+, installs mcp (<2), scipy and pytest
+uv run pytest                # 95 offline tests: parser, matcher, answer key, grader, B0, edgar_pit's cut-off rule
 ```
 
 ## Reproducing Week 1
@@ -87,12 +93,27 @@ uv run python scripts/bakeoff.py run qwen3:4b
 uv run python scripts/bakeoff.py report                         # -> docs/bakeoff.md
 ```
 
-**The `edgar_pit` MCP server** (point-in-time EDGAR for the agent): one process per episode,
-configured by the environment. It refuses the target report and anything accepted at or after
-the cut-off, and logs every call to `$AI_DEBT_DATA/logs/edgar_pit_access.jsonl`.
+The frozen steps (`review_universe.py`, `select_generalisation.py`, `build_splits.py`) now refuse to
+overwrite their outputs; `--refreeze` exists only for use with a new, logged gate decision.
+
+## Reproducing Week 2
 
 ```powershell
-$env:EDGAR_PIT_AS_OF = "<cutoff from manifests/*.csv>"; $env:EDGAR_PIT_EXCLUDE = "<target_adsh>"
+$env:PYTHONPATH = "scripts"
+uv run python -m ai_debt_tracker.eval.fsn 2024_01 2024_06 2     # earlier notes data (prior 10-Ks)
+uv run python scripts/build_answer_key.py                       # -> docs/answer_key.md
+uv run python scripts/score_baseline.py dev                     # -> docs/baseline_b0.md
+uv run python scripts/handcheck.py grade                        # -> docs/handcheck.md (transcriptions in manifests/handcheck/)
+uv run python scripts/explain_changes.py                        # -> docs/changes_dev.md
+```
+
+**The `edgar_pit` MCP server** (point-in-time EDGAR for the agent): one process per episode,
+configured by the environment. It refuses the target report and anything accepted after it, and
+logs every call to `$AI_DEBT_DATA/logs/edgar_pit_access.jsonl`. Start it from the episode's target
+report — not from a timestamp, because EDGAR's acceptance times have moved by hours (P29):
+
+```powershell
+$env:EDGAR_PIT_TARGET = "<cik>:<target_adsh>"                   # both columns of manifests/*.csv
 uv run python -m ai_debt_tracker.mcp_servers.edgar_pit          # stdio; tools: timeline, exhibits, fetch
 ```
 

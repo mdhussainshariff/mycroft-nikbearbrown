@@ -185,3 +185,11 @@ def test_bonds_and_offerings_tagged_side_by_side_is_l1():
     from ai_debt_tracker.eval.answer_key import grading_level
     rec = _rec([{"amount_usd": 47e9}, {"amount_usd": 47e9}, {"amount_usd": 90e9, "klass": "offering"}], {"long_term_debt": 100e9})
     assert grading_level(rec)["level"] == "L1"
+
+
+def test_zero_balance_beats_a_face_amount_dated_at_period_end(key):
+    """Oracle: a repaid note keeps its face amount at the period end, with carrying amount 0."""
+    key.num[A].append({"adsh": A, "tag": "DebtInstrumentFaceAmount", "version": "us-gaap/2025", "ddate": "20260630",
+                       "qtrs": "0", "uom": "USD", "dimh": "0xb8", "coreg": "", "value": "2000000000", "dcml": "-6"})
+    i = by_member(key)[0]["Notes1.00Due2026"]
+    assert i.outstanding is False and i.outstanding_from == "zero balance at period end"

@@ -1,0 +1,121 @@
+{
+ "episode": "789019-2025-06-30",
+ "company": "Microsoft",
+ "report": "10-K 20250630",
+ "level": "L2",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "debt table read from the HTML",
+ "review": "The debt table is by issuance year with coupon ranges (no single coupon per row), outstanding face at June 30 2025: 13 issuances, total face $49,206 m. The 2013 euro issuance (\u20ac4.1 bn issued) is printed at its US-dollar value, $2,700 m. Total debt $43,151 m (after $4,864 m premium on debt exchange and discounts); current portion $2,999 m.",
+ "instruments": [
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 520000000.0,
+   "issued": "2009",
+   "amount_usd": 520000000.0,
+   "row": "2009 issuance | 520"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 486000000.0,
+   "issued": "2010",
+   "amount_usd": 486000000.0,
+   "row": "2010 issuance | 486"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 718000000.0,
+   "issued": "2011",
+   "amount_usd": 718000000.0,
+   "row": "2011 issuance | 718"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 454000000.0,
+   "issued": "2012",
+   "amount_usd": 454000000.0,
+   "row": "2012 issuance | 454"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 314000000.0,
+   "issued": "2013",
+   "amount_usd": 314000000.0,
+   "row": "2013 issuance | 314"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 2700000000.0,
+   "issued": "2013",
+   "amount_usd": 2700000000.0,
+   "row": "2013 issuance | 2,700"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 7555000000.0,
+   "issued": "2015",
+   "amount_usd": 7555000000.0,
+   "row": "2015 issuance | 7,555"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 7930000000.0,
+   "issued": "2016",
+   "amount_usd": 7930000000.0,
+   "row": "2016 issuance | 7,930"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 6833000000.0,
+   "issued": "2017",
+   "amount_usd": 6833000000.0,
+   "row": "2017 issuance | 6,833"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 10111000000.0,
+   "issued": "2020",
+   "amount_usd": 10111000000.0,
+   "row": "2020 issuance | 10,111"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 8185000000.0,
+   "issued": "2021",
+   "amount_usd": 8185000000.0,
+   "row": "2021 issuance | 8,185"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 56000000.0,
+   "issued": "2023",
+   "amount_usd": 56000000.0,
+   "row": "2023 issuance | 56"
+  },
+  {
+   "kind": "offering",
+   "currency": "USD",
+   "principal": 3344000000.0,
+   "issued": "2024",
+   "amount_usd": 3344000000.0,
+   "row": "2024 issuance | 3,344"
+  }
+ ],
+ "totals": {
+  "total_debt": 43151000000.0,
+  "current": 2999000000.0
+ }
+}

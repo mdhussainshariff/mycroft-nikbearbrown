@@ -32,7 +32,7 @@ from pathlib import Path
 
 from ai_debt_tracker.eval.answer_key import AnswerKey, grading_level
 from ai_debt_tracker.eval.fsn import month_dir, read_tsv
-from review_universe import TEST, extracted_periods, gate_status, nearest_quarter_end
+from review_universe import TEST, extracted_periods, gate_status, guard_frozen, nearest_quarter_end
 
 ROOT = Path(__file__).resolve().parents[1]
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 75
@@ -50,6 +50,7 @@ def division(sic: int) -> str:
 
 
 def main() -> int:
+    guard_frozen("manifests/generalisation.csv")
     universe = json.loads((ROOT / "universe_v1.json").read_text(encoding="utf-8"))
     ai = {c["cik"] for c in universe["companies"]} | {s["cik"] for c in universe["companies"] for s in c["issuing_subsidiaries"]}
     periods = extracted_periods()

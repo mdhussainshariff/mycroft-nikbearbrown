@@ -136,7 +136,7 @@ per-bond detail. This was confirmed on 2025 Q1: zero bond-level facts for 17 AI 
 ## 3.2 The AI universe (draft — frozen in week 1)
 
 Twenty-five companies in five groups. CIKs were checked against EDGAR's own company names;
-`universe_draft.json` holds the machine-readable copy.
+`docs/archive/universe_draft.json` holds the machine-readable copy.
 
 | Group | Companies |
 |---|---|
@@ -170,7 +170,7 @@ bond counts — hand-checked in week 1):
 
 | How finely debt is tagged | Companies (latest 10-Q/10-K) | What can be graded |
 |---|---|---|
-| **Each instrument separately** — **21 of 25** | e.g. Microsoft 13, Nvidia 15, Broadcom 64, Super Micro 53, Equinix 41, Vistra 51, CoreWeave 19, Applied Digital 12, TeraWulf 11, Cipher Mining 7, Snowflake 3 (full list in `universe_draft.json`) | Every bond: principal, rate, maturity |
+| **Each instrument separately** — **21 of 25** | e.g. Microsoft 13, Nvidia 15, Broadcom 64, Super Micro 53, Equinix 41, Vistra 51, CoreWeave 19, Applied Digital 12, TeraWulf 11, Cipher Mining 7, Snowflake 3 (full list in `docs/archive/universe_draft.json`) | Every bond: principal, rate, maturity |
 | **Each offering** (all bonds sold on one day grouped together) | Meta — 6 members like `meta:November2025DebtMember`; **Alphabet and Amazon** — many members are offerings like `A2026USDollarNotes` ($20 bn, several tranches), found in the feasibility spike (P18) | Each offering's total and maturities |
 | **Totals only** | Oracle — `orcl:SeniorNotesAndOtherBorrowingsMember` | Total debt, current vs. long-term, maturity buckets |
 
@@ -219,7 +219,15 @@ are still graded per bond. Evidence: [`docs/universe_v1_review.md`](docs/univers
 | P26 | **Subtotal members beside the instruments they sum.** | Week 1: Digital Realty's $16 bn "Unsecured senior notes"; Oracle's $125 bn "Senior Notes And Other Long Term Borrowings". | A member worth ≥ 50% of total debt is an aggregate; members without a maturity never count as itemised bonds. |
 | P27 | **Facts about debt after the period end** sit inside the target report (`SubsequentEventType` axis). | Week 1: CoreWeave's June 2026 10-Q has 3 such facts. | Excluded from the answer key (they describe the next quarter); counted per filing. |
 | P28 | **The notes data is monthly only for the last 12 months**; older periods are quarterly files (`2025q3_notes.zip`). | Week 1: `2024_07_notes.zip` returns 404. | The extractor maps each month to the file that holds it (`eval/fsn.periods_covering`). |
-| P29 | **Two clocks for "accepted".** EDGAR's submissions index and the notes data's `sub.tsv` disagree by hours for the same filing (CoreWeave's June 2026 10-Q: `2026-08-12T03:24:42Z` vs `2026-08-11 19:25`). | Week 1 smoke test of `edgar_pit`. | Episode cut-offs are copied from the submissions index — the same clock `edgar_pit` compares against — never from `sub.tsv`. |
+| P29 | **Two clocks for "accepted".** EDGAR's submissions index and the notes data's `sub.tsv` disagree by hours for the same filing (CoreWeave's June 2026 10-Q: `2026-08-12T03:24:42Z` vs `2026-08-11 19:25`). | Week 1 smoke test of `edgar_pit`. **Week 2: the submissions index itself moved** — between 18 and 23 Oct 2026, 43 of the 495 episode targets (9 filers) shifted by 4–5 h, consistent with Eastern → UTC. | Cut-offs are **pinned to the target report** (`PointInTimeEdgar.for_episode`, `EDGAR_PIT_TARGET`): the target's acceptance time is read from the live index when the server starts, so both sides share one snapshot of one clock; manifest timestamps are for people only. On the cut-off day a filing must also be ≥ 5 h earlier than the target to be visible, so a clock mix can never let a later filing in. |
+| P30 | **Repaid notes keep their face tag.** Oracle tags notes repaid during the year with carrying 0 *and* their original face, dated at the period end. | Week 2 hand-check (Oracle 10-K FY2025). | An explicit zero balance wins; face at period end counts only when no balance is tagged (still unreliable alone — P35). |
+| P31 | **Combined members.** One member names two bonds ("4.319% … Due 2028 And 4.212% … Due 2026"). | Week 2 answer-key anomaly check (AMD coverage 148%). | Members naming several coupons or maturities are deals, not bonds. |
+| P32 | **Acquired debt on a `BusinessAcquisition` axis.** | Week 2 hand-check: Broadcom's 10 assumed VMware notes (56 facts) were dropped. | The axis is descriptive; its facts are kept. |
+| P33 | **Members named by due date**, and misspelt. | Broadcom: `May2025SeniorNotes`, `November2025SeniorNotes`, `May2027SeniorNots`. | A month on or after the report's period end is a maturity; "Nots" reads as notes. |
+| P34 | **A currency the XBRL never states.** A Swiss franc note whose label names no currency and whose face and carrying are both tagged in USD. | Week 2 hand-check (Equinix 10-K). | A key currency is *known* only from the label or a foreign-unit face; otherwise it does not block a match. |
+| P35 | **Face-only "outstanding" is unreliable.** A repaid sterling note with no balance tag, only a face dated at the period end. | Week 2 held-out check (Digital Realty 10-Q). | Open (Week 3): require a balance tag where the report tags balances elsewhere. |
+| P36 | **Filer tagging errors on currency.** A dollar exchangeable note's face tagged in euros. | Same. | Open (Week 3): when face and carrying units disagree, treat the currency as unknown. |
+| P37 | **Translated face amounts.** Euro notes' face tagged as dollar translations, so the key's principal is in another currency from the printed one. | Same (principal 4 of 20 agree). | Open (Week 3): score principal only when the key's currency is known and equals the ledger's. |
 
 ## 3.5 How the data is used
 
@@ -557,6 +565,15 @@ Reported per company group, per grading level, per split, and for agent-start vs
 | **B2** | One `qwen3:8b` call per document, no merging, no checks, no investigators. | The "just ask a model" approach. |
 | **Full** | AI Debt Tracker. | |
 
+*B0 measured in week 2* ([`docs/baseline_b0.md`](docs/baseline_b0.md), dev split, 95% bootstrap intervals):
+**L1 bond recall 90.7%** (87.5–93.5), precision 90.3% (85.9–94.0), principal accuracy 99.2%; 18 of 47
+L1 episodes reproduced exactly. **New bonds caught: 0 of 36; early removals caught: 3 of 16** (by the
+maturity sweep). L2 offering recall 76.2%. The headroom the agent has to win is exactly those
+additions and removals: 30 of the 32 searchable new bonds and 5 of the 6 early removals were announced
+in a filing it could read ([`docs/changes_dev.md`](docs/changes_dev.md)). B0 opens from the last
+report itemised finely enough (it walks back for Intel- and Oracle-style annual-only itemisers) and
+sweeps bonds by maturity year.
+
 ## 9.4 Ablations
 
 | | Change | Question answered |
@@ -657,7 +674,7 @@ Verdict: **go.**
 
 ```
 data/raw/AI_Debt_Tracker/
-  DESIGN.md  README.md  pyproject.toml  uv.lock  universe_draft.json  universe_v1.json
+  DESIGN.md  README.md  pyproject.toml  uv.lock  universe_v1.json   (Week 0 draft in docs/archive/)
   .env.example  .gitignore
   src/ai_debt_tracker/
     config.py  sec.py  edgar.py               # env-only paths; the one door to sec.gov; filing index   [week 1]
@@ -669,14 +686,19 @@ data/raw/AI_Debt_Tracker/
     llm/           ollama_client.py  schemas.py
     signals/       compute.py  contract.py
     eval/          fsn.py  answer_key.py                                                             [week 1]
-                   grader.py  metrics.py  baselines/   # nothing outside eval/ may import eval/ (enforced by a test)
+                   grader.py  baselines/carry_forward.py                                             [week 2]
+                   metrics.py   # nothing outside eval/ may import eval/ (enforced by a test)
   scripts/         probe_debt_filings.py  spike_*.py                                                  [week 0]
                    review_universe.py  select_generalisation.py  build_splits.py
                    load_answer_key.py  f1_matching.py  bakeoff.py                                    [week 1]
+                   build_answer_key.py  score_baseline.py  handcheck.py  explain_changes.py           [week 2]
                    demo.py
-  manifests/       dev.csv  test.csv  generalisation.csv                                             [week 1]
+  manifests/       dev.csv  test.csv  generalisation.csv  week1_gate.json                            [week 1]
+                   handcheck/<episode>.json   (13 transcriptions of printed debt tables)             [week 2]
   docs/            feasibility.md  worklog.md  universe_v1_review.md  answer_key_week1.md
-                   bakeoff.md  bakeoff_set.md                                                        [week 1]
+                   bakeoff.md  bakeoff_set.md  week1_review.md                                       [week 1]
+                   answer_key.md  baseline_b0.md  handcheck.md  changes_dev.md                       [week 2]
+                   archive/   (superseded: universe_draft.json, run_log_pending.md)
                    (later: findings.md, demo.md, mcp_server.md)
   tests/
 ```
@@ -732,5 +754,14 @@ F1 re-run; the model bake-off run. **Week 1 gate cleared** the same day by Om Ma
 of Claude's review ([`docs/week1_review.md`](docs/week1_review.md)): universe, generalisation
 set, splits and the model (`qwen3:4b`) frozen. See [`docs/worklog.md`](docs/worklog.md).
 
-**Before week 2 starts:** create the branch, commit Weeks 0–1, and append
-`docs/run_log_pending.md` to `logs/RUN_LOG.md` (git is Om's).
+*Done in week 2 (23 October 2026):* Weeks 0–1 committed and logged in `logs/RUN_LOG.md`; the answer key
+built for all 100 companies (1,093 reports, Jan 2024 – Sep 2026); the grader (L1/L2/L3, change
+detection, bootstrap intervals); baseline B0 scored on dev; the hand-check — **10 of 10** on the
+calibration set after five answer-key and grader fixes (P30–P34), **2 of 3** on a held-out set (P35–P37
+open); changes explained with a proper removal method; `edgar_pit` cut-offs pinned to the target report
+after EDGAR's clock moved (P29). See [`docs/worklog.md`](docs/worklog.md).
+
+**Week 2 gate cleared** by Om Mali on 23 October 2026: the hand-check
+([`docs/handcheck.md`](docs/handcheck.md)) accepted as the week 2 check (`manifests/week2_gate.json`).
+
+**Week 3 begins with** P35–P37 and a fresh held-out check, then the `docs` server and triage (§11).

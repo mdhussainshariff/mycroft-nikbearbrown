@@ -3,8 +3,11 @@
 A thin binding of `edgar_pit_core.PointInTimeEdgar` to MCP tool names; the rule lives in the core.
 Configured from the environment when the process starts, so one process serves one episode:
 
-    EDGAR_PIT_AS_OF     cut-off, EDGAR acceptance time, exclusive (required; "now" for live mode)
-    EDGAR_PIT_EXCLUDE   comma-separated accessions to withhold (the episode's target report)
+    EDGAR_PIT_TARGET    "<cik>:<accession>" of the episode's target report — the cut-off is that
+                        report's acceptance time in the live index, and it is withheld (backtests;
+                        preferred, P29)
+    EDGAR_PIT_AS_OF     or: a cut-off timestamp, exclusive ("now" for live mode)
+    EDGAR_PIT_EXCLUDE   with AS_OF: comma-separated accessions to withhold
 
 Run:  python -m ai_debt_tracker.mcp_servers.edgar_pit
 """
@@ -20,9 +23,13 @@ from .edgar_pit_core import DEFAULT_MAX_CHARS, PointInTimeEdgar, Refused
 
 
 def _make() -> PointInTimeEdgar:
+    target = os.environ.get("EDGAR_PIT_TARGET", "").strip()
+    if target:
+        cik, accession = target.split(":", 1)
+        return PointInTimeEdgar.for_episode(int(cik), accession.strip())
     as_of = os.environ.get("EDGAR_PIT_AS_OF", "").strip()
     if not as_of:
-        raise SystemExit("EDGAR_PIT_AS_OF is required: the cut-off this server enforces (or 'now' for live mode)")
+        raise SystemExit("set EDGAR_PIT_TARGET (<cik>:<target accession>) or EDGAR_PIT_AS_OF (a cut-off, or 'now')")
     if as_of == "now":
         as_of = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     exclude = {a.strip() for a in os.environ.get("EDGAR_PIT_EXCLUDE", "").split(",") if a.strip()}

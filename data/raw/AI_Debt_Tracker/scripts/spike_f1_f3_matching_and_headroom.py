@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(os.environ.get("AI_DEBT_DATA", ROOT / "data")) / "spike"
 CACHE = HERE / "fsn"
 CACHE.mkdir(parents=True, exist_ok=True)
-UNIVERSE = json.loads((ROOT / "universe_draft.json").read_text())["companies"]
+UNIVERSE = json.loads((ROOT / "docs" / "archive" / "universe_draft.json").read_text())["companies"]
 L1 = [c for c in UNIVERSE if c["grading_level"] == "L1"]
 BALANCE_TAGS = {
     "LongTermDebt", "DebtInstrumentCarryingAmount", "LongTermDebtGross", "LongTermDebtNoncurrent",

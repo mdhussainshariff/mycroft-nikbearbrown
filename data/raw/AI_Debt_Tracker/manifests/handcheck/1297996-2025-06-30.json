@@ -1,0 +1,204 @@
+{
+ "episode": "1297996-2025-06-30",
+ "company": "Digital Realty",
+ "report": "10-Q 20250630",
+ "level": "L1",
+ "status": "reviewed",
+ "holdout": true,
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 4-25",
+ "review": "Rows 4-25 of the senior notes table (in thousands): principal in the borrowed currency, its US-dollar amount, maturity date, balance at Jun 30 2025 and Dec 31 2024. The \u00a3400 m 4.250% 2025 notes show '\u2014' (repaid in January); the \u20ac650 m 0.625% notes were still outstanding at Jun 30 (paid July 15). Euro notes identified as rows whose principal differs from its dollar amount (the \u20ac cell is stripped in extraction).",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 0.625,
+   "maturity_year": 2025,
+   "principal": 650000000.0,
+   "amount_usd": 766155000.0,
+   "row": "0.625 % notes due 2025 (2) | \u200b | 650,000 | \u200b | 720,980 | \u200b | Jul 15, 2025 | \u200b | \u200b | 766,155 | \u200b | \u200b | 673,010"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 2.5,
+   "maturity_year": 2026,
+   "principal": 1075000000.0,
+   "amount_usd": 1267103000.0,
+   "row": "2.500 % notes due 2026 | \u200b | 1,075,000 | \u200b | 1,224,640 | \u200b | Jan 16, 2026 | \u200b | \u200b | 1,267,103 | \u200b | \u200b | 1,113,055"
+  },
+  {
+   "kind": "bond",
+   "currency": "CHF",
+   "coupon_pct": 0.2,
+   "maturity_year": 2026,
+   "principal": 275000000.0,
+   "amount_usd": 346768000.0,
+   "row": "0.200 % notes due 2026 | \u200b | CHF | 275,000 | \u200b | 298,404 | \u200b | Dec 15, 2026 | \u200b | \u200b | 346,768 | \u200b | \u200b | 302,987"
+  },
+  {
+   "kind": "bond",
+   "currency": "CHF",
+   "coupon_pct": 1.7,
+   "maturity_year": 2027,
+   "principal": 150000000.0,
+   "amount_usd": 189146000.0,
+   "row": "1.700 % notes due 2027 | \u200b | CHF | 150,000 | \u200b | 162,465 | \u200b | Mar 30, 2027 | \u200b | \u200b | 189,146 | \u200b | \u200b | 165,265"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.7,
+   "maturity_year": 2027,
+   "principal": 1000000000.0,
+   "amount_usd": 1000000000.0,
+   "row": "3.700 % notes due 2027 (3) | \u200b | 1,000,000 | \u200b | 1,000,000 | \u200b | Aug 15, 2027 | \u200b | \u200b | 1,000,000 | \u200b | \u200b | 1,000,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.55,
+   "maturity_year": 2028,
+   "principal": 900000000.0,
+   "amount_usd": 900000000.0,
+   "row": "5.550 % notes due 2028 (3) | \u200b | 900,000 | \u200b | 900,000 | \u200b | Jan 15, 2028 | \u200b | \u200b | 900,000 | \u200b | \u200b | 900,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 1.125,
+   "maturity_year": 2028,
+   "principal": 500000000.0,
+   "amount_usd": 589350000.0,
+   "row": "1.125 % notes due 2028 | \u200b | 500,000 | \u200b | 548,550 | \u200b | Apr 09, 2028 | \u200b | \u200b | 589,350 | \u200b | \u200b | 517,700"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.45,
+   "maturity_year": 2028,
+   "principal": 650000000.0,
+   "amount_usd": 650000000.0,
+   "row": "4.450 % notes due 2028 | \u200b | 650,000 | \u200b | 650,000 | \u200b | Jul 15, 2028 | \u200b | \u200b | 650,000 | \u200b | \u200b | 650,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "CHF",
+   "coupon_pct": 0.55,
+   "maturity_year": 2029,
+   "principal": 270000000.0,
+   "amount_usd": 340463000.0,
+   "row": "0.550 % notes due 2029 | \u200b | CHF | 270,000 | \u200b | 292,478 | \u200b | Apr 16, 2029 | \u200b | \u200b | 340,463 | \u200b | \u200b | 297,478"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.6,
+   "maturity_year": 2029,
+   "principal": 900000000.0,
+   "amount_usd": 900000000.0,
+   "row": "3.600 % notes due 2029 | \u200b | 900,000 | \u200b | 900,000 | \u200b | Jul 01, 2029 | \u200b | \u200b | 900,000 | \u200b | \u200b | 900,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "GBP",
+   "coupon_pct": 3.3,
+   "maturity_year": 2029,
+   "principal": 350000000.0,
+   "amount_usd": 480620000.0,
+   "row": "3.300 % notes due 2029 | \u200b | \u00a3 | 350,000 | \u200b | 454,895 | \u200b | Jul 19, 2029 | \u200b | \u200b | 480,620 | \u200b | \u200b | 438,060"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 1.875,
+   "maturity_year": 2029,
+   "principal": 1150000000.0,
+   "amount_usd": 1150000000.0,
+   "row": "1.875 % notes due 2029 (3) | \u200b | 1,150,000 | \u200b | 1,150,000 | \u200b | Nov 15, 2029 | \u200b | \u200b | 1,150,000 | \u200b | \u200b | 1,150,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 1.5,
+   "maturity_year": 2030,
+   "principal": 750000000.0,
+   "amount_usd": 884025000.0,
+   "row": "1.500 % notes due 2030 | \u200b | 750,000 | \u200b | 831,900 | \u200b | Mar 15, 2030 | \u200b | \u200b | 884,025 | \u200b | \u200b | 776,550"
+  },
+  {
+   "kind": "bond",
+   "currency": "GBP",
+   "coupon_pct": 3.75,
+   "maturity_year": 2030,
+   "principal": 550000000.0,
+   "amount_usd": 755260000.0,
+   "row": "3.750 % notes due 2030 | \u200b | \u00a3 | 550,000 | \u200b | 719,825 | \u200b | Oct 17, 2030 | \u200b | \u200b | 755,260 | \u200b | \u200b | 688,380"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 1.25,
+   "maturity_year": 2031,
+   "principal": 500000000.0,
+   "amount_usd": 589350000.0,
+   "row": "1.250 % notes due 2031 | \u200b | 500,000 | \u200b | 560,950 | \u200b | Feb 01, 2031 | \u200b | \u200b | 589,350 | \u200b | \u200b | 517,700"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 0.625,
+   "maturity_year": 2031,
+   "principal": 1000000000.0,
+   "amount_usd": 1178700000.0,
+   "row": "0.625 % notes due 2031 | \u200b | 1,000,000 | \u200b | 1,220,700 | \u200b | Jul 15, 2031 | \u200b | \u200b | 1,178,700 | \u200b | \u200b | 1,035,400"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 1.0,
+   "maturity_year": 2032,
+   "principal": 750000000.0,
+   "amount_usd": 884025000.0,
+   "row": "1.000 % notes due 2032 | \u200b | 750,000 | \u200b | 874,500 | \u200b | Jan 15, 2032 | \u200b | \u200b | 884,025 | \u200b | \u200b | 776,550"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 1.375,
+   "maturity_year": 2032,
+   "principal": 750000000.0,
+   "amount_usd": 884025000.0,
+   "row": "1.375 % notes due 2032 | \u200b | 750,000 | \u200b | 849,375 | \u200b | Jul 18, 2032 | \u200b | \u200b | 884,025 | \u200b | \u200b | 776,550"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 3.875,
+   "maturity_year": 2033,
+   "principal": 850000000.0,
+   "amount_usd": 1001895000.0,
+   "row": "3.875 % notes due 2033 | \u200b | 850,000 | \u200b | 941,375 | \u200b | Sep 13, 2033 | \u200b | \u200b | 1,001,895 | \u200b | \u200b | 880,090"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 3.875,
+   "maturity_year": 2034,
+   "principal": 850000000.0,
+   "amount_usd": 1001895000.0,
+   "row": "3.875 % notes due 2034 | \u200b | 850,000 | \u200b | 991,015 | \u200b | Jul 15, 2034 | \u200b | \u200b | 1,001,895 | \u200b | \u200b | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "EUR",
+   "coupon_pct": 3.875,
+   "maturity_year": 2035,
+   "principal": 850000000.0,
+   "amount_usd": 1001895000.0,
+   "row": "3.875% notes due 2035 | \u200b | 850,000 | \u200b | 876,180 | \u200b | Mar 15, 2035 | \u200b | \u200b | 1,001,895 | \u200b | \u200b | \u2014"
+  }
+ ],
+ "totals": {}
+}

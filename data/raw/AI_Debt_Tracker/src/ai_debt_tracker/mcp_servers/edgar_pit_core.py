@@ -14,10 +14,18 @@ tested without a server:
 * Every call, allowed or refused, is appended to a JSONL access log, so a backtest can prove
   afterwards what the agent did and did not read.
 
-Times: cut-offs are compared with EDGAR's `acceptanceDateTime` exactly as EDGAR writes it, as
-`YYYY-MM-DDTHH:MM:SS` strings, never converted between time zones. An episode's cut-off is copied
-from the target report's own `acceptanceDateTime`, so both sides are always in the same clock
-(CoreWeave's June 2026 10-Q reads `2026-08-12T03:24:42.000Z`; which zone that is does not matter).
+Times (P29). EDGAR's `acceptanceDateTime` is not a stable clock: between 18 and 23 October 2026
+the submissions index moved 43 of the 495 episode targets (9 filers) by 4–5 hours, consistent with
+a switch from US Eastern time to UTC for some filers. Two rules make the cut-off immune to that:
+
+* **Pin the cut-off to the target report, not to a timestamp.** `for_episode(cik, target)` reads
+  the target's acceptance time from the live index when the server starts, so the cut-off and the
+  filings it is compared with always come from the same snapshot of the same clock. A timestamp
+  written in a manifest is kept for people to read, never used to enforce.
+* **A safety margin on the cut-off day.** A filing from an earlier filing date is visible; a
+  filing dated the same day as the cut-off is visible only if accepted at least `margin_hours`
+  (default 5, the largest shift seen) before it. If one filer's filings mix two clocks, nothing
+  accepted after the target can slip in; the cost is hiding a same-day filing now and then.
 """
 
 from __future__ import annotations
@@ -27,7 +35,7 @@ import json
 import re
 import threading
 from dataclasses import asdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from .. import config
@@ -54,17 +62,37 @@ def html_to_text(raw: str) -> str:
 
 class PointInTimeEdgar:
     def __init__(self, as_of: str, exclude: set[str] | None = None, client: SecClient | None = None,
-                 log_path: Path | None = None):
+                 log_path: Path | None = None, cutoff_date: str | None = None, margin_hours: float = 5.0):
         self.as_of = normalise_time(as_of)
+        self.cutoff_date = cutoff_date or self.as_of[:10]
+        self.margin_hours = margin_hours
+        self._same_day_limit = (datetime.fromisoformat(self.as_of) - timedelta(hours=margin_hours)).isoformat()
         self.exclude = set(exclude or ())
         self.client = client or SecClient()
         self.log_path = log_path or config.data_dir() / "logs" / "edgar_pit_access.jsonl"
         self._index: dict[int, dict[str, FilingRef]] = {}
         self._lock = threading.Lock()
 
+    @classmethod
+    def for_episode(cls, cik: int, target_accession: str, client: SecClient | None = None,
+                    log_path: Path | None = None, margin_hours: float = 5.0) -> "PointInTimeEdgar":
+        """The cut-off of an episode: the target report's acceptance time in the live index."""
+        client = client or SecClient()
+        refs = load_filings(client, cik)
+        if target_accession not in refs:
+            raise Refused("target report is not in this company's EDGAR index")
+        t = refs[target_accession]
+        pit = cls(t.accepted, {target_accession}, client, log_path, cutoff_date=t.filing_date, margin_hours=margin_hours)
+        pit._index[int(cik)] = refs
+        return pit
+
     # ---- the rule ---------------------------------------------------------------------------
     def visible(self, ref: FilingRef) -> bool:
-        return ref.accepted < self.as_of and ref.accession not in self.exclude
+        if ref.accession in self.exclude or ref.accepted >= self.as_of:
+            return False
+        if ref.filing_date < self.cutoff_date:
+            return True
+        return ref.filing_date == self.cutoff_date and ref.accepted < self._same_day_limit
 
     def _check(self, cik: int, accession: str) -> FilingRef:
         if not ACCESSION.match(accession or ""):
@@ -74,8 +102,10 @@ class PointInTimeEdgar:
             raise Refused("accession is not a filing of this company (or cannot be dated)")
         if accession in self.exclude:
             raise Refused("this filing is withheld for this episode")
-        if ref.accepted >= self.as_of:
+        if ref.accepted >= self.as_of or ref.filing_date > self.cutoff_date:
             raise Refused("filing accepted at or after the cut-off")
+        if not self.visible(ref):
+            raise Refused("filed on the cut-off day too close to the cut-off to be sure it came first")
         return ref
 
     # ---- index of a company's filings -------------------------------------------------------

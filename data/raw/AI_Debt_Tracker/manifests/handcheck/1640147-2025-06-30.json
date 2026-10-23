@@ -1,0 +1,35 @@
+{
+ "episode": "1640147-2025-06-30",
+ "company": "Snowflake",
+ "report": "10-Q 20250731",
+ "level": "L1",
+ "status": "reviewed",
+ "holdout": true,
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 441-442 of the report's tables",
+ "review": "The convertible notes table (principal, unamortized issuance costs, net carrying amount, fair value): $1.15 bn 0% notes due 2027 and 2029. The 0% coupon is the notes' name in the report's text. Net carrying total $2,275.7 m.",
+ "instruments": [
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 0.0,
+   "maturity_year": 2027,
+   "principal": 1150000000.0,
+   "amount_usd": 1150000000.0,
+   "row": "2027 Notes | 1,150,000 | 11,299 | 1,138,701"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 0.0,
+   "maturity_year": 2029,
+   "principal": 1150000000.0,
+   "amount_usd": 1150000000.0,
+   "row": "2029 Notes | 1,150,000 | 13,027 | 1,136,973"
+  }
+ ],
+ "totals": {
+  "total_debt": 2275674000.0
+ }
+}

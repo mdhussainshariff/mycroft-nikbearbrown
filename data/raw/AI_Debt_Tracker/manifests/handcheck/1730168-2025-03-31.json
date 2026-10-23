@@ -1,0 +1,392 @@
+{
+ "episode": "1730168-2025-03-31",
+ "company": "Broadcom",
+ "report": "10-Q 20250430",
+ "level": "L1",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 1-44",
+ "review": "Rows 1-44 (rate, effective rate, current quarter, prior year end); '\u2014' means repaid (3.125% 2025 notes, the 2026 term loan). The 4.489% loan and both SOFR term loans are loans, not bonds. Rows 48+ are the exhibit list.",
+ "instruments": [
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": 4.489,
+   "maturity_year": 2028,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "4.489 % loan due May 2028 | 4.55 | 750 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.8,
+   "maturity_year": 2028,
+   "principal": 1100000000.0,
+   "amount_usd": 1100000000.0,
+   "row": "4.800 % notes due April 2028 | 5.03 | 1,100 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.05,
+   "maturity_year": 2030,
+   "principal": 800000000.0,
+   "amount_usd": 800000000.0,
+   "row": "5.050 % notes due April 2030 | 5.20 | 800 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.2,
+   "maturity_year": 2032,
+   "principal": 1100000000.0,
+   "amount_usd": 1100000000.0,
+   "row": "5.200 % notes due April 2032 | 5.34 | 1,100 | \u2014"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.15,
+   "maturity_year": 2028,
+   "principal": 875000000.0,
+   "amount_usd": 875000000.0,
+   "row": "4.150 % notes due February 2028 | 4.36 | 875 | 875"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.35,
+   "maturity_year": 2030,
+   "principal": 1500000000.0,
+   "amount_usd": 1500000000.0,
+   "row": "4.350 % notes due February 2030 | 4.51 | 1,500 | 1,500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.55,
+   "maturity_year": 2032,
+   "principal": 875000000.0,
+   "amount_usd": 875000000.0,
+   "row": "4.550 % notes due February 2032 | 4.70 | 875 | 875"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.8,
+   "maturity_year": 2034,
+   "principal": 1750000000.0,
+   "amount_usd": 1750000000.0,
+   "row": "4.800 % notes due October 2034 | 4.38 | (a) | 1,750 | 1,750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.05,
+   "maturity_year": 2027,
+   "principal": 1250000000.0,
+   "amount_usd": 1250000000.0,
+   "row": "5.050 % notes due July 2027 | 5.27 | 1,250 | 1,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.05,
+   "maturity_year": 2029,
+   "principal": 2250000000.0,
+   "amount_usd": 2250000000.0,
+   "row": "5.050 % notes due July 2029 | 5.23 | 2,250 | 2,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.15,
+   "maturity_year": 2031,
+   "principal": 1500000000.0,
+   "amount_usd": 1500000000.0,
+   "row": "5.150 % notes due November 2031 | 5.30 | 1,500 | 1,500"
+  },
+  {
+   "kind": "facility",
+   "currency": "USD",
+   "coupon_pct": null,
+   "maturity_year": 2028,
+   "principal": 6000000000.0,
+   "amount_usd": 6000000000.0,
+   "row": "SOFR plus 1.125 % term loan due November 2028 | 5.45 | 6,000 | 8,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.0,
+   "maturity_year": 2029,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "4.000 % notes due April 2029 | 4.17 | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.15,
+   "maturity_year": 2032,
+   "principal": 1200000000.0,
+   "amount_usd": 1200000000.0,
+   "row": "4.150 % notes due April 2032 | 4.30 | 1,200 | 1,200"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.926,
+   "maturity_year": 2037,
+   "principal": 2500000000.0,
+   "amount_usd": 2500000000.0,
+   "row": "4.926 % notes due May 2037 | 5.33 | 2,500 | 2,500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.137,
+   "maturity_year": 2035,
+   "principal": 3250000000.0,
+   "amount_usd": 3250000000.0,
+   "row": "3.137 % notes due November 2035 | 4.23 | 3,250 | 3,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.187,
+   "maturity_year": 2036,
+   "principal": 2750000000.0,
+   "amount_usd": 2750000000.0,
+   "row": "3.187 % notes due November 2036 | 4.79 | 2,750 | 2,750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.419,
+   "maturity_year": 2033,
+   "principal": 2250000000.0,
+   "amount_usd": 2250000000.0,
+   "row": "3.419 % notes due April 2033 | 4.66 | 2,250 | 2,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.469,
+   "maturity_year": 2034,
+   "principal": 3250000000.0,
+   "amount_usd": 3250000000.0,
+   "row": "3.469 % notes due April 2034 | 4.63 | 3,250 | 3,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 1.95,
+   "maturity_year": 2028,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "1.950 % notes due February 2028 | 2.10 | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.45,
+   "maturity_year": 2031,
+   "principal": 2750000000.0,
+   "amount_usd": 2750000000.0,
+   "row": "2.450 % notes due February 2031 | 2.56 | 2,750 | 2,750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.6,
+   "maturity_year": 2033,
+   "principal": 1750000000.0,
+   "amount_usd": 1750000000.0,
+   "row": "2.600 % notes due February 2033 | 2.70 | 1,750 | 1,750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.5,
+   "maturity_year": 2041,
+   "principal": 3000000000.0,
+   "amount_usd": 3000000000.0,
+   "row": "3.500 % notes due February 2041 | 3.60 | 3,000 | 3,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.75,
+   "maturity_year": 2051,
+   "principal": 1750000000.0,
+   "amount_usd": 1750000000.0,
+   "row": "3.750 % notes due February 2051 | 3.84 | 1,750 | 1,750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.459,
+   "maturity_year": 2026,
+   "principal": 752000000.0,
+   "amount_usd": 752000000.0,
+   "row": "3.459 % notes due September 2026 | 4.19 | 752 | 752"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.11,
+   "maturity_year": 2028,
+   "principal": 1118000000.0,
+   "amount_usd": 1118000000.0,
+   "row": "4.110 % notes due September 2028 | 5.02 | 1,118 | 1,118"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.15,
+   "maturity_year": 2025,
+   "principal": 900000000.0,
+   "amount_usd": 900000000.0,
+   "row": "3.150 % notes due November 2025 | 3.29 | 900 | 900"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.15,
+   "maturity_year": 2030,
+   "principal": 1856000000.0,
+   "amount_usd": 1856000000.0,
+   "row": "4.150 % notes due November 2030 | 4.27 | 1,856 | 1,856"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.3,
+   "maturity_year": 2032,
+   "principal": 2000000000.0,
+   "amount_usd": 2000000000.0,
+   "row": "4.300 % notes due November 2032 | 4.39 | 2,000 | 2,000"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 5.0,
+   "maturity_year": 2030,
+   "principal": 606000000.0,
+   "amount_usd": 606000000.0,
+   "row": "5.000 % notes due April 2030 | 5.18 | 606 | 606"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.75,
+   "maturity_year": 2029,
+   "principal": 1655000000.0,
+   "amount_usd": 1655000000.0,
+   "row": "4.750 % notes due April 2029 | 4.95 | 1,655 | 1,655"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.875,
+   "maturity_year": 2027,
+   "principal": 2922000000.0,
+   "amount_usd": 2922000000.0,
+   "row": "3.875 % notes due January 2027 | 4.02 | 2,922 | 2,922"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.5,
+   "maturity_year": 2028,
+   "principal": 777000000.0,
+   "amount_usd": 777000000.0,
+   "row": "3.500 % notes due January 2028 | 3.60 | 777 | 777"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.5,
+   "maturity_year": 2025,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "4.500 % notes due May 2025 | 5.81 | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 1.4,
+   "maturity_year": 2026,
+   "principal": 1500000000.0,
+   "amount_usd": 1500000000.0,
+   "row": "1.400 % notes due August 2026 | 5.60 | 1,500 | 1,500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.65,
+   "maturity_year": 2027,
+   "principal": 500000000.0,
+   "amount_usd": 500000000.0,
+   "row": "4.650 % notes due May 2027 | 5.60 | 500 | 500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 3.9,
+   "maturity_year": 2027,
+   "principal": 1250000000.0,
+   "amount_usd": 1250000000.0,
+   "row": "3.900 % notes due August 2027 | 5.50 | 1,250 | 1,250"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 1.8,
+   "maturity_year": 2028,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "1.800 % notes due August 2028 | 5.44 | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.7,
+   "maturity_year": 2030,
+   "principal": 750000000.0,
+   "amount_usd": 750000000.0,
+   "row": "4.700 % notes due May 2030 | 5.75 | 750 | 750"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 2.2,
+   "maturity_year": 2031,
+   "principal": 1500000000.0,
+   "amount_usd": 1500000000.0,
+   "row": "2.200 % notes due August 2031 | 5.74 | 1,500 | 1,500"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.7,
+   "maturity_year": 2027,
+   "principal": 215000000.0,
+   "amount_usd": 215000000.0,
+   "row": "4.700 % notes due March 2027 | 5.15 | 215 | 215"
+  },
+  {
+   "kind": "bond",
+   "currency": "USD",
+   "coupon_pct": 4.5,
+   "maturity_year": 2034,
+   "principal": 6000000.0,
+   "amount_usd": 6000000.0,
+   "row": "4.500 % notes due August 2034 | 4.55 | 6 | 6"
+  }
+ ],
+ "totals": {}
+}

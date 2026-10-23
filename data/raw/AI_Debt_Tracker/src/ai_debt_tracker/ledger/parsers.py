@@ -44,7 +44,8 @@ KIND_RULES = [  # first match wins; order matters (a "convertible senior note" i
     ("credit_facility", r"credit ?(facility|agreement)|facility"),
     ("finance_lease", r"finance ?lease|capital ?lease"),
     ("other_debt", r"other (long ?term )?(debt|borrowings?)"),
-    ("notes", r"notes?\b|bonds?\b|debentures?|senior ?unsecured|senior ?secured|\bdebt\b"),
+    # "nots": Broadcom's member for its 4.65% May 2027 notes is spelt `May2027SeniorNots`
+    ("notes", r"notes?\b|\bnots\b|bonds?\b|debentures?|senior ?unsecured|senior ?secured|\bdebt\b"),
 ]
 
 
@@ -158,7 +159,7 @@ YEAR_RANGE = re.compile(r"(?<!\d)(20\d\d)\s*(?:-|–|to|through)\s*(20\d\d)(?!\d
 MONTH_YEAR = re.compile(r"\b(" + "|".join(MONTHS) + r")\.?\s*(?:\d{1,2},?\s*)?(20\d\d)\b", re.I)
 
 
-def _parse_text(text: str, as_of_year: int | None = None) -> ParsedMember:
+def _parse_text(text: str, as_of_year: int | None = None, as_of_month: int | None = None) -> ParsedMember:
     p = ParsedMember()
     words = _fix_typos(text.split())
     norm = " ".join(words)
@@ -198,8 +199,15 @@ def _parse_text(text: str, as_of_year: int | None = None) -> ParsedMember:
         rng = YEAR_RANGE.search(norm)
         month_years = {int(y) for _, y in MONTH_YEAR.findall(norm)}
         years = [int(y) for y in YEAR.findall(norm)] + word_years
+        dated = [int(y) * 100 + MONTH_NUM[mo.lower().rstrip(".")] for mo, y in MONTH_YEAR.findall(norm)
+                 if mo.lower().rstrip(".") in MONTH_NUM]
         if rng:
             p.notes.append("year range — a series, not one maturity")
+        elif dated and as_of_month and p.kind in ("notes", "convertible") and max(dated) >= as_of_month:
+            # a month on or after the report's own period end cannot be an issue date: Broadcom's
+            # assumed VMware notes are named by due date, `May2025SeniorNotes`, `November2025SeniorNotes`
+            p.maturity_year = max(dated) // 100
+            p.notes.append("month-year on or after the report: read as maturity")
         elif years and as_of_year and p.kind in ("notes", "convertible") and max(years) > as_of_year:
             # a bond cannot have been issued after the report it appears in, so a later year is
             # its maturity: "2029 Notes", "May 2029 Notes", "Two Thousand Thirty Three Senior Notes"
@@ -220,20 +228,32 @@ def _parse_text(text: str, as_of_year: int | None = None) -> ParsedMember:
     if p.maturity_year is None and re.search(r"\bissuances?\b", low) and p.kind in ("notes", None):
         p.offering = True
         p.kind = "notes"
+    # One member naming two bonds is a deal, not a bond: AMD's "4.319% Senior Note Due 2028 And
+    # 4.212% Senior Note Due 2026" is the $1.5 bn total of two bonds it also tags one by one.
+    rates = {float(r) for r in RATE_BARE.findall(norm)}
+    due_years = {int(y) for y in DUE_YEAR.findall(norm)}
+    pair = re.search(r"(?<!\d)(20\d\d)\s*(?:and|&)\s*(20\d\d)(?!\d)", norm, re.I)   # "due 2027 and 2028"
+    if pair and pair.group(1) != pair.group(2):
+        due_years |= {int(pair.group(1)), int(pair.group(2))}
+    if p.kind in ("notes", "convertible") and (len(rates) > 1 or len(due_years) > 1):
+        p.offering, p.rate, p.rate_digits, p.maturity_year = True, None, None, None
+        p.notes.append("combined member: names several bonds")
     return p
 
 
-def parse_member(name: str, label: str | None = None, as_of_year: int | None = None) -> ParsedMember:
+def parse_member(name: str, label: str | None = None, as_of_year: int | None = None,
+                 as_of_month: int | None = None) -> ParsedMember:
     """Label first (it is the filer's own human text), name second; fields fill from either.
 
-    `as_of_year` is the year of the report the member appears in. Without it an undated year
-    ("2029 Notes") stays unread, because it could be an issue year (P18); with it, a year after
-    the report can only be a maturity."""
-    from_name = _parse_text(split_camel(name), as_of_year)
+    `as_of_year` is the year of the report the member appears in, `as_of_month` its period end as
+    YYYYMM. Without them an undated year ("2029 Notes") stays unread, because it could be an issue
+    year (P18); with them, a year after the report — or a month on or after its period end — can
+    only be a maturity."""
+    from_name = _parse_text(split_camel(name), as_of_year, as_of_month)
     from_name.source = "name"
     if not label:
         return from_name
-    from_label = _parse_text(re.sub(r"\[member\]|\bmember\b", " ", label, flags=re.I), as_of_year)
+    from_label = _parse_text(re.sub(r"\[member\]|\bmember\b", " ", label, flags=re.I), as_of_year, as_of_month)
     from_label.source = "label"
     out = from_label
     for f in ("rate", "rate_digits", "maturity_year", "kind", "currency"):
@@ -241,10 +261,44 @@ def parse_member(name: str, label: str | None = None, as_of_year: int | None = N
             setattr(out, f, getattr(from_name, f))
             out.source = "label+name"
     out.floating = out.floating or from_name.floating
+    if any("combined member" in n for n in from_name.notes + from_label.notes):
+        out.rate = out.rate_digits = out.maturity_year = None
+        out.offering = True
+        out.notes = sorted(set(out.notes + ["combined member: names several bonds"]))
     out.offering = (out.offering or from_name.offering) and out.maturity_year is None
     if from_name.rate is not None and out.rate is not None and abs(from_name.rate - out.rate) > 0.0051:
         out.notes.append(f"label rate {out.rate} disagrees with name rate {from_name.rate}")
     return out
+
+
+MONTH_NUM = {m: i for i, m in enumerate(("january", "february", "march", "april", "may", "june", "july", "august",
+                                         "september", "october", "november", "december"), 1)}
+MONTH_NUM.update({m[:3]: i for m, i in list(MONTH_NUM.items())} | {"sept": 9})
+
+
+def issue_period(name: str, label: str | None = None) -> str | None:
+    """When an offering member was issued, as 'YYYY-MM' or 'YYYY' (P18, for L2 grading).
+
+    `November2025Debt` -> '2025-11'; `January2021SeniorNotesTranche` -> '2021-01';
+    `A2026USDollarNotes` -> '2026'; `IssuanceOfLongTermDebtEight` -> None (no date in the name).
+    Only meaningful for offerings: on a bond the year is usually the maturity."""
+    for text in (label, split_camel(name)):
+        if not text:
+            continue
+        low = " ".join(_fix_typos(text.split())).lower()
+        m = MONTH_YEAR.search(low)
+        if m:
+            return f"{int(m.group(2)):04d}-{MONTH_NUM[m.group(1).rstrip('.')]:02d}"
+        words = _words_to_years(low.split())
+        month = next((MONTH_NUM[w] for w in low.split() if w in MONTH_NUM), None)
+        if words and month:
+            return f"{words[0]:04d}-{month:02d}"
+        m = re.search(r"(?<!\d)(20\d\d)(?!\d)", low)
+        if m:
+            return m.group(1)
+        if words:
+            return str(words[0])
+    return None
 
 
 def rates_match(a: float | None, b: float | None, tol: float = 0.0051) -> bool:

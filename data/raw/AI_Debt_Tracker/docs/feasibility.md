@@ -106,6 +106,14 @@ New problems found in Week 1 are P22–P29 in `DESIGN.md` §3.4: issuance-number
 many tags, subtotal members, subsequent-event facts in the target report, quarterly-only older
 notes data, and two clocks for "accepted".
 
+## Week 2 re-checks — run on 2026-10-23
+
+| # | Check | Pass line | **Week 2 result** | Verdict |
+|---|---|---|---|---|
+| **F2** | Changes are announced | ≥ 80% of changes explained by a filing | Re-run on the **dev** split with the grader's change list and a proper removal method (an exit word must sit next to the bond, not anywhere in the document), reading only what `edgar_pit` allows at each cut-off: **new bonds 30 of 32 announced (94%)**; removals: 9 of 16 scheduled maturities, **5 of the other 6 announced**. 3 changes unexplained, $0.9 bn. | **Pass.** Removals now have a method, as Week 0 asked. [`changes_dev.md`](changes_dev.md) |
+| **F3** | Room to beat doing nothing | Carry-forward wrong on ≥ 30% of episodes | B0 scored by the real grader on dev: bond recall 90.7%, but **0 of 36 new bonds** and 3 of 16 removals caught; only **18 of 47** L1 episodes reproduced exactly (62% wrong). | **Pass.** [`baseline_b0.md`](baseline_b0.md) |
+| — | **Grader vs printed reports** (§11 week 2) | 10 of 10 hand-checked company-quarters | **10 of 10** after fixing five defects the first pass (8 of 10) exposed (P30–P34); a held-out set graded once afterwards: **2 of 3**, all 3 disagreements on Digital Realty's own tagging (P35–P37, open). | **Pass**, with the held-out caveat; accepted by Om Mali, 2026-10-23. [`handcheck.md`](handcheck.md) |
+
 ## Why this can't end with "nothing to show"
 
 | By the end of | You have, even if everything after fails |
@@ -138,3 +146,6 @@ changes are never announced in a filing" would itself be a useful finding for My
 | 2026-10-18 | F4 bake-off | `qwen3:4b` 95% of fields, 29/29 JSON, ≤ 12.6 s — pass; `qwen3:8b` 84% (2 runaways) fails the rule | — (evidence only) |
 | 2026-10-18 | Bake-off set review | All 29 passages genuine; 7 truth fields on 6 rows corrected to what the documents say; re-scored `qwen3:4b` 99%, `llama3.1:8b` 91%, `qwen3:8b` 88% | Claude (model judgment, [`week1_review.md`](week1_review.md)) |
 | 2026-10-18 | **Week 1 gate:** universe v1 (overrides Meta → L2, TeraWulf → L1), generalisation set, splits, bake-off set, model `qwen3:4b` | **Frozen / confirmed** | **Om Mali**, on the basis of Claude's review, without checking the filings personally (`manifests/week1_gate.json`) |
+| 2026-10-23 | F2 re-run on dev (new removal method) | 94% of new bonds, 5 of 6 early removals announced — pass | — (evidence only) |
+| 2026-10-23 | B0 scored on dev | recall 90.7%, 0 of 36 new bonds caught, 18 of 47 exact — the headroom is real | — (evidence only) |
+| 2026-10-23 | Hand-check (week 2 check) | 10 of 10 calibration, 2 of 3 held-out | **Accepted** — **Om Mali**, 2026-10-23 (`manifests/week2_gate.json`); transcriptions are Claude's model judgment |

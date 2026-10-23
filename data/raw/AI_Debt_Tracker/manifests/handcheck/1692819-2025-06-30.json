@@ -1,0 +1,16 @@
+{
+ "episode": "1692819-2025-06-30",
+ "company": "Vistra",
+ "report": "10-Q 20250630",
+ "level": "L3",
+ "status": "reviewed",
+ "reviewer": "Claude (model judgment, P8), 2026-10-23",
+ "source": "printed debt table in the report's HTML",
+ "source_rows": "rows 17-19",
+ "review": "Totals only (the episode's level): 'Total long-term debt including amounts due currently' $15,770 m and 'Less amounts due currently' $230 m. The forward repurchase obligation ($1,295 m) is printed as a separate line and is not debt.",
+ "instruments": [],
+ "totals": {
+  "total_debt": 15770000000.0,
+  "current": 230000000.0
+ }
+}
