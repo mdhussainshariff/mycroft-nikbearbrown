@@ -950,3 +950,12 @@
   - [OPEN] Steps 2, 4 and 6 and the script mappings for the respond-to-webhook and human-report nodes: still `[TODO: DEV]` (`todos_open` is 5).
   - [OPEN] Live mode: no approval record; the Alpha Vantage request, the Groq call and the webhook reply are only recorded handoffs (`approved_for_live_action: false`); Parse_LLM_Response is not ported, so a custom scenario stops at the Groq handoff.
   - [NOT COVERED] Real portfolios, live behaviour, and whether the template shocks and the engine's risk thresholds are sound (ported faithfully, not judged).
+
+## 2026-10-26 -- Add Finance Investigator named materiality approval
+
+- **Recipe:** `mycroft-finance-investigator` v0.1.0 (`DRAFT`). Closes the open issue every prior run of this project has carried: the materiality threshold was a fixture nobody had approved.
+- **Inputs:** `data/verified/mycroft-finance-investigator` (2026-02 pack, six source files); `projects/Mycroft-Finance-Investigator/config/sample-materiality-approval.json` as a clearly-marked fixture, not an approval.
+- **Commands:** Ran the complete project unit suite; ran `materiality-request` against the real verified pack; exercised the four refusal paths through `record-materiality` (agent-authored decision, placeholder reasoning, scope mismatch, overwrite of an existing approval); ran repo conformance on every added file.
+- **Outputs:** `mycroft_finance_investigator/materiality.py`; `schemas/materiality-approval.schema.json`; `config/sample-materiality-approval.json`; `tests/test_materiality.py` (18 cases); `materiality-request` and `record-materiality` CLI commands.
+- **Result:** A threshold can now reach `APPROVED` only through a record naming a human, stating a basis of at least twenty characters, and carrying the SHA-256 of all six source files as the approver saw them. Reading an approval back re-hashes the pack, so an approval recorded against one pack cannot authorise a different one. Approvals are append-only; a second write to the same path is refused. All 84 project tests pass (66 existing, 18 new).
+- **Open issues:** No approved threshold is committed, by design -- the shipped sample is a fixture and says so. `APPROVED` records that a named human set the amount against specific data; it does not assert the amount is appropriate, and the engine cannot tell a considered basis from a plausible-sounding one. Causal explanation, adequacy, and distribution remain with a named human.
