@@ -977,3 +977,12 @@
 - **Outputs:** `mycroft_finance_investigator/disagreement.py`; `tests/test_disagreement.py` (13 cases); `record-disagreement` CLI command.
 - **Result:** A named reviewer can record a position (`NOT_MATERIAL`, `MATERIAL_EXPECTED`, `MISCLASSIFIED`, `INSUFFICIENT_EVIDENCE`) against a category the engine actually reported on, with a stated basis. Both sides are kept: the engine's figure is copied from the run rather than from the record, and a record that tries to restate `engine_value` is refused. The log binds to the run's SHA-256, so if the run changes the log detaches rather than silently referring to findings that no longer exist. Two reviewers may disagree with the same finding; one reviewer may not restate a position. All 111 project tests pass (98 existing, 13 new).
 - **Open issues:** A recorded disagreement resolves nothing. Neither side is adopted, the engine's numbers are unchanged, and no downstream artifact currently consumes the log. Whether a reviewer's position is correct is outside what this records.
+
+## 2026-10-26 -- Add Finance Investigator evidence coverage
+
+- **Recipe:** `mycroft-finance-investigator` v0.1.0 (`DRAFT`). Findings already carried evidence references. Nothing had ever resolved them.
+- **Inputs:** `logs/mycroft-finance-investigator-sample-2026-02.json`; `data/verified/mycroft-finance-investigator` (six source files).
+- **Commands:** Ran the complete project unit suite; ran the `coverage` CLI against the real 2026-02 run and pack; exercised all three failure modes plus malformed references; ran repo conformance on every added file.
+- **Outputs:** `mycroft_finance_investigator/coverage.py`; `tests/test_coverage.py` (11 cases); `coverage` CLI command.
+- **Result:** Every evidence reference is parsed into file, column and value, then resolved by reading the file and finding the row. Against the real 2026-02 investigation **all 21 references across 4 claims resolve**. Three failures are reported separately rather than collapsed into "unsourced": `UNCITED` (no evidence at all), `DANGLING` (file not in the pack) and `UNRESOLVED` (file present, no matching row). A malformed reference raises rather than being skipped. All 122 project tests pass (111 existing, 11 new).
+- **Open issues:** Resolution proves the cited row exists. It does not prove the row supports the claim -- a figure can resolve perfectly and still be the wrong figure. Nothing yet blocks a report whose coverage is incomplete; the check reports, it does not gate.

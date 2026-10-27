@@ -15,6 +15,7 @@ from .finance import FinanceData, FinanceEngine
 from .orchestration import run_orchestration, write_orchestration_artifacts
 from .reporting import write_human_report, write_machine_log
 from .reinvestigation import run_reinvestigation, write_reinvestigation_artifacts
+from .coverage import write_check as write_coverage
 from .disagreement import append_disagreement
 from .freshness import write_assessment as write_freshness
 from .materiality import (
@@ -119,6 +120,12 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--run-id", default=None)
         sub.add_argument("--log-path", type=Path, default=None)
         sub.add_argument("--report-path", type=Path, default=None)
+    coverage = subparsers.add_parser(
+        "coverage", help="resolve every evidence reference against the pack"
+    )
+    coverage.add_argument("--run-log", type=Path, default=DEFAULT_RUN_LOG)
+    coverage.add_argument("--verified-dir", type=Path, required=True)
+    coverage.add_argument("--output", type=Path, required=True)
     disagree = subparsers.add_parser(
         "record-disagreement",
         help="append a named reviewer's position against an engine finding",
@@ -227,6 +234,15 @@ def main() -> None:
             args.log_path,
             args.report_path,
         )
+    if args.command == "coverage":
+        report = write_coverage(args.run_log, args.verified_dir, args.output)
+        print(f"coverage: {report['references_resolved']}/"
+              f"{report['references_checked']} references resolved across "
+              f"{report['claims_checked']} claims")
+        for problem in report["problems"]:
+            print(f"  - {problem['failure']}: {problem['claim']} "
+                  f"{problem['reference'] or '(no evidence)'}")
+        print(f"coverage report: {args.output}")
     if args.command == "record-disagreement":
         log = append_disagreement(args.record, args.run_log, args.log)
         latest = log["entries"][-1]
