@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 
@@ -15,6 +15,7 @@ from .finance import FinanceData, FinanceEngine
 from .orchestration import run_orchestration, write_orchestration_artifacts
 from .reporting import write_human_report, write_machine_log
 from .reinvestigation import run_reinvestigation, write_reinvestigation_artifacts
+from .freshness import write_assessment as write_freshness
 from .materiality import (
     record_approval,
     write_approval_request as write_materiality_request,
@@ -117,6 +118,14 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--run-id", default=None)
         sub.add_argument("--log-path", type=Path, default=None)
         sub.add_argument("--report-path", type=Path, default=None)
+    freshness = subparsers.add_parser(
+        "freshness", help="measure arrival lag and shelf age of a verified pack"
+    )
+    freshness.add_argument("--verified-dir", type=Path, required=True)
+    freshness.add_argument("--as-of", required=True, help="YYYY-MM-DD")
+    freshness.add_argument("--max-lag-days", type=int, required=True)
+    freshness.add_argument("--max-age-days", type=int, required=True)
+    freshness.add_argument("--output", type=Path, required=True)
     materiality_request = subparsers.add_parser(
         "materiality-request",
         help="prepare the materiality approval a named human must sign",
@@ -210,6 +219,19 @@ def main() -> None:
             args.log_path,
             args.report_path,
         )
+    if args.command == "freshness":
+        assessment = write_freshness(
+            args.verified_dir,
+            date.fromisoformat(args.as_of),
+            args.max_lag_days,
+            args.max_age_days,
+            args.output,
+        )
+        print(f"freshness: {assessment['verdict']} "
+              f"(lag {assessment['lag_days']}d, age {assessment['age_days']}d)")
+        for reason in assessment["reasons"]:
+            print(f"  - {reason}")
+        print(f"freshness assessment: {args.output}")
     if args.command == "materiality-request":
         request = write_materiality_request(
             args.verified_dir,
