@@ -15,6 +15,7 @@ from .finance import FinanceData, FinanceEngine
 from .orchestration import run_orchestration, write_orchestration_artifacts
 from .reporting import write_human_report, write_machine_log
 from .reinvestigation import run_reinvestigation, write_reinvestigation_artifacts
+from .distribution import write_evaluation as write_distribution
 from .coverage import write_check as write_coverage
 from .disagreement import append_disagreement
 from .freshness import write_assessment as write_freshness
@@ -120,6 +121,14 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--run-id", default=None)
         sub.add_argument("--log-path", type=Path, default=None)
         sub.add_argument("--report-path", type=Path, default=None)
+    distribution = subparsers.add_parser(
+        "distribution-gate",
+        help="decide whether a report may leave the system (blocked by default)",
+    )
+    for flag in ("materiality", "freshness", "coverage-report", "review",
+                 "disagreements"):
+        distribution.add_argument(f"--{flag}", type=Path, default=None)
+    distribution.add_argument("--output", type=Path, required=True)
     coverage = subparsers.add_parser(
         "coverage", help="resolve every evidence reference against the pack"
     )
@@ -234,6 +243,20 @@ def main() -> None:
             args.log_path,
             args.report_path,
         )
+    if args.command == "distribution-gate":
+        result = write_distribution(
+            args.output,
+            materiality=args.materiality,
+            freshness=args.freshness,
+            coverage=args.coverage_report,
+            review=args.review,
+            disagreements=args.disagreements,
+        )
+        print(f"distribution: {result['status']}")
+        for condition in result["conditions"]:
+            print(f"  {condition['status']:8} {condition['condition']}: "
+                  f"{condition['reason']}")
+        print(f"distribution gate: {args.output}")
     if args.command == "coverage":
         report = write_coverage(args.run_log, args.verified_dir, args.output)
         print(f"coverage: {report['references_resolved']}/"
