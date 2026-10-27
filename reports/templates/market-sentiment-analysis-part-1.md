@@ -22,4 +22,4 @@
 
 ## Full Data
 
-Log entry: `logs/market-sentiment-analysis-part-1/[RUN_ID].json`
+Log entry: `logs/market-sentiment-analysis-part-1-[DATE].json`

@@ -1,8 +1,51 @@
-# Run Log
 
-Use this file for meaningful recipe runs, blockers, generated artifacts, and
-workflow changes.
 
+## 2026-10-02 (renumber) -- Private AI Valuation Agent: the schedule renumbered, 12 weeks to 11
+
+- **Recipe:** `data/raw/Private_AI_Valuation_Agent/plan.md` -- the schedule itself was edited, at the user's instruction.
+- **Gate decision:** none. No measurement, artifact or number changed; this is the recipe's week numbering and the documentation that cites it.
+- **Change:** the two weeks covering the MCP server and the signal contract are merged into **Week 10 "Interface and the signal contract"**, and the former Week 12 becomes **Week 11 "Documentation, catalogue, and launch"**. The plan is now an 11-week schedule.
+
+| Was | Now |
+|---|---|
+| Week 10 -- MCP server | **Week 10 -- Interface and the signal contract** |
+| Week 11 -- Commentary graph, signal contract, scheduling | *(merged into Week 10)* |
+| Week 12 -- Documentation, catalogue, and launch | **Week 11 -- Documentation, catalogue, and launch** |
+
+- **The merge is substantive, not only bookkeeping.** Both halves exist for one reason: so that something other than this repository can consume the panel. The MCP server is the interactive reader and the signal is the machine-readable one, and the token-bounding work and the contract-freezing work are the same discipline aimed at two audiences. The merged plan entry says so, and both docs now carry a cross-link to the other as the other half of one week.
+- **Files changed:** `plan.md` (entries merged, last renumbered, "12-week" -> "11-week"); `README.md` (status heading, layout line); `DATABASE_SETUP.md` (the deferred consolidated schema listing is now Week 11's job); `docs/worklog.md` (week labels in two dated entries, plus a new entry carrying the mapping table); `docs/mcp_server.md` and `docs/signal_and_commentary.md` (cross-linked, both labelled Week 10); `src/graphs/quarterly_graph.py` and `scripts/schedule.py` (docstrings citing "week 11"); `scripts/make_week1011_figures.py` (docstring).
+- **Deliberately NOT changed: this log's existing entries.** `logs/RUN_LOG.md` is the governance audit trail and append-only (P7). Its entries describing "Weeks 10 and 11" were accurate when written, and rewriting them would falsify the record of what was done and when. This entry is the record of the renumbering; the mapping table above is how a later reader reconciles the two.
+- **Deliberately NOT changed: the figure filenames.** `w10-*` and `w11-*` are referenced by name in the built video reels' `pantry/` directories and `beat_sheet.json` files, which live outside this repository. Renaming would break artifacts this repo does not own. All four `w10`/`w11` figures are Week 10 figures regardless of prefix, and the generator's docstring now says so. Same reasoning for `docs/_figdata_week1011.json` and `scripts/make_week1011_figures.py`.
+- **Verified:** no stale `Week 12`, `Weeks 10 and 11` or `12-week` string remains outside the worklog's mapping table; `plan.md` holds 11 week entries; the suite and conformance pass unchanged.
+- **Open issues:** carried forward unchanged -- **milestone PR 1 and PR 2 not opened** (git is the user's), `openai/gpt-oss-120b` substitutes for the retired model plan.md named, qualitative adjectives in the commentary unchecked by design, the Cerebras event study unblocked only when `2026q3_nport.zip` publishes, N-CSR entry dates a floor rather than a history, Week 3's live EDGAR path, non-USD currency guarded but unexercised, 314 of 322 golden-set labels unattested, and the 28 `%COHERE%` holdings still inside the shipped universe layer.
+
+## 2026-10-09 -- Private AI Valuation Agent: Week 11, documentation, catalogue and demo
+
+- **Recipe:** `data/raw/Private_AI_Valuation_Agent/plan.md` (Week 11 -- the final week).
+- **Gate decision:** none. Documentation and a read-only demo; no measurement, schema or artifact value changed.
+- **Commands:** `python -m scripts.analyze --findings`; `python -m scripts.demo --write`; `python -m pytest tests/ -q` -> **310 passed, 39 skipped**; `node scripts/conformance.mjs` over the new and changed documents -> **60 files, all conform**.
+- **Outputs:** `proposal.md`, `system_architecture.md`, `data_architecture.md` (all new); `scripts/demo.py`, `docs/demo.md` (new); `n8n/README.md` (new); `scripts/analyze.py` (+sections 6 and 7), `docs/findings.md`; `docs/entity_resolution.md` (+section 11); `DATABASE_SETUP.md`; `README.md`.
+
+- **Three of the six documents `plan.md` names did not exist.** `proposal.md`, `system_architecture.md` and `data_architecture.md` were absent entirely -- the week's audit found them rather than the week's plan predicting them. Written from the project's own measured figures and the decisions already recorded in `docs/worklog.md`, not from the plan's prose.
+- **One explicit requirement had zero coverage.** `plan.md` week 11: "citing the prior-art literature honestly". A grep for Caplight, Gornall, Strebulaev, Agarwal, Chernenko and Kwon across `docs/findings.md` and `docs/entity_resolution.md` returned **0 matches in both**. The project's own plan is emphatic that this source is "commercially exploited" and "academically mature" and that "claiming novelty of the data source would not survive a literature review" -- and none of that had reached the published documents. Now in `proposal.md`, `docs/findings.md` §7 and `docs/entity_resolution.md` §11.1.
+- **The citation is load-bearing in one place, and that is stated.** Gornall & Strebulaev (JFE 2020) establishes that funds write up *all* share classes to the latest round price. That is **reproduced on this cohort** and is the reason dispersion is measured at company level with the class recorded rather than within-class only -- an earlier draft's rule, overturned by the verified data. The other citations frame the contribution as open infrastructure rather than discovery.
+- **`docs/findings.md` stopped at Week 8 and was extended through its generator, not by hand.** It is a generated artifact (P3), so `scripts/analyze.py` gained sections 6 (Form D x N-CSR corroboration, 10 of 18 acquisition dates landing on a filed round date, with the denominator caveat) and 7 (the literature). Regenerating reproduces them.
+- **`DATABASE_SETUP.md` schema block completed.** On 2026-10-02 I found it listing only the four Week 2 core tables while the database held fifteen, and deferred the consolidated listing to this week as "Week 11's job". Done: all fifteen with row counts, verified against `information_schema`, plus the four LangGraph checkpoint tables named as not belonging to this project's schema.
+- **The demo is a runnable script rather than a recording.** `scripts/demo.py` prints five acts in the order `plan.md` names them and writes `docs/demo.md`. The reasoning is in its docstring: a recording is true on the day it was made, and this re-runs with every figure queried live, so a transcript that disagrees with the database is a bug rather than an old file. **Act II is read-only on purpose** -- it displays a decision a named human already recorded and does not make a new one, because a demo that recorded a judgment would be a demo that clears a gate for the sake of a screenshot (P4). Act I likewise shows the ingest reconciliation rather than re-downloading 6 GB.
+- **Catalogue entry: the path in `plan.md` does not exist here.** It says `n8n_Workflows/README.md`; this repository has no such directory and the path refers to a sibling Humanitarians AI repo. Rather than inventing a top-level directory, the entry is `n8n/README.md`, beside the workflow it describes, carrying a paste-ready catalogue row to copy across when the two repos are in the same place. Stated in the file itself so the deviation is visible.
+- **Open issues:** **milestone PRs 1, 2 and 3 are not opened** -- git is the user's, and this is now the only item of the eleven-week plan outstanding on this side. Carried forward unchanged: `openai/gpt-oss-120b` substitutes for the retired model plan.md named; qualitative adjectives in the commentary are unchecked by design; the Cerebras event study unblocks only when `2026q3_nport.zip` publishes; N-CSR entry dates are a floor rather than a history; Week 3's live EDGAR path; non-USD currency guarded but unexercised; 314 of 322 golden-set labels unattested; and the 28 `%COHERE%` holdings still inside the shipped universe layer.
+
+## 2026-10-09 -- Private AI Valuation Agent: final-week figures and narration script
+
+- **Recipe:** `data/raw/Private_AI_Valuation_Agent/plan.md` (week 11 deliverable -- the video).
+- **Gate decision:** none. Figures and a narration script; no measurement, schema or artifact value changed.
+- **Commands:** `python scripts/make_week12_figures.py`; `npm run svg-to-png` (+ `audit:layout`, postinstall hook) -> **4 new SVGs, 0 layout errors, 0 warnings on them**; `node scripts/conformance.mjs` -> conforms.
+- **Outputs:** `docs/_figdata_week12.json`, `scripts/make_week12_figures.py` (new); `images/private-ai-valuation-agent/w12-{docs,priorart,provenance,demo}.{svg,png}`; narration script, `figdata.json` and `images/` copied to the video folder outside this repo.
+- **The `w12-` prefix is historical.** `w10-` and `w11-` were taken by figures built before the schedule merge and are referenced by name in built reels, so the final week's figures take the next free prefix rather than a renumbering that would break artifacts outside this repository. Stated in the generator's docstring.
+- **Every "before" number comes from `git show HEAD:<path>`, not from memory.** The documentation audit (three of six named documents absent) and the prior-art count (0 mentions in both published documents, now 9 / 8 / 5) are both computed at build time against the last commit, so the figures cannot drift from the repository (P3).
+- **The demo's read-only claim is scanned, not asserted.** The generator greps `INSERT INTO` / `UPDATE ... SET` / `DELETE FROM` across `scripts/demo.py` and `src/mcp/*.py` -> **0 across 5 files** -- the figure prints the count it measured.
+- **Two accuracy-pass corrections before the figures were accepted:** the provenance chain's closing lines sat 10px from the source line (chain step tightened 30 -> 28px), and the demo figure's caption read "15 tables read" when the demo reads a subset -- reworded to "15 project tables, by layer". A third fix cleared the only layout warning, a section-sign glyph.
+- **Open issues:** unchanged from the week 11 entry above; milestone PRs 1, 2 and 3 remain unopened (git is the user's).
 ## Template
 
 ```markdown
@@ -98,6 +141,113 @@ workflow changes.
   - Phase 2: Generate `signals-validation-audit.md` (spot-check 10 signals, assess quality).
   - Phase 3: Solve Groq token limit (upgrade tier or secondary provider for news classification).
 
+## 2026-07-11 -- Hacker News AI Buzz Tracker: historical backfill, baselines, and watchlist-version guard
+
+- **Recipe:** Hacker News AI Buzz Tracker (`data/raw/Hacker_News_AI_Buzz_Tracker/`) — historical backfill and trailing-baseline phase.
+- **Inputs:** the project's 12-entity v1 watchlist config, existing scoring/parsing code from earlier phases (reused as-is, not rewritten), the Hacker News Algolia `search_by_date` API, Supabase (`hn_buzz_runs`, plus two new tables: a dedicated backfill table and an entity-baseline table).
+- **Commands:**
+  - Wrote and ran a 90-day historical backfill script (dry-run first, then live) — weekly chunked, paginated Algolia pulls, deduped by story ID, scored with the existing scoring code, inserted into the new dedicated backfill table.
+  - Wrote and ran a trailing-baselines script against the backfilled data into the new entity-baseline table.
+  - Diagnosed and fixed an Algolia query-matching bug (unquoted short terms, e.g. one entity's ticker-style term, matched hundreds of unrelated stories; some terms returned zero real hits) by quoting every query term and enabling exact-phrase matching, in both the backfill script and the live n8n workflow.
+  - Fixing the live workflow required adding a separate quoted-term field threaded through the workflow's node schema, since an existing merge step matched the API's echoed query string against the original unquoted term field.
+  - Migrated the live snapshot table to add a `watchlist_version` column and updated the live workflow's previous-run read query, row-builder, and insert step to close a gap: the version tag previously existed only as metadata on the backfill table, with no structural guard against a future watchlist-version comparison in the live velocity lookup.
+  - Ran the live workflow manually post-migration to confirm the guard works without breaking velocity computation.
+- **Outputs:** new backfill script and trailing-baselines script, updated live n8n workflow export, updated database setup documentation (new table schemas + migration note).
+- **Result:** 13 weekly backfilled rows in the new backfill table (verified: full entity coverage per row, no duplicates, internally consistent confidence/score flags, query-matching fix holding at scale); one row per entity in the new baseline table; watchlist-version guard live and confirmed on a partial manual test run (velocity computed correctly, non-cold-start).
+- **Open issues:**
+  - [GATE OPEN] Full-watchlist live-run regression test of the watchlist-version guard — only tested with a subset of entities so far.
+  - [BLOCKER] Backfilled engagement totals (points/comments) carry a look-ahead risk, since the source API returns current rather than point-in-time totals — unresolved; story count designated the primary metric for downstream analysis to route around it.
+  - [GATE OPEN] Signal-validation backtest (pooled panel design with entity fixed effects, multiple-comparison correction, lead-lag test) specified but not yet implemented.
+
+## 2026-07-16 -- Hacker News AI Buzz Tracker: signal-validation backtest (Week 6)
+
+- **Recipe:** Hacker News AI Buzz Tracker (`data/raw/Hacker_News_AI_Buzz_Tracker/`) — Week 6 signal-validation backtest (early Phase 2).
+- **Inputs:** Week 5 backfill (`backfill_output/backfill_v1.json`, 12 entities × 13 weeks, storyCount as primary point-in-time-safe metric); Alpha Vantage daily closes for the 9 public-ticker entities; `watchlist.json`.
+- **Commands / artifacts:**
+  - Installed and pinned the stats stack (`pandas`, `scipy`, `statsmodels`) in `requirements.txt`.
+  - Wrote `docs/backtest_preregistration.md` **before** computing any correlation (lag family, metric, pooled-panel design, BH-FDR, bidirectional tests, weight-tuning decision rule, limitations all fixed up front).
+  - Wrote and ran `fetch_prices.py` → `backfill_output/prices_v1.json` (9 tickers, 100 daily closes each, 2026-02-20 → 2026-07-15; rate-limit-aware + cached).
+  - Wrote and ran `run_backtest.py` → `backfill_output/backtest_results.json` (pooled Pearson over 9 entities, 7-test lag family, BH-FDR q=0.05, both directions, per-entity descriptive).
+  - Wrote `signal_validation.md` (the Week 6 deliverable report).
+- **Result:** **Null result.** 0 of 7 pooled tests survive FDR. Forward buzz→price leads ≈0 / slightly negative; strongest raw cell is price→buzz at 2wk (r=0.23, p=0.027, q=0.19 — fails FDR), consistent with buzz reacting to, not leading, price. Investment framing downgraded to *unproven*, honestly, per the "building to learn" spirit.
+- **Decision (logged):** Keep Buzz Score weights unchanged (30/30/20/20) per the pre-committed rule — no forward lead survived FDR with |r|≥0.20, so there is no validated target to tune toward; tuning would overfit a null. Re-evaluate at ≥26 weeks of backfill.
+- **Open issues:**
+  - [GATE OPEN] Human attestation (adequacy sign-off) of the backtest design and null verdict — machine conformance done (scripts run, JSON valid); human judgment pending.
+  - Carried from Week 5: `watchlist_version` guard still missing on the live table (not blocking Week 6; must close before Week 11 v2 expansion).
+  - Caveat: pooled Pearson p-values are optimistic under within-entity serial autocorrelation (bias runs downward, toward significance). The forward leads fail to clear even that lowered bar, so an autocorrelation-robust test would push the p-values up and leave them more clearly null — the bias runs against the null yet the null holds, which strengthens the verdict rather than threatening it. [Correction 2026-07-18: an earlier version of this caveat mis-stated the bias as "cutting toward the null"; the conclusion (verdict unchanged) was right but the reasoning was inverted — fixed here and in the report.]
+
+## 2026-07-16 -- HN Buzz Tracker: Week 6 backtest attestation (gate cleared)
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 6 signal-validation backtest.
+- **Who/what/when:** Om Mali re-ran `run_backtest.py` independently (output matched the report exactly), hand-checked NVIDIA 2026-04-17 (storyCount 31 / NVDA close 201.68 against source files), and ran two break-checks (panel = 9 public entities; the 2026-07-03 holiday correctly falls back to the 2026-07-02 close). Adequacy sign-off and honest "did not test" list recorded in `docs/backtest_attestation.md`.
+- **Result:** Human attestation gate **[GATE CLEARED]** by Om Mali, 2026-07-16. Null verdict accepted; keep-weights decision accepted; investment framing downgraded to *unproven* pending ≥26 weeks of backfill. This closes the [GATE OPEN] from the 2026-07-16 backtest entry above.
+
+## 2026-07-16 -- HN Buzz Tracker: Week 7 LLM narrative layer
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 7 LLM narrative/theme/tone layer.
+- **Inputs:** project `GROQ_API_KEY` (Groq cloud, OpenAI-compatible endpoint); watchlist.json; live HN Algolia top stories; `metric_generation.parse_hit` (reused).
+- **Commands / artifacts:**
+  - Resolved the "free LLM" decision empirically: `GET /openai/v1/models` to list reachable models + a JSON-mode smoke test. Default `llama-3.3-70b-versatile`, fallback `llama-3.1-8b-instant`, Claude alt — documented in `docs/llm_narrative_design.md`.
+  - Wrote `llm_narrative.py`: per-entity narrative/theme/tone via Groq (Claude path too), grounded prompt, controlled vocab, JSON mode, total graceful degradation.
+  - Wrote `docs/llm_narrative_design.md` (model decision + prompt design + n8n integration steps for the user).
+- **Result (verified):** Live NVIDIA → theme `controversy`, tone `neutral` (grounded in the GPU circular-financing story); offline GPT-5 fixture → `launch`/`neutral`; no-key path → `degraded=true` with reason. Unit checks passed: off-vocab enum coerced+flagged, prose-wrapped JSON parsed, garbage input → degrade. `py_compile` clean; workflow JSON unchanged and conformance-valid.
+- **Open issues:**
+  - [USER STEP] n8n workflow integration (add Groq credential + HTTP Request LLM node + rewire + persist `narratives`) is documented but must be applied and runtime-verified in the user's n8n — not testable from here (Pyodide code nodes have no network; needs live Postgres/SMTP). Steps in `docs/llm_narrative_design.md` §6.
+  - Note: `ANTHROPIC_API_KEY` not set, so the Claude path is built but untested against the live Anthropic API.
+
+## 2026-07-18 -- HN Buzz Tracker: Week 7 n8n LLM integration verified in n8n
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 7 LLM narrative layer, live n8n verification (closes the [USER STEP] above).
+- **What was applied (by Om Mali, in the running n8n):** Created a Groq Header-Auth credential; added `Explode Entities` (Code) → `LLM Narrative (Groq)` (HTTP Request, Body = "Using JSON" `{{ $json.groqBody }}`) → `Merge Narratives` (Merge, combine-by-position) → `Attach Narratives` (Code) → the three existing consumers; extended `Save Snapshot` INSERT to persist the `narratives` column.
+- **Debugging notes (found during wiring):** (1) HTTP body must be "Using JSON", not "Using fields below" — a blank-named field yielded `{"error":"invalid syntax"}`. (2) This n8n build exposes neither an "Include Input Fields" toggle nor `_('Node')` in Python code nodes, so input (`entity`/`row`) is recombined with the Groq response via a Merge/combine-by-position node instead of passthrough. (3) Feeding only the single `topStory` gave a thin/misleading narrative; switched the prompt to the top 3 stories.
+- **Result (verified):** Ran with NVIDIA enabled — `Attach Narratives` returned the full run row with the NVIDIA leaderboard entry carrying `narrative`/`theme`/`tone` (theme `controversy`, grounded in the Apple-overtakes-Nvidia + Chinese-alternatives stories) and a top-level `narratives` map; the row was written to `hn_buzz_runs` with a non-null `narratives` column. LLM narrative layer now confirmed working end-to-end in n8n.
+- **Open issues:**
+  - [OPTIONAL] Missing-key degrade path recommended to test once in n8n (bad Groq key → run completes with null narratives). Python-side degrade already verified 2026-07-16.
+  - The repo's exported `Hacker News AI Tracker.json` still reflects the pre-Week-7 graph; re-export from n8n to sync the file (or defer to the Week 12 export deliverable).
+
+## 2026-07-21 -- HN Buzz Tracker: Week 8 dashboard (build only, render/webhook unverified)
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 8 dashboard.
+- **Artifacts:** `dashboard/index.html` (static Chart.js: leaderboard, per-entity trend with watchlist-version boundary markers, narrative-theme breakdown, Community Opinion placeholder — colors restricted to the `brutalist/DESIGN.md` six-token palette); `dashboard/fixture_runs.json` (copy of `backfill_output/backfill_v1.json`, used for `?mock=1` local testing); `docs/dashboard_design.md` (design rationale + n8n `GET /webhook/dashboard` wiring spec, not yet applied to the exported graph).
+- **Result:** JS syntax checked clean (`node -e` parse); `fixture_runs.json` passes `node scripts/conformance.mjs`. **Not verified:** actual browser rendering of the four panels (no browser tool in this session) and the live n8n webhook wiring (no running n8n instance here, and no `SUPABASE_URL`/`SUPABASE_ANON_KEY` configured in this environment's `.env`).
+- **Open issues:**
+  - [USER STEP] Open `dashboard/index.html?mock=1` in a browser and confirm all four panels render before this counts as done against the plan's "test the dashboard render" step; capture `preview.png` for the Month 2 milestone PR once confirmed.
+  - [USER STEP] Apply the Webhook → Respond to Webhook wiring in `docs/dashboard_design.md` to the running n8n instance; re-export `Hacker News AI Tracker.json` (already deferred to Week 12 per plan.md).
+  - Version-boundary marker logic only exercised against the "no boundary" case (fixture is all-v1); real test waits on Week 11's watchlist v2.
+  - Carried open: `watchlist_version` guard missing on the live table (Week 5); this is unrelated to the dashboard and tracked separately.
+
+## 2026-07-21 -- HN Buzz Tracker: Week 8 dashboard verified live (closes the [USER STEP]s from the earlier Week 8 entry)
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 8 dashboard, live n8n + Supabase verification.
+- **What was applied (Om Mali, in the running n8n/Docker/Supabase):** Built `Hacker News Dashboard.json` as a standalone workflow (Webhook -> Read/Write Files from Disk -> Extract from File -> Inject Config Code node -> Respond to Webhook); remounted `./dashboard` at `/home/node/.n8n-files/dashboard` in `docker-compose.yml` (the default-allowed path for file-read nodes); added `env_file: [.env]` + `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` so the Code node injects `SUPABASE_URL`/`SUPABASE_ANON_KEY` from the container env rather than hardcoding them.
+- **Bugs found and fixed during wiring (full detail in `docs/dashboard_design.md`):** malformed `={{ }}` response expression; file-access sandbox restriction; `$env` blocked by default; a `.replace()`-first-match-only bug that silently left a literal `%%SUPABASE_URL%%` token as the "real" value; a `service_role` key mistakenly wired in place of `anon` (caught before shipping, rotated in Supabase); a `navigator.locks` `SecurityError` from `supabase-js`'s default auth-lock behavior (fixed with a no-op `lock` override); `community_opinions` requested in the dashboard's query before that column exists on the live table (dropped from `.select()` until Week 9 adds it).
+- **Result (verified):** `GET http://localhost:5678/webhook/dashboard` returns the live, key-injected dashboard HTML; confirmed rendering in a browser against real `hn_buzz_runs` data (leaderboard, trend chart, theme breakdown/placeholder, Community Opinion placeholder).
+- **Open issues:**
+  - [USER STEP, recommended] Explicitly confirm the `anon`-role RLS policy on `hn_buzz_runs` rejects writes, not just that reads succeed — the anon key is visible in the page's source, so RLS is the only thing keeping that safe.
+  - `preview.png` screenshot and the Month 2 milestone PR (Weeks 5-8) are still open — not done as part of this entry.
+  - Carried from Week 5: `watchlist_version` guard still missing on the live table.
+
+## 2026-07-22 -- HN Buzz Tracker: Week 9 Community Opinion analyzer (build + LLM smoke-test; n8n wiring/migration documented, not yet applied)
+
+- **Recipe:** Hacker News AI Buzz Tracker — Week 9 Community Opinion analyzer (`data/raw/Hacker_News_AI_Buzz_Tracker/`).
+- **Artifacts:** `community_opinion.py` (HN Firebase comment fetch, HTML-cleaning/dedupe, per-entity LLM opinion analyzer, cross-entity sector-theme clustering — mirrors `llm_narrative.py`'s Groq/Claude plumbing); `tests/test_community_opinion.py` (12 fixture tests, no network); `docs/community_opinion_design.md` (fetch strategy, token budget, prompt design, degrade table, `community_opinions` column migration SQL, n8n node-wiring spec mirroring `docs/llm_narrative_design.md`).
+- **Result:** `tests/test_community_opinion.py` 12/12 passed. `python community_opinion.py --demo` hit this environment's real `GROQ_API_KEY`, got an API error on that call, and returned a clean `degraded=true` record — degrade contract confirmed live, not just in fixtures. `python community_opinion.py --sector --demo` succeeded against the real key and returned a genuine clustered sector narrative from two fixture entity opinions.
+- **Not verified / open:**
+  - [USER STEP] `alter table hn_buzz_runs add column if not exists community_opinions jsonb` — must be applied to the live Supabase table (it predates this column; same gap that caused the Week 8 dashboard's `column does not exist` error).
+  - [USER STEP] The n8n node wiring in `docs/community_opinion_design.md` §8 (comment-fetch loop, Clean Comments Code node, Community Opinion + Cluster Sector Themes HTTP nodes, Save Snapshot INSERT extension) — needs applying and verifying against the running n8n instance, same pattern as Weeks 7-8.
+  - Live comment-fetch path (`fetch_comments_for_story`) untested against a real entity this session — only LLM/parsing/degrade layers were smoke-tested.
+  - Dashboard's Community Opinion panel (Week 8) remains a placeholder until this pipeline is live; wiring it is separate follow-up work.
+
+## 2026-07-25 -- HN AI Buzz Tracker — Weeks 10-12 (attribution fix, digest, contract, config, launch)
+
+- **Recipe:** Hacker News AI Buzz Tracker — Weeks 10-12 (`data/raw/Hacker_News_AI_Buzz_Tracker/`).
+- **Constraint:** did NOT modify `Hacker News AI Tracker.json` (read-only for understanding); all code changes in `node code/` + reference modules + docs, per standing instruction.
+- **Week 10 (verified):** `node code/Get Metrics.py` now relevance-filters top-story selection (query term must be in the story TITLE) — fixes the Bento misattribution where a name-drop Show HN topped OpenAI & Anthropic. Metrics stay over all hits; only narrative/opinion attribution is gated. New reference `story_relevance.py` + `tests/test_story_relevance.py` (8 fixtures incl. the real Bento case). `docs/relevance_fix_design.md`. Richer digest in `node code/Code in Python1.py` (sector narrative + badges + per-entity Community Opinion). `docs/alert_logic.md`.
+- **Fixed pre-existing drift:** `compute_buzz_score.py` reference was Week-3 era (no ACCEL_MIN/MAX/velocity) and broke `tests/test_scoring.py` collection → synced to `node code/Computer Buzz Score.py`; converted `test_scoring.py::test_acceleration` return→assert.
+- **Week 11:** `docs/json_signal_contract.md` (schema 1.0 formalized + additive 1.1 + `/webhook/signal` spec); `config/watchlist.v1.json` (conformance ✓) + `docs/watchlist_governance.md` (version guard status + v2 protocol as a human gate, not activated).
+- **Week 12:** README signals/architecture updated; `.env.example` + SMTP/service_role; `docs/launch_article.md`.
+- **Commands:** `python -m pytest tests/` → **21 passed, no warnings**; `python tests/test_scoring.py` → 5 passed; digest smoke-tested with sample row; `node scripts/conformance.mjs config/watchlist.v1.json` → conform.
+- **Not verified / open (human/canvas):** paste updated Get Metrics + digest into live n8n and re-verify a full run (confirm Bento no longer tops OpenAI/Anthropic; check `relevantStories`); wire `/webhook/signal` + Error-Trigger failure alert; SMTP creds; watchlist v2 approval + lockstep writer/reader edit; re-export `workflow.json`; record demo; open final PR.
 ## 2026-07-24 -- Project 29 regulatory workflow: Layer-1 hardening pass (working copy)
 
 - **Context:** Inherited n8n "Financial Regulatory Intelligence System" (orig. Darshan Rajopadhye). Goal: "noise generator -> signal provider" in 4 layers; this pass = Layer 1 (hardening) + unambiguous detection bugs. Original workflow JSON is quarantined Tier 3 and left untouched.
@@ -413,3 +563,390 @@ workflow changes.
 - **Outputs:** `mycroft_finance_investigator/reinvestigation.py`; follow-up request/schema/tests and CLI command; `logs/mycroft-finance-investigator-follow-up-week37.json`; `reports/generated/mycroft-finance-investigator-follow-up-week37.md`; updated recipe, conductor, project documentation, and status.
 - **Result:** The engine bound the request to the exact Week 36 SHA-256, revalidated upstream plan and trend hashes, and reproduced all three specialist result fingerprints. One existing evidence set replayed exactly, one synthetic causal claim was classified unsupported because it cited calculation evidence without an approved causal evidence class, and one operational evidence request remained open. All 66 project tests pass, including deliberate orchestration tampering, unknown citation, missing task, duplicate task, and overwrite attempts.
 - **Open issues:** `VERIFIED` means evidence integrity only, not verified causation. The COGS claim is a synthetic rejection test and is not an endorsed explanation. A named finance reviewer still must inspect unresolved gaps, approve or replace materiality, supply causal evidence, judge adequacy, and authorize distribution.
+
+## 2026-09-17 -- Gateway Sprint 4: retry system and first full run
+
+- **Recipe:** Adaptive Model Routing & Inference Gateway (Sprint 4 of 17).
+- **Gate:** First full live sweep of the frozen fixture set, watched by a human.
+- **Cleared by:** Simba · 2026-09-17
+- **Inputs:** 24 fixtures frozen 2026-09-17; policy 0.2.0; tiers 0.4.0;
+  prices 2026-09-17; GROQ_API_KEY (free tier).
+- **Commands:** `python -m pytest scripts/gateway/tests -q` (146 passed);
+  `bench/run.py --dry-run`; `bench/run.py --limit 3`; `bench/run.py` (three
+  sweeps); `first_live_call.py strong --max-tokens 896`.
+- **Outputs:** `validators.py`, `prompts.py`, `gateway.py`, `bench/run.py`;
+  updates to `adapters/base.py`, `adapters/fake.py`, `adapters/groq.py`,
+  `client.py`, `policy.json`, `tiers.json`, `prices.json`; tests
+  `test_validators.py` (21), `test_prompts.py` (10), `test_gateway.py` (11),
+  `test_grade.py` (8); three run logs under `logs/gateway/runs/` and matching
+  `bench/results/*.json`.
+- **Result:** Final sweep (`2026-09-17T015116`): 24 requests, 26 attempts,
+  escalation 8%, failure 0%, cost $0.00250 total and $0.000104 per request,
+  latency p50 393 ms and p95 734 ms. 16 of 24 graded, 14 correct. Both
+  escalations (`rag-001`, `rag-004`) failed `cites_context` on mid and then
+  answered correctly on strong. Every model answer that completed was correct;
+  the two graded "wrong" are answer-key errors, not model errors.
+  Retry rule as built: one retry only, on a failed check or a retryable
+  provider error, never a chain, and never on a terminal error.
+- **Broke during testing, fixed:**
+  - `verdict_with_quote` required one contiguous span, but models quoted both
+    conflicting statements joined together. All three escalations in the
+    01:44 sweep were false alarms caused by the check, not the models. The
+    prompt now asks for one continuous span from a single statement; all four
+    contradiction fixtures then passed and graded correct.
+  - The strong tier's `qwen/qwen3.6-27b` returned 404 "does not exist or you
+    do not have access" after two successful calls on 2026-09-10. It is gone
+    from Groq's model list. Replaced with `qwen/qwen3.8-27b` ($0.80/$4.00 per
+    1M). Groq's deprecation page still recommends 3.6 as a migration target,
+    so their docs contradict their API.
+  - Strong's `max_tokens` of 1024 exceeded this account's output-tokens-per-
+    minute cap of 1000, so every strong call was refused before the model ran.
+    Lowered to 896 (policy 0.2.0) and gated live: 19 in / 2 out, $0.0000232.
+  - A 429 meaning "request too large" is now classified terminal. Waiting
+    cannot help it; only a smaller budget can.
+  - `bench/run.py` wrote one log file per day, so a smoke run's 3 requests were
+    counted inside the full sweep's summary (27 requests for 24 fixtures). Log
+    files are now stamped to the second and the summary is scoped to the run's
+    own request ids.
+  - `test_promoted_to_the_top_has_nowhere_to_escalate` hardcoded 1024 as the
+    strong budget and failed when the budget changed. Now asserts against
+    `policy.max_tokens("strong")`.
+- **Findings:** see `scripts/gateway/FINDINGS.md` section 7. In short:
+  no wrong-but-valid answers appeared across 24 fixtures; escalated requests
+  were 8% of requests and 23% of spend; and the cost ladder is not monotonic
+  on trivial prompts -- strong answered the gate prompt for 20% less than
+  cheap, with the crossover at roughly five output tokens.
+- **Not verified:** Groq console usage for these calls; the correctness of the
+  8 extraction and summarization fixtures, which no deterministic check can
+  judge and which wait on the Sprint 5 judge.
+- **Open issues:**
+  - `sent-001` and `sent-004` are still keyed `negative`. Both entries under
+    "wrong but passed the check" are this key error, not model error. Fix
+    before any Sprint 7 result is quoted.
+  - The strong tier's 1000 OTPM cap allows roughly one strong call per minute
+    at an 896 budget. Sprint 7 wants every fixture on every tier several times
+    over, so it needs pacing or a paid tier.
+  - GROQ_API_KEY still needs rotating; it was exposed outside the terminal.
+  - 20 of 24 fixtures start on mid, so the cheap tier served only 4 requests.
+    Sprint 7 must try cheap on everything, not only where policy prefers it.
+  - Coverage is still 4 of the 30 fixtures targeted per task type.
+
+## 2026-09-25 -- market-sentiment-analysis-part-1 promoted to RUNNABLE-SAMPLE (steps 1-6)
+
+- **Recipe:** market-sentiment-analysis-part-1, v0.2.0, `status: RUNNABLE-SAMPLE`, `todos_open: 2`.
+- **Inputs:** `recipes/market-sentiment-analysis-part-1.md`, `conductor/market-sentiment-analysis-part-1.md`,
+  `docs/architecture.md` 5.2 (script-layer contract), `SNICKERDOODLE.md` (lifecycle + verification
+  stack), `data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json` (the only
+  declared schema for this recipe), and the named source workflow
+  `data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Market_Monitoring_Agent/market_sentiment.json`
+  (read for the Aggregate node's arithmetic only).
+- **Commands:** full pipeline, both fixture sets, all six steps:
+  - `scripts/tools/...-verify-provenance.py` -> exit 0
+  - `scripts/ingest/...-ingest-inputs.py --fixture-set {clean,defective}` -> exit 0
+  - `scripts/gigo/...-validate-data-shape.py --fixture-set {clean,defective}` -> exit 0 / **1**
+  - `scripts/gigo/...-transform-quality-check.py --fixture-set {clean,defective}` -> exit 0 / **1**
+  - `scripts/tools/...-run-approved-tools.py --fixture-set {clean,defective}` -> exit 0
+  - `scripts/tools/...-produce-human-report.py --fixture-set {clean,defective}` -> exit 0
+  - Nonzero on the defective set is the designed behaviour: report every finding, then halt.
+  - `node scripts/conformance.mjs` -> 187 files, all conform.
+  - Gate-3 test as literally written -> all 26 JSON artifacts parse.
+- **Outputs:**
+  - `reports/generated/market-sentiment-analysis-part-1-2026-08-27-{clean,defective}.md` (15/15 sections)
+  - `logs/market-sentiment-analysis-part-1-2026-08-27-{clean,defective}.json` (16/16 contract fields)
+  - `data/verified/.../runs/sample-001-{clean,defective}/sample-001-{clean,defective}-audit.md`
+  - `logs/gate-decisions/market-sentiment-analysis-part-1-gate-{1,2,3,4}.json`
+  - This entry.
+- **Result:** **18/18 catalogued corpus defects detected at their exact manifest locators**, split
+  8 to step 3 and 10 to step 4, with every declared total in `expected_totals` matching --
+  including `news_by_headline: 2`, which a short-circuiting dedupe reports as 1. Each step was also
+  tested for what it must NOT catch: step 3 leaks none of step 4's ten. Clean set: 10 rows, zero
+  findings. Defective set: 19 rows seen, 13 promoted, 6 withheld, 5 duplicates, 6 quality flags.
+  Both sets score 64/100 SLIGHTLY BULLISH -- the same headline number, with four flagged rows
+  feeding one of them, which is the argument for the flags existing.
+- **Promotion evidence (SPECIFIED -> RUNNABLE-SAMPLE):** full sample run completes; conformance
+  passes; audits generated and read. Gates 1-4 carry logged decisions naming a human.
+  `RUNNABLE-LIVE` is not claimed and `attestation` stays null.
+- **Changes made this session:**
+  - Closed the six canonical-step `[TODO: DEV]` markers with their evidence. Resolved the six
+    legacy n8n node markers as **mappings, not code**: four were absorbed by canonical steps, and
+    two (`Parse Question & Extract Tickers`, `Webhook Response`) were **never built** and now say so.
+  - Added lifecycle frontmatter. `todos_open: 2` -- one DEFINE on step 5's scoring constants, one
+    APPROVE on gate 5. Both markers now sit in the recipe body so the count is greppable; note the
+    same strings also appear inside the gate 1 and gate 5 test commands, where they are the test.
+  - **Contract fix 1:** step 3 gained `type_errors`. A wrong-typed value was none of its five
+    declared fields, so D02/D11/D17 had to be reported only in step 4 `flags`. Step 3 now reports
+    them against a declared TYPE_CONTRACT; rows are still promoted (a wrong value is not a wrong
+    shape), and step 4 still flags them for its quality assessment -- the same carry-forward
+    pattern it already uses for step 3's rejects. Verified: 18/18 unchanged, step 4 totals unchanged.
+  - **Contract fix 2:** the report Reader is now the compliance/audit reviewer the artifact actually
+    serves. The report already carried source hashes, reproduced scoring parameters and a per-score
+    trace chain; the declared reader now matches.
+  - **Contract fix 3:** `reports/templates/market-sentiment-analysis-part-1.md` cited
+    `logs/.../[RUN_ID].json` against the recipe's `logs/...-[DATE].json`. Recipe governs; template
+    corrected.
+  - **Gate 4's test was amended.** It previously passed if the script existed OR if a DEV-TODO
+    marker was still present in the recipe -- satisfiable by doing nothing. It now compiles all six.
+- **Design decisions worth recording:**
+  - **Gates 5 and 6 were deliberately not written.** Gate 5 would be a false clearance: no live,
+    external, or model call has ever run, and all three step-5 handoffs carry
+    `approved_for_live_action: false`. Gate 6 is step 6's own output, not yet a human decision.
+  - **Each gate record carries `residual_risk` and `voids_if`.** An audit reports what it found;
+    it does not say pass. Gate 3's record states plainly that shape validation cannot catch a
+    wrong-entity row.
+  - **The legacy node section was relabelled historical, not closed as done.** Claiming six more
+    scripts were written would have been false -- two of those nodes have no implementation at all.
+- **Open issues:**
+  - [DEFECT] **Gate 5's test is still self-satisfying** -- `test -f <approval>.json || rg "[TODO:
+    APPROVE]"`. Now that `logs/gate-decisions/` exists, the approval file is absent, so the test
+    falls through to the marker and reports a pass for a gate that has never been cleared. Same
+    class as the gate-4 defect fixed above; left alone because it was not in scope, but it is now
+    actively misleading and should be the next fix.
+  - [OPEN] `[TODO: DEFINE]` scoring constants: the weights, thresholds and both keyword lists are
+    ported verbatim from a source workflow that records no derivation, backtest or author.
+    Reproduced so a historical score can be recomputed, not endorsed. Needs a named human.
+  - [OPEN] `[TODO: APPROVE]` gate 5: live and model execution remain blocked.
+  - [OPEN] Live mode is unimplemented. Needs real fetchers, credentials from the environment, and
+    401/403/429/timeout/empty-200 handling the fixture corpus explicitly does not cover.
+  - [OPEN] The step-scoped `TYPE_CONTRACT` is not a promoted schema. If accepted it belongs in
+    `DATA_CONTRACT.md` with a named owner.
+  - [NOT COVERED] Wrong-entity signals, upstream HTTP failure modes, encoding defects, and
+    volume/pagination. The first of these is the class that reached a finished brief on 2026-08-26.
+  - [OPEN] No independent test suite covers the six scripts, and CI runs none of the repo's 72
+    existing Python test files.
+
+## 2026-10-02 -- market-sentiment-analysis-part-1: both open TODOs closed, todos_open 0
+
+- **Recipe:** market-sentiment-analysis-part-1, v0.2.0, `status: RUNNABLE-SAMPLE`, `todos_open: 0`.
+  The steps 1-6 run itself is logged at `logs/RUN_LOG.md#2026-09-25`; this entry records the two
+  typed-TODO closures, the gate-4/5 test fixes, and the rebase onto the current `origin/main`.
+- **Inputs:** `recipes/market-sentiment-analysis-part-1.md`, `SNICKERDOODLE.md` (TODO closure table
+  and the verification stack), `logs/gate-decisions/`, and the step-5 scoring parameters as ported
+  from the named source workflow.
+- **Commands:**
+  - Full pipeline re-run, both fixture sets, after the rebase -> step 1 exit 0; clean set all exit 0;
+    defective set steps 3 and 4 exit 1 by design, steps 2/5/6 exit 0.
+  - All six gate tests as literally written -> all pass.
+  - Gate-5 test break-tested across four cases (see below).
+  - `node scripts/conformance.mjs` -> all conform.
+- **Outputs:**
+  - `logs/gate-decisions/market-sentiment-analysis-part-1-gate-5.json` -- **decision: deny**
+  - Recipe: both typed TODOs closed in place; `todos_open` 2 -> 0; gate-5 test amended twice.
+  - This entry.
+- **Result:** `todos_open: 0`. Neither closure loosened anything -- one defines what the numbers are,
+  the other refuses to switch anything on.
+- **TODO closures:**
+  - **[DEFINE] step 5 scoring constants -- closed by definition, not by endorsement.** The weights
+    (price 0.40 / news 0.30 / social 0.30), the label thresholds (65/55/45/35), the price score map
+    and both keyword lists are now restated in the recipe with their reasoning: they are inherited
+    byte-for-byte from the `Aggregate & Calculate Sentiment` node so any score the original ever
+    produced can be recomputed and audited. They carry **no claim** that the weighting or the word
+    lists are analytically sound. Step 5 continues to raise `scoring_params_unattributed` on every
+    run, and the report continues to file every score under inferred findings. Changing any value
+    requires a new `scoring_params` version, because a score is only reconstructable against the
+    parameter set that produced it.
+  - **[APPROVE] gate 5 -- closed by a logged decision, and the decision is DENY.** The closure rule
+    is "a logged gate decision", not "an approval", so a recorded refusal closes it honestly. Live
+    execution was declined on four grounds: step 2 hard-stops in live mode, so approval would
+    authorise a capability that does not exist; no credentials are configured, making approval a
+    statement of intent rather than a decision; the frozen corpus explicitly does not cover
+    401/403/429/timeout/empty-200, so live failure behaviour has never been exercised; and two of
+    the three declined actions are outward-facing and irreversible once sent. Four preconditions to
+    reopen are named in the record.
+- **Design decisions worth recording:**
+  - **Writing the deny record immediately re-created the defect it was meant to close.** The gate-5
+    test at that moment read `test -f <record>.json || ...`, so the presence of a *refusal* cleared
+    the gate exactly as an approval would. Caught on the same turn it was introduced. The test now
+    reads `approved_for_live_action` out of the record instead of checking that the file exists.
+    Break-tested four ways: no-call/no-record PASS; no-call/deny PASS; **live-call/deny FAIL**;
+    live-call/approve PASS.
+  - **A deny is a closure, not a loophole.** Recording "no" is what turns an unexamined gate into a
+    decided one. The alternative -- leaving the TODO open indefinitely -- is how a gate quietly
+    becomes decoration.
+  - **The branch was rebased onto `origin/main` by cherry-pick, not by `git rebase`.** `origin/main`
+    had moved to a lineage missing steps 4, 5 and 6, so replaying only the newer commits would have
+    produced a branch whose recipe claims six working steps and whose gate-4 record asserts all six
+    compile, while two scripts did not exist. Steps 4-5 were carried along deliberately.
+- **Open issues:**
+  - [OPEN] Live mode remains unimplemented, and is now explicitly declined rather than merely
+    pending. Reopening requires the four preconditions in the gate-5 record.
+  - [OPEN] The step-scoped `TYPE_CONTRACT` in steps 3 and 4 is still not a promoted schema. If
+    accepted it belongs in `DATA_CONTRACT.md` with a named owner.
+  - [OPEN] `attestation` stays null. `VERIFIED` needs an attestation bound to this recipe version,
+    and the SNICKERDOODLE format requires a mandatory "Did not test" section.
+  - [NOT COVERED] Wrong-entity signals, upstream HTTP failure modes, encoding defects, and
+    volume/pagination. The first is the class that reached a finished brief on 2026-08-26.
+  - [OPEN] No independent test suite covers the six scripts, and CI runs none of the repo's existing
+    Python test files.
+
+## 2026-10-02 -- attestation recorded for market-sentiment-analysis-part-1 v0.2.0 (status unchanged)
+
+- **Recipe:** market-sentiment-analysis-part-1 v0.2.0, `status: RUNNABLE-SAMPLE` (**unchanged**),
+  `attestation: logs/attestations/market-sentiment-analysis-part-1-v0.2.0.md`.
+- **Inputs:** `SNICKERDOODLE.md` (attestation format + lifecycle table), the two prior RUN_LOG
+  entries for this recipe, `logs/gate-decisions/` (5 records), the generated audits and reports.
+- **Commands:** branch rebased onto the current `origin/main`; full pipeline re-run on both fixture
+  sets -> step 1 exit 0, clean all exit 0, defective steps 3/4 exit 1 by design; all six gate tests
+  pass; `node scripts/conformance.mjs` -> all conform.
+- **Outputs:** `logs/attestations/market-sentiment-analysis-part-1-v0.2.0.md`; `attestation:` path
+  recorded in the recipe frontmatter; this entry.
+- **Result:** An attestation exists, bound to v0.2.0, in the SNICKERDOODLE format: 17 tested rows --
+  of which **7 are deliberate attempts to break the thing** -- a mandatory Did-not-test section with
+  10 entries, and 9 defects that broke during testing and were fixed.
+- **Status NOT promoted to VERIFIED, deliberately.** The lifecycle is
+  DRAFT -> SPECIFIED -> RUNNABLE-SAMPLE -> RUNNABLE-LIVE -> VERIFIED. Reaching VERIFIED requires
+  passing through RUNNABLE-LIVE, whose gate test is "live run with a human clearing every gate".
+  Neither condition holds: **no live run has ever happened** (live mode is unimplemented and step 2
+  hard-stops before any fetch), and **not every gate is cleared** -- gate 5 is recorded
+  `decision: deny` with `approved_for_live_action: false`. Setting the status today would assert a
+  live run that never occurred and a clearance that was explicitly refused. Per the constitution,
+  "editing the status field without the evidence is a violation, not a promotion."
+- **What VERIFIED would require, in order:** implement live mode in step 2; add a second fixture set
+  covering 401/403/429/timeout/empty-200 with declared expected detections; reopen gate 5 against
+  the four preconditions in its record and log an approval naming the approver; perform a live run
+  with every gate cleared, logged (that earns RUNNABLE-LIVE); then record a **fresh** attestation
+  bound to the version that ran live, since any edit to the recipe or its scripts voids this one.
+- **Design decisions worth recording:**
+  - **The Did-not-test section is the load-bearing half.** It names live execution, whether the
+    score is correct, wrong-entity signals, HTTP failure modes, encoding defects, volume, the
+    untestable `redditMentions > 20` branch, the absence of any unit tests, cross-platform
+    behaviour, and interrupted runs. An empty one would have been the new "it works".
+  - **An attestation that cannot promote is still worth recording.** It fixes what was exercised, at
+    which version, with its boundary stated -- which is what makes the next one comparable.
+- **Open issues:**
+  - [OPEN] Live mode unimplemented and explicitly declined; see the gate-5 record.
+  - [OPEN] `TYPE_CONTRACT` in steps 3 and 4 is still step-scoped, not promoted to `DATA_CONTRACT.md`.
+  - [OPEN] No unit tests for the six scripts; CI runs none of the repo's existing Python tests.
+  - [NOT COVERED] Wrong-entity signals, HTTP failure modes, encoding defects, volume/pagination.
+
+## 2026-10-04 -- contradiction-detection-agent: six step scripts built, sample run, promoted to RUNNABLE-SAMPLE
+
+- **Recipe:** `recipes/contradiction-detection-agent.md` v0.2.0, status RUNNABLE-SAMPLE, todos_open 0. Before this change it had no lifecycle frontmatter and its six step scripts were still to be written (`[TODO: DEV]`). Its 16 per-node scripts are left unchanged.
+- **Inputs:** the original workflow `data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Contradiction_Detection_Agent/Contradiction_detection_agent.json` (26 nodes); a new frozen synthetic corpus `data/raw/contradiction-detection-agent/sample/` (16 fictional companies; 17 catalogued defects; `expected-flags.json` written from the original JavaScript before any port); `SNICKERDOODLE.md`; the recipe contract.
+- **Commands:**
+  - `python3 scripts/tools/contradiction-detection-agent-run-sample.py --fixture-set clean`: steps 1-6 exit 0 (16 companies, 13 flags)
+  - `python3 scripts/tools/contradiction-detection-agent-run-sample.py --fixture-set defective`: step 3 exits **1** by design (13 shape defects); step 6 still writes the report and audit
+  - `python3 scripts/tools/contradiction-detection-agent-parity-check.py`: exit 0, 16/16 companies match the original JavaScript (run under a Node shim)
+  - `python3 scripts/tools/contradiction-detection-agent-self-test.py`: exit 0, 38/38 checks as expected
+  - `python3 scripts/tools/contradiction-detection-agent-gate-check.py --gate 1` … `--gate 6`: all six pass
+  - `node scripts/conformance.mjs`: all conform; `node scripts/manifest-check.mjs`: passed
+- **Outputs:** step scripts `scripts/{tools,ingest,gigo}/contradiction-detection-agent-*.py` (6) and supporting scripts (run-sample, gate-check, parity-check, self-test); `data/raw|verified/contradiction-detection-agent/runs/sample-001-{clean,defective}/`; audits beside the verified data; `reports/generated/contradiction-detection-agent-2026-09-30-{clean,defective}.md`; `logs/contradiction-detection-agent-2026-09-30-{clean,defective}.json`; `logs/contradiction-detection-agent/self-test-results.{json,md}`; `logs/gate-decisions/contradiction-detection-agent-gate-{1..5}.json`.
+- **Result:**
+  - 17/17 catalogued defects detected at the step and row the manifest names, 0 false findings.
+  - The parity check catches 3 deliberately broken ports.
+  - Break tests (empty tree, live mode, changed fixture, repaired broken file, renamed node, step 5 before step 4, no half-built bundles) all stop as designed.
+  - Every gate test fails on an empty tree.
+  - Two clean runs are byte-identical.
+  - **Promotion evidence (DRAFT -> SPECIFIED -> RUNNABLE-SAMPLE):** the typed TODOs closed (DEV by the scripts plus conformance plus handoff conditions; DEFINE and APPROVE by the decisions below), a full sample run, conformance passing, and audits generated and read.
+- **Gate decisions:** Tanmay Kulkarni, 2026-10-04, verbatim "D1 clear, D2 deny, D3 keep, D4 log".
+  - Gates 1-4 approved for the sample run.
+  - Gate 5 **denied**: live mode declined, with four preconditions to reopen.
+  - `[TODO: DEFINE]` closed: thresholds kept as inherited, unvalidated.
+  - Pattern 3's wording kept as ported and logged in *Notes from porting*.
+  - Gate 6 not yet decided.
+- **Changes made this session:**
+  - The six gate tests now call `gate-check.py`, so each checks its condition directly and can fail. The previous tests are kept in the recipe for the record.
+  - New recipe sections: Notes from porting, Sample corpus and evidence, Supporting scripts.
+  - One stop condition added: no live run until queries pass their values as parameters.
+  - Per-node outline labelled historical, nothing deleted.
+- **Open issues:**
+  - [OPEN] Gate 6 decision.
+  - [OPEN] Live mode: the four preconditions in the gate-5 record.
+  - [NOT COVERED] Live behaviour, LLM output, and live failure modes.
+
+## 2026-10-04 -- contradiction-detection-agent: report step fixed during gate-6 review; gate 6 approved
+
+- **Recipe:** `recipes/contradiction-detection-agent.md` v0.2.0, status RUNNABLE-SAMPLE (unchanged), `last_gate` now gate 6.
+- **Found while reviewing the reports for gate 6** (in this recipe's own report step, `scripts/tools/contradiction-detection-agent-produce-human-report.py`):
+  - on the stopped (defective) run the report counted 13 rejects and the agent log 0, because the log counted step-4 rejects only;
+  - checks a stopped run never reached (duplicates, the lookback) were shown as 0 instead of "not checked";
+  - the clean report's recommendation still named gates 1-4, which were already decided.
+- **Changes:** one reject list now feeds both the report and the log; unchecked items say "not checked" (and the log lists them in `not_checked`); the recommendation is built from the gate records. New self-test section G checks all three and was confirmed to fail on the previous version (3 unexpected).
+- **Commands:**
+  - `python3 scripts/tools/contradiction-detection-agent-run-sample.py --fixture-set clean` and `--fixture-set defective`: as before (clean exit 0, 13 flags; defective stops at step 3 by design)
+  - `python3 scripts/tools/contradiction-detection-agent-parity-check.py`: exit 0, 16/16
+  - `python3 scripts/tools/contradiction-detection-agent-self-test.py`: exit 0, 42/42 checks as expected
+  - `python3 scripts/tools/contradiction-detection-agent-gate-check.py --gate 1` … `--gate 6`: all six pass
+  - `node scripts/conformance.mjs`: all conform; `node scripts/manifest-check.mjs`: passed
+- **Gate decisions:** Tanmay Kulkarni, 2026-10-04.
+  - "D1 clear" reconfirmed after the fix; gate 3 and 4 evidence re-hashed.
+  - Gate 6 **approved** ("D5 approve"): `logs/gate-decisions/contradiction-detection-agent-gate-6.json`, hashing both reports and both agent logs.
+- **Open issues:**
+  - [OPEN] Live mode: the four preconditions in the gate-5 record (needs live data access and a new decision by a named human).
+  - [NOT COVERED] Live behaviour, LLM output, and live failure modes.
+
+## 2026-10-10 -- portfolio-price-fetcher + portfolio-dashboard: four [TODO: DEV] closures (provenance, data shape, the calculation port), sample mode
+
+- **Recipes:** `recipes/portfolio-price-fetcher.md` and `recipes/portfolio-dashboard.md` (the Portfolio Visualization Agent; the dashboard calls the price fetcher). Both now carry status frontmatter: `status: DRAFT`, v0.2.0; `todos_open` 4 and 7.
+- **Closed (each with its script, a status line and evidence in the recipe):**
+  - price fetcher step 1 `scripts/tools/portfolio-price-fetcher-verify-provenance.py`; step 3 `scripts/gigo/portfolio-price-fetcher-validate-data-shape.py`; step 5 `scripts/tools/portfolio-price-fetcher-run-approved-tools.py` (a Python port of Calculate Metrics and Aggregate Summary)
+  - dashboard step 1 `scripts/tools/portfolio-dashboard-verify-provenance.py`
+- **Inputs:** each recipe's declared workflow JSON (read as the named source file the recipe declares); a frozen sample corpus `data/raw/portfolio-price-fetcher/sample/` (5 clean responses for the workflow's own tickers, 5 catalogued defects, SHA-256 manifest; every price invented and labelled); `data/raw/portfolio-price-fetcher/run-envelope.json` (mode sample).
+- **Outputs:** `logs/portfolio-price-fetcher-provenance-2026-10-10.json`, `logs/portfolio-dashboard-provenance-2026-10-10.json`, `data/verified/portfolio-price-fetcher/{clean,defective}/validated.json` + `validate-audit.md`, `data/verified/portfolio-price-fetcher/clean/portfolio-summary.json`, `logs/portfolio-price-fetcher-run-approved-tools-2026-10-10.json`, `logs/portfolio-price-fetcher/self-test-results.{json,md}`.
+- **Commands:**
+  - provenance: price fetcher exit 0 (node table matches, both portfolio definitions agree, fixtures intact); dashboard exit 0 (calls the Price Fetcher by name; placeholder workflow id noted)
+  - step 3: clean exit 0 (5 promoted); defective exit 1 by design (5/5 catalogued defects rejected)
+  - step 5: clean exit 0 (total 65098.13); defective refused (exit 1, nothing written)
+  - `python3 scripts/tools/portfolio-price-fetcher-parity-check.py`: exit 0, 5/5 holdings and the summary agree with the original JavaScript (excluded: lastUpdatedFormatted, host-locale dependent)
+  - `python3 scripts/tools/portfolio-price-fetcher-self-test.py`: exit 0, 15/15 checks as expected, including 7 deliberate breaks
+  - `node scripts/conformance.mjs`: all conform; `node scripts/manifest-check.mjs`: passed
+- **Fixed while building:** the port first wrote `lastUpdated` as `...00Z`; JavaScript's `toISOString()` writes `...00.000Z`. Caught by the parity check, fixed in the port.
+- **Unchanged:** the four generated per-node scripts for these recipes (`scripts/ingest/portfolio-price-fetcher-fetch-stock-prices.py`, `scripts/tools/portfolio-price-fetcher-calculate-metrics.py`, `scripts/tools/portfolio-dashboard-call-portfolio-price-fetcher.py`, `scripts/tools/portfolio-dashboard-webhook.py`), byte-identical.
+- **Open issues:**
+  - [OPEN] Price fetcher steps 2, 4, 6 and the report-script mapping; dashboard steps 2-6 and its two script mappings: still `[TODO: DEV]`.
+  - [OPEN] Live mode: no approval record; Yahoo Finance is never called (the handoff is recorded with `approved_for_live_action: false`).
+  - [NOT COVERED] Real market data, live behaviour, and the dashboard's HTML generation.
+
+## 2026-10-10 -- portfolio-price-fetcher: run instructions added
+
+- **Artifact:** `logs/portfolio-price-fetcher/README.md`, covering how to run the closed steps of `recipes/portfolio-price-fetcher.md` and `recipes/portfolio-dashboard.md` (commands, stop conditions, outputs, the sample corpus, what is not covered). Documentation only; no script or data changed.
+
+## 2026-10-17 -- what-if-simulation-agent: three [TODO: DEV] closures + two script mappings (provenance, data shape, the six-node port), sample mode
+
+- **Recipe:** `recipes/what-if-simulation-agent.md`, which had no status frontmatter. It now carries `status: DRAFT`, `todos_open: 5`, `recipe_version: 0.2.0`, `attestation: null`. It stays `DRAFT`, which is honest: the recipe is not yet SPECIFIED.
+- **Closed (each with its script, a status line and evidence in the recipe):**
+  - step 1 `scripts/tools/what-if-simulation-agent-verify-provenance.py`; step 3 `scripts/gigo/what-if-simulation-agent-validate-data-shape.py`; step 5 `scripts/tools/what-if-simulation-agent-run-approved-tools.py`
+  - mapped to those scripts, with the original notes kept: the Parse & Validate Input node (to step 3's contract and step 5's first node) and the Aggregate & Score All Simulations node (to step 5)
+- **Inputs:** the recipe's declared workflow JSON (read as the named source file); a frozen sample corpus `data/raw/what-if-simulation-agent/sample/` (15 clean requests that reach all 9 growth-and-sentiment cells, all 3 risk appetites, all 3 horizons and all 5 final recommendations; 10 catalogued defective ones; SHA-256 manifest; every company and number invented); `data/raw/what-if-simulation-agent/run-envelope.json` declaring sample mode.
+- **Outputs:** `logs/what-if-simulation-agent-provenance-2026-10-17.json`, `logs/what-if-simulation-agent-run-approved-tools-2026-10-17.json`, `data/verified/what-if-simulation-agent/{clean,defective}/validated.json` and `validate-audit.md`, `data/verified/what-if-simulation-agent/clean/simulation-results.json`, `logs/what-if-simulation-agent/{parity-results.json,self-test-results.json,self-test-results.md,README.md}`.
+- **Commands:**
+  - step 1: exit 0 (node table matches the workflow's 13 nodes, the connections form the chain the port assumes, fixtures intact)
+  - step 3: clean exit 0 (15/15 accepted); defective exit 1 by design (10/10 rejected, each for its own reason)
+  - step 5: clean exit 0 (15 results, each ending in the prompt the Groq node would send); defective refused (exit 1, nothing written)
+  - `python3 scripts/tools/what-if-simulation-agent-parity-check.py`: exit 0, 23/23 requests identical to the original JavaScript (every field, every character of the prompt), with the clock and Math.random pinned inside the JavaScript run
+  - `python3 scripts/tools/what-if-simulation-agent-self-test.py`: exit 0, 18/18 checks as expected, including 10 deliberate breaks (a renamed node, a skipped simulator, a changed fixture, the tools handed rejected data, and four breaks of the port: Python's round, Python's formatting, Python's min/max with NaN, Python's number printing; each caught)
+  - `node scripts/conformance.mjs`: all conform; `node scripts/manifest-check.mjs`: passed
+- **Fixed while building:** the parity check found that Python's `min` and `max` do not treat NaN the way JavaScript's `Math.min` and `Math.max` do (any NaN makes the answer NaN), which changed the aggregate verdict on the two NaN requests. The port now has `js_min` and `js_max`. The self-test's break for it is caught.
+- **Observation, offered as an open question for the maintainers and not as a finding:** in JavaScript a value that parses to NaN passes every comparison, so the Parse & Validate Input node's own five rules accept it. The step-3 gate here adds one rule (numeric fields must be finite) and says so in every audit; the port itself still copies the node exactly, so the parity check can compare NaN behaviour too.
+- **Unchanged:** the eight generated per-node scripts for this recipe (`scripts/gigo/what-if-simulation-agent-parse-groq-response.py`, `-parse-validate-input.py`, `-save-to-postgresql.py`; `scripts/tools/what-if-simulation-agent-aggregate-score-all-simulations.py`, `-build-ai-prompt.py`, `-groq-generate-investment-insights.py`, `-sim-2-risk-appetite-simulator.py`, `-webhook-receive-simulation-request.py`), and the sibling recipe `recipes/n8n-what-if-simulation-agent.md`.
+- **Open issues:**
+  - [OPEN] Steps 2, 4 and 6 and the script mappings for the respond-to-webhook and human-report nodes: still `[TODO: DEV]` (`todos_open` is 5).
+  - [OPEN] Live mode: no approval record; the Groq call and the PostgreSQL write are only recorded handoffs (`approved_for_live_action: false`); the nodes after the prompt are not ported.
+  - [NOT COVERED] Real market data, live behaviour, and whether the simulators' investment logic is sound (ported faithfully, not judged).
+
+
+## 2026-10-25 -- scenariostresstestingagent: three [TODO: DEV] closures (provenance, data shape, the stress-test chain port), sample mode
+
+- **Recipe:** `recipes/scenariostresstestingagent.md`, which had no status frontmatter. It now carries `status: DRAFT`, `todos_open: 5`, `recipe_version: 0.2.0`, `attestation: null`. It stays `DRAFT`, which is honest: the recipe is not yet SPECIFIED.
+- **Closed (each with its script, a status line and evidence in the recipe):**
+  - step 1 `scripts/tools/scenariostresstestingagent-verify-provenance.py`; step 3 `scripts/gigo/scenariostresstestingagent-validate-data-shape.py`; step 5 `scripts/tools/scenariostresstestingagent-run-approved-tools.py`
+  - the step-5 port also covers, with the generated per-node scripts left unchanged, the Stress_Test_Engine and Save_Portfolio_Before_LLM nodes (an "Also covered" line under each), and the Validate Portfolio and Load_Template_Scenario code nodes, which the recipe does not list as steps
+- **Inputs:** the recipe's declared workflow JSON (read as the named source file); a frozen sample corpus `data/raw/scenariostresstestingagent/sample/` (12 clean requests that reach all five template scenarios, the custom-scenario route, all four risk levels, both sides of the weight-rescale rule and the exact 10-percent threshold; 10 catalogued defective ones; SHA-256 manifest; every portfolio and number invented); `data/raw/scenariostresstestingagent/run-envelope.json` declaring sample mode.
+- **Outputs:** `logs/scenariostresstestingagent-provenance-2026-10-25.json`, `logs/scenariostresstestingagent-run-approved-tools-2026-10-25.json`, `data/verified/scenariostresstestingagent/{clean,defective}/validated.json` and `validate-audit.md`, `data/verified/scenariostresstestingagent/clean/stress-results.json`, `logs/scenariostresstestingagent/{parity-results.json,self-test-results.json,self-test-results.md,README.md}`.
+- **Commands:**
+  - step 1: exit 0 (node table matches the workflow's 16 nodes, the 18 connections match the wiring the port assumes, fixtures intact)
+  - step 3: clean exit 0 (12/12 accepted); defective exit 1 by design (10/10 rejected, each for its own reason)
+  - step 5: clean exit 0 (11 stress-tested, 1 stopped at the Groq handoff; risk levels CRITICAL 7, HIGH 1, MODERATE 1, LOW 2); defective refused (exit 1, nothing written)
+  - `python3 scripts/tools/scenariostresstestingagent-parity-check.py`: exit 0, 24/24 compared cases identical to the original code (Validate Portfolio under node; the three Python nodes by exec inside a small shim), one defective request (a string weight) not modelled and refused by the gate
+  - `python3 scripts/tools/scenariostresstestingagent-self-test.py`: exit 0, 27/27 checks as expected, including 12 deliberate breaks (a renamed node, a rewired connection, a tampered fixture, a holding without a ticker, and eight breaks of the port: no rescale, a wrong threshold, `>=` for `>`, one-decimal rounding, an extra shock, a wrong default scenario, a wrong sector, a custom scenario on the template branch; each caught)
+  - `node scripts/conformance.mjs`: all conform; `node scripts/manifest-check.mjs`: passed
+- **Fixed while building:** none needed beyond a corpus design choice; the parity check matched on the first full run (including the engine's error branches and the `portfolio.holdings is not iterable` message).
+- **Observations, offered as open questions for the maintainers and not as findings:**
+  - the Stress_Test_Engine uses a fixed sector map (ten tickers; any other ticker is treated as `tech_sector`) and a fixed starting value of 10000; the two lists `ai_stocks` and `growth_stocks` are fixed too
+  - two template shocks are defined but the engine never reads them: `volatility_spike` (every scenario) and `all_sectors` (black_swan), so black_swan applies only its market shock; `horizon_days` passes through Validate Portfolio and is not used
+  - a holding with no weight passes Validate Portfolio when the other weights sum to 1.0 and then fails in the engine (`KeyError: 'weight'`); all-zero weights are rescaled by zero, become NaN, and the engine fails on them (`TypeError`); a negative weight, an unknown scenario_type, and an empty holdings array all run without a message (the step-3 gate rejects these four, says so in its audit, and the port reproduces the workflow's behaviour so parity holds either way)
+  - the Fetch_Data node carries a placeholder API key string and a fixed symbol (NVDA); it is never called here
+- **Unchanged:** the eight generated per-node scripts for this recipe (`scripts/gigo/scenariostresstestingagent-parse-input.py`; `scripts/ingest/scenariostresstestingagent-fetch-data.py`; `scripts/tools/scenariostresstestingagent-{basic-llm-chain,groq-chat-model,parse-llm-response,save-portfolio-before-llm,stress-test-engine,webhook-trigger}.py`).
+- **Open issues:**
+  - [OPEN] Steps 2, 4 and 6 and the script mappings for the respond-to-webhook and human-report nodes: still `[TODO: DEV]` (`todos_open` is 5).
+  - [OPEN] Live mode: no approval record; the Alpha Vantage request, the Groq call and the webhook reply are only recorded handoffs (`approved_for_live_action: false`); Parse_LLM_Response is not ported, so a custom scenario stops at the Groq handoff.
+  - [NOT COVERED] Real portfolios, live behaviour, and whether the template shocks and the engine's risk thresholds are sound (ported faithfully, not judged).

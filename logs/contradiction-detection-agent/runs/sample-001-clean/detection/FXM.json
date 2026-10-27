@@ -1,0 +1,158 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Mike Fixture Co",
+  "contradiction_flags": [],
+  "detection_summary": {
+    "has_contradictions": false,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": false,
+    "total_flags": 0
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXM-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 1,
+    "qa_items": 0,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXM-001",
+        "claim_summary": "Renewal rates are in line with last year.",
+        "claim_text": "Renewal rates are in line with last year.",
+        "company_name": "Mike Fixture Co",
+        "direction": "unchanged",
+        "direction_confidence": 0.5,
+        "earnings_call_id": "CALL-FXM-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "contract renewals",
+        "id": "G-FXM-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXM",
+        "transcript_citation": "CALL-FXM-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXM-1",
+        "headline": "Mike Fixture Co update",
+        "id": "N-FXM-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.0,
+        "source_name": "Fixture Wire",
+        "ticker": "FXM",
+        "topic_tags": [
+          "earnings"
+        ]
+      }
+    ],
+    "qa_pressure": [],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": true,
+        "burst_ratio": 3.2,
+        "claim_id": "TS-FXM-001",
+        "declining_languages": [],
+        "emerging_languages": [
+          "rust",
+          "zig"
+        ],
+        "id": "T-FXM-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 0,
+        "ticker": "FXM",
+        "velocity_anomaly": true,
+        "velocity_z_score": 2.4
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.0,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": true,
+      "burst_ratio": 3.2,
+      "claim_id": "TS-FXM-001",
+      "declining_languages": [],
+      "emerging_languages": [
+        "rust",
+        "zig"
+      ],
+      "id": "T-FXM-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 0,
+      "ticker": "FXM",
+      "velocity_anomaly": true,
+      "velocity_z_score": 2.4
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "NEUTRAL",
+    "pos_news": 0,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 1,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXM"
+}

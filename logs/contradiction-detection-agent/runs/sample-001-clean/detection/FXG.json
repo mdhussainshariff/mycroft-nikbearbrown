@@ -1,0 +1,214 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Golf Fixture Co",
+  "contradiction_flags": [
+    {
+      "claim_a_direction": null,
+      "claim_a_id": "QA-CALL-FXG-2026Q2-1-pricing",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "Topic: pricing, pressure_score: 8",
+      "claim_b_direction": "positive",
+      "claim_b_id": "NEWS-FXG-1",
+      "claim_b_source": "news_agent",
+      "claim_b_text": "Analysts raise Golf Fixture Co target",
+      "conflict_description": "Management evaded 2 high-pressure Q&A topics but analyst coverage is positive",
+      "evidence_for_a": "Q&A: 2 evaded topics, top=\"pricing\"",
+      "evidence_for_b": "Analyst news: sentiment=positive",
+      "flag_id": "CONTRA-FXG-20260930-001-P3-F001",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 3,
+      "pattern_name": "QA Evasion vs Analyst Confidence",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXG-20260930-001",
+      "schema_valid": true,
+      "severity": "MEDIUM",
+      "ticker": "FXG"
+    }
+  ],
+  "detection_summary": {
+    "has_contradictions": true,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 1,
+    "overall_confidence_level": "LOW_CONCERN",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": true,
+    "total_flags": 1
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 1
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXG-20260930-001",
+  "signal_counts": {
+    "guidance": 0,
+    "news": 1,
+    "qa_items": 3,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXG-1",
+        "headline": "Analysts raise Golf Fixture Co target",
+        "id": "N-FXG-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXG",
+        "topic_tags": [
+          "analyst",
+          "target"
+        ]
+      }
+    ],
+    "qa_pressure": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-2",
+        "pressure_score": 8,
+        "question_text": "Can you say more about pricing?",
+        "question_topic": "pricing",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 1
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": true,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-1",
+        "pressure_score": 5,
+        "question_text": "Can you say more about capex?",
+        "question_topic": "capex",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 3
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXG-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXG-3",
+        "pressure_score": 2,
+        "question_text": "Can you say more about hiring?",
+        "question_topic": "hiring",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXG",
+        "times_asked": 1
+      }
+    ],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXG-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXG-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXG",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.5,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXG-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXG-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXG",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "POSITIVE",
+    "pos_news": 1,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXG"
+}

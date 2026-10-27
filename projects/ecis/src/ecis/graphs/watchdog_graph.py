@@ -98,6 +98,16 @@ def check_thresholds(state: WatchdogState) -> dict:
         }
         requires_approval = True
 
+    reader = state.get("reader_name", "triangulated")
+    if reader in ("finetuned_llm", "llm_finetuned"):
+        from ecis.extraction.finetuned_guard import finetuned_reversion_needed
+
+        revert, revert_details = finetuned_reversion_needed(ss)
+        if revert:
+            action_type = "revert_finetuned"
+            action_details = revert_details
+            requires_approval = False
+
     return {
         "consecutive_negative_skill": consecutive_neg,
         "action_type": action_type,
@@ -167,6 +177,11 @@ def execute_action(state: WatchdogState) -> dict:
             conn.commit()
             _log_action(reader, action, f"weight {row['weight']:.4f} → {new_weight:.4f}", details)
         conn.close()
+
+    elif action == "revert_finetuned":
+        from ecis.extraction.finetuned_guard import revert_finetuned_adapter
+
+        revert_finetuned_adapter(details)
 
     return {}
 

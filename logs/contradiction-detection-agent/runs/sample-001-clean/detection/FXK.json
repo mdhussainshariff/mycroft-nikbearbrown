@@ -1,0 +1,156 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Kilo Fixture Co",
+  "contradiction_flags": [],
+  "detection_summary": {
+    "has_contradictions": false,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": false,
+    "total_flags": 0
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXK-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 1,
+    "qa_items": 0,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXK-001",
+        "claim_summary": "Efficiency gains continue.",
+        "claim_text": "Efficiency gains continue.",
+        "company_name": "Kilo Fixture Co",
+        "direction": "strengthened",
+        "direction_confidence": 0.65,
+        "earnings_call_id": "CALL-FXK-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "operating efficiency",
+        "id": "G-FXK-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXK",
+        "transcript_citation": "CALL-FXK-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXK-1",
+        "headline": "Kilo Fixture Co holds event",
+        "id": "N-FXK-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.0,
+        "source_name": "Fixture Wire",
+        "ticker": "FXK",
+        "topic_tags": [
+          "events"
+        ]
+      }
+    ],
+    "qa_pressure": [],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXK-001",
+        "declining_languages": [
+          "perl"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXK-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 4,
+        "ticker": "FXK",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.0,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXK-001",
+      "declining_languages": [
+        "perl"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXK-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 4,
+      "ticker": "FXK",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "NEUTRAL",
+    "pos_news": 0,
+    "strengthened_guidance_count": 1,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXK"
+}

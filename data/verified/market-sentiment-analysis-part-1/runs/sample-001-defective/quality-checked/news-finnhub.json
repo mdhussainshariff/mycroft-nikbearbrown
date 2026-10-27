@@ -1,0 +1,178 @@
+{
+  "_provenance": {
+    "fixture_set": "defective",
+    "quality_checked_by": "scripts/gigo/market-sentiment-analysis-part-1-transform-quality-check.py",
+    "run_id": "sample-001",
+    "source_envelope": {
+      "fetched_at": "2026-08-27T14:30:00+00:00",
+      "sample_mode": true,
+      "source_name": "Finnhub company-news",
+      "source_path": "data/raw/market-sentiment-analysis-part-1/sample/defective/news-finnhub.json",
+      "source_sha256": "c7dd6641a29e8dee26efd45fed186c473c01977ef769f4192eb402ba4cb052e9",
+      "source_type": "http_json"
+    },
+    "step3_input": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/news-finnhub.json"
+  },
+  "classification": "gigo",
+  "duplicate_counting_rule": "A duplicate is every occurrence of an identity key beyond the first. Three rows sharing one key count as 2 duplicates, not 3 and not 1.",
+  "duplicates": [
+    {
+      "action": "removed from verified_records; first occurrence kept",
+      "basis": "identity_key",
+      "first_seen_locator": "records[0]",
+      "key_fields": [
+        "id"
+      ],
+      "key_value": [
+        900001
+      ],
+      "locator": "records[2]"
+    },
+    {
+      "action": "removed from verified_records; first occurrence kept",
+      "basis": "headline_near_duplicate",
+      "first_seen_locator": "records[0]",
+      "key_fields": [
+        "headline (whitespace-normalised, case-folded)"
+      ],
+      "key_value": [
+        "fake industries shares surge as quarterly results beat expectations"
+      ],
+      "locator": "records[1]",
+      "note": "Same headline. When id and url differ this is a syndicated copy of one story; an id-only dedupe would count it as independent and double-weight it."
+    },
+    {
+      "action": "removed from verified_records; first occurrence kept",
+      "basis": "headline_near_duplicate",
+      "first_seen_locator": "records[0]",
+      "key_fields": [
+        "headline (whitespace-normalised, case-folded)"
+      ],
+      "key_value": [
+        "fake industries shares surge as quarterly results beat expectations"
+      ],
+      "locator": "records[2]",
+      "note": "Same headline. When id and url differ this is a syndicated copy of one story; an id-only dedupe would count it as independent and double-weight it."
+    }
+  ],
+  "flags": [
+    {
+      "action": "flagged and kept; stale data must not be silently dropped",
+      "age_days": 895,
+      "field": "datetime",
+      "flag": "stale_timestamp",
+      "locator": "records[6]",
+      "measured_from": "2026-08-27T14:30:00+00:00",
+      "observed_at": "2024-03-15T13:00:00+00:00",
+      "value": 1710507600,
+      "window_days": 2
+    },
+    {
+      "action": "flagged and left as found; must not be coerced downstream",
+      "expected": "epoch_int",
+      "field": "datetime",
+      "flag": "type_violation",
+      "locator": "records[7]",
+      "value": "yesterday"
+    }
+  ],
+  "freshness_measured_from": "2026-08-27T14:30:00+00:00",
+  "freshness_window_days": 2,
+  "identity_keys": [
+    "id"
+  ],
+  "node": "Transform and quality check",
+  "quality_notes": [
+    {
+      "declared": 7,
+      "detail": "The source envelope under-reported its own payload. The recount governs; the declared value is retained for provenance.",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/news-finnhub.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "note": "envelope_count_mismatch",
+      "recounted": 8,
+      "stream": "news"
+    }
+  ],
+  "record_count": 3,
+  "record_count_basis": "rows surviving dedup; flagged rows are kept, not dropped",
+  "rejects": [
+    {
+      "action": "row withheld from the verified layer; never defaulted",
+      "detail": "key_absent",
+      "field": "headline",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/news-finnhub.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "locator": "records[3]",
+      "reason": "missing_required_field",
+      "stream": "news"
+    },
+    {
+      "action": "row withheld from the verified layer; never defaulted",
+      "detail": "present_but_null",
+      "field": "url",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/news-finnhub.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "locator": "records[4]",
+      "reason": "missing_required_field",
+      "stream": "news"
+    },
+    {
+      "action": "row withheld from the verified layer",
+      "detail": "expected an object, got list",
+      "file": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/news-finnhub.json",
+      "found_by": "step 3 (validate-data-shape)",
+      "locator": "records[5]",
+      "reason": "malformed_row",
+      "stream": "news"
+    }
+  ],
+  "rows_in": 5,
+  "rows_removed_as_duplicates": 3,
+  "schema_source": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+  "schema_version": "1.0.0",
+  "stream": "news",
+  "type_contract": {
+    "datetime": "epoch_int"
+  },
+  "verified_locators": [
+    "records[0]",
+    "records[6]",
+    "records[7]"
+  ],
+  "verified_records": [
+    {
+      "category": "company",
+      "datetime": 1787832300,
+      "headline": "Fake Industries shares surge as quarterly results beat expectations",
+      "id": 900001,
+      "image": "https://example.invalid/img/900001.jpg",
+      "related": "FAKE",
+      "source": "Synthetic Wire",
+      "summary": "Fake Industries reported a strong quarter, and the stock saw a sharp gain in early trading.",
+      "url": "https://example.invalid/news/900001"
+    },
+    {
+      "category": "company",
+      "datetime": 1710507600,
+      "headline": "Fake Industries announces prior-year restructuring",
+      "id": 900016,
+      "image": "https://example.invalid/img/900016.jpg",
+      "related": "FAKE",
+      "source": "Synthetic Wire",
+      "summary": "Item dated well outside the declared two-day collection window.",
+      "url": "https://example.invalid/news/900016"
+    },
+    {
+      "category": "company",
+      "datetime": "yesterday",
+      "headline": "Fake Industries item carries a non-numeric timestamp",
+      "id": 900017,
+      "image": "https://example.invalid/img/900017.jpg",
+      "related": "FAKE",
+      "source": "Synthetic Aggregator",
+      "summary": "The datetime field is a free-text string where an epoch integer is required.",
+      "url": "https://example.invalid/news/900017"
+    }
+  ],
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

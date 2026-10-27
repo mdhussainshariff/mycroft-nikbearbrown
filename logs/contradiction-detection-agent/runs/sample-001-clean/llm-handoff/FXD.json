@@ -1,0 +1,27 @@
+{
+  "action": "llm_review_of_flags",
+  "approval_required_by": "Gate 5 - Approval gate",
+  "approved_for_live_action": false,
+  "credential_policy": "GROQ_API_KEY from the environment only; never hardcoded",
+  "endpoint_named_by_original": "https://api.groq.com/openai/v1/chat/completions",
+  "judgment_label": "MODEL JUDGMENT (not produced in sample mode)",
+  "live_call_performed": false,
+  "live_precondition": "before any live send, confirm the request body carries this prompt (in the exported workflow JSON the Groq node's body parameters are empty)",
+  "llm_needed": true,
+  "model_named_by_original": "llama-3.3-70b-versatile",
+  "payload": {
+    "max_tokens": 2000,
+    "messages": [
+      {
+        "content": "You are a senior investment intelligence analyst for the Mycroft platform. You receive structured contradiction flags produced by automated detection logic. Your job is to: 1. Assess the plausibility of each contradiction. 2. Assign an investment relevance score (1-10) to each flag. 3. Identify which contradictions are self-resolving vs genuinely irreconcilable. 4. Produce a concise analyst memo (3-5 sentences) per flag. 5. Produce a single overall portfolio-level assessment paragraph. Rules: Never recommend buy/sell/hold. Surface conflict, do not resolve it. Flag INSUFFICIENT_EVIDENCE when data is thin. Cite only evidence provided. Return ONLY valid JSON. No markdown, no preamble.",
+        "role": "system"
+      },
+      {
+        "content": "TICKER: FXD | COMPANY: Delta Fixture Co | RESOLVE_ID: CONTRA-FXD-20260930-001\n\nSIGNAL INVENTORY:\n- Guidance signals: 1\n- Risk admissions: 0\n- QA pressure items: 0\n- News articles: 4\n- Tech stack snapshots: 1\n\nNEWS SENTIMENT: NEGATIVE\n\nDETECTED CONTRADICTION FLAGS (1 total):\n\n[Flag 1] Pattern 1 — Sentiment vs Guidance Direction | Severity: HIGH\nConflict: Guidance STRENGTHENED on call but news sentiment is NEGATIVE\nEvidence A (earnings_agent): Earnings: 1 strengthened signals\nEvidence B (news_agent): News: 3 negative articles, avg score -0.30\n\nReturn JSON (schema as in the original Build Groq Prompt node).",
+        "role": "user"
+      }
+    ],
+    "model": "llama-3.3-70b-versatile",
+    "temperature": 0.1
+  }
+}

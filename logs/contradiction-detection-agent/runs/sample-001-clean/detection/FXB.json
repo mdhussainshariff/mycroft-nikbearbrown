@@ -1,0 +1,156 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Bravo Fixture Co",
+  "contradiction_flags": [],
+  "detection_summary": {
+    "has_contradictions": false,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": false,
+    "total_flags": 0
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXB-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 1,
+    "qa_items": 0,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXB-001",
+        "claim_summary": "Cloud margin may soften.",
+        "claim_text": "Cloud margin may soften.",
+        "company_name": "Bravo Fixture Co",
+        "direction": "weakened",
+        "direction_confidence": 0.55,
+        "earnings_call_id": "CALL-FXB-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "cloud margin",
+        "id": "G-FXB-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXB",
+        "transcript_citation": "CALL-FXB-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXB-1",
+        "headline": "Bravo Fixture Co upbeat",
+        "id": "N-FXB-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXB",
+        "topic_tags": [
+          "earnings"
+        ]
+      }
+    ],
+    "qa_pressure": [],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXB-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXB-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXB",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.5,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXB-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXB-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXB",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "POSITIVE",
+    "pos_news": 1,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 1
+  },
+  "ticker": "FXB"
+}

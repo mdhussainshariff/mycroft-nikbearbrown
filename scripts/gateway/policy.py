@@ -6,6 +6,10 @@ Refusals, following the price-table and tier-config precedent:
 - a label or verdict task without its label set is rejected
 - every tier the policy names must exist in tiers.json
 - escalation must go UP the tier order; sideways or down is rejected
+
+`escalate_to` may be null, meaning this task type is never retried. That is
+the only way to express a task starting on the top tier, where there is no
+higher tier to escalate to.
 """
 
 from __future__ import annotations
@@ -25,8 +29,7 @@ VALIDATORS = frozenset({
     "numbers_grounded", "cites_context",
 })
 QUALITY_CHECKS = frozenset({"deterministic", "offline_judge"})
-_REQUIRED = ("description", "output", "validator", "quality_check",
-             "start_tier", "escalate_to")
+_REQUIRED = ("description", "output", "validator", "quality_check", "start_tier")
 
 
 class PolicyError(ValueError):
@@ -89,14 +92,21 @@ class Policy:
                     raise PolicyError(f"task type {name!r} produces a {rule['output']} "
                                       f"and needs a non-empty list of distinct labels")
 
-            start, up = rule["start_tier"], rule["escalate_to"]
-            for tier in (start, up):
-                if tier not in order:
-                    raise PolicyError(f"task type {name!r} names tier {tier!r}, "
+            start = rule["start_tier"]
+            if start not in order:
+                raise PolicyError(f"task type {name!r} names tier {start!r}, "
+                                  f"which is not in tier_order {order}")
+
+            # null means this task type is never retried -- the only way to
+            # express a task that starts on the top tier.
+            up = rule.get("escalate_to")
+            if up is not None:
+                if not isinstance(up, str) or up not in order:
+                    raise PolicyError(f"task type {name!r} names tier {up!r}, "
                                       f"which is not in tier_order {order}")
-            if order.index(up) <= order.index(start):
-                raise PolicyError(f"task type {name!r} escalates from {start!r} to "
-                                  f"{up!r}; escalation must go up the tier order")
+                if order.index(up) <= order.index(start):
+                    raise PolicyError(f"task type {name!r} escalates from {start!r} to "
+                                      f"{up!r}; escalation must go up the tier order")
 
             promote = rule.get("promote_above_chars")
             if promote is not None and not _positive_int(promote):

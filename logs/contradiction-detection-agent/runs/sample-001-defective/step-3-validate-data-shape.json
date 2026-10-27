@@ -1,0 +1,248 @@
+{
+  "classification": "gigo",
+  "human_gate": {
+    "capacity": "[PA]",
+    "cleared_by": null,
+    "gate": 3,
+    "note": "Gate 3: every raw and verified JSON output parses and every shape finding has been read."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_step": null,
+  "node": "Validate data shape",
+  "node_type": "recipe-step",
+  "run": "sample-001-defective",
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "missing_fields": [
+        "direction"
+      ],
+      "parse_errors": [],
+      "promoted": 7,
+      "record_count": 12,
+      "required_fields_present": false,
+      "row_findings": [
+        {
+          "findings": [
+            {
+              "field": "direction",
+              "problem": "missing_required"
+            }
+          ],
+          "id": "G-FXA-1",
+          "index": 0
+        },
+        {
+          "findings": [
+            {
+              "expected": "number",
+              "field": "direction_confidence",
+              "got": "str",
+              "problem": "type_error",
+              "value": "'0.85'"
+            }
+          ],
+          "id": "G-FXC-1",
+          "index": 2
+        },
+        {
+          "findings": [
+            {
+              "allowed": [
+                "strengthened",
+                "weakened",
+                "unchanged"
+              ],
+              "field": "direction",
+              "problem": "not_in_allowed_set",
+              "value": "up"
+            }
+          ],
+          "id": "G-FXD-1",
+          "index": 3
+        },
+        {
+          "findings": [
+            {
+              "field": "direction_confidence",
+              "max": 1,
+              "min": 0,
+              "problem": "out_of_bounds",
+              "value": 1.4
+            }
+          ],
+          "id": "G-FXJ-1",
+          "index": 4
+        },
+        {
+          "findings": [
+            {
+              "field": null,
+              "problem": "row_not_object",
+              "value": "'not-a-row'"
+            }
+          ],
+          "id": null,
+          "index": 11
+        }
+      ],
+      "schema_version": "1.0.0",
+      "source_name": "guidance-signals",
+      "type_errors": 4,
+      "withheld": 5
+    },
+    {
+      "missing_fields": [
+        "schema_valid"
+      ],
+      "parse_errors": [],
+      "promoted": 5,
+      "record_count": 7,
+      "required_fields_present": false,
+      "row_findings": [
+        {
+          "findings": [
+            {
+              "allowed": [
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ],
+              "field": "severity",
+              "problem": "not_in_allowed_set",
+              "value": "severe"
+            }
+          ],
+          "id": "R-FXE-1",
+          "index": 1
+        },
+        {
+          "findings": [
+            {
+              "field": "schema_valid",
+              "problem": "missing_required"
+            }
+          ],
+          "id": "R-FXP-1",
+          "index": 5
+        }
+      ],
+      "schema_version": "1.0.0",
+      "source_name": "risk-admissions",
+      "type_errors": 1,
+      "withheld": 2
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [
+        "does not parse: Invalid control character at: line 85 column 21 (char 2403)"
+      ],
+      "required_fields_present": false,
+      "row_findings": [],
+      "schema_version": "1.0.0",
+      "source_name": "qa-pressure-map",
+      "type_errors": 0
+    },
+    {
+      "missing_fields": [],
+      "parse_errors": [],
+      "promoted": 29,
+      "record_count": 32,
+      "required_fields_present": true,
+      "row_findings": [
+        {
+          "findings": [
+            {
+              "expected": "number",
+              "field": "sentiment_score",
+              "got": "str",
+              "problem": "type_error",
+              "value": "'0.4'"
+            }
+          ],
+          "id": "N-FXA-2",
+          "index": 1
+        },
+        {
+          "findings": [
+            {
+              "expected": "datetime",
+              "field": "published_at",
+              "got": "str",
+              "problem": "type_error",
+              "value": "'yesterday'"
+            }
+          ],
+          "id": "N-FXC-3",
+          "index": 6
+        },
+        {
+          "findings": [
+            {
+              "expected": "list",
+              "field": "topic_tags",
+              "got": "str",
+              "problem": "type_error",
+              "value": "'analyst'"
+            }
+          ],
+          "id": "N-FXG-1",
+          "index": 19
+        }
+      ],
+      "schema_version": "1.0.0",
+      "source_name": "news-signals",
+      "type_errors": 3,
+      "withheld": 3
+    },
+    {
+      "missing_fields": [
+        "declining_languages"
+      ],
+      "parse_errors": [],
+      "promoted": 12,
+      "record_count": 14,
+      "required_fields_present": false,
+      "row_findings": [
+        {
+          "findings": [
+            {
+              "expected": "boolean",
+              "field": "burst_detected",
+              "got": "str",
+              "problem": "type_error",
+              "value": "'true'"
+            }
+          ],
+          "id": "T-FXJ-1",
+          "index": 7
+        },
+        {
+          "findings": [
+            {
+              "field": "declining_languages",
+              "problem": "missing_required"
+            }
+          ],
+          "id": "T-FXL-1",
+          "index": 9
+        }
+      ],
+      "schema_version": "1.0.0",
+      "source_name": "tech-stack-signals",
+      "type_errors": 1,
+      "withheld": 2
+    }
+  ],
+  "status": "stop",
+  "stop_conditions": [
+    "guidance-signals: 0 parse error(s), 5 row(s) with shape findings",
+    "risk-admissions: 0 parse error(s), 2 row(s) with shape findings",
+    "qa-pressure-map: 1 parse error(s), 0 row(s) with shape findings",
+    "news-signals: 0 parse error(s), 3 row(s) with shape findings",
+    "tech-stack-signals: 0 parse error(s), 2 row(s) with shape findings"
+  ],
+  "workflow": "Contradiction_detection_agent"
+}

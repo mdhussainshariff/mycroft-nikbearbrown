@@ -1,0 +1,11 @@
+{
+  "action": "llm_review_of_flags",
+  "approval_required_by": "Gate 5 - Approval gate",
+  "approved_for_live_action": false,
+  "endpoint_named_by_original": "https://api.groq.com/openai/v1/chat/completions",
+  "judgment_label": "MODEL JUDGMENT (not produced in sample mode)",
+  "live_call_performed": false,
+  "llm_needed": false,
+  "model_named_by_original": "llama-3.3-70b-versatile",
+  "reason": "no flags: the original skips the model (No-Flag Passthrough)"
+}

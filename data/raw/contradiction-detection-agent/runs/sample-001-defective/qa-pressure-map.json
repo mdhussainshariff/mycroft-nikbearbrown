@@ -1,0 +1,18 @@
+{
+  "errors": [
+    "does not parse: Invalid control character at: line 85 column 21 (char 2403)"
+  ],
+  "fetched_at": "2026-09-30T00:00:00+00:00",
+  "original_node": "DB: Fetch QA Pressure Map",
+  "parsed": false,
+  "raw_text": "{\n  \"rows\": [\n    {\n      \"analyst_firm\": [\n        \"Fixture Securities\"\n      ],\n      \"call_date\": \"2026-07-28\",\n      \"earnings_call_id\": \"CALL-FXA-2026Q2-1\",\n      \"evasion_flag\": false,\n      \"fiscal_quarter\": \"2026Q2\",\n      \"id\": \"Q-FXA-1\",\n      \"pressure_score\": 3,\n      \"question_text\": \"Can you say more about headcount?\",\n      \"question_topic\": \"headcount\",\n      \"response_summary\": \"Management responded (direct).\",\n      \"response_type\": \"direct\",\n      \"schema_valid\": true,\n      \"ticker\": \"FXA\",\n      \"times_asked\": 1\n    },\n    {\n      \"analyst_firm\": [\n        \"Fixture Securities\"\n      ],\n      \"call_date\": \"2026-07-28\",\n      \"earnings_call_id\": \"CALL-FXG-2026Q2-1\",\n      \"evasion_flag\": true,\n      \"fiscal_quarter\": \"2026Q2\",\n      \"id\": \"Q-FXG-1\",\n      \"pressure_score\": 5,\n      \"question_text\": \"Can you say more about capex?\",\n      \"question_topic\": \"capex\",\n      \"response_summary\": \"Management responded (direct).\",\n      \"response_type\": \"direct\",\n      \"schema_valid\": true,\n      \"ticker\": \"FXG\",\n      \"times_asked\": 3\n    },\n    {\n      \"analyst_firm\": [\n        \"Fixture Securities\"\n      ],\n      \"call_date\": \"2026-07-28\",\n      \"earnings_call_id\": \"CALL-FXG-2026Q2-1\",\n      \"evasion_flag\": false,\n      \"fiscal_quarter\": \"2026Q2\",\n      \"id\": \"Q-FXG-2\",\n      \"pressure_score\": 8,\n      \"question_text\": \"Can you say more about pricing?\",\n      \"question_topic\": \"pricing\",\n      \"response_summary\": \"Management responded (direct).\",\n      \"response_type\": \"direct\",\n      \"schema_valid\": true,\n      \"ticker\": \"FXG\",\n      \"times_asked\": 1\n    },\n    {\n      \"analyst_firm\": [\n        \"Fixture Securities\"\n      ],\n      \"call_date\": \"2026-07-28\",\n      \"earnings_call_id\": \"CALL-FXG-2026Q2-1\",\n      \"evasion_flag\": false,\n      \"fiscal_quarter\": \"2026Q2\",\n      \"id\": \"Q-FXG-3\",\n      \"pressure_score\": 2,\n      \"question_text\": \"Can you say more about hiring?\",\n      \"question_topic\": \"hiring\",\n      \"response_summary\": \"Management responded (direct).\",\n      \"response_type\": \"direct\",\n      \"schema_valid\": true,\n      \"ticker\": \"FXG\",\n      \"times_asked\": 1\n    },\n    {\n      \"analyst_firm\": [\n        \"Fixture Securities\"\n      ],\n      \"call_date\": \"2026-07-28\",\n      \"earnings_call_id\": \"CALL-FXH-2026Q2-1\",\n      \"evasion_flag\": true,\n      \"fiscal_quarter\": \"2026Q2\",\n      \"id\": \"Q-FXH-1\",\n      \"pressure_score\": 9,\n      \"question_text\n",
+  "record_count": null,
+  "records": null,
+  "rejects": [],
+  "run": "sample-001-defective",
+  "sample_mode": true,
+  "sha256": "c10f69408753645b04c638e8536c8522438d4bb624c043ce891f88c2a97f0387",
+  "source_name": "qa-pressure-map",
+  "source_type": "fixture",
+  "source_url_or_path": "data/raw/contradiction-detection-agent/sample/defective/qa-pressure-map.json.broken"
+}

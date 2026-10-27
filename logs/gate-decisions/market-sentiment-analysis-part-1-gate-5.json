@@ -1,0 +1,76 @@
+{
+  "actions_declined": [
+    {
+      "credentials": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "kind": "model_call",
+      "model": "claude-sonnet-4-20250514",
+      "performed": false,
+      "tool": "AI Analysis & Synthesis"
+    },
+    {
+      "credentials": [
+        "SLACK_BOT_TOKEN",
+        "SLACK_CHANNEL_ID"
+      ],
+      "kind": "notification",
+      "performed": false,
+      "tool": "Send to Slack"
+    },
+    {
+      "credentials": [
+        "SMTP_HOST",
+        "SMTP_USER",
+        "SMTP_PASSWORD",
+        "REPORT_RECIPIENT"
+      ],
+      "kind": "notification",
+      "performed": false,
+      "tool": "Send Email"
+    }
+  ],
+  "approved_for_live_action": false,
+  "decided_at": "2026-10-02",
+  "decided_by": {
+    "name": "Uday Sonawane",
+    "role": "recipe owner"
+  },
+  "decision": "deny",
+  "decision_note": "Closed by a logged decision, which is what the gate requires. The decision is no. This record exists so the gate is CLOSED rather than open-and-unexamined; it does not authorise anything.",
+  "evidence_files": [
+    {
+      "note": "Renders all three handoffs with approved_for_live_action false; performs none.",
+      "path": "scripts/tools/market-sentiment-analysis-part-1-run-approved-tools.py",
+      "sha256": "edb664608bbd2b214e5308057e7ad0ada62e2f81caa9bec6a41557d1fff4a624"
+    },
+    {
+      "note": "live_call_performed false throughout.",
+      "path": "logs/market-sentiment-analysis-part-1/runs/sample-001-defective/sentiment-scores.json",
+      "sha256": "73f75357ccd0c1d2b2531527bed7c1e498fe92dc92b420f8f2a73b2042afcf93"
+    }
+  ],
+  "gate": 5,
+  "gate_name": "Approval gate",
+  "gate_test_status": "The gate-5 test passes because nothing has recorded a performed live call, not because this gate was cleared for live action. It fails the moment a live call is recorded without an approval record.",
+  "handoff_condition": "Live network calls, external writes, credentials, production databases, emails, dashboards, publishing, or model calls with sensitive data require an approval record.",
+  "human_capacity": "[EI]",
+  "preconditions_to_reopen": [
+    "Real fetchers implemented in step 2, reading credentials from the environment only.",
+    "A second fixture set covering 401/403/429/timeout/empty-200, with expected detections declared.",
+    "A named recipient for the Slack and email actions, and a stated retention position for what is sent.",
+    "A suitability review of the model prompt, which asks for actionable insights on a financial question."
+  ],
+  "recipe": "recipes/market-sentiment-analysis-part-1.md",
+  "recipe_version": "0.2.0",
+  "residual_risk": "A deny is not a safety guarantee. Nothing in the pipeline enforces this decision at runtime -- it is enforced by step 2 refusing live mode and by the gate-5 test, both of which are code that could be changed.",
+  "run_log": "logs/RUN_LOG.md#2026-10-02",
+  "voids_if": "Any edit to the recipe or its six step scripts, any change to the fixture corpus, or any implementation of live mode voids this decision and requires a fresh one.",
+  "why_denied": [
+    "Live mode is unimplemented: step 2 hard-stops before any fetch, so an approval would authorise a capability that does not exist.",
+    "No credentials are configured. Approving would mean approving in principle, which is the checkbox the gate exists to prevent.",
+    "The frozen corpus explicitly does not cover upstream HTTP failure modes (401, 403, 429, timeout, empty 200). The failure behaviour of a live run has never been exercised.",
+    "Two of the three declined actions are outward-facing and irreversible once sent: a Slack message and an email. The third generates investment-flavoured prose from a model."
+  ],
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

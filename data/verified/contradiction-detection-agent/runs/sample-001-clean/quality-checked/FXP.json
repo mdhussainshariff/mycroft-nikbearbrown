@@ -1,0 +1,148 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "Papa Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXP-20260930-001",
+    "ticker": "FXP"
+  },
+  "rows": {
+    "guidance-signals": [],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXP-1",
+        "headline": "Analysts upgrade Papa Fixture Co",
+        "id": "N-FXP-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.6,
+        "source_name": "Fixture Wire",
+        "ticker": "FXP",
+        "topic_tags": [
+          "analyst"
+        ]
+      }
+    ],
+    "qa-pressure-map": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "evasion_flag": true,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXP-1",
+        "pressure_score": 8,
+        "question_text": "Can you say more about security?",
+        "question_topic": "security",
+        "response_summary": "Management responded (deflected).",
+        "response_type": "deflected",
+        "schema_valid": true,
+        "ticker": "FXP",
+        "times_asked": 2
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXP-2",
+        "pressure_score": 7,
+        "question_text": "Can you say more about outage?",
+        "question_topic": "outage",
+        "response_summary": "Management responded (partial).",
+        "response_type": "partial",
+        "schema_valid": true,
+        "ticker": "FXP",
+        "times_asked": 1
+      }
+    ],
+    "risk-admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXP-001",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXP-1",
+        "prior_disclosure_call": null,
+        "risk_category": "cybersecurity",
+        "risk_description": "A breach may disrupt operations.",
+        "risk_summary": "A breach may disrupt operations.",
+        "schema_valid": true,
+        "severity": "high",
+        "ticker": "FXP",
+        "transcript_citation": "CALL-FXP-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech-stack-signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXP-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXP-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXP",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 0
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 1
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 2
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 1
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 1
+    }
+  }
+}

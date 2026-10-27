@@ -1,0 +1,60 @@
+{
+  "_provenance": {
+    "fixture_set": "clean",
+    "quality_checked_by": "scripts/gigo/market-sentiment-analysis-part-1-transform-quality-check.py",
+    "run_id": "sample-001",
+    "source_envelope": {
+      "fetched_at": "2026-08-27T14:30:00+00:00",
+      "sample_mode": true,
+      "source_name": "Alpha Vantage GLOBAL_QUOTE",
+      "source_path": "data/raw/market-sentiment-analysis-part-1/sample/clean/price-alpha-vantage.json",
+      "source_sha256": "a7d3c58fdf0a388bc67eed6403ec44437462a6297bb88bcddb78b868e185e2be",
+      "source_type": "http_json"
+    },
+    "step3_input": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-clean/price-alpha-vantage.json"
+  },
+  "classification": "gigo",
+  "duplicate_counting_rule": "A duplicate is every occurrence of an identity key beyond the first. Three rows sharing one key count as 2 duplicates, not 3 and not 1.",
+  "duplicates": [],
+  "flags": [],
+  "freshness_measured_from": "2026-08-27T14:30:00+00:00",
+  "freshness_window_days": 5,
+  "identity_keys": [
+    "01. symbol",
+    "07. latest trading day"
+  ],
+  "node": "Transform and quality check",
+  "quality_notes": [],
+  "record_count": 1,
+  "record_count_basis": "rows surviving dedup; flagged rows are kept, not dropped",
+  "rejects": [],
+  "rows_in": 1,
+  "rows_removed_as_duplicates": 0,
+  "schema_source": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+  "schema_version": "1.0.0",
+  "stream": "price",
+  "type_contract": {
+    "05. price": "numeric_string",
+    "06. volume": "int_like",
+    "08. previous close": "numeric_string",
+    "10. change percent": "percent_string"
+  },
+  "verified_locators": [
+    "records[0].\"Global Quote\""
+  ],
+  "verified_records": [
+    {
+      "01. symbol": "FAKE",
+      "02. open": "100.0000",
+      "03. high": "103.5000",
+      "04. low": "99.5000",
+      "05. price": "102.0000",
+      "06. volume": "12000000",
+      "07. latest trading day": "2026-08-27",
+      "08. previous close": "100.0000",
+      "09. change": "2.0000",
+      "10. change percent": "2.0000%"
+    }
+  ],
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

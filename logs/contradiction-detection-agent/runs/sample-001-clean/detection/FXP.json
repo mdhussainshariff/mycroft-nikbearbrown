@@ -1,0 +1,235 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Papa Fixture Co",
+  "contradiction_flags": [
+    {
+      "claim_a_direction": null,
+      "claim_a_id": "RA-FXP-001",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "A breach may disrupt operations.",
+      "claim_b_direction": null,
+      "claim_b_id": null,
+      "claim_b_source": null,
+      "claim_b_text": null,
+      "conflict_description": "High-severity risk \"cybersecurity\" admitted on call but absent from news coverage",
+      "evidence_for_a": "Earnings: severity=high",
+      "evidence_for_b": "News: 1 articles scanned, zero match topic",
+      "flag_id": "CONTRA-FXP-20260930-001-P2-F001",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 2,
+      "pattern_name": "Risk Admission vs News Coverage Gap",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXP-20260930-001",
+      "schema_valid": true,
+      "severity": "MEDIUM",
+      "ticker": "FXP"
+    },
+    {
+      "claim_a_direction": null,
+      "claim_a_id": "QA-CALL-FXP-2026Q2-1-security",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "Topic: security, pressure_score: 8",
+      "claim_b_direction": "positive",
+      "claim_b_id": "NEWS-FXP-1",
+      "claim_b_source": "news_agent",
+      "claim_b_text": "Analysts upgrade Papa Fixture Co",
+      "conflict_description": "Management evaded 2 high-pressure Q&A topics but analyst coverage is positive",
+      "evidence_for_a": "Q&A: 2 evaded topics, top=\"security\"",
+      "evidence_for_b": "Analyst news: sentiment=positive",
+      "flag_id": "CONTRA-FXP-20260930-001-P3-F002",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 3,
+      "pattern_name": "QA Evasion vs Analyst Confidence",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXP-20260930-001",
+      "schema_valid": true,
+      "severity": "MEDIUM",
+      "ticker": "FXP"
+    }
+  ],
+  "detection_summary": {
+    "has_contradictions": true,
+    "high_severity": 0,
+    "low_severity": 0,
+    "medium_severity": 2,
+    "overall_confidence_level": "REVIEW_WARRANTED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": true,
+    "total_flags": 2
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 1
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 1
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXP-20260930-001",
+  "signal_counts": {
+    "guidance": 0,
+    "news": 1,
+    "qa_items": 2,
+    "risks": 1,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXP-1",
+        "headline": "Analysts upgrade Papa Fixture Co",
+        "id": "N-FXP-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.6,
+        "source_name": "Fixture Wire",
+        "ticker": "FXP",
+        "topic_tags": [
+          "analyst"
+        ]
+      }
+    ],
+    "qa_pressure": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "evasion_flag": true,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXP-1",
+        "pressure_score": 8,
+        "question_text": "Can you say more about security?",
+        "question_topic": "security",
+        "response_summary": "Management responded (deflected).",
+        "response_type": "deflected",
+        "schema_valid": true,
+        "ticker": "FXP",
+        "times_asked": 2
+      },
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXP-2",
+        "pressure_score": 7,
+        "question_text": "Can you say more about outage?",
+        "question_topic": "outage",
+        "response_summary": "Management responded (partial).",
+        "response_type": "partial",
+        "schema_valid": true,
+        "ticker": "FXP",
+        "times_asked": 1
+      }
+    ],
+    "risk_admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXP-001",
+        "earnings_call_id": "CALL-FXP-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXP-1",
+        "prior_disclosure_call": null,
+        "risk_category": "cybersecurity",
+        "risk_description": "A breach may disrupt operations.",
+        "risk_summary": "A breach may disrupt operations.",
+        "schema_valid": true,
+        "severity": "high",
+        "ticker": "FXP",
+        "transcript_citation": "CALL-FXP-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXP-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXP-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXP",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.6,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXP-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXP-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXP",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "POSITIVE",
+    "pos_news": 1,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 0
+  },
+  "ticker": "FXP"
+}

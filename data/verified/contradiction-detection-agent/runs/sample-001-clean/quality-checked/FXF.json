@@ -1,0 +1,141 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "Foxtrot Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXF-20260930-001",
+    "ticker": "FXF"
+  },
+  "rows": {
+    "guidance-signals": [],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXF-1",
+        "headline": "Foxtrot Fixture Co supply chain recovers",
+        "id": "N-FXF-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.4,
+        "source_name": "Fixture Wire",
+        "ticker": "FXF",
+        "topic_tags": [
+          "supply_chain"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXF-2",
+        "headline": "Foxtrot Fixture Co faces lawsuit",
+        "id": "N-FXF-2",
+        "published_at": "2026-09-20T10:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.4,
+        "source_name": "Fixture Wire",
+        "ticker": "FXF",
+        "topic_tags": [
+          "litigation"
+        ]
+      }
+    ],
+    "qa-pressure-map": [],
+    "risk-admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXF-001",
+        "earnings_call_id": "CALL-FXF-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXF-1",
+        "prior_disclosure_call": null,
+        "risk_category": "supply chain",
+        "risk_description": "Supply chain disruption may delay shipments.",
+        "risk_summary": "Supply chain disruption may delay shipments.",
+        "schema_valid": true,
+        "severity": "high",
+        "ticker": "FXF",
+        "transcript_citation": "CALL-FXF-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      },
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXF-002",
+        "earnings_call_id": "CALL-FXF-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXF-2",
+        "prior_disclosure_call": null,
+        "risk_category": "litigation",
+        "risk_description": "An adverse ruling may require damages.",
+        "risk_summary": "An adverse ruling may require damages.",
+        "schema_valid": true,
+        "severity": "critical",
+        "ticker": "FXF",
+        "transcript_citation": "CALL-FXF-2026Q2-1 ¶42",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech-stack-signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXF-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXF-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXF",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 0
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 2
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 0
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 2
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 1
+    }
+  }
+}

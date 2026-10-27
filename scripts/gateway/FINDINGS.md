@@ -1,10 +1,10 @@
 # How Mycroft picks models today
 
 Findings for the Adaptive Model Routing & Inference Gateway.
-Written 2026-09-02; updated 2026-09-10 with live-call and fixture results.
-Based on a read of scripts/, recipes/, case-study-workflows/, projects/, data/,
-and logs/RUN_LOG.md. No PM or billing access was available; every claim below
-cites a file or a logged call.
+Written 2026-09-02; updated 2026-09-10 (live calls), 2026-09-17 (fixture set
+and first full run). Based on a read of scripts/, recipes/,
+case-study-workflows/, projects/, data/, and logs/RUN_LOG.md. No PM or billing
+access was available; every claim below cites a file or a logged call.
 
 ## 1. Model choice is hardcoded four incompatible ways
 
@@ -63,34 +63,37 @@ anywhere in the repo.
 | HuggingFace | One spec, `ProsusAI/finbert` — an embedding model | Not a chat tier |
 | AWS Bedrock Nova Micro | Prose in `recipes/vendor-intelligence-brief.yaml:107`; no credential reference anywhere | Documentation only |
 
-### Tier models changed on 2026-09-02
+### Tier models changed twice
 
-The evidenced models could not be used. Groq publishes no per-token rate for
-`llama-3.1-8b-instant` or `llama-3.3-70b-versatile` — both show "Contact Sales"
-(https://console.groq.com/docs/models, read 2026-09-02). `prices.json` refuses
-unpriced models by design, so the gateway could not call them.
+**2026-09-02.** Groq publishes no per-token rate for `llama-3.1-8b-instant` or
+`llama-3.3-70b-versatile` — both show "Contact Sales". `prices.json` refuses
+unpriced models by design, so the gateway could not call the models the repo
+evidenced. All three tiers moved to publicly priced models on the same key.
 
-All three tiers moved to publicly priced models on the same Groq key:
+**2026-09-17.** `qwen/qwen3.6-27b` began returning 404 "does not exist or you
+do not have access", after two successful calls on 2026-09-10. It is gone from
+Groq's model list. Groq's own deprecation page still recommends it as a
+migration target, so their docs contradict their API. Replaced with
+`qwen/qwen3.8-27b`.
 
 | Tier | Model | Input /1M | Output /1M |
 |---|---|---|---|
 | cheap | `openai/gpt-oss-20b` | $0.075 | $0.30 |
 | mid | `openai/gpt-oss-120b` | $0.15 | $0.60 |
-| strong | `qwen/qwen3.6-27b` | $0.60 | $3.00 |
+| strong | `qwen/qwen3.8-27b` | $0.80 | $4.00 |
 
-The provisional Ollama strong tier was dropped: its $0 marginal cost made every
-cost comparison degenerate, and a priced strong tier removed the reason to keep it.
-
-Cost of the change: no Mycroft project has used these models before. Benefit:
-a defensible cost number, without which Sprints 8–9 have no result.
+A pinned model can disappear between runs. That is an argument for checking
+model availability at the start of a sweep rather than discovering it mid-run.
 
 ### Open question for whoever holds the budget
 
 Groq's free-tier limit already blocked a production batch once (RUN_LOG
-2026-07-09). Sprints 7–8 run at volume. Either a paid tier or a second provider
-is needed before then — a spending decision, not an engineering one.
+2026-07-09), and the strong tier's output cap of 1000 tokens per minute now
+limits a full benchmark sweep to roughly one strong call per minute. Sprints
+7–8 run at volume. Either a paid tier or a second provider is needed — a
+spending decision, not an engineering one.
 
-All three tiers now share one provider and one key, so a rate limit or an auth
+All three tiers share one provider and one key, so a rate limit or an auth
 failure takes out the whole ladder at once. There is no tier to escalate to.
 
 ## 5. What the first live calls showed
@@ -107,10 +110,8 @@ word: ok"`. Source: `logs/gateway/first-live-call.jsonl`.
 | 5 | strong | 256 | 17 | 181 | $0.00055320 | 1,170 ms | `ok` wrapped in a `<think>` block |
 | 6 | strong | 256 | 17 | 245 | $0.00074520 | 1,424 ms | `ok`, after the fix |
 
-Total spend $0.00138; the two strong calls are 94% of it. Every successful
-call's cost was recomputed from the price table and matched the log exactly.
-These are single observations on one trivial prompt — signals to test, not
-conclusions.
+Every successful call's cost was recomputed from the price table and matched
+the log exactly. These are single observations on one trivial prompt.
 
 **The price table does not give the cost.** Reasoning tokens are billed, and
 each model reasons a different amount:
@@ -118,29 +119,22 @@ each model reasons a different amount:
 | | Sticker (output price) | Observed on this prompt |
 |---|---|---|
 | cheap → mid | 2× | 1.4× — the bigger model reasoned less (47 vs 77 tokens) |
-| cheap → strong | 10× | 19–26× — qwen reasoned 181–245 tokens at the top price |
-
-On this evidence, starting cheap only beats starting mid if cheap is right
-more than ~73% of the time.
+| cheap → strong (3.6) | 10× | 19–26× — qwen reasoned 181–245 tokens at the top price |
 
 **Models expose reasoning differently.** `gpt-oss` keeps reasoning out of the
 response text. `qwen3.6-27b` returned it inline, in `<think>...</think>` tags,
 ahead of the answer. That response passed every check the gate had at the
 time — it was well-formed and wrong. Fixed by `strip_reasoning()` in the Groq
-adapter, plus an answer check in the gate script. Left unfixed, every
-validator would have failed the strong tier.
+adapter, plus an answer check in the gate script.
 
 **Reasoning length varies run to run.** Calls 5 and 6: identical prompt,
 181 vs 245 output tokens, +35% cost. One call is not a cost measurement.
 
-**The strong tier was near its budget.** 245 of 256 tokens used — 11 from
-truncation, which returns an empty answer. `policy.json` now gives strong 1,024.
-
-**Input tokens depend on the model.** 78 for `gpt-oss`, 17 for `qwen`, same
+**Input tokens depend on the model.** 78 for `gpt-oss`, 19 for `qwen`, same
 prompt. The overhead is `gpt-oss`'s prompt format, not a general cost.
 
-**Cold start.** Call 1 took 1,126 ms, call 2 382 ms, same model. Call 4 was the
-first call in its session. Latency across these calls is not yet comparable.
+**Cold start.** Call 1 took 1,126 ms, call 2 382 ms, same model. Latency
+across single calls is not comparable.
 
 **Auth errors must not escalate.** A 401 is `provider_error`, correctly — but
 every tier shares the key, so a retry fails identically.
@@ -150,20 +144,20 @@ Calls 1 and 5 were both `ok`.
 
 ## 6. What the first fixture set showed
 
-24 synthetic fixtures, 4 per task type, labeled and frozen 2026-09-10
-(`scripts/gateway/bench/manifest.json`). No model has been run on them yet —
-these are findings about the router and the checks, not about models.
+24 synthetic fixtures, 4 per task type, labeled and frozen
+(`scripts/gateway/bench/manifest.json`). Findings about the router and the
+checks, before any model had been run.
 
 **The simple router cannot reach strong on a short input.** Its only paths to
 strong are a long input or escalation. Every seed input is under 200
 characters, so the router sent 8 fixtures to cheap, 16 to mid and 0 to strong.
 The labeler put 7 on strong — all short inputs with a trap. Router and labels
-agree on 9 of 24. The labels are predictions; this is not yet a measurement.
+agree on 10 of 24.
 
 **Deterministic checks catch malformed answers, not wrong ones.** A misread
 sarcastic post still returns a valid label, so `label_in_set` passes and
 nothing escalates. The benchmark sees the error because it has an answer key;
-production has none. This is the main design risk for Sprints 4–5.
+production has none.
 
 **Some fixtures test the checks, not the models.** `summ-004`: a correct unit
 conversion fails `numbers_grounded`. `summ-003`: the superseded figure passes
@@ -173,20 +167,77 @@ it. `extract-004`: an invented value passes `required_keys`.
 203 of 217 script sample payloads are generic placeholders;
 `data/raw/market-sentiment-analysis-part-1/sample/` declares itself synthetic;
 the Klarna mock transactions file holds 0 records. Fictional companies are
-used so no fixture can be mistaken for market data. Results will support claims
-about how models handle these task types — not about Mycroft's real traffic mix.
+used so no fixture can be mistaken for market data. Results support claims
+about how models handle these task types — not about Mycroft's traffic mix.
 
-## 7. Consequences
+## 7. What the first full run showed
 
-- Policy refers to tier names, never models; `prices.json` stays versioned.
-- `max_tokens` is set per tier in `policy.json`; 256 was too tight for strong.
+Three sweeps on 2026-09-17; the final one is `logs/gateway/runs/2026-09-17T015116-sprint4-run.jsonl`.
+
+| | Value |
+|---|---|
+| Requests / attempts | 24 / 26 |
+| Escalation | 8% (`rag-001`, `rag-004`) |
+| Failure | 0% |
+| Cost | $0.00250 total · $0.000104 per request |
+| Latency | p50 393 ms · p95 734 ms |
+| Graded | 16 of 24 · 14 correct |
+
+**No wrong-but-valid answers appeared.** The count this sprint exists to
+measure — an answer that passes every free check and is still wrong — came out
+at **zero real cases** across 24 fixtures, including every deliberate trap:
+sarcasm, a headline whose negative words belong to a rival company, two
+statements in tension that do not contradict, and two distractor passages that
+share the question's keywords. The two entries the run printed under that
+heading are answer-key errors: `sent-001` and `sent-004` are keyed `negative`,
+the models answered `positive`, and the models are right.
+
+**The cheap tier handled the wrong-entity trap.** `sent-004` attributes
+sentiment to the named company while the negative words belong to a rival —
+the failure class that reached a finished brief per RUN_LOG. The 20b model got
+it right.
+
+**The first check failure was the check's fault, not a model's.** In the 01:44
+sweep, all three escalations came from `verdict_with_quote` rejecting a quote
+that spanned both statements — a sensible answer to "quote the conflicting
+span". After the prompt was narrowed to one continuous span from a single
+statement, all four contradiction fixtures passed and graded correct, and
+escalation fell from 11% to 8%. The one remaining escalation pair was genuine:
+the mid model answered without citing a passage.
+
+**Escalated requests cost 3.2× a single-attempt one.** 8% of requests consumed
+23% of the spend: $0.000282 each against $0.000088. Retrying is cheap in
+absolute terms and expensive in relative terms, which is exactly why the
+trigger has to be right.
+
+**The cost ladder is not monotonic on trivial prompts.** On the gate prompt
+the strong tier cost $0.0000232 (19 in / 2 out) against cheap's $0.00002895
+(78 in / 77 out) — strong was 20% *cheaper* while its sticker output price is
+13× higher. The crossover is near five output tokens: any real answer puts
+strong far above cheap. What this establishes is narrow and still useful — the
+sticker ratio and the observed ratio can point in opposite directions, and
+which model is cheaper depends on how much each one says.
+
+**A model can vanish between runs, and a cap can make a tier unusable.**
+`qwen/qwen3.6-27b` 404'd a week after working. Its replacement was then
+refused on every call because the configured 1024-token budget exceeded the
+account's 1000 output-tokens-per-minute cap — a failure of configuration, not
+of the model, which answered fine at 896.
+
+## 8. Consequences
+
+- Policy refers to tier names, never models; `prices.json` stays versioned and
+  keeps retired models so old rows stay traceable.
+- `max_tokens` is set per tier in `policy.json`, and must stay under the
+  account's per-minute output cap or every call is refused before it runs.
 - The router measures input in characters, because token counts depend on the model.
-- Sprint 4 must separate transient errors (rate limit, 5xx, timeout) from
-  terminal ones (401, unknown model).
-- Sprint 4–5: escalation driven only by deterministic validators will miss
-  wrong-but-valid answers. Decide what, if anything, triggers escalation for
-  label and verdict tasks.
+- A 429 about pacing is worth one retry; a 429 about request size is not.
+- Sprint 5's judge is needed for the 8 extraction and summarization fixtures
+  that no deterministic check can grade.
+- Sprint 6 should ask whether `numbers_grounded` earns its place, given that it
+  fails a correct unit conversion by design.
 - Sprint 7 should run every fixture on all three tiers, several times each,
   discarding a warmup call — so the cheapest correct tier is measured rather
-  than predicted, and cost is reported as a spread.
+  than predicted, and cost is reported as a spread. At the strong tier's
+  current cap that is roughly one call per minute.
 - Sprint 8 must compare cost per *useful answer*, not per token.

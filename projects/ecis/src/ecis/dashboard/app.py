@@ -48,220 +48,11 @@ _PLOTLY_LAYOUT = dict(
 )
 
 
-def _inject_styles() -> None:
-    st.markdown(
-        f"""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
-
-:root {{
-  --bg: {_COLORS["bg"]};
-  --surface: {_COLORS["surface"]};
-  --surface2: {_COLORS["surface2"]};
-  --ink: {_COLORS["ink"]};
-  --muted: {_COLORS["muted"]};
-  --accent: {_COLORS["accent"]};
-  --accent2: {_COLORS["accent2"]};
-}}
-
-html, body, [data-testid="stAppViewContainer"] {{
-  background: var(--bg) !important;
-  color: var(--ink);
-  font-family: "DM Sans", system-ui, sans-serif;
-}}
-
-[data-testid="stAppViewContainer"]::before {{
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(61, 155, 143, 0.18), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 90% 0%, rgba(196, 163, 90, 0.10), transparent 50%),
-    linear-gradient(180deg, #121820 0%, var(--bg) 40%);
-  animation: ambientShift 18s ease-in-out infinite alternate;
-}}
-
-@keyframes ambientShift {{
-  from {{ filter: hue-rotate(0deg) brightness(1); }}
-  to   {{ filter: hue-rotate(12deg) brightness(1.05); }}
-}}
-
-@keyframes fadeUp {{
-  from {{ opacity: 0; transform: translateY(14px); }}
-  to   {{ opacity: 1; transform: translateY(0); }}
-}}
-
-@keyframes countPulse {{
-  0%, 100% {{ transform: scale(1); }}
-  50% {{ transform: scale(1.02); }}
-}}
-
-.block-container {{
-  padding-top: 1.5rem !important;
-  max-width: 1200px;
-  position: relative;
-  z-index: 1;
-}}
-
-h1, h2, h3, .ecis-brand {{
-  font-family: "Fraunces", Georgia, serif !important;
-  letter-spacing: -0.02em;
-  color: var(--ink) !important;
-}}
-
-.ecis-hero {{
-  animation: fadeUp 0.7s ease-out both;
-  margin-bottom: 1.75rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid {_COLORS["grid"]};
-}}
-
-.ecis-brand {{
-  font-size: 2.35rem;
-  font-weight: 600;
-  margin: 0 0 0.35rem 0;
-  background: linear-gradient(120deg, var(--ink) 0%, var(--accent) 55%, var(--accent2) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
-}}
-
-.ecis-tagline {{
-  color: var(--muted);
-  font-size: 1.05rem;
-  margin: 0;
-  max-width: 36rem;
-  animation: fadeUp 0.85s ease-out 0.12s both;
-}}
-
-.metric-grid {{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 1.25rem 0 1.75rem;
-}}
-
-.metric-card {{
-  background: linear-gradient(160deg, var(--surface) 0%, var(--surface2) 100%);
-  border: 1px solid {_COLORS["grid"]};
-  border-radius: 12px;
-  padding: 1.15rem 1.25rem;
-  animation: fadeUp 0.6s ease-out both;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}}
-
-.metric-card:nth-child(1) {{ animation-delay: 0.08s; }}
-.metric-card:nth-child(2) {{ animation-delay: 0.16s; }}
-.metric-card:nth-child(3) {{ animation-delay: 0.24s; }}
-
-.metric-card:hover {{
-  border-color: rgba(61, 155, 143, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-}}
-
-.metric-label {{
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-}}
-
-.metric-value {{
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--ink);
-  animation: countPulse 2.8s ease-in-out infinite;
-  animation-delay: 1s;
-}}
-
-.section-enter {{
-  animation: fadeUp 0.55s ease-out both;
-}}
-
-div[data-testid="stTabs"] {{
-  animation: fadeUp 0.65s ease-out 0.2s both;
-}}
-
-div[data-testid="stTabs"] button {{
-  font-family: "DM Sans", sans-serif;
-  color: var(--muted) !important;
-}}
-
-div[data-testid="stTabs"] button[aria-selected="true"] {{
-  color: var(--accent) !important;
-  border-bottom-color: var(--accent) !important;
-}}
-
-[data-testid="stMetric"],
-[data-testid="stSidebar"] {{
-  display: none;
-}}
-
-div[data-testid="stDataFrame"] {{
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid {_COLORS["grid"]};
-  animation: fadeUp 0.5s ease-out both;
-}}
-
-.stSelectbox label, .stMultiSelect label, .stTextArea label, .stSlider label {{
-  color: var(--muted) !important;
-}}
-
-div[data-baseweb="select"] > div {{
-  background-color: var(--surface) !important;
-  border-color: {_COLORS["grid"]} !important;
-}}
-
-.stButton > button {{
-  background: var(--accent) !important;
-  color: #0a1210 !important;
-  border: none !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  transition: transform 0.2s ease, filter 0.2s ease !important;
-}}
-
-.stButton > button:hover {{
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-}}
-
-@media (max-width: 768px) {{
-  .metric-grid {{ grid-template-columns: 1fr; }}
-  .ecis-brand {{ font-size: 1.75rem; }}
-}}
-</style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def _metric_cards(stats: dict) -> None:
-    st.markdown(
-        f"""
-<div class="metric-grid">
-  <div class="metric-card">
-    <div class="metric-label">Total Signals</div>
-    <div class="metric-value">{stats["total_signals"]:,}</div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-label">Tickers</div>
-    <div class="metric-value">{stats["total_tickers"]}</div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-label">Resolved Outcomes</div>
-    <div class="metric-value">{stats["total_outcomes"]:,}</div>
-  </div>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Total Signals", f"{stats['total_signals']:,}")
+    c2.metric("Tickers", stats["total_tickers"])
+    c3.metric("Resolved Outcomes", f"{stats['total_outcomes']:,}")
 
 
 def _direction_chart(by_direction: dict) -> go.Figure | None:
@@ -298,19 +89,12 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
-_inject_styles()
-
-st.markdown(
-    """
-<div class="ecis-hero">
-  <p class="ecis-brand">ECIS</p>
-  <p class="ecis-tagline">Earnings Call Intelligence Signals — explore extractions, reader performance, and calibration.</p>
-</div>
-    """,
-    unsafe_allow_html=True,
+st.title("ECIS")
+st.caption(
+    "Earnings Call Intelligence Signals — explore extractions, reader performance, and calibration."
 )
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12 = st.tabs([
     "Signal Explorer",
     "Reader Comparison",
     "Model Comparison",
@@ -318,10 +102,14 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "Agent Activity",
     "Approvals",
     "RAG Query",
+    "Forecast",
+    "Correlation",
+    "Confidence",
+    "Impact",
+    "Quality",
 ])
 
 with tab1:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     stats = get_summary_stats()
     _metric_cards(stats)
 
@@ -360,6 +148,7 @@ with tab1:
             "signal_id", "ticker", "direction", "confidence_raw",
             "confidence_calibrated", "source_method", "section_label",
             "speaker", "speaker_role", "transcript_date", "llm_model",
+            "surprise_score", "hedging_index",
             "low_confidence", "chunk_quality", "trend", "retry_count",
             "supporting_quote",
         ]
@@ -375,10 +164,7 @@ with tab1:
                         st.text(row["reasoning_trace"])
     else:
         st.info("No signals found. Run extraction first.")
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab2:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Reader Comparison")
     merged = get_signals_with_outcomes()
 
@@ -434,10 +220,7 @@ with tab2:
         )
         fig_w.update_layout(**_PLOTLY_LAYOUT, title_font=dict(family="Fraunces", size=16))
         st.plotly_chart(fig_w, use_container_width=True, config={"displayModeBar": False})
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab3:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Llama vs Mistral vs Qwen")
     try:
         from ecis.scoring.scorer import score_by_llm_model
@@ -493,10 +276,7 @@ with tab3:
     if not registry.empty:
         st.subheader("Ticker registry")
         st.dataframe(registry, use_container_width=True, height=280)
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab4:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Calibration curves")
     merged = get_signals_with_outcomes()
 
@@ -538,7 +318,12 @@ with tab4:
             if overlay_models and "llm_model" in scored.columns:
                 from ecis.config.settings import settings as _settings
 
-                model_palette = {"llama": _COLORS["accent"], "mistral": _COLORS["accent2"], "qwen": "#6b8cae"}
+                model_palette = {
+                    "llama": _COLORS["accent"],
+                    "mistral": _COLORS["accent2"],
+                    "qwen": "#6b8cae",
+                    "finetuned": _COLORS["raised"],
+                }
                 aliases = scored["llm_model"].dropna().map(_settings.model_alias)
                 scored = scored.assign(_alias=aliases)
                 for alias, color in model_palette.items():
@@ -574,10 +359,7 @@ with tab4:
             st.info("No resolved outcomes for calibration curves.")
     else:
         st.info("No data available for calibration curves.")
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab5:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Agent activity")
     agent_filter = st.selectbox(
         "Filter by agent",
@@ -599,10 +381,7 @@ with tab5:
         st.dataframe(actions, use_container_width=True, height=420)
     else:
         st.info("No agent actions recorded yet.")
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab6:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Human-in-the-loop approvals")
     pending = get_pending_approvals()
     if pending.empty:
@@ -639,10 +418,7 @@ with tab6:
                             st.rerun()
                         except Exception as exc:
                             st.error(str(exc))
-    st.markdown("</div>", unsafe_allow_html=True)
-
 with tab7:
-    st.markdown('<div class="section-enter">', unsafe_allow_html=True)
     st.subheader("Semantic search")
     query_text = st.text_area("Query earnings guidance", height=100)
     tickers = get_tickers()
@@ -683,5 +459,15 @@ with tab7:
                 st.warning("No results found.")
         except Exception as e:
             st.error(f"Search failed: {e}")
-    st.markdown("</div>", unsafe_allow_html=True)
+from ecis.dashboard.views import render_confidence, render_correlation, render_forecast, render_impact, render_quality
 
+with tab8:
+    render_forecast(_PLOTLY_LAYOUT, _COLORS)
+with tab9:
+    render_correlation(_PLOTLY_LAYOUT)
+with tab10:
+    render_confidence(_PLOTLY_LAYOUT, _COLORS)
+with tab11:
+    render_impact(_PLOTLY_LAYOUT, _COLORS)
+with tab12:
+    render_quality()

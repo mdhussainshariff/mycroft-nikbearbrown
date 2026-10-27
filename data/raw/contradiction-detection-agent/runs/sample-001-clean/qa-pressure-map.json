@@ -1,0 +1,178 @@
+{
+  "errors": [],
+  "fetched_at": "2026-09-30T00:00:00+00:00",
+  "original_node": "DB: Fetch QA Pressure Map",
+  "parsed": true,
+  "record_count": 9,
+  "records": [
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXA-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXA-1",
+      "pressure_score": 3,
+      "question_text": "Can you say more about headcount?",
+      "question_topic": "headcount",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXA",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": true,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-1",
+      "pressure_score": 5,
+      "question_text": "Can you say more about capex?",
+      "question_topic": "capex",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 3
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-2",
+      "pressure_score": 8,
+      "question_text": "Can you say more about pricing?",
+      "question_topic": "pricing",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXG-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXG-3",
+      "pressure_score": 2,
+      "question_text": "Can you say more about hiring?",
+      "question_topic": "hiring",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXG",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXH-2026Q2-1",
+      "evasion_flag": true,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXH-1",
+      "pressure_score": 9,
+      "question_text": "Can you say more about capex?",
+      "question_topic": "capex",
+      "response_summary": "Management responded (deflected).",
+      "response_type": "deflected",
+      "schema_valid": true,
+      "ticker": "FXH",
+      "times_asked": 2
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXH-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXH-2",
+      "pressure_score": 6,
+      "question_text": "Can you say more about pricing?",
+      "question_topic": "pricing",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXH",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXN-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXN-1",
+      "pressure_score": 4,
+      "question_text": "Can you say more about revenue?",
+      "question_topic": "revenue",
+      "response_summary": "Management responded (direct).",
+      "response_type": "direct",
+      "schema_valid": true,
+      "ticker": "FXN",
+      "times_asked": 1
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXP-2026Q2-1",
+      "evasion_flag": true,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXP-1",
+      "pressure_score": 8,
+      "question_text": "Can you say more about security?",
+      "question_topic": "security",
+      "response_summary": "Management responded (deflected).",
+      "response_type": "deflected",
+      "schema_valid": true,
+      "ticker": "FXP",
+      "times_asked": 2
+    },
+    {
+      "analyst_firm": [
+        "Fixture Securities"
+      ],
+      "call_date": "2026-07-28",
+      "earnings_call_id": "CALL-FXP-2026Q2-1",
+      "evasion_flag": false,
+      "fiscal_quarter": "2026Q2",
+      "id": "Q-FXP-2",
+      "pressure_score": 7,
+      "question_text": "Can you say more about outage?",
+      "question_topic": "outage",
+      "response_summary": "Management responded (partial).",
+      "response_type": "partial",
+      "schema_valid": true,
+      "ticker": "FXP",
+      "times_asked": 1
+    }
+  ],
+  "rejects": [],
+  "run": "sample-001-clean",
+  "sample_mode": true,
+  "sha256": "53e5bf112dfb61657a74f2ec02f4837f11df067a3f5ae925a05f3f1e2338fd14",
+  "source_name": "qa-pressure-map",
+  "source_type": "fixture",
+  "source_url_or_path": "data/raw/contradiction-detection-agent/sample/clean/qa-pressure-map.json"
+}

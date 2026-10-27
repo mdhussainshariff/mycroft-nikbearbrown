@@ -1,0 +1,158 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "Delta Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXD-20260930-001",
+    "ticker": "FXD"
+  },
+  "rows": {
+    "guidance-signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXD-001",
+        "claim_summary": "We are raising guidance.",
+        "claim_text": "We are raising guidance.",
+        "company_name": "Delta Fixture Co",
+        "direction": "strengthened",
+        "direction_confidence": 0.85,
+        "earnings_call_id": "CALL-FXD-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "data center demand",
+        "id": "G-FXD-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXD",
+        "transcript_citation": "CALL-FXD-2026Q2-1 ¶11"
+      }
+    ],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXD-1",
+        "headline": "Delta Fixture Co under pressure (1)",
+        "id": "N-FXD-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXD",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXD-2",
+        "headline": "Delta Fixture Co under pressure (2)",
+        "id": "N-FXD-2",
+        "published_at": "2026-09-20T10:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXD",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXD-3",
+        "headline": "Delta Fixture Co under pressure (3)",
+        "id": "N-FXD-3",
+        "published_at": "2026-09-20T09:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "negative",
+        "sentiment_score": -0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXD",
+        "topic_tags": [
+          "markets"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXD-4",
+        "headline": "Delta Fixture Co product praised",
+        "id": "N-FXD-4",
+        "published_at": "2026-09-20T08:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.3,
+        "source_name": "Fixture Wire",
+        "ticker": "FXD",
+        "topic_tags": [
+          "products"
+        ]
+      }
+    ],
+    "qa-pressure-map": [],
+    "risk-admissions": [],
+    "tech-stack-signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXD-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXD-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXD",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 1
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 4
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 0
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 0
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 1
+    }
+  }
+}

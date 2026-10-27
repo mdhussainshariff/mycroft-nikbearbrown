@@ -1,9 +1,10 @@
 {
-  "version": "2026-09-02",
+  "version": "2026-09-17",
   "currency": "USD",
   "unit": "per_1k_tokens",
-  "_source": "https://console.groq.com/docs/models -- read 2026-09-02",
+  "_source": "https://console.groq.com/docs/models -- read 2026-09-02, rechecked 2026-09-17",
   "_units_note": "Groq quotes per MILLION tokens; this table is per THOUSAND. Every figure below is the published per-1M price divided by 1000.",
+  "_retired_note": "A retired model keeps its entry. Rows already logged cite the price-table version that produced their cost, so removing the entry would break that trace.",
 
   "models": {
     "groq:openai/gpt-oss-20b": {
@@ -24,13 +25,23 @@
       "published_per_1m": {"input": 0.15, "output": 0.60}
     },
 
+    "groq:qwen/qwen3.8-27b": {
+      "input_per_1k": 0.0008,
+      "output_per_1k": 0.004,
+      "basis": "list_price",
+      "source": "https://console.groq.com/docs/models",
+      "read_on": "2026-09-17",
+      "published_per_1m": {"input": 0.80, "output": 4.00}
+    },
+
     "groq:qwen/qwen3.6-27b": {
       "input_per_1k": 0.0006,
       "output_per_1k": 0.003,
       "basis": "list_price",
       "source": "https://console.groq.com/docs/models",
       "read_on": "2026-09-02",
-      "published_per_1m": {"input": 0.60, "output": 3.00}
+      "published_per_1m": {"input": 0.60, "output": 3.00},
+      "retired": "Returned 404 'does not exist or you do not have access' on 2026-09-17, after two successful calls on 2026-09-10. Kept so rows priced at table version 2026-09-02 stay traceable."
     }
   }
 }

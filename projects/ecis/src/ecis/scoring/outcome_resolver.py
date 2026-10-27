@@ -53,18 +53,36 @@ def _evaluate_correctness(direction: str, excess_return: float) -> int | None:
     return None
 
 
-def _had_split(ticker: str, t0: date) -> bool:
+def _had_corporate_action(ticker: str, t0: date) -> bool:
     try:
-        actions = yf.Ticker(ticker).splits
-        if actions is None or getattr(actions, "empty", True):
-            return False
-        for ts in actions.index:
-            split_day = ts.date() if hasattr(ts, "date") else date.fromisoformat(str(ts)[:10])
-            if t0 <= split_day <= date.today():
-                return True
+        info = yf.Ticker(ticker)
+        for series in (getattr(info, "splits", None), getattr(info, "dividends", None)):
+            if series is None or getattr(series, "empty", True):
+                continue
+            for ts in series.index:
+                day = ts.date() if hasattr(ts, "date") else date.fromisoformat(str(ts)[:10])
+                if t0 <= day <= date.today():
+                    return True
     except Exception as exc:
-        logger.debug("Split lookup failed for %s: %s", ticker, exc)
+        logger.debug("Corporate-action lookup failed for %s: %s", ticker, exc)
     return False
+
+
+def _impact_features(ticker: str, t0: date) -> dict[str, float | None]:
+    from ecis.scoring.price_cache import return_between, volume_ratio
+
+    def _ret(days: int) -> float | None:
+        end = t0 + timedelta(days=days)
+        return return_between(ticker, str(t0), str(end))
+
+    return {
+        "drift_5d": return_between(ticker, str(t0 - timedelta(days=5)), str(t0)),
+        "drift_10d": return_between(ticker, str(t0 - timedelta(days=10)), str(t0)),
+        "ret_same_day": _ret(1),
+        "ret_1_3d": _ret(3),
+        "ret_1_2w": _ret(14),
+        "volume_ratio": volume_ratio(ticker, t0),
+    }
 
 
 def resolve_signal(signal_id: int, *, force: bool = False) -> list[dict[str, Any]]:
@@ -87,7 +105,7 @@ def resolve_signal(signal_id: int, *, force: bool = False) -> list[dict[str, Any
     direction = row["direction"]
     t0_date = date.fromisoformat(row["transcript_date"])
     today = date.today()
-    split_adjusted = 1 if _had_split(ticker, t0_date) else 0
+    split_adjusted = 1 if _had_corporate_action(ticker, t0_date) else 0
 
     if force:
         _invalidate_outcomes(signal_id)
@@ -120,6 +138,17 @@ def resolve_signal(signal_id: int, *, force: bool = False) -> list[dict[str, Any
         excess = stock_return - bench_return
         correct = _evaluate_correctness(direction, excess)
 
+        from ecis.scoring.sector import sector_etf_for
+
+        sector_etf = sector_etf_for(ticker)
+        sector_t0 = _fetch_price(sector_etf, t0_date) if sector_etf != BENCHMARK_TICKER else bench_t0
+        sector_t1 = _fetch_price(sector_etf, t1_date) if sector_etf != BENCHMARK_TICKER else bench_t1
+        sector_excess = None
+        if sector_t0 and sector_t1:
+            sector_excess = stock_return - ((sector_t1 - sector_t0) / sector_t0)
+
+        impact = _impact_features(ticker, t0_date)
+
         outcome = {
             "signal_id": signal_id,
             "horizon_days": horizon,
@@ -133,6 +162,10 @@ def resolve_signal(signal_id: int, *, force: bool = False) -> list[dict[str, Any
             "correct": correct,
             "transcript_date": str(t0_date),
             "split_adjusted": split_adjusted,
+            "sector_etf": sector_etf,
+            "sector_excess_return": round(sector_excess, 6) if sector_excess is not None else None,
+            "reaction_magnitude": round(abs(excess), 6),
+            **impact,
         }
         outcomes.append(outcome)
 
@@ -189,8 +222,10 @@ def _write_outcomes(outcomes: list[dict[str, Any]]) -> None:
                (signal_id, horizon_days, stock_price_t0, stock_price_t1,
                 benchmark_price_t0, benchmark_price_t1,
                 stock_return, benchmark_return, excess_return, correct,
-                transcript_date, split_adjusted)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                transcript_date, split_adjusted, sector_etf, sector_excess_return,
+                reaction_magnitude, drift_5d, drift_10d, ret_same_day, ret_1_3d,
+                ret_1_2w, volume_ratio)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 o["signal_id"], o["horizon_days"],
                 o["stock_price_t0"], o["stock_price_t1"],
@@ -199,6 +234,15 @@ def _write_outcomes(outcomes: list[dict[str, Any]]) -> None:
                 o["excess_return"], o["correct"],
                 o.get("transcript_date"),
                 o.get("split_adjusted", 0),
+                o.get("sector_etf"),
+                o.get("sector_excess_return"),
+                o.get("reaction_magnitude"),
+                o.get("drift_5d"),
+                o.get("drift_10d"),
+                o.get("ret_same_day"),
+                o.get("ret_1_3d"),
+                o.get("ret_1_2w"),
+                o.get("volume_ratio"),
             ),
         )
     conn.commit()

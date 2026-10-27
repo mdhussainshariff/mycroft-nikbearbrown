@@ -66,7 +66,10 @@ def test_promoted_to_the_top_has_nowhere_to_escalate(policy, tiers):
     d = route(task_type="summarization", text="x" * 12001,
               policy=policy, tiers=tiers)
     assert (d.tier, d.escalate_to) == ("strong", None)
-    assert d.max_tokens == 1024, "strong gets its larger budget"
+    # Ask the policy rather than hardcoding a number: the strong budget moved
+    # from 1024 to 896 on 2026-09-17 to stay under the account's output cap.
+    assert d.max_tokens == policy.max_tokens("strong")
+    assert d.max_tokens > policy.max_tokens("cheap"), "strong gets a larger budget"
 
 
 def test_unknown_task_type_is_refused(policy, tiers):
@@ -106,4 +109,4 @@ def test_every_task_type_routes_and_explains_itself(policy, tiers):
     for task_type in policy.task_types:
         d = route(task_type=task_type, text="short input", policy=policy, tiers=tiers)
         assert d.tier in policy.tier_order
-        assert d.tier in d.explanation
+        assert d.tier in d.explanation   

@@ -17,6 +17,13 @@
   "duplicates_deferred_to_step_4": true,
   "freshness_deferred_to_step_4": true,
   "node": "Validate data shape",
+  "promoted_locators": [
+    "records[0]",
+    "records[1]",
+    "records[2]",
+    "records[6]",
+    "records[7]"
+  ],
   "record_count": 5,
   "record_count_basis": "rows that passed shape validation and were promoted",
   "records": [
@@ -108,9 +115,18 @@
     "rows_promoted": 5,
     "rows_seen": 8,
     "rows_withheld": 3,
-    "source_declared_record_count": 7
+    "source_declared_record_count": 7,
+    "type_errors": [
+      {
+        "action": "reported; row still promoted, value not coerced",
+        "expected_type": "epoch_int",
+        "field": "datetime",
+        "locator": "records[7]",
+        "value": "yesterday"
+      }
+    ]
   },
   "stream": "news",
-  "types_deferred_to_step_4": "Type violations are not checked here. This step has no declared field for them, so per fixture-manifest.json they surface in step 4 flags.",
+  "type_errors_note": "Reported in type_errors above against the declared TYPE_CONTRACT. Rows are still promoted -- a wrong value is not a wrong shape -- so step 4 flags the same violations when assessing what they cost the score.",
   "workflow": "Market Sentiment Analysis - Part 1"
 }

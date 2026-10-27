@@ -17,6 +17,12 @@
   "duplicates_deferred_to_step_4": true,
   "freshness_deferred_to_step_4": true,
   "node": "Validate data shape",
+  "promoted_locators": [
+    "records[0].\"Global Quote\"",
+    "records[2].\"Global Quote\"",
+    "records[3].\"Global Quote\"",
+    "records[4].\"Global Quote\""
+  ],
   "record_count": 4,
   "record_count_basis": "rows that passed shape validation and were promoted",
   "records": [
@@ -92,9 +98,18 @@
     "rows_promoted": 4,
     "rows_seen": 5,
     "rows_withheld": 1,
-    "source_declared_record_count": 5
+    "source_declared_record_count": 5,
+    "type_errors": [
+      {
+        "action": "reported; row still promoted, value not coerced",
+        "expected_type": "percent_string",
+        "field": "10. change percent",
+        "locator": "records[2].\"Global Quote\"",
+        "value": "N/A"
+      }
+    ]
   },
   "stream": "price",
-  "types_deferred_to_step_4": "Type violations are not checked here. This step has no declared field for them, so per fixture-manifest.json they surface in step 4 flags.",
+  "type_errors_note": "Reported in type_errors above against the declared TYPE_CONTRACT. Rows are still promoted -- a wrong value is not a wrong shape -- so step 4 flags the same violations when assessing what they cost the score.",
   "workflow": "Market Sentiment Analysis - Part 1"
 }

@@ -1,0 +1,176 @@
+{
+  "duplicates": [],
+  "flags": [
+    {
+      "flag_id": "CONTRA-FXA-20260930-001-P1-F001",
+      "pattern_id": 1,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXA"
+    },
+    {
+      "flag_id": "CONTRA-FXC-20260930-001-P1-F001",
+      "pattern_id": 1,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXC"
+    },
+    {
+      "flag_id": "CONTRA-FXC-20260930-001-P6-F002",
+      "pattern_id": 6,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXC"
+    },
+    {
+      "flag_id": "CONTRA-FXD-20260930-001-P1-F001",
+      "pattern_id": 1,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXD"
+    },
+    {
+      "flag_id": "CONTRA-FXE-20260930-001-P2-F001",
+      "pattern_id": 2,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXE"
+    },
+    {
+      "flag_id": "CONTRA-FXF-20260930-001-P2-F001",
+      "pattern_id": 2,
+      "requires_human_review": true,
+      "severity": "MEDIUM",
+      "ticker": "FXF"
+    },
+    {
+      "flag_id": "CONTRA-FXG-20260930-001-P3-F001",
+      "pattern_id": 3,
+      "requires_human_review": true,
+      "severity": "MEDIUM",
+      "ticker": "FXG"
+    },
+    {
+      "flag_id": "CONTRA-FXJ-20260930-001-P4-F001",
+      "pattern_id": 4,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXJ"
+    },
+    {
+      "flag_id": "CONTRA-FXL-20260930-001-P5-F001",
+      "pattern_id": 5,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXL"
+    },
+    {
+      "flag_id": "CONTRA-FXP-20260930-001-P2-F001",
+      "pattern_id": 2,
+      "requires_human_review": true,
+      "severity": "MEDIUM",
+      "ticker": "FXP"
+    },
+    {
+      "flag_id": "CONTRA-FXP-20260930-001-P3-F002",
+      "pattern_id": 3,
+      "requires_human_review": true,
+      "severity": "MEDIUM",
+      "ticker": "FXP"
+    },
+    {
+      "flag_id": "CONTRA-FXQ-20260930-001-P1-F001",
+      "pattern_id": 1,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXQ"
+    },
+    {
+      "flag_id": "CONTRA-FXR-20260930-001-P1-F001",
+      "pattern_id": 1,
+      "requires_human_review": true,
+      "severity": "HIGH",
+      "ticker": "FXR"
+    }
+  ],
+  "gate_decisions": [
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 1,
+      "name": "Source gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 2,
+      "name": "Scope gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 3,
+      "name": "Data-shape gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 4,
+      "name": "Script-readiness gate"
+    },
+    {
+      "approved_for_live_action": false,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "deny",
+      "gate": 5,
+      "name": "Approval gate"
+    },
+    {
+      "approved_for_live_action": null,
+      "decided_at": "2026-10-04",
+      "decided_by": "Tanmay Kulkarni",
+      "decision": "approve",
+      "gate": 6,
+      "name": "Report gate"
+    }
+  ],
+  "generated_at": "2026-09-30T00:00:00+00:00",
+  "mode": "sample",
+  "not_checked": [],
+  "raw_output_paths": [
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/"
+  ],
+  "records_seen": 71,
+  "rejects": [],
+  "report_path": "reports/generated/contradiction-detection-agent-2026-09-30-clean.md",
+  "run_id": "sample-001-clean",
+  "source_files": [
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/guidance-signals.json",
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/risk-admissions.json",
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/qa-pressure-map.json",
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/news-signals.json",
+    "data/raw/contradiction-detection-agent/runs/sample-001-clean/tech-stack-signals.json"
+  ],
+  "steps_completed": [
+    "verify-provenance",
+    "ingest-inputs",
+    "validate-data-shape",
+    "transform-quality-check",
+    "run-approved-tools"
+  ],
+  "stop_conditions": [],
+  "todo_items": [],
+  "verified_output_paths": [
+    "data/verified/contradiction-detection-agent/runs/sample-001-clean/"
+  ],
+  "workflow": "contradiction-detection-agent"
+}

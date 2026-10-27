@@ -1,0 +1,191 @@
+{
+  "classification": "gigo",
+  "companies": [
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 3,
+        "qa-pressure-map": 1,
+        "risk-admissions": 1,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXA"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXB"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 6,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXC"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 4,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXD"
+    },
+    {
+      "rows": {
+        "guidance-signals": 0,
+        "news-signals": 3,
+        "qa-pressure-map": 0,
+        "risk-admissions": 1,
+        "tech-stack-signals": 0
+      },
+      "ticker": "FXE"
+    },
+    {
+      "rows": {
+        "guidance-signals": 0,
+        "news-signals": 2,
+        "qa-pressure-map": 0,
+        "risk-admissions": 2,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXF"
+    },
+    {
+      "rows": {
+        "guidance-signals": 0,
+        "news-signals": 1,
+        "qa-pressure-map": 3,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXG"
+    },
+    {
+      "rows": {
+        "guidance-signals": 0,
+        "news-signals": 1,
+        "qa-pressure-map": 2,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXH"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 2,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXJ"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXK"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXL"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXM"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 1,
+        "risk-admissions": 1,
+        "tech-stack-signals": 0
+      },
+      "ticker": "FXN"
+    },
+    {
+      "rows": {
+        "guidance-signals": 0,
+        "news-signals": 1,
+        "qa-pressure-map": 2,
+        "risk-admissions": 1,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXP"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 2,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXQ"
+    },
+    {
+      "rows": {
+        "guidance-signals": 1,
+        "news-signals": 1,
+        "qa-pressure-map": 0,
+        "risk-admissions": 0,
+        "tech-stack-signals": 1
+      },
+      "ticker": "FXR"
+    }
+  ],
+  "duplicates": [],
+  "flags": [],
+  "human_gate": {
+    "capacity": "[PA]",
+    "cleared_by": null,
+    "gate": 3,
+    "note": "A human reads the withheld rows and the kept-but-stale rows before detection runs."
+  },
+  "live_call_performed": false,
+  "network_access": "none",
+  "next_step": "run-approved-tools",
+  "node": "Transform and quality check",
+  "node_type": "recipe-step",
+  "output_path": "data/verified/contradiction-detection-agent/runs/sample-001-clean/quality-checked",
+  "quality_notes": [
+    "No row is older than the declared lookback.",
+    "No query LIMIT cut any row."
+  ],
+  "record_count": 71,
+  "rejects": [],
+  "run": "sample-001-clean",
+  "stale_rows": [],
+  "status": "ok",
+  "stop_conditions": [],
+  "verified_records": 71,
+  "workflow": "Contradiction_detection_agent"
+}

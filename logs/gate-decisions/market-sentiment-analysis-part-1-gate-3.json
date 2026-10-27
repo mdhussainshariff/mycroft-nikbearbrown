@@ -1,0 +1,31 @@
+{
+  "decided_at": "2026-09-25",
+  "decided_by": {
+    "name": "Uday Sonawane",
+    "role": "recipe owner"
+  },
+  "decision": "approve",
+  "evidence_files": [
+    {
+      "path": "data/verified/market-sentiment-analysis-part-1/runs/sample-001-defective/sample-001-defective-audit.md",
+      "sha256": "7958cf44b526d4da9341a2f1fbb5e304f3f1f4e14cefd1f288a0878e4959099c"
+    },
+    {
+      "path": "data/raw/market-sentiment-analysis-part-1/sample/fixture-manifest.json",
+      "sha256": "7ee88528523d57800bbebd58ceb393718f8afce728e8a517b204bb6546f52095"
+    }
+  ],
+  "evidence_observed": "All 26 JSON artifacts under data/raw and data/verified parse. Step 3 detected 8 of the 18 catalogued corpus defects in the fields the fixture manifest names, and withheld 6 rows from the verified layer rather than repairing them. Step 4 detected the remaining 10. 18/18.",
+  "gate": 3,
+  "gate_name": "Data-shape gate",
+  "handoff_condition": "Every raw and verified JSON output parses before downstream scripts run.",
+  "human_capacity": "[PA]",
+  "mode": "sample",
+  "recipe": "recipes/market-sentiment-analysis-part-1.md",
+  "recipe_version": "0.2.0",
+  "residual_risk": "Shape only. A row that is well-formed, fresh, unique and complete but belongs to a DIFFERENT company passes every check here. That class reached a finished brief once before (DATA_CONTRACT.md, 782 purged rows) and the corpus cannot exercise it -- ticker FAKE is unambiguous by construction.",
+  "run_log": "logs/RUN_LOG.md#2026-09-25",
+  "scope": "This decision covers the sample run over the frozen fixture corpus only.",
+  "voids_if": "Any edit to the recipe or its six step scripts, any change to the fixture corpus, or a switch out of sample mode voids this decision.",
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

@@ -1,0 +1,47 @@
+{
+  "decided_at": "2026-09-25",
+  "decided_by": {
+    "name": "Uday Sonawane",
+    "role": "recipe owner"
+  },
+  "decision": "approve",
+  "evidence_files": [
+    {
+      "path": "scripts/tools/market-sentiment-analysis-part-1-verify-provenance.py",
+      "sha256": "3afb272debc044ae94c795a83bd3f333d466b1551e0860287dcac2257a03524c"
+    },
+    {
+      "path": "scripts/ingest/market-sentiment-analysis-part-1-ingest-inputs.py",
+      "sha256": "0b7d6e1ad217e31237aeb7692b46dcf278744992c4af0702a72e5c9fae915e0f"
+    },
+    {
+      "path": "scripts/gigo/market-sentiment-analysis-part-1-validate-data-shape.py",
+      "sha256": "1b21e1acdb2e308f759803e3637486f17f4f0c6c1cbd707368a532a5fd0cbf5e"
+    },
+    {
+      "path": "scripts/gigo/market-sentiment-analysis-part-1-transform-quality-check.py",
+      "sha256": "7090c48fe30e24be171a82621ae6f49c169b7ac2a8aa775852e1043c2ec1b22d"
+    },
+    {
+      "path": "scripts/tools/market-sentiment-analysis-part-1-run-approved-tools.py",
+      "sha256": "c9179cc024ef9f24bf26e5618b4e50adfce612c9a689437355ea971802576ef8"
+    },
+    {
+      "path": "scripts/tools/market-sentiment-analysis-part-1-produce-human-report.py",
+      "sha256": "3e65b2eb4117ced449a32caafcee4f9223983cb98a0a1758793d7e9ed39df613"
+    }
+  ],
+  "evidence_observed": "All six exist and pass python -m py_compile. Conformance passes on the full default surface. The gate test itself was amended on 2026-09-25: it previously passed if a script existed OR if a DEV-TODO marker was still in the recipe, so it could be satisfied by doing nothing.",
+  "gate": 4,
+  "gate_name": "Script-readiness gate",
+  "handoff_condition": "Every one of the six step scripts exists and compiles.",
+  "human_capacity": "[IJ]",
+  "mode": "sample",
+  "recipe": "recipes/market-sentiment-analysis-part-1.md",
+  "recipe_version": "0.2.0",
+  "residual_risk": "Existence and compilation, not correctness. The scripts are exercised by the sample corpus, but no independent test suite covers them and none runs in CI.",
+  "run_log": "logs/RUN_LOG.md#2026-09-25",
+  "scope": "This decision covers the sample run over the frozen fixture corpus only.",
+  "voids_if": "Any edit to the recipe or its six step scripts, any change to the fixture corpus, or a switch out of sample mode voids this decision.",
+  "workflow": "Market Sentiment Analysis - Part 1"
+}

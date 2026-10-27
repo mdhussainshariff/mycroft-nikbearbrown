@@ -11,6 +11,7 @@ from typing import Any
 from ecis.config.settings import settings
 from ecis.db.init_db import get_connection
 from ecis.extraction.chunk_quality import score_chunk
+from ecis.extraction.keyword_density import density_from_keyword_result, density_multiplier
 from ecis.extraction.speaker_roles import classify_speaker, speaker_weight
 from ecis.schemas.signal import (
     GuidanceDirection,
@@ -90,11 +91,26 @@ def triangulate_chunk(
     total_weight = sum(weights.get(k, 0.0) for k in ["keyword", "finbert", "llm", "agreement"])
     raw_confidence = min(direction_scores[best_direction] / total_weight, 1.0)
 
-    role = classify_speaker(chunk.get("speaker", ""))
-    spk_w = speaker_weight(chunk.get("speaker", ""), role)
+    ticker = chunk.get("ticker")
+    role = classify_speaker(chunk.get("speaker", ""), ticker=ticker)
+    spk_w = speaker_weight(chunk.get("speaker", ""), role, ticker=ticker)
     quality = score_chunk(chunk)
     quality_score = quality["chunk_quality"]
-    raw_confidence = min(raw_confidence * spk_w * quality_score, 1.0)
+    section = chunk.get("section_label", "prepared_remarks")
+    section_w = (
+        settings.section_weight_qa
+        if section == "qa"
+        else settings.section_weight_prepared
+    )
+    density = chunk.get("keyword_density")
+    if density is None:
+        density = density_from_keyword_result(chunk, keyword_result)
+    density_w = density_multiplier(float(density), settings.keyword_density_floor)
+    negation = bool(chunk.get("negation_flag"))
+    raw_confidence = min(
+        raw_confidence * spk_w * quality_score * section_w * density_w,
+        1.0,
+    )
 
     supporting_quote = ""
     reasoning_trace = ""
@@ -111,6 +127,27 @@ def triangulate_chunk(
     raw_confidence = round(raw_confidence, 4)
     low_confidence = raw_confidence < settings.min_scorecard_confidence
 
+    from ecis.quality.lineage import build_lineage
+
+    lineage = build_lineage(
+        ticker=chunk.get("ticker", ""),
+        source_file=chunk.get("source_file", ""),
+        chunk_index=chunk.get("chunk_index", 0),
+        category=chunk.get("category"),
+        keyword=keyword_result,
+        finbert=finbert_result,
+        llm=llm_result,
+        conflict=chunk.get("conflict"),
+        weights={
+            "reader": weights,
+            "speaker": spk_w,
+            "chunk_quality": quality_score,
+            "section": section_w,
+            "density": density_w,
+        },
+        dedup=chunk.get("dedup"),
+    )
+
     try:
         signal = SignalRecord(
             ticker=chunk.get("ticker", "UNKNOWN"),
@@ -123,6 +160,8 @@ def triangulate_chunk(
             speaker_role=role,
             speaker_weight=spk_w,
             chunk_quality=quality_score,
+            keyword_density=float(density),
+            negation_flag=negation,
             transcript_date=date.fromisoformat(chunk.get("transcript_date", str(date.today()))),
             chunk_index=chunk.get("chunk_index", 0),
             character_offsets=(chunk.get("char_start", 0), max(chunk.get("char_end", 1), 1)),
@@ -134,6 +173,7 @@ def triangulate_chunk(
             content_hash=chunk.get("content_hash"),
             retry_count=int((llm_result or {}).get("retry_count") or 0),
             provenance=(llm_result or {}).get("provenance"),
+            lineage=lineage,
             raw_llm_output=(llm_result or {}).get("raw_llm_output"),
             low_confidence=low_confidence,
         )
@@ -155,8 +195,9 @@ def log_signal(signal: SignalRecord) -> int:
             transcript_date, chunk_index, char_start, char_end,
             reasoning_trace, ner_entities, self_consistency_votes,
             verification_status, llm_model, content_hash, retry_count,
-            provenance, raw_llm_output, low_confidence)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            provenance, lineage, raw_llm_output, low_confidence,
+            decay_profile, keyword_density, negation_flag)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
             signal.ticker,
             signal.direction.value,
@@ -182,8 +223,12 @@ def log_signal(signal: SignalRecord) -> int:
             signal.content_hash,
             signal.retry_count,
             signal.provenance,
+            signal.lineage,
             signal.raw_llm_output,
             1 if signal.low_confidence else 0,
+            signal.decay_profile,
+            signal.keyword_density,
+            1 if signal.negation_flag else 0,
         ),
     )
     conn.commit()

@@ -1,0 +1,241 @@
+{
+  "basis": "Reasoned from the ORIGINAL JavaScript before any port existed; checked against both the original and the Python port by the parity test.",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "scenarios": [
+    {
+      "company_name": "Alpha Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXA-001",
+          "claim_b_id": "NEWS-FXA-1",
+          "pattern_id": 1,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "P1 fires: weakened guidance (conf 0.80 ≥ 0.6) against POSITIVE news (avg 0.40 > 0.2)",
+      "ticker": "FXA"
+    },
+    {
+      "company_name": "Bravo Fixture Co",
+      "expected_flags": [],
+      "expected_overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "expected_skipped_patterns": [],
+      "purpose": "P1 near-miss: weakened guidance at conf 0.55 (< 0.6) does not fire despite POSITIVE news",
+      "ticker": "FXB"
+    },
+    {
+      "company_name": "Charlie Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXC-001",
+          "claim_b_id": "NEWS-FXC-1",
+          "pattern_id": 1,
+          "severity": "HIGH"
+        },
+        {
+          "claim_a_id": "GS-FXC-001",
+          "claim_b_id": "NEWS-FXC-1",
+          "pattern_id": 6,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CRITICALLY_COMPROMISED",
+      "expected_skipped_patterns": [],
+      "purpose": "One 'strengthened guidance vs negative news' situation fires both P1 (branch 2) and P6 → two HIGH flags → CRITICALLY_COMPROMISED",
+      "ticker": "FXC"
+    },
+    {
+      "company_name": "Delta Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXD-001",
+          "claim_b_id": "NEWS-FXD-1",
+          "pattern_id": 1,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "P6 near-miss: same picture as FXC but only 4 articles (< 5), so P6 is silent; P1 branch 2 still fires",
+      "ticker": "FXD"
+    },
+    {
+      "company_name": "Echo Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "RA-FXE-001",
+          "claim_b_id": "NEWS-FXE-1",
+          "pattern_id": 2,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [
+        {
+          "pattern_id": 4,
+          "reason": "tech_stack_data_unavailable"
+        },
+        {
+          "pattern_id": 5,
+          "reason": "tech_stack_data_unavailable"
+        }
+      ],
+      "purpose": "P2 tone: high-severity risk with matching POSITIVE coverage → HIGH; no tech data → P4/P5 skipped",
+      "ticker": "FXE"
+    },
+    {
+      "company_name": "Foxtrot Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "RA-FXF-001",
+          "claim_b_id": null,
+          "pattern_id": 2,
+          "severity": "MEDIUM"
+        }
+      ],
+      "expected_overall_confidence_level": "LOW_CONCERN",
+      "expected_skipped_patterns": [],
+      "purpose": "Tags are matched as text: risk 'supply chain' and news tag 'supply_chain' don't match → coverage-gap MEDIUM; a critical risk with matching NEGATIVE coverage raises nothing (near-miss)",
+      "ticker": "FXF"
+    },
+    {
+      "company_name": "Golf Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "QA-CALL-FXG-2026Q2-1-pricing",
+          "claim_b_id": "NEWS-FXG-1",
+          "pattern_id": 3,
+          "severity": "MEDIUM"
+        }
+      ],
+      "expected_overall_confidence_level": "LOW_CONCERN",
+      "expected_skipped_patterns": [],
+      "purpose": "P3 counts topics that were repeated or scored pressure ≥ 7: 'capex' was asked repeatedly and 'pricing' scored 8, both answered directly; P3 counts both (its wording says 'evaded')",
+      "ticker": "FXG"
+    },
+    {
+      "company_name": "Hotel Fixture Co",
+      "expected_flags": [],
+      "expected_overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "expected_skipped_patterns": [],
+      "purpose": "P3 near-miss: only one topic qualifies (needs ≥ 2), despite positive analyst news",
+      "ticker": "FXH"
+    },
+    {
+      "company_name": "Juliett Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXJ-001",
+          "claim_b_id": "TS-FXJ-2026-09-15",
+          "pattern_id": 4,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "P4 fires: 2 declining languages against strengthened guidance (conf 0.65 ≥ 0.6)",
+      "ticker": "FXJ"
+    },
+    {
+      "company_name": "Kilo Fixture Co",
+      "expected_flags": [],
+      "expected_overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "expected_skipped_patterns": [],
+      "purpose": "P4 near-miss: 1 declining language and 4 stale repos (thresholds are 2 and 5)",
+      "ticker": "FXK"
+    },
+    {
+      "company_name": "Lima Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": null,
+          "claim_b_id": "TS-FXL-2026-09-15",
+          "pattern_id": 5,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "P5 fires: engineering burst (z 2.4) with no strengthened or pivot-worded guidance",
+      "ticker": "FXL"
+    },
+    {
+      "company_name": "Mike Fixture Co",
+      "expected_flags": [],
+      "expected_overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "expected_skipped_patterns": [],
+      "purpose": "Same burst as FXL, but guidance topic 'contract renewals' contains 'new', which the keyword match counts as a pivot disclosure, so P5 stays silent",
+      "ticker": "FXM"
+    },
+    {
+      "company_name": "November Fixture Co",
+      "expected_flags": [],
+      "expected_overall_confidence_level": "NO_CONTRADICTIONS_DETECTED",
+      "expected_skipped_patterns": [
+        {
+          "pattern_id": 4,
+          "reason": "tech_stack_data_unavailable"
+        },
+        {
+          "pattern_id": 5,
+          "reason": "tech_stack_data_unavailable"
+        }
+      ],
+      "purpose": "Quiet company with no tech data: nothing fires; P4/P5 recorded as skipped, not as passed",
+      "ticker": "FXN"
+    },
+    {
+      "company_name": "Papa Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "RA-FXP-001",
+          "claim_b_id": null,
+          "pattern_id": 2,
+          "severity": "MEDIUM"
+        },
+        {
+          "claim_a_id": "QA-CALL-FXP-2026Q2-1-security",
+          "claim_b_id": "NEWS-FXP-1",
+          "pattern_id": 3,
+          "severity": "MEDIUM"
+        }
+      ],
+      "expected_overall_confidence_level": "REVIEW_WARRANTED",
+      "expected_skipped_patterns": [],
+      "purpose": "Two MEDIUM flags (P2 gap + P3) and no HIGH → REVIEW_WARRANTED",
+      "ticker": "FXP"
+    },
+    {
+      "company_name": "Quebec Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXQ-001",
+          "claim_b_id": "NEWS-FXQ-1",
+          "pattern_id": 1,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "Port-fidelity case: news average is exactly 0.625, a rounding tie (JS toFixed → '0.63', Python's default → '0.62'), and confidence 1.0 (JS prints '1', Python '1.0')",
+      "ticker": "FXQ"
+    },
+    {
+      "company_name": "Romeo Fixture Co",
+      "expected_flags": [
+        {
+          "claim_a_id": "GS-FXR-001",
+          "claim_b_id": "NEWS-FXR-1",
+          "pattern_id": 1,
+          "severity": "HIGH"
+        }
+      ],
+      "expected_overall_confidence_level": "CONFIDENCE_REDUCED",
+      "expected_skipped_patterns": [],
+      "purpose": "Boundary case: weakened guidance at confidence exactly 0.60 fires, because the test is >= 0.6 (a port using > or 0.61 fails here)",
+      "ticker": "FXR"
+    }
+  ]
+}

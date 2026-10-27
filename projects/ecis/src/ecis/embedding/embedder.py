@@ -10,6 +10,11 @@ from typing import Any
 import chromadb
 
 from ecis.config.settings import settings
+from ecis.embedding.versioning import (
+    TRANSCRIPT_COLLECTION,
+    collection_metadata,
+    embedding_metadata,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -36,12 +41,18 @@ def _get_chroma_client() -> chromadb.ClientAPI:
 
 
 def get_transcript_collection() -> chromadb.Collection:
-    """Return (or create) the ecis_transcripts ChromaDB collection."""
+    """Unified transcript collection filtered by ticker, date, and section."""
     client = _get_chroma_client()
-    return client.get_or_create_collection(
-        name="ecis_transcripts",
-        metadata={"hnsw:space": "cosine"},
-    )
+    try:
+        return client.get_or_create_collection(
+            name=TRANSCRIPT_COLLECTION,
+            metadata=collection_metadata(),
+        )
+    except Exception:
+        return client.get_or_create_collection(
+            name=TRANSCRIPT_COLLECTION,
+            metadata={"hnsw:space": "cosine"},
+        )
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
@@ -86,6 +97,7 @@ def store_chunks(chunks: list[dict[str, Any]]) -> int:
             "char_start": c["char_start"],
             "char_end": c["char_end"],
             "source_file": c["source_file"],
+            **embedding_metadata(),
         }
         for c in chunks
     ]
@@ -131,12 +143,16 @@ def query_similar(
     elif len(conditions) > 1:
         where_filters = {"$and": conditions}
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results,
-        where=where_filters,
-        include=["documents", "metadatas", "distances"],
-    )
+    kwargs: dict[str, Any] = {
+        "query_embeddings": [query_embedding],
+        "n_results": n_results,
+        "where": where_filters,
+        "include": ["documents", "metadatas", "distances"],
+    }
+    try:
+        results = collection.query(**kwargs, nns={"ef": settings.hnsw_ef_search})
+    except TypeError:
+        results = collection.query(**kwargs)
 
     output = []
     if results["documents"]:

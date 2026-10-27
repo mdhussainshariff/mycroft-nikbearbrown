@@ -11,6 +11,7 @@ import chromadb
 
 from ecis.config.settings import settings
 from ecis.embedding.embedder import _get_chroma_client, embed_texts
+from ecis.embedding.versioning import EXEMPLAR_COLLECTION, collection_metadata, embedding_metadata
 
 logger = logging.getLogger(__name__)
 
@@ -18,10 +19,16 @@ logger = logging.getLogger(__name__)
 def get_exemplar_collection() -> chromadb.Collection:
     """Return (or create) the ecis_exemplars ChromaDB collection."""
     client = _get_chroma_client()
-    return client.get_or_create_collection(
-        name="ecis_exemplars",
-        metadata={"hnsw:space": "cosine"},
-    )
+    try:
+        return client.get_or_create_collection(
+            name=EXEMPLAR_COLLECTION,
+            metadata=collection_metadata(),
+        )
+    except Exception:
+        return client.get_or_create_collection(
+            name=EXEMPLAR_COLLECTION,
+            metadata={"hnsw:space": "cosine"},
+        )
 
 
 def add_exemplar(
@@ -49,6 +56,7 @@ def add_exemplar(
             "reasoning_trace": reasoning_trace,
             "signal_category": signal_category,
             "is_negative": is_negative,
+            **embedding_metadata(),
         }],
     )
     logger.info("Added exemplar %s (direction=%s, category=%s)", exemplar_id, direction, signal_category)
@@ -106,12 +114,16 @@ def retrieve_exemplars(
     elif len(conditions) > 1:
         where_filter = {"$and": conditions}
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results,
-        where=where_filter,
-        include=["documents", "metadatas", "distances"],
-    )
+    kwargs: dict[str, Any] = {
+        "query_embeddings": [query_embedding],
+        "n_results": n_results,
+        "where": where_filter,
+        "include": ["documents", "metadatas", "distances"],
+    }
+    try:
+        results = collection.query(**kwargs, nns={"ef": settings.hnsw_ef_search})
+    except TypeError:
+        results = collection.query(**kwargs)
 
     output = []
     if results["documents"]:

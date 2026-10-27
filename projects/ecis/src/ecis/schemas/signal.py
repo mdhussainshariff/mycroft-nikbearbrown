@@ -51,6 +51,9 @@ class SignalRecord(BaseModel):
     speaker_weight: Optional[float] = Field(default=None, ge=0.0, le=1.0)
     chunk_quality: Optional[float] = Field(default=None, ge=0.0, le=1.0)
     trend: Optional[str] = None
+    decay_profile: Optional[str] = None
+    keyword_density: Optional[float] = Field(default=None, ge=0.0, le=1.0)
+    negation_flag: bool = False
     transcript_date: date
     chunk_index: int = Field(..., ge=0)
     character_offsets: tuple[int, int]
@@ -63,6 +66,7 @@ class SignalRecord(BaseModel):
     content_hash: Optional[str] = None
     retry_count: int = 0
     provenance: Optional[str] = None
+    lineage: Optional[str] = None
     raw_llm_output: Optional[str] = None
     low_confidence: bool = False
 
@@ -116,3 +120,5 @@ class FastPassResult(BaseModel):
     finbert_dominant: Optional[str] = None
     finbert_confidence: float = 0.0
     finbert_direction: Optional[GuidanceDirection] = None
+    negation_flag: bool = False
+    keyword_density: float = 0.0

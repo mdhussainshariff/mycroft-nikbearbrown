@@ -1,0 +1,244 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Alpha Fixture Co",
+  "contradiction_flags": [
+    {
+      "claim_a_direction": "weakened",
+      "claim_a_id": "GS-FXA-001",
+      "claim_a_source": "earnings_agent",
+      "claim_a_text": "We now expect cloud margin to come in lower.",
+      "claim_b_direction": "positive",
+      "claim_b_id": "NEWS-FXA-1",
+      "claim_b_source": "news_agent",
+      "claim_b_text": "Alpha Fixture Co shares climb",
+      "conflict_description": "Guidance for \"cloud margin\" marked WEAKENED but news sentiment is POSITIVE",
+      "evidence_for_a": "Earnings: direction=weakened, confidence=0.8",
+      "evidence_for_b": "News: 3 positive articles, avg score 0.40",
+      "flag_id": "CONTRA-FXA-20260930-001-P1-F001",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 1,
+      "pattern_name": "Sentiment vs Guidance Direction",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXA-20260930-001",
+      "schema_valid": true,
+      "severity": "HIGH",
+      "ticker": "FXA"
+    }
+  ],
+  "detection_summary": {
+    "has_contradictions": true,
+    "high_severity": 1,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "CONFIDENCE_REDUCED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": true,
+    "total_flags": 1
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 1
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXA-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 3,
+    "qa_items": 1,
+    "risks": 1,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXA-001",
+        "claim_summary": "We now expect cloud margin to come in lower.",
+        "claim_text": "We now expect cloud margin to come in lower.",
+        "company_name": "Alpha Fixture Co",
+        "direction": "weakened",
+        "direction_confidence": 0.8,
+        "earnings_call_id": "CALL-FXA-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "cloud margin",
+        "id": "G-FXA-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXA",
+        "transcript_citation": "CALL-FXA-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXA-1",
+        "headline": "Alpha Fixture Co shares climb",
+        "id": "N-FXA-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.5,
+        "source_name": "Fixture Wire",
+        "ticker": "FXA",
+        "topic_tags": [
+          "earnings"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXA-2",
+        "headline": "Alpha Fixture Co wins contract",
+        "id": "N-FXA-2",
+        "published_at": "2026-09-20T10:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.4,
+        "source_name": "Fixture Wire",
+        "ticker": "FXA",
+        "topic_tags": [
+          "contracts"
+        ]
+      },
+      {
+        "claim_id": "NEWS-FXA-3",
+        "headline": "Alpha Fixture Co steady",
+        "id": "N-FXA-3",
+        "published_at": "2026-09-20T09:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.3,
+        "source_name": "Fixture Wire",
+        "ticker": "FXA",
+        "topic_tags": [
+          "markets"
+        ]
+      }
+    ],
+    "qa_pressure": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXA-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXA-1",
+        "pressure_score": 3,
+        "question_text": "Can you say more about headcount?",
+        "question_topic": "headcount",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXA",
+        "times_asked": 1
+      }
+    ],
+    "risk_admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXA-001",
+        "earnings_call_id": "CALL-FXA-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXA-1",
+        "prior_disclosure_call": null,
+        "risk_category": "pricing",
+        "risk_description": "Pricing pressure may persist.",
+        "risk_summary": "Pricing pressure may persist.",
+        "schema_valid": true,
+        "severity": "medium",
+        "ticker": "FXA",
+        "transcript_citation": "CALL-FXA-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": false,
+        "burst_ratio": 1.0,
+        "claim_id": "TS-FXA-001",
+        "declining_languages": [
+          "fortran"
+        ],
+        "emerging_languages": [],
+        "id": "T-FXA-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 1,
+        "ticker": "FXA",
+        "velocity_anomaly": false,
+        "velocity_z_score": 0.5
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.39999999999999997,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": false,
+      "burst_ratio": 1.0,
+      "claim_id": "TS-FXA-001",
+      "declining_languages": [
+        "fortran"
+      ],
+      "emerging_languages": [],
+      "id": "T-FXA-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 1,
+      "ticker": "FXA",
+      "velocity_anomaly": false,
+      "velocity_z_score": 0.5
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "POSITIVE",
+    "pos_news": 3,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 1
+  },
+  "ticker": "FXA"
+}

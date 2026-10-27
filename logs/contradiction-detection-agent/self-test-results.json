@@ -1,0 +1,304 @@
+{
+  "as_expected": 42,
+  "checks": 42,
+  "live_call_performed": false,
+  "network_access": "none",
+  "results": [
+    {
+      "as_expected": true,
+      "expected": "exit 1: shape defects halt the run",
+      "ran": "step 3 on the defective set",
+      "saw": "exit 1, status stop",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D01 missing_required in guidance-signals (G-FXA-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D02 type_error in guidance-signals (G-FXC-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D03 enum in guidance-signals (G-FXD-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D04 bounds in guidance-signals (G-FXJ-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 4",
+      "ran": "D05 stale in guidance-signals (G-FXN-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D06 row_not_object in guidance-signals ((appended string))",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D07 enum in risk-admissions (R-FXE-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D08 missing_required in risk-admissions (R-FXP-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 4",
+      "ran": "D09 duplicate in risk-admissions (R-FXF-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D10 type_error in news-signals (N-FXA-2)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D11 type_error in news-signals (N-FXG-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D12 type_error in news-signals (N-FXC-3)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 4",
+      "ran": "D13 invalid_marked in news-signals (N-FXB-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 4",
+      "ran": "D14 out_of_scope in news-signals (N-ZZZZ-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D15 missing_required in tech-stack-signals (T-FXL-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D16 type_error in tech-stack-signals (T-FXJ-1)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "detected by step 3",
+      "ran": "D17 unparseable_file in qa-pressure-map (qa-pressure-map.json.broken)",
+      "saw": "detected",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "0 (no false findings)",
+      "ran": "step-3 findings outside the catalogue",
+      "saw": "0",
+      "section": "A"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 0, all agree",
+      "ran": "parity check, real port, clean set",
+      "saw": "exit 0, 16/16 companies agree",
+      "section": "B"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: the break is caught",
+      "ran": "parity check against a deliberately broken port (threshold 0.6 -> 0.61)",
+      "saw": "exit 1, disagreeing ['FXR']",
+      "section": "B"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: the break is caught",
+      "ran": "parity check against a deliberately broken port (Python rounding instead of JS toFixed)",
+      "saw": "exit 1, disagreeing ['FXQ']",
+      "section": "B"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: the break is caught",
+      "ran": "parity check against a deliberately broken port (Python number-to-text instead of JS)",
+      "saw": "exit 1, disagreeing ['FXQ']",
+      "section": "B"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1, naming every missing source",
+      "ran": "step 1 on an empty tree (scripts only)",
+      "saw": "exit 1, 5 stop condition(s)",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "both exit 1 before any connection, naming what live mode would need",
+      "ran": "live mode in the envelope, steps 2 and 5",
+      "saw": "step 2 exit 1, step 5 exit 1; names credentials: True",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fixture changed since the manifest froze it",
+      "ran": "one fixture value changed after the manifest froze it",
+      "saw": "exit 1: ['fixture changed since the manifest froze it: data/raw/contradiction-detection-agent/sample/clean/news-signals.json']",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: the defect corpus can't silently lose a defect",
+      "ran": "the deliberately unparseable fixture 'repaired'",
+      "saw": "exit 1",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: the recipe no longer describes its source",
+      "ran": "a node renamed in the recipe's node table",
+      "saw": "exit 1: [\"node table mismatch (in recipe but not in workflow): ['Fan Out Every Flag']\", \"node table mismatch (in workflow but not in recipe): ['Fan Out Flags']\"]",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: no verified bundles",
+      "ran": "step 5 before steps 2-4 have run",
+      "saw": "exit 1: ['no verified bundles at data/verified/contradiction-detection-agent/runs/sample-001-clean/quality-checked: run steps 2-4 first']",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1 and no half-built bundles for step 5 to pick up",
+      "ran": "step 4 stopping on the defective set",
+      "saw": "exit 1, 0 bundle(s) written",
+      "section": "C"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 1 test on an empty tree",
+      "saw": "exit 1: not met: step-1 report for this run exists; step 1 reported status ok; a fresh provenance check passes now; no drift sin",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 2 test on an empty tree",
+      "saw": "exit 1: not met: run envelope parses; mode is sample, or live with a gate-5 approve record; a fixture set is declared; companies",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 3 test on an empty tree",
+      "saw": "exit 1: not met: this run has raw and verified JSON outputs; every output parses (0 files; failing: []); step 3 reported status ",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 4 test on an empty tree",
+      "saw": "exit 1: not met: the detector matches the original workflow's JavaScript (parity check exit 0)",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 5 test on an empty tree",
+      "saw": "exit 1: not met: a gate-5 decision record exists and parses; it names a human and records approve or deny",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "exit 1: fails",
+      "ran": "gate 6 test on an empty tree",
+      "saw": "exit 1: not met: human report exists; report has every contract section (missing: ['Run summary', 'Purpose', 'Source inventory',",
+      "section": "D"
+    },
+    {
+      "as_expected": true,
+      "expected": "byte-identical outputs",
+      "ran": "the full clean run, twice, in two fresh trees",
+      "saw": "62 files, digests 864b914eb171bc9e / 864b914eb171bc9e",
+      "section": "E"
+    },
+    {
+      "as_expected": true,
+      "expected": "equal",
+      "ran": "frontmatter todos_open against the open typed TODOs in the recipe",
+      "saw": "declared 0, found 0: []",
+      "section": "F"
+    },
+    {
+      "as_expected": true,
+      "expected": "equal",
+      "ran": "clean run: rejects in the report against rejects in the agent log",
+      "saw": "report 0, log 0",
+      "section": "G"
+    },
+    {
+      "as_expected": true,
+      "expected": "exactly the gates with no decision record: []",
+      "ran": "clean run: gates the recommendation asks a human to decide",
+      "saw": "[] (All six gates are decided for this sample run; nothing furth...)",
+      "section": "G"
+    },
+    {
+      "as_expected": true,
+      "expected": "equal",
+      "ran": "defective run: rejects in the report against rejects in the agent log",
+      "saw": "report 13, log 13",
+      "section": "G"
+    },
+    {
+      "as_expected": true,
+      "expected": "'Not checked' in the report and listed in the log, not reported as 0",
+      "ran": "defective run (stopped at step 3): what the report and log say about step-4 checks",
+      "saw": "duplicates: 'Not checked: step 4 (quality) did not ru'; log not_checked: ['duplicates', 'rows older than the declared lookback', 'quality rejects']",
+      "section": "G"
+    }
+  ],
+  "unexpected": 0,
+  "workflow": "contradiction-detection-agent"
+}

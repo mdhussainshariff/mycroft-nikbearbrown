@@ -1,0 +1,133 @@
+{
+  "checked_at": "2026-09-30T00:00:00+00:00",
+  "ctx": {
+    "active_patterns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "company_name": "November Fixture Co",
+    "fiscal_quarter": "",
+    "frozen_clock": "2026-09-30T00:00:00+00:00",
+    "lookback_days": 365,
+    "requested_at": "2026-09-30T00:00:00+00:00",
+    "resolve_id": "CONTRA-FXN-20260930-001",
+    "ticker": "FXN"
+  },
+  "rows": {
+    "guidance-signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXN-001",
+        "claim_summary": "We reaffirm revenue guidance.",
+        "claim_text": "We reaffirm revenue guidance.",
+        "company_name": "November Fixture Co",
+        "direction": "unchanged",
+        "direction_confidence": 0.7,
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "revenue",
+        "id": "G-FXN-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXN",
+        "transcript_citation": "CALL-FXN-2026Q2-1 ¶11"
+      }
+    ],
+    "news-signals": [
+      {
+        "claim_id": "NEWS-FXN-1",
+        "headline": "November Fixture Co reaffirms",
+        "id": "N-FXN-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.05,
+        "source_name": "Fixture Wire",
+        "ticker": "FXN",
+        "topic_tags": [
+          "earnings"
+        ]
+      }
+    ],
+    "qa-pressure-map": [
+      {
+        "analyst_firm": [
+          "Fixture Securities"
+        ],
+        "call_date": "2026-07-28",
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "evasion_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "id": "Q-FXN-1",
+        "pressure_score": 4,
+        "question_text": "Can you say more about revenue?",
+        "question_topic": "revenue",
+        "response_summary": "Management responded (direct).",
+        "response_type": "direct",
+        "schema_valid": true,
+        "ticker": "FXN",
+        "times_asked": 1
+      }
+    ],
+    "risk-admissions": [
+      {
+        "call_date": "2026-07-28",
+        "claim_id": "RA-FXN-001",
+        "earnings_call_id": "CALL-FXN-2026Q2-1",
+        "fiscal_quarter": "2026Q2",
+        "id": "R-FXN-1",
+        "prior_disclosure_call": null,
+        "risk_category": "currency",
+        "risk_description": "Currency moves may affect results.",
+        "risk_summary": "Currency moves may affect results.",
+        "schema_valid": true,
+        "severity": "low",
+        "ticker": "FXN",
+        "transcript_citation": "CALL-FXN-2026Q2-1 ¶41",
+        "uncertainty_language": "may"
+      }
+    ],
+    "tech-stack-signals": []
+  },
+  "run": "sample-001-clean",
+  "selection": {
+    "guidance-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "returned": 1
+    },
+    "news-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch News Signals",
+      "returned": 1
+    },
+    "qa-pressure-map": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch QA Pressure Map",
+      "returned": 1
+    },
+    "risk-admissions": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Risk Admissions",
+      "returned": 1
+    },
+    "tech-stack-signals": {
+      "cut_by_limit": 0,
+      "cut_ids": [],
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "returned": 0
+    }
+  }
+}

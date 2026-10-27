@@ -1,0 +1,41 @@
+{
+  "decided_at": "2026-10-04",
+  "decided_by": {
+    "name": "Tanmay Kulkarni",
+    "role": "recipe contributor (Humanitarians AI fellow)"
+  },
+  "decision": "approve",
+  "decision_words": "D1 clear, D2 deny, D3 keep, D4 log",
+  "evidence_files": [
+    {
+      "path": "data/mycroft-main/n8n-workflows/originals/n8n_Workflows/Contradiction_Detection_Agent/Contradiction_detection_agent.json",
+      "sha256": "7f77a6e26f29f943ca4aff33ab24cb78c34f6456ec98f1b1884aee7c3469954c"
+    },
+    {
+      "path": "data/raw/contradiction-detection-agent/sample/fixture-manifest.json",
+      "sha256": "ff397cce2e206cb7d6b76d53ed32ebf4fd8a5b80771547da6cfcf707a71a5b27"
+    },
+    {
+      "path": "logs/contradiction-detection-agent/runs/sample-001-clean/step-1-verify-provenance.json",
+      "sha256": "54399f02983fb0fbeb87f13140839a6a03e3abd5917b171f797bc6dc6dce067f"
+    }
+  ],
+  "evidence_observed": "Step 1 ok; the recipe's node table matches all 26 workflow nodes; every fixture matches its frozen SHA-256; gate test passes.",
+  "gate": 1,
+  "gate_name": "Source gate",
+  "handoff_condition": "Every declared source is present, parses, and is the one this recipe describes.",
+  "human_capacity": "[TO]",
+  "mode": "sample",
+  "recipe": "recipes/contradiction-detection-agent.md",
+  "recipe_version": "0.2.0",
+  "reconfirmed": [
+    "2026-10-04 by Tanmay Kulkarni, same words, after wording-only edits to the recipe, scripts and corpus descriptions (detector behaviour, flags and fixture rows unchanged); evidence re-hashed",
+    "2026-10-04 by Tanmay Kulkarni (\"D1–D5 confirmed\"), after an additive edit to the recipe that keeps the original recipe's wording for the record (gates 1 and 4, the six closed [TODO: DEV] notes); evidence files unchanged"
+  ],
+  "residual_risk": "Covers the sample corpus and the pinned original JSON only, not any live table.",
+  "run": "sample-001-clean (and sample-001-defective, read for gate 3)",
+  "run_log": "logs/RUN_LOG.md#2026-10-04",
+  "scope": "This decision covers sample mode over the frozen synthetic corpus only.",
+  "voids_if": "Any edit to the recipe or its step, gate or parity scripts, any change to the fixture corpus, or a switch out of sample mode.",
+  "workflow": "Contradiction_detection_agent"
+}

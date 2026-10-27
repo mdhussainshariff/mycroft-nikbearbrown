@@ -1,0 +1,64 @@
+{
+  "classification": "ingest",
+  "fetched_at": "2026-09-30T00:00:00+00:00",
+  "fixture_set": "defective",
+  "human_gate": {
+    "capacity": "[PF]",
+    "cleared_by": null,
+    "gate": 2,
+    "note": "Gate 2 confirms the envelope declares sample mode (or an approved live mode) before ingest."
+  },
+  "live_call_performed": false,
+  "mode": "sample",
+  "network_access": "none",
+  "next_step": "validate-data-shape",
+  "node": "Ingest declared inputs",
+  "node_type": "recipe-step",
+  "records": 65,
+  "run": "sample-001-defective",
+  "sources": [
+    {
+      "arrived": true,
+      "original_node": "DB: Fetch Earnings Guidance Signals",
+      "parsed": true,
+      "path": "data/raw/contradiction-detection-agent/runs/sample-001-defective/guidance-signals.json",
+      "record_count": 12,
+      "source_name": "guidance-signals"
+    },
+    {
+      "arrived": true,
+      "original_node": "DB: Fetch Risk Admissions",
+      "parsed": true,
+      "path": "data/raw/contradiction-detection-agent/runs/sample-001-defective/risk-admissions.json",
+      "record_count": 7,
+      "source_name": "risk-admissions"
+    },
+    {
+      "arrived": true,
+      "original_node": "DB: Fetch QA Pressure Map",
+      "parsed": false,
+      "path": "data/raw/contradiction-detection-agent/runs/sample-001-defective/qa-pressure-map.json",
+      "record_count": null,
+      "source_name": "qa-pressure-map"
+    },
+    {
+      "arrived": true,
+      "original_node": "DB: Fetch News Signals",
+      "parsed": true,
+      "path": "data/raw/contradiction-detection-agent/runs/sample-001-defective/news-signals.json",
+      "record_count": 32,
+      "source_name": "news-signals"
+    },
+    {
+      "arrived": true,
+      "original_node": "DB: Fetch Tech Stack Signals",
+      "parsed": true,
+      "path": "data/raw/contradiction-detection-agent/runs/sample-001-defective/tech-stack-signals.json",
+      "record_count": 14,
+      "source_name": "tech-stack-signals"
+    }
+  ],
+  "status": "ok",
+  "stop_conditions": [],
+  "workflow": "Contradiction_detection_agent"
+}

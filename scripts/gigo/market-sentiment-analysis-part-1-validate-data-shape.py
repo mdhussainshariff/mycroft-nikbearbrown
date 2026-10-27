@@ -18,10 +18,12 @@ SCOPE -- what this step is responsible for catching:
     The other 10 -- duplicates, stale timestamps, type violations -- belong to step 4 and are
     deliberately NOT detected here. Catching them early would make step 4 untestable.
 
-    A wrong-typed value is none of this step's five declared output fields; the recipe's
-    contract has no type_errors field. Rather than smuggle type checks into missing_fields,
-    this step leaves them alone and records the gap in types_deferred_to_step_4. The
-    contract defect is logged, not silently worked around (P6).
+    Type violations: the recipe gained a `type_errors` field on 2026-09-25, closing the
+    contract gap that previously forced D02/D11/D17 to be reported only in step 4 `flags`.
+    This step now reports them against TYPE_CONTRACT below. A type violation does NOT
+    withhold the row -- the value is wrong, not the record's shape -- so step 4 still sees
+    those rows and still flags them for its quality assessment, exactly as it already
+    carries forward this step's rejects.
 
 Constitution notes:
     P2 - only rows that pass shape validation are written to data/verified/. Failing rows are
@@ -36,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -199,6 +202,67 @@ def _extract_rows(stream: str, records: Any) -> tuple[list[tuple[str, Any]], lis
     return rows, malformed
 
 
+# Declared value types per stream. The fixture manifest declares required fields, identity
+# keys and freshness windows but no types, so this table is that closure. It is scoped to this
+# recipe and is NOT a promoted schema -- see the DEFINE todo in DATA_CONTRACT terms.
+TYPE_CONTRACT = {
+    'price': {
+        '05. price': 'numeric_string',
+        '06. volume': 'int_like',
+        '08. previous close': 'numeric_string',
+        '10. change percent': 'percent_string',
+    },
+    'news': {'datetime': 'epoch_int'},
+    'reddit': {'created_utc': 'epoch_int', 'score': 'int_like'},
+}
+
+
+def _type_ok(value: Any, kind: str) -> bool:
+    """Check one value against a declared type. False means a violation."""
+    if isinstance(value, bool):
+        return False
+    if kind in ('numeric_string', 'percent_string'):
+        if isinstance(value, (int, float)):
+            return True
+        if not isinstance(value, str):
+            return False
+        candidate = value.strip().rstrip('%') if kind == 'percent_string' else value.strip()
+        try:
+            float(candidate)
+            return True
+        except ValueError:
+            return False
+    if kind == 'epoch_int':
+        return isinstance(value, int) or (isinstance(value, float) and value.is_integer())
+    if kind == 'int_like':
+        if isinstance(value, int) or (isinstance(value, float) and value.is_integer()):
+            return True
+        return isinstance(value, str) and bool(re.fullmatch(r'-?\d+', value.strip()))
+    return True
+
+
+def _check_types(rows: list[tuple[str, Any]], contract: dict[str, str]) -> list[dict[str, Any]]:
+    """Report values whose type contradicts the declared contract.
+
+    A type violation does NOT withhold the row. The value is wrong, not the record's shape,
+    and the recipe's quality step needs the row present to assess what the violation costs.
+    Reported here so the finding has a home in this step's declared contract; step 4 carries
+    it into `flags`, the same way it already carries forward this step's rejects.
+    """
+    out: list[dict[str, Any]] = []
+    for locator, row in rows:
+        for field, kind in contract.items():
+            if field in row and row[field] is not None and not _type_ok(row[field], kind):
+                out.append({
+                    'locator': locator,
+                    'field': field,
+                    'value': row[field],
+                    'expected_type': kind,
+                    'action': 'reported; row still promoted, value not coerced',
+                })
+    return out
+
+
 def _check_required(rows: list[tuple[str, Any]], required: list[str]) -> tuple[list[dict[str, Any]], list[int]]:
     """Check required fields on each row. A field present with value null counts as missing."""
     missing: list[dict[str, Any]] = []
@@ -229,6 +293,7 @@ def _validate_file(path: Path, root: Path, schema: dict[str, Any]) -> dict[str, 
         'required_fields': [],
         'required_fields_present': None,
         'missing_fields': [],
+        'type_errors': [],
         'malformed_rows': [],
         'rows_promoted': 0,
         'promoted_records': None,
@@ -275,14 +340,20 @@ def _validate_file(path: Path, root: Path, schema: dict[str, Any]) -> dict[str, 
         'source_declared_record_count': declared,
         'count_matches_declared': (declared == recount) if declared is not None else None,
         'missing_fields': missing,
+        'type_errors': _check_types(rows, TYPE_CONTRACT.get(stream, {})),
         'malformed_rows': malformed,
         'required_fields_present': not missing,
     })
 
     # Only rows that pass shape validation are promoted (P2).
-    promoted = [row for i, (_loc, row) in enumerate(rows) if i not in set(failing_idx)]
-    finding['rows_promoted'] = len(promoted)
-    finding['promoted_records'] = promoted
+    failed = set(failing_idx)
+    kept = [(loc, row) for i, (loc, row) in enumerate(rows) if i not in failed]
+    finding['rows_promoted'] = len(kept)
+    finding['promoted_records'] = [row for _loc, row in kept]
+    # Index-aligned with promoted_records. Step 4 reports its findings against the ORIGINAL
+    # raw locator, not a position in the shortened verified list, so the trace chain from a
+    # score back to a byte range in a named source file stays intact (P3).
+    finding['promoted_locators'] = [loc for loc, _row in kept]
     return finding
 
 
@@ -332,18 +403,21 @@ def validate_data_shape(payload: Any = None, root: Path | None = None) -> dict[s
             'record_count': f['rows_promoted'],
             'record_count_basis': 'rows that passed shape validation and were promoted',
             'records': f['promoted_records'],
+            'promoted_locators': f['promoted_locators'],
             'shape_validation': {
                 'rows_seen': f['record_count'],
                 'rows_promoted': f['rows_promoted'],
                 'rows_withheld': f['record_count'] - f['rows_promoted'],
                 'missing_fields': f['missing_fields'],
+                'type_errors': f['type_errors'],
                 'malformed_rows': f['malformed_rows'],
                 'source_declared_record_count': f['source_declared_record_count'],
                 'count_matches_declared': f['count_matches_declared'],
             },
-            'types_deferred_to_step_4': (
-                'Type violations are not checked here. This step has no declared field for '
-                'them, so per fixture-manifest.json they surface in step 4 flags.'
+            'type_errors_note': (
+                'Reported in type_errors above against the declared TYPE_CONTRACT. Rows are '
+                'still promoted -- a wrong value is not a wrong shape -- so step 4 flags the '
+                'same violations when assessing what they cost the score.'
             ),
             'duplicates_deferred_to_step_4': True,
             'freshness_deferred_to_step_4': True,
@@ -378,6 +452,7 @@ def validate_data_shape(payload: Any = None, root: Path | None = None) -> dict[s
             })
 
     all_missing = [dict(m, file=f['file']) for f in findings for m in f['missing_fields']]
+    all_type_errors = [dict(e, file=f['file'], stream=f['stream']) for f in findings for e in f['type_errors']]
     count_mismatches = [
         {
             'file': f['file'],
@@ -414,6 +489,7 @@ def validate_data_shape(payload: Any = None, root: Path | None = None) -> dict[s
         'record_count': {f['stream']: f['record_count'] for f in findings if f['stream'] and f['record_count'] is not None},
         'required_fields_present': all(f['required_fields_present'] for f in findings if f['required_fields_present'] is not None),
         'missing_fields': all_missing,
+        'type_errors': all_type_errors,
         'parse_errors': parse_errors,
         'schema_version': schema['schema_version'],
         # ---
@@ -447,11 +523,13 @@ def validate_data_shape(payload: Any = None, root: Path | None = None) -> dict[s
         },
         'verified_output_dir': out_dir_rel,
         'verified_output_paths': sorted(written),
-        'types_deferred_to_step_4': (
-            'This step has no declared field for a type violation. Per fixture-manifest.json, '
-            'D02/D11/D17 surface in step 4 flags. Logged as a P6 contract defect, not worked around.'
+        'type_errors_note': (
+            'The recipe gained a type_errors field on 2026-09-25. Violations are reported here '
+            'and the rows are still promoted; step 4 flags the same violations when assessing '
+            'their effect on the score. fixture-manifest.json still maps D02/D11/D17 to step 4 '
+            'flags, which remains true -- they now appear in both places, by design.'
         ),
-        'deferred_to_step_4': ['duplicates', 'stale timestamps', 'type violations'],
+        'deferred_to_step_4': ['duplicates', 'stale timestamps'],
         'network_access': 'none',
         'generated_at': datetime.now(timezone.utc).isoformat(),
         'status': 'stop' if stop_conditions else 'ok',
@@ -486,6 +564,7 @@ def _stopped(stops: list[str], ident: dict[str, Any], schema: dict[str, Any]) ->
         'record_count': {},
         'required_fields_present': None,
         'missing_fields': [],
+        'type_errors': [],
         'parse_errors': [],
         'schema_version': schema.get('schema_version'),
         'verified_output_paths': [],
@@ -496,14 +575,45 @@ def _stopped(stops: list[str], ident: dict[str, Any], schema: dict[str, Any]) ->
     }
 
 
+def _require_sample_mode() -> None:
+    """Enforce --sample: the run envelope must declare sample mode, or this stops.
+
+    The flag is an assertion, not decoration. Without this check `--sample` would be a
+    comfortable no-op that someone could pass at a live envelope and feel safe.
+    """
+    envelope = Path(__file__).resolve().parents[2] / f'data/raw/{WORKFLOW_SLUG}/run-envelope.json'
+    if not envelope.is_file():
+        return  # nothing declares a mode here; the step's own stop conditions still apply
+    try:
+        mode = json.loads(envelope.read_text(encoding='utf-8')).get('mode')
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError):
+        return
+    if mode != 'sample':
+        raise SystemExit(
+            f"--sample was given, but the run envelope declares mode={mode!r}. "
+            'Refusing to run: the flag asserts a sample run and this is not one.'
+        )
+
+
 def load_input(sample: Any | None = None) -> dict[str, Any]:
     """Load overrides from --input, --run-dir, or --fixture-set, plus the optional --output path."""
     parser = argparse.ArgumentParser(description=f'Validate ingested record shape for {WORKFLOW_NAME}.')
     parser.add_argument('--input', help='JSON string or path to a JSON file with overrides (run_dir, fixture_set).')
+    # The recipe's Step Commands table documents --sample for every step, so the step
+    # accepts it. It is an assertion, not a no-op: it requires the run to be a sample
+    # run and fails if the envelope declares anything else, so `--sample` cannot
+    # silently ride along on a live run.
+    parser.add_argument(
+        '--sample',
+        action='store_true',
+        help='Require sample mode; fail if the run envelope does not declare it.',
+    )
     parser.add_argument('--output', help='Optional path to write the summary JSON.')
     parser.add_argument('--run-dir', help='Step-2 run directory to validate, repo-relative.')
     parser.add_argument('--fixture-set', choices=('clean', 'defective'), help='Override the envelope fixture_set.')
     args = parser.parse_args()
+    if args.sample:
+        _require_sample_mode()
     if args.input:
         candidate = Path(args.input)
         text = candidate.read_text(encoding='utf-8') if candidate.exists() else args.input

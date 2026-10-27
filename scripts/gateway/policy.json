@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "locked_on": "2026-09-10",
   "_note": "The locked task-type vocabulary and the routing rule for each type, in one file so the router, the fixtures, and the validators cannot disagree about what task types exist. Changing this after the Sprint 7 baseline makes later results incomparable: any change is a version bump plus a RUN_LOG entry.",
   "_define_note": "Budgets and promote_above_chars are human [DEFINE] choices, not measurements. Provisional: revisit against Sprint 7 truncation and escalation rates.",
@@ -9,8 +9,8 @@
   "max_tokens_by_tier": {
     "cheap": 512,
     "mid": 512,
-    "strong": 1024,
-    "_reason": "Gate calls used at most 77 (cheap), 47 (mid) and 245 (strong) output tokens on a one-word answer. Strong varied 35% run to run, and 245 of 256 was 11 tokens from truncation. Real inputs make models reason longer."
+    "strong": 896,
+    "_reason": "Gate calls used at most 77 (cheap), 47 (mid) and 245 (strong) output tokens on a one-word answer. Strong varied 35% run to run, and 245 of 256 was 11 tokens from truncation. Strong was 1024 until 2026-09-17, when every strong call was rejected: the account's on_demand output-tokens-per-minute cap for qwen/qwen3.8-27b is 1000, and a request asking for 1024 is refused before the model runs. 896 leaves headroom under that cap and is still 3.6x the largest observed strong response."
   },
 
   "task_types": {

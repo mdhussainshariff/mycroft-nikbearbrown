@@ -5,6 +5,11 @@ provider-neutral terms. It does not log, does not price, does not retry,
 and does not decide which model to use -- those belong to the layers above.
 That separation is what lets the rest of the gateway be tested with zero
 network access.
+
+An adapter does say whether a failure is worth retrying, because only the
+adapter can read the provider's own signal. A bad key or an unknown model
+fails identically on every tier -- all tiers share one credential -- so
+retrying one is guaranteed waste (Sprint 2, RUN_LOG 2026-09-10).
 """
 
 from __future__ import annotations
@@ -21,13 +26,15 @@ class ProviderError(RuntimeError):
     """A call failed at the provider: refused, rate-limited, errored, timed out."""
 
     def __init__(self, message: str, *, provider: str, model: str,
-                 kind: str = "provider_error") -> None:
+                 kind: str = "provider_error", retryable: bool = True) -> None:
         super().__init__(message)
         if kind not in FAILURE_KINDS:
             raise ValueError(f"kind {kind!r} is not one of {sorted(FAILURE_KINDS)}")
         self.provider = provider
         self.model = model
         self.kind = kind
+        # False means a retry on any tier would fail the same way.
+        self.retryable = retryable
 
 
 @dataclass(frozen=True)

@@ -6,7 +6,8 @@ the suite fast, free, and independent of any provider's uptime.
 
 Behaviour is scriptable so a test can stage the exact sequence it needs --
 notably "cheap model fails, strong model succeeds", the case the whole
-gateway exists to handle.
+gateway exists to handle. A scripted error can be marked terminal, so the
+"never retry a bad key" rule can be tested without a provider.
 """
 
 from __future__ import annotations
@@ -40,9 +41,15 @@ class FakeAdapter:
         return self
 
     def queue_error(self, *, kind: str = "provider_error",
-                    message: str = "scripted failure") -> "FakeAdapter":
-        """Stage one failure. Returns self, so calls chain."""
-        self._script.append({"error": {"kind": kind, "message": message}})
+                    message: str = "scripted failure",
+                    retryable: bool = True) -> "FakeAdapter":
+        """Stage one failure. Returns self, so calls chain.
+
+        `retryable=False` stages the kind of failure a retry cannot fix --
+        a bad credential or an unknown model.
+        """
+        self._script.append({"error": {"kind": kind, "message": message,
+                                       "retryable": retryable}})
         return self
 
     # -- the adapter contract --------------------------------------------
@@ -55,7 +62,7 @@ class FakeAdapter:
         if error := step.get("error"):
             raise ProviderError(
                 error["message"], provider=self.provider, model=model,
-                kind=error["kind"],
+                kind=error["kind"], retryable=error.get("retryable", True),
             )
 
         text = step.get("text", self.default_text)

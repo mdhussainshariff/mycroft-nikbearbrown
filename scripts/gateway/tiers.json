@@ -1,6 +1,6 @@
 {
-  "version": "0.3.0",
-  "updated": "2026-09-02",
+  "version": "0.4.0",
+  "updated": "2026-09-17",
   "_note": "Policy maps task types to tier NAMES, never to models. Swapping a model is a change here plus a version bump.",
 
   "tiers": {
@@ -28,13 +28,13 @@
 
     "strong": {
       "provider": "groq",
-      "model": "qwen/qwen3.6-27b",
+      "model": "qwen/qwen3.8-27b",
       "credential_env": "GROQ_API_KEY",
       "context_limit": 131072,
       "capabilities": ["text"],
-      "_limits_source": "https://console.groq.com/docs/models -- read 2026-09-02",
+      "_limits_source": "UNCONFIRMED -- read the context window for qwen/qwen3.8-27b from https://console.groq.com/docs/models and correct this number. One read of that page reported 131,042, which looks like a transcription slip.",
       "status": "evidenced",
-      "evidence": "Publicly priced at $0.60/$3.00 per 1M -- roughly 9x the cheap tier, giving the router real headroom. Replaces the provisional Ollama tier, whose $0 marginal cost made cost comparisons degenerate."
+      "evidence": "Publicly priced at $0.80/$4.00 per 1M (console.groq.com/docs/models, read 2026-09-17). Replaces qwen/qwen3.6-27b, which returned 404 'does not exist or you do not have access' on 2026-09-17 after two successful calls on 2026-09-10; it is no longer in Groq's model list. Groq's deprecation page still recommends 3.6 as a migration target, so their docs contradict their API."
     }
   },
 

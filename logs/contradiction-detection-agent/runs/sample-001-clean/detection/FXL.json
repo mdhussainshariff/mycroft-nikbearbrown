@@ -1,0 +1,182 @@
+{
+  "active_patterns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "company_name": "Lima Fixture Co",
+  "contradiction_flags": [
+    {
+      "claim_a_direction": null,
+      "claim_a_id": null,
+      "claim_a_source": null,
+      "claim_a_text": null,
+      "claim_b_direction": "burst",
+      "claim_b_id": "TS-FXL-2026-09-15",
+      "claim_b_source": "tech_stack_agent",
+      "claim_b_text": "Burst ratio=3.2, velocity z-score=2.4, emerging: rust, zig",
+      "conflict_description": "Significant engineering burst detected but no corresponding management disclosure on earnings call",
+      "evidence_for_a": "No earnings guidance matches the engineering direction change",
+      "evidence_for_b": "Tech stack: burst=true, velocity_anomaly=true, emerging=rust, zig",
+      "flag_id": "CONTRA-FXL-20260930-001-P5-F001",
+      "flagged_at": "2026-09-30T00:00:00.000Z",
+      "pattern_id": 5,
+      "pattern_name": "Engineering Burst vs Undisclosed Pivot",
+      "requires_human_review": true,
+      "resolution_status": "UNRESOLVED",
+      "resolve_id": "CONTRA-FXL-20260930-001",
+      "schema_valid": true,
+      "severity": "HIGH",
+      "ticker": "FXL"
+    }
+  ],
+  "detection_summary": {
+    "has_contradictions": true,
+    "high_severity": 1,
+    "low_severity": 0,
+    "medium_severity": 0,
+    "overall_confidence_level": "CONFIDENCE_REDUCED",
+    "patterns_active": 6,
+    "patterns_skipped": 0,
+    "requires_human_review": true,
+    "total_flags": 1
+  },
+  "fiscal_quarter": "",
+  "frozen_clock": "2026-09-30T00:00:00+00:00",
+  "lookback_days": 365,
+  "pattern_results": {
+    "1": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "2": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "3": {
+      "active": true,
+      "flags_raised": 0
+    },
+    "4": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 0
+    },
+    "5": {
+      "active": true,
+      "data_available": true,
+      "flags_raised": 1
+    },
+    "6": {
+      "active": true,
+      "flags_raised": 0
+    }
+  },
+  "requested_at": "2026-09-30T00:00:00+00:00",
+  "resolve_id": "CONTRA-FXL-20260930-001",
+  "signal_counts": {
+    "guidance": 1,
+    "news": 1,
+    "qa_items": 0,
+    "risks": 0,
+    "tech_stack": 1
+  },
+  "signals": {
+    "guidance_signals": [
+      {
+        "call_date": "2026-07-28",
+        "change_description": null,
+        "claim_id": "GS-FXL-001",
+        "claim_summary": "Gross margin may dip slightly.",
+        "claim_text": "Gross margin may dip slightly.",
+        "company_name": "Lima Fixture Co",
+        "direction": "weakened",
+        "direction_confidence": 0.4,
+        "earnings_call_id": "CALL-FXL-2026Q2-1",
+        "falsification_flag": false,
+        "fiscal_quarter": "2026Q2",
+        "guidance_topic": "gross margin",
+        "id": "G-FXL-1",
+        "metric_type": null,
+        "metric_value_prior": null,
+        "quantified_value": null,
+        "schema_valid": true,
+        "ticker": "FXL",
+        "transcript_citation": "CALL-FXL-2026Q2-1 ¶11"
+      }
+    ],
+    "news_signals": [
+      {
+        "claim_id": "NEWS-FXL-1",
+        "headline": "Lima Fixture Co update",
+        "id": "N-FXL-1",
+        "published_at": "2026-09-20T11:00:00+00:00",
+        "schema_valid": true,
+        "sentiment_label": "neutral",
+        "sentiment_score": 0.0,
+        "source_name": "Fixture Wire",
+        "ticker": "FXL",
+        "topic_tags": [
+          "earnings"
+        ]
+      }
+    ],
+    "qa_pressure": [],
+    "risk_admissions": [],
+    "tech_stack_signals": [
+      {
+        "ai_focus_increasing": false,
+        "burst_detected": true,
+        "burst_ratio": 3.2,
+        "claim_id": "TS-FXL-001",
+        "declining_languages": [],
+        "emerging_languages": [
+          "rust",
+          "zig"
+        ],
+        "id": "T-FXL-1",
+        "rising_languages": [],
+        "schema_valid": true,
+        "snapshot_date": "2026-09-15",
+        "stale_repo_count": 0,
+        "ticker": "FXL",
+        "velocity_anomaly": true,
+        "velocity_z_score": 2.4
+      }
+    ]
+  },
+  "skipped_patterns": [],
+  "summaries": {
+    "avg_news_score": 0.0,
+    "has_tech_stack": true,
+    "latest_tech": {
+      "ai_focus_increasing": false,
+      "burst_detected": true,
+      "burst_ratio": 3.2,
+      "claim_id": "TS-FXL-001",
+      "declining_languages": [],
+      "emerging_languages": [
+        "rust",
+        "zig"
+      ],
+      "id": "T-FXL-1",
+      "rising_languages": [],
+      "schema_valid": true,
+      "snapshot_date": "2026-09-15",
+      "stale_repo_count": 0,
+      "ticker": "FXL",
+      "velocity_anomaly": true,
+      "velocity_z_score": 2.4
+    },
+    "neg_news": 0,
+    "news_sentiment_direction": "NEUTRAL",
+    "pos_news": 0,
+    "strengthened_guidance_count": 0,
+    "unchanged_guidance_count": 0,
+    "weakened_guidance_count": 1
+  },
+  "ticker": "FXL"
+}
