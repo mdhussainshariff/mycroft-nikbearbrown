@@ -15,6 +15,7 @@ from .finance import FinanceData, FinanceEngine
 from .orchestration import run_orchestration, write_orchestration_artifacts
 from .reporting import write_human_report, write_machine_log
 from .reinvestigation import run_reinvestigation, write_reinvestigation_artifacts
+from .disagreement import append_disagreement
 from .freshness import write_assessment as write_freshness
 from .materiality import (
     record_approval,
@@ -118,6 +119,13 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--run-id", default=None)
         sub.add_argument("--log-path", type=Path, default=None)
         sub.add_argument("--report-path", type=Path, default=None)
+    disagree = subparsers.add_parser(
+        "record-disagreement",
+        help="append a named reviewer's position against an engine finding",
+    )
+    disagree.add_argument("--run-log", type=Path, default=DEFAULT_RUN_LOG)
+    disagree.add_argument("--record", type=Path, required=True)
+    disagree.add_argument("--log", type=Path, required=True)
     freshness = subparsers.add_parser(
         "freshness", help="measure arrival lag and shelf age of a verified pack"
     )
@@ -219,6 +227,14 @@ def main() -> None:
             args.log_path,
             args.report_path,
         )
+    if args.command == "record-disagreement":
+        log = append_disagreement(args.record, args.run_log, args.log)
+        latest = log["entries"][-1]
+        print(f"disagreement: {latest['reviewer']} -> {latest['position']} "
+              f"on {latest['claim']}")
+        print(f"engine finding unchanged: variance "
+              f"{latest['engine_finding'].get('variance')}")
+        print(f"disagreement log: {args.log} ({len(log['entries'])} entries)")
     if args.command == "freshness":
         assessment = write_freshness(
             args.verified_dir,
