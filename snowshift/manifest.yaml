@@ -1,0 +1,59 @@
+# Deployment manifest — the single source of truth for execution order.
+#
+# Stages run top to bottom. Within a stage, files run in filename order, which
+# is why every file carries a numeric prefix. Dependencies only ever point
+# backwards (a view may reference a table; a table never references a view),
+# so this ordering is also the dependency graph.
+#
+# Override the connection targets with SNOWSHIFT_DATABASE / SNOWSHIFT_SCHEMA /
+# SNOWSHIFT_WAREHOUSE, or with the matching CLI flags.
+
+target:
+  database: SNOWCONVERT_DEMO
+  schema: Planning
+  warehouse: MIGRATION_WH
+
+stages:
+  - name: setup
+    path: sql/00_setup
+    description: Warehouse, database, schema and role grants.
+    idempotent: true
+
+  - name: tables
+    path: sql/10_tables
+    description: The eight core Planning tables, in dependency order.
+    idempotent: true
+
+  - name: staging
+    path: sql/20_staging
+    description: >-
+      Staging tables and helper procedures that stand in for the SQL Server
+      table-valued parameters, which Snowflake has no equivalent for.
+    idempotent: true
+
+  - name: views
+    path: sql/30_views
+    description: Reporting views over the core tables.
+    idempotent: true
+
+  - name: functions
+    path: sql/40_functions
+    description: Scalar and table-valued functions.
+    idempotent: true
+
+  - name: procedures
+    path: sql/50_procedures
+    description: The six business procedures carried over from T-SQL.
+    idempotent: true
+
+  - name: seed
+    path: sql/60_seed
+    description: ~400 sample rows for testing. Not part of a production cutover.
+    idempotent: false
+    optional: true
+
+  - name: tests
+    path: sql/90_tests
+    description: Object-existence verification and procedure smoke tests.
+    idempotent: true
+    optional: true

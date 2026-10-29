@@ -1,0 +1,74 @@
+# Parity spec -- what to compare between the SQL Server source and Snowflake
+# after a cutover.
+#
+# Columns are declared, not introspected, on purpose: a DECIMAL(19,4) that
+# landed as a FLOAT would compare equal under introspection and then drift.
+# Declaring the intended kind turns that into a visible diff.
+#
+# kind: numeric -> COUNT, SUM (rounded to `scale`), MIN, MAX
+#       text    -> COUNT, MIN, MAX
+#       date    -> COUNT, MIN, MAX
+
+source_schema: dbo
+target_schema: Planning
+
+tables:
+  - name: FiscalPeriod
+    key: FiscalPeriodID
+    columns:
+      - {name: FiscalYear, kind: numeric, scale: 0}
+      - {name: FiscalMonth, kind: numeric, scale: 0}
+      - {name: PeriodStartDate, kind: date}
+      - {name: PeriodEndDate, kind: date}
+      - {name: PeriodName, kind: text}
+
+  - name: GLAccount
+    key: GLAccountID
+    columns:
+      - {name: AccountNumber, kind: text}
+      - {name: AccountName, kind: text}
+      - {name: AccountType, kind: text}
+
+  - name: CostCenter
+    key: CostCenterID
+    columns:
+      - {name: CostCenterCode, kind: text}
+      - {name: CostCenterName, kind: text}
+      - {name: AllocationPercentage, kind: numeric, scale: 4}
+
+  - name: AllocationRule
+    key: AllocationRuleID
+    columns:
+      - {name: RuleCode, kind: text}
+      - {name: ExecutionSequence, kind: numeric, scale: 0}
+      - {name: AllocationBasis, kind: text}
+
+  - name: BudgetHeader
+    key: BudgetHeaderID
+    columns:
+      - {name: BudgetCode, kind: text}
+      - {name: FiscalYear, kind: numeric, scale: 0}
+      - {name: StatusCode, kind: text}
+
+  # The money table. If any single check earns the harness its keep, it is the
+  # three SUMs here: a lost decimal scale shows up nowhere else.
+  - name: BudgetLineItem
+    key: BudgetLineItemID
+    columns:
+      - {name: OriginalAmount, kind: numeric, scale: 4}
+      - {name: AdjustedAmount, kind: numeric, scale: 4}
+      - {name: FinalAmount, kind: numeric, scale: 4}
+
+  - name: ConsolidationJournal
+    key: JournalID
+    columns:
+      - {name: JournalNumber, kind: text}
+      - {name: JournalType, kind: text}
+      - {name: PostingDate, kind: date}
+
+  - name: ConsolidationJournalLine
+    key: JournalLineID
+    columns:
+      - {name: DebitAmount, kind: numeric, scale: 4}
+      - {name: CreditAmount, kind: numeric, scale: 4}
+      - {name: NetAmount, kind: numeric, scale: 4}
